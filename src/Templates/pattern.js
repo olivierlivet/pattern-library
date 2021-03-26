@@ -15,9 +15,9 @@ const PatternTemplate = ( props ) => {
 export default PatternTemplate
 
 export const pageQuery = graphql`
-query adQuery( $contentfulID: String!, $locale: String! ){
+query adQuery( $contentfulID: String! ){
     pattern:contentfulPattern(contentful_id: {eq: $contentfulID}) {
-        name
+        slug
       }
     
 }

@@ -2,6 +2,12 @@ var
   fs = require('fs'),
   path = require('path');
 
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`
+});
+
+console.log('end', process.env.NODE_ENV)
+
 exports.createPages = ({ graphql, actions }) => {
     const { createPage } = actions
 
@@ -16,7 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
           node_locale
           contentful_id
           slug
-          name
+          #name
         }
       }
     }
