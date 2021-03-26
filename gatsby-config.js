@@ -12,6 +12,7 @@ module.exports = {
       options: {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         spaceId: process.env.CONTENTFUL_SPACE_ID,
+        host: `preview.contentful.com`
       },
     },
     "gatsby-plugin-gatsby-cloud",
