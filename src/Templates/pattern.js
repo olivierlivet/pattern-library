@@ -5,9 +5,9 @@ const PatternTemplate = ( props ) => {
     return(
         <div>
             A pattern { props.data.pattern.title }
-            {/* <pre>
+            <pre>
                 { JSON.stringify( props, null, 1 )}
-            </pre> */}
+            </pre>
         </div>
     )
 }
