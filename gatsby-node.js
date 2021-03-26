@@ -41,7 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         allPatterns.forEach((edge) => {
             createPage({
-                path: `${edge.node.node_locale}${edge.node.slug}`,
+                path: `${edge.node.slug}`,
                 component: patternTemplate,
                 context: {
                     slug: edge.node.slug,
