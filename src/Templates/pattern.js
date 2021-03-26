@@ -4,10 +4,10 @@ import { graphql } from 'gatsby'
 const PatternTemplate = ( props ) => {
     return(
         <div>
-            A pattern
-            <pre>
+            A pattern { props.data.pattern.title }
+            {/* <pre>
                 { JSON.stringify( props, null, 1 )}
-            </pre>
+            </pre> */}
         </div>
     )
 }
@@ -18,6 +18,7 @@ export const pageQuery = graphql`
 query adQuery( $contentfulID: String! ){
     pattern:contentfulPattern(contentful_id: {eq: $contentfulID}) {
         slug
+        title
       }
     
 }
