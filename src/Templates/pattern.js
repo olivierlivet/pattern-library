@@ -19,6 +19,9 @@ query adQuery( $contentfulID: String! ){
     pattern:contentfulPattern(contentful_id: {eq: $contentfulID}) {
         slug
         title
+        description {
+            raw
+        }
       }
     
 }
