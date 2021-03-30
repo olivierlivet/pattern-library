@@ -198,7 +198,7 @@ exports.createPages = ({ graphql, actions }) => {
   
 
   return Promise.all([
-    homepage,
+    // homepage,
     univers,
     categories,
     variants,
