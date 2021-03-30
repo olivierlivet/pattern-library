@@ -20,7 +20,7 @@ const UniversTemplate = ( props ) => {
         <Layout
             enableBackButton = { true }
         >
-            <Heading as='h1'>Category: { pageContent.title }</Heading>
+            <Heading as='h1'>Univers: { pageContent.title }</Heading>
             {/* <pre>
                 { JSON.stringify( categories, null, 1 )}
             </pre> */}
