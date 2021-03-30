@@ -1,11 +1,23 @@
 import * as React from "react"
-import { ChakraProvider, CSSReset } from "@chakra-ui/react"
+import Header from './Header'
+import BackButton from './BackButton'
+import { ChakraProvider, CSSReset, Box } from "@chakra-ui/react"
 
-const baseLayout = ({ children }) => {
+const baseLayout = ({ children, enableBackButton }) => {
     return(
     <ChakraProvider>
         <CSSReset />
-        {children}
+        <Header />
+        <Box
+            maxW='1300px'
+            mx='auto'
+            px={{ base:2, lg:0 }}
+            as='main'
+        >
+            { enableBackButton ?   <BackButton /> : null }
+            {children}
+        </Box>
+
     </ChakraProvider>
     )
 }
