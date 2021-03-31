@@ -20,7 +20,7 @@ type propTypes = {
     filter: object,
     onClose: Function,
     isOpen: boolean
-  }
+}
 
 const SearchEngineLoader: FunctionComponent<propTypes> = ({ filter, onClose, isOpen }) => (
     <Modal

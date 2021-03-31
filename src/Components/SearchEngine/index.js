@@ -5,9 +5,12 @@ import {
     Divider,
     Flex,
     Center,
-    VStack
+    VStack,
+    Grid
 } from '@chakra-ui/react'
 import config from '../../Utils/config'
+import ProductCardSmall from '../Product/CardSmall'
+import ProductCardLarge from '../Product/CardLarge'
 
 const contentful = require("contentful");
 const client = contentful.createClient({
@@ -15,12 +18,14 @@ const client = contentful.createClient({
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
 });
 
+
 class SearchEngine extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            products: null
+            products: null,
+            singleProduct: null
         }
     }
 
@@ -53,22 +58,33 @@ class SearchEngine extends Component {
     }
 
     render() {
-        const { products } = this.state
+        const { products, singleProduct } = this.state
 
         return (
-            <Box>
-                <Flex
-                    borderBottom='solid 1px'
-                    borderBottomColor='gray.100'
-                    position='fixed'
-                    top='0'
-                    right='0'
-                    w='100%'
+            <Grid
+                templateColumns={{
+                    base:`100%`,
+                    lg:`300px 1fr`
+                }}
+            >
+                <Box
+                    h='100vh'
+                >
+                <Box
+                    position='sticky'
+                    top={0}
+                    // borderBottom='solid 1px'
+                    // borderBottomColor='gray.100'
+                    // position='fixed'
+                    // zIndex='banner'
+                    // top='0'
+                    // right='0'
+                    // w='100%'
                     bg='green.50'
-                    justifyContent='space-between'>
-                    <Flex
-
-                    >
+                    justifyContent='space-between'
+                >
+                        <Box>Type de vêtement : Jupe</Box>
+                        <Box>Coupe / Finition : Jupe portefeuille</Box>
                         {
                             ["Niveau", "Longueur", "Taille", "Fermeture", "Pocket", "Assymétrique"]
                                 .map(item =>
@@ -78,30 +94,44 @@ class SearchEngine extends Component {
                                     </>
                                 )
                         }
-                    </Flex>
                     <Flex
                         px={10}
                         align='center'
+                        position='fixed'
+                        top='2rem'
+                        right='2rem'
                     >
                         <Button onClick={() => this.props.onClose()}>Close</Button>
                     </Flex>
-                </Flex>
+                </Box>
+                </Box>
 
-                <Box mt='105px'>
-                    <VStack bg='gray.50' spacing={10}>
+                <Box>
+                    <VStack
+                        w='100%'
+                        py={ 20 }
+                        bg='gray.50' spacing={10} shouldWrapChildren={true}>
                         {products && products.map(product =>
-                            <Box
-                                w='500px'
-                                mx='auto'
-                            >
-                                <Center
-                                    bg='white'
-                                    h='500px'
-                                >
+                            <ProductCardSmall
+                                title={ product.fields.title }
+                                level={ product.fields.level }
+                                rating={ product.fields.rating }
 
-                                    {product.fields.title}
-                                </Center>
-                            </Box>
+                                //Actions
+                                onOpen={()=> this.setState({ singleProduct: product.fields })}
+                            />
+                            // <Box
+                            //     w='500px'
+                            //     mx='auto'
+                            // >
+                            //     <Center
+                            //         bg='white'
+                            //         h='500px'
+                            //     >
+
+                            //         {product.fields.title}
+                            //     </Center>
+                            // </Box>
                         )}
                     </VStack>
                 </Box>
@@ -110,7 +140,13 @@ class SearchEngine extends Component {
                         {JSON.stringify(products, null, 1)}
                     </pre>
                     : null} */}
-            </Box>
+                { singleProduct ?
+                    <ProductCardLarge
+                        product={ singleProduct }
+                        onClose={ ()=>this.setState({singleProduct: null}) }
+                    />
+                : null }
+            </Grid>
         )
     }
 }
