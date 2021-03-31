@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
 
@@ -6,10 +6,11 @@ import {
     StaticImage,
     // GatsbyImage
 } from "gatsby-plugin-image"
-import SearchEngine from '../Components/SearchEngine'
+import SearchEngineLoader from '../Components/SearchEngine/Loader.tsx'
 import Nav from '../Components/Nav/Base'
 import ProductsSummary from '../Components/ProductsSummary/index.js'
-
+import HeroSearch from '../Components/Hero/Hero'
+import RichContent from '../Components/RichContent'
 import {
     Heading,
     Box
@@ -19,24 +20,24 @@ const HomeTemplate = ( props ) => {
     const pageContent = props.data.page
     const univers = props.data.univers.edges
     const products = props.data.products.edges
+
+    const [showEngine, setShowEngine] = useState( false )
     return(
         <Layout
             enableBackButton = { false }
         >
-            <Heading as='h1'>Home: { pageContent.title }</Heading>
+            {/* <Heading as='h1'>Home: { pageContent.title }</Heading> */}
             {/* <pre>
                 { JSON.stringify( props.data, null, 1 )}
             </pre> */}
+            <HeroSearch handleLoadSearchEngine={()=> setShowEngine( true ) } />
 
             <Nav data={ univers } />
 
+            <RichContent data={ pageContent.description } />
             <ProductsSummary data={ products } />
 
-            {/* <SearchEngine /> */}
-
-            {/* <pre>
-                { JSON.stringify( props, null, 1 )}
-            </pre> */}
+            { showEngine ? <SearchEngineLoader filter={{ type:'skirt'}} onClose={ ()=>setShowEngine(false) } /> : null }
         </Layout>
     )
 }
@@ -48,7 +49,16 @@ query homeQuery( $contentfulID: String! ){
     page:contentfulPage(contentful_id: {eq: $contentfulID})
     {
         slug
-        title 
+        title
+        description {
+            raw
+            references {
+                contentful_id
+                node_locale
+                slug
+                ... on ContentfulUnivers { contentful_id slug }
+            }
+        }
     }
     univers:allContentfulUnivers
     {

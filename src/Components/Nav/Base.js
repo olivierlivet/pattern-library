@@ -13,7 +13,7 @@ const Nav = ({ data }) => {
             py='2rem'
         >
             { data ? data.map( item =>
-            <Link color="blue.400" as={ GatsbyLink } to={ '/fr'+item.node.slug }>{ item.node.title }</Link>
+            <Link key={ item.node.slug } color="blue.400" as={ GatsbyLink } to={ '/fr'+item.node.slug }>{ item.node.title }</Link>
             ) : 'null' }
         </Box>
     )

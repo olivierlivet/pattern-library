@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import {
-    Box
+    Box,
+    Button,
+    Divider,
+    Flex,
+    Center,
+    VStack
 } from '@chakra-ui/react'
 import config from '../../Utils/config'
 
@@ -18,23 +23,23 @@ class SearchEngine extends Component {
             products: null
         }
     }
-    
-    componentDidMount(){
-        let baseQuery = {
-        content_type: "product",
-        // "fields.level[gt]": 1
-        // "fields.specs.level":3
-        // locale: process.env.GATSBY_LANG,
-        // order: this.getOrder(),
-        // limit: this.props.pageLimite ? this.props.pageLimite : 20,
-        // skip: reset ? 0 : (currentPage) * (this.props.pageLimite ? this.props.pageLimite : 20),
-    }
 
-    client
-            .getEntries( baseQuery )
+    componentDidMount() {
+        let baseQuery = {
+            content_type: "product",
+            // "fields.level[gt]": 1
+            // "fields.specs.level":3
+            // locale: process.env.GATSBY_LANG,
+            // order: this.getOrder(),
+            // limit: this.props.pageLimite ? this.props.pageLimite : 20,
+            // skip: reset ? 0 : (currentPage) * (this.props.pageLimite ? this.props.pageLimite : 20),
+        }
+
+        client
+            .getEntries(baseQuery)
             .then(response =>
                 // console.log( response )
-                this.setState( { products: response.items } )
+                this.setState({ products: response.items })
 
                 // this.setState({
                 //     ads: reset ? response.items : ads.concat(response.items),
@@ -48,16 +53,58 @@ class SearchEngine extends Component {
     }
 
     render() {
-        const { products } = this.state
+        const { products } = this.state
 
         return (
             <Box>
-                <h1>Search engine</h1>
-                <div>
-                    {products && products.map(product =>
-                        <Box>{product.fields.title}</Box>
-                    )}
-                </div>
+                <Flex
+                    borderBottom='solid 1px'
+                    borderBottomColor='gray.100'
+                    position='fixed'
+                    top='0'
+                    right='0'
+                    w='100%'
+                    bg='green.50'
+                    justifyContent='space-between'>
+                    <Flex
+
+                    >
+                        {
+                            ["Niveau", "Longueur", "Taille", "Fermeture", "Pocket", "Assymétrique"]
+                                .map(item =>
+                                    <>
+                                        <Box p={10} key={item}>{item}</Box>
+                                        <Divider orientation='vertical' />
+                                    </>
+                                )
+                        }
+                    </Flex>
+                    <Flex
+                        px={10}
+                        align='center'
+                    >
+                        <Button onClick={() => this.props.onClose()}>Close</Button>
+                    </Flex>
+                </Flex>
+
+                <Box mt='105px'>
+                    <VStack bg='gray.50' spacing={10}>
+                        {products && products.map(product =>
+                            <Box
+                                w='500px'
+                                mx='auto'
+                            >
+                                <Center
+                                    bg='white'
+                                    h='500px'
+                                >
+
+                                    {product.fields.title}
+                                </Center>
+                            </Box>
+                        )}
+                    </VStack>
+                </Box>
                 {/* { products ?
                     <pre>
                         {JSON.stringify(products, null, 1)}

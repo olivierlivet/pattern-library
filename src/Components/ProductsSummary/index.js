@@ -17,6 +17,7 @@ const ProductsSummary = ({ data }) => {
             <Stack isInline>
                 {data.map(product =>
                     <Box
+                        key={`${product.node.slug}`}
                         as={ GatsbyLink }
                         to={ `/fr${product.node.slug}` }
                         p={ 10 }

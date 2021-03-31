@@ -9,10 +9,11 @@ const baseLayout = ({ children, enableBackButton }) => {
         <CSSReset />
         <Header />
         <Box
-            maxW='1300px'
-            mx='auto'
+            // maxW='1300px'
+            // mx='auto'
             px={{ base:2, lg:0 }}
             as='main'
+            position='relative'
         >
             { enableBackButton ?   <BackButton /> : null }
             {children}
