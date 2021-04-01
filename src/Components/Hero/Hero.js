@@ -11,7 +11,6 @@ import {
 } from 'gatsby-plugin-image'
 
 import Search from './Search'
-import Paper from '../../Images/Paper.jpg'
 
 const HeroSearch = ({ handleLoadSearchEngine }) => {
     return (
