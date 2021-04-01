@@ -42,13 +42,13 @@ const HeroSearch = ({ handleLoadSearchEngine }) => {
                 overflow='hidden'
 
             >
-                <StaticImage
+                {/* <StaticImage
                     w='100vw'
                     h='100%'
-                    src={ Paper }
+                    src={ '../Images/Paper.jpg' }
                     alt="Qu'allez-vous coudre aujourd'hui"
 
-                />
+                /> */}
             </Box>
 
         </Box>
