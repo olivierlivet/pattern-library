@@ -45,7 +45,7 @@ const HeroSearch = ({ handleLoadSearchEngine }) => {
                 <StaticImage
                     w='100vw'
                     h='100%'
-                    src='../../Images/Paper.jpg'
+                    src={ Paper }
                     alt="Qu'allez-vous coudre aujourd'hui"
 
                 />
