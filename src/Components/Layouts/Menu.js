@@ -94,9 +94,9 @@ const Menu = ({ visible, onClose }) => {
                             <Box
                                 w='100%'
                             >
-                            <Text textAlign='center'>
+                            {/* <Text textAlign='center'>
                                 <Link to={`/fr/about/`}>À propos</Link>
-                            </Text>
+                            </Text> */}
                             </Box>
                             </Box>
                             
