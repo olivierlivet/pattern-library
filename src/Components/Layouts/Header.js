@@ -4,8 +4,10 @@ import Menu from './Menu'
 import {
     Button,
     Flex,
+    Link,
     Text,
-    Box 
+    Box, 
+    HStack
 } from '@chakra-ui/react'
 
 const Header = () => {
@@ -21,9 +23,18 @@ const Header = () => {
             <Text>
                 La Patronthèque v0
             </Text>
-            <Button onClick={()=> setMenuVisible( !menuVisible )}>
-                <AddIcon w={6} h={6} />
-            </Button>
+            <HStack>
+                <Link>
+                    À propos
+                </Link>
+                <Link>
+                    Newsletter
+                </Link>
+                <Button onClick={()=> setMenuVisible( !menuVisible )}>
+                    <AddIcon w={6} h={6} /> Menu
+                </Button>
+            </HStack>
+            
         </Flex>
         <Menu visible={ menuVisible } onClose={()=> setMenuVisible( !menuVisible )} />
         </>

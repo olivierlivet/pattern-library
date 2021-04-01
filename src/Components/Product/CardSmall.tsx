@@ -8,14 +8,17 @@ type productCardPropsTypes = {
     onOpen: Function
 }
 
-import { StaticImage } from 'gatsby-plugin-image'
 import {
     Box,
     Heading,
     Grid,
     Text,
-    Button
+    Button,
+    HStack,
+    Badge,
+    VStack
 } from '@chakra-ui/react'
+import ProductIllustrationWithSwap from './ProductIllustrationWithSwap'
 
 const ProductCard:FunctionComponent<productCardPropsTypes> = ({
         title,
@@ -38,19 +41,46 @@ const ProductCard:FunctionComponent<productCardPropsTypes> = ({
             gap={10}
         >
             <Box>
-                <StaticImage
-                    src='https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg'
-                    alt={title}
-                />
+
+            
+            <ProductIllustrationWithSwap
+                imagesUrl = {[
+                    'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',
+                    'https://www.ladroguerie.com/wp-content/uploads/2020/02/patron-couture-deauville-chemise-homme-mesures.jpg'
+                ]}
+            />
+            {/* <AddTo */}
             </Box>
-            <Box
+
+            <VStack
+                spacing={ 4 }
                 p={5}
+                align='start'
+                justify='center'
+
             >
-                <Heading>{title}</Heading>
-                <Text>Level : { level }</Text>
+                <Text
+                    textTransform='uppercase'
+                    letterSpacing='wide'
+                    fontSize='small'
+                    color='green.500'
+                >La république du Chiffon</Text>
+                <Heading
+                    as='h3'
+                    fontSize='28px'
+                    letterSpacing='wide'
+                >{title}</Heading>
+                <Box>
+                    Description courte
+                </Box>
+                <HStack>
+                    <Badge>12€</Badge>
+                    <Badge>Pochette</Badge>
+                    <Text>Niveau 3</Text>
+                </HStack>
                 <Button onClick={()=>onOpen()}>View</Button>
 
-            </Box>
+            </VStack>
         </Grid>
     </Box>
     )
