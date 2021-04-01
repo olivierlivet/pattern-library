@@ -36,7 +36,8 @@ const HomeTemplate = ( props ) => {
 
             <RichContent data={ pageContent.description } />
             <ProductsSummary data={ products } />
-
+            
+            <SearchEngineLoader filter={{ type:'skirt'}} onClose={ ()=>setShowEngine(false) } />
             { showEngine ? <SearchEngineLoader filter={{ type:'skirt'}} onClose={ ()=>setShowEngine(false) } /> : null }
         </Layout>
     )

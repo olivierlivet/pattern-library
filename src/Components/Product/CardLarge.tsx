@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react'
-
+import './modal.css'
 type productCardPropsTypes = {
     product: object,
+    title: string,
 
     onOpen(): Function,
     onClose(): Function
@@ -27,8 +28,7 @@ import {
 
 const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
     product,
-
-
+    title,
     onClose
 }) => {
     return (
@@ -37,18 +37,23 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
             isOpen={true}
             size='full'
             onClose={()=>onClose()}
+            motionPreset="slideInBottom"
+            id={`modal-product-detail`}
+
 
         >
-            <ModalOverlay />
+            <ModalHeader>Heder</ModalHeader>
+            <ModalCloseButton />
             <ModalContent>
-                <ModalHeader>Modal Title</ModalHeader>
-                <ModalCloseButton />
                 <ModalBody
-                   my={'0'}
-
-                            borderRadius='0'
+                            my={'0'}
+                   marginTop='0'
+                   borderRadius='0'
 
                 >
+                    <Button
+                        onClick={()=>onClose()}
+                    >Retour</Button>
 
 
                     <Box

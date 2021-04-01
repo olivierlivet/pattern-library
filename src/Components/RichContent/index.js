@@ -64,8 +64,12 @@ const RichContent = ({ data }) => {
             }
         }
     }
-
-    return <Stack spacing={{ base: 3, lg: 5 }}>{documentToReactComponents(JSON.parse(data.raw), options)}</Stack>
+    return(
+        data && data.raw ?
+            <Stack spacing={{ base: 3, lg: 5 }}>{documentToReactComponents( JSON.parse(data.raw), options )}</Stack>
+        :
+            <Stack spacing={{ base: 3, lg: 5 }}>{documentToReactComponents( data, options)}</Stack>
+        )
 }
 
 export default RichContent

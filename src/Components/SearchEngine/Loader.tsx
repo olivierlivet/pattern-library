@@ -27,14 +27,16 @@ const SearchEngineLoader: FunctionComponent<propTypes> = ({ filter, onClose, isO
         isOpen={true}
         size='full'
         onClose={()=>onClose()}
+        id='modalSearchForm'
     >
         <ModalOverlay />
         <ModalContent
             my={'0'}
             borderRadius={{ base: 0, lg: 0 }}
+            bg='gray.50'
         >
             {/* <ModalHeader>Patterns search engine</ModalHeader> */}
-            <ModalCloseButton />
+            {/* <ModalCloseButton /> */}
             <ModalBody p={0}>
                 <SearchEngine filter={ filter } onClose={()=>onClose()} />
             </ModalBody>
