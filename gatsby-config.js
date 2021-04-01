@@ -4,9 +4,10 @@ require("dotenv").config({ path: `.env.${activeEnv}` });
 module.exports = {
   siteMetadata: {
     title: "Pattern Library",
-    siteUrl: "https://www.pattern-library.com"
+    siteUrl: "https://patternslibrary.gatsbyjs.io"
   },
   plugins: [
+    `gatsby-plugin-robots-txt`,
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {

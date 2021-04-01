@@ -24,12 +24,12 @@ const Header = () => {
                 La Patronthèque v0
             </Text>
             <HStack>
-                <Link to={`/fr/a-propos/`}>
+                {/* <Link to={`/fr/a-propos/`}>
                     À propos
                 </Link>
                 <Link to={`/fr/a-propos/#newsletter`}>
                     Newsletter
-                </Link>
+                </Link> */}
                 <Button onClick={()=> setMenuVisible( !menuVisible )}>
                     <SmallAddIcon w={6} h={6} /> Menu
                 </Button>

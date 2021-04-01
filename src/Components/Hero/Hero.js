@@ -31,7 +31,7 @@ const HeroSearch = ({ handleLoadSearchEngine }) => {
                 </Box>
             </Flex>
 
-            {/* <Box
+            <Box
                 zIndex='base'
                 h='90vh'
                 w='100vw'
@@ -48,7 +48,7 @@ const HeroSearch = ({ handleLoadSearchEngine }) => {
                     alt="Qu'allez-vous coudre aujourd'hui"
 
                 />
-            </Box> */}
+            </Box>
 
         </Box>
     )
