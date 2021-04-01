@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
+import { PhoneIcon, AddIcon, WarningIcon, SmallAddIcon } from '@chakra-ui/icons'
 import Menu from './Menu'
 import {
     Button,
@@ -17,21 +17,21 @@ const Header = () => {
         <Flex
             as={'header'}
             p={ 10 }
-            background='green.50'
+            background='#efccbf'
             justifyContent='space-between'
         >
             <Text>
                 La Patronthèque v0
             </Text>
             <HStack>
-                <Link>
+                <Link to={`/fr/a-propos/`}>
                     À propos
                 </Link>
-                <Link>
+                <Link to={`/fr/a-propos/#newsletter`}>
                     Newsletter
                 </Link>
                 <Button onClick={()=> setMenuVisible( !menuVisible )}>
-                    <AddIcon w={6} h={6} /> Menu
+                    <SmallAddIcon w={6} h={6} /> Menu
                 </Button>
             </HStack>
             

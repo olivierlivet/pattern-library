@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
-
+import ProductPage from '../Components/Product/ProductPage'
 // import {
 //     StaticImage,
 //     // GatsbyImage
@@ -12,12 +12,14 @@ import {
 } from '@chakra-ui/react'
 
 const ProductTemplate = ( props ) => {
-    const pageContent = props.data.home
+    const pageContent = props.data.product
     return(
         <Layout
             enableBackButton = { true }
         >
-            <Heading>Product: { pageContent.title }</Heading>
+            <ProductPage
+                data={ props.data.product }
+            />
             {/* <StaticImage
                 src="https://placekitten.com/800/600"
                 alt="A kitten"
@@ -45,13 +47,14 @@ export default ProductTemplate
 
 export const pageQuery = graphql`
 query adQuery( $contentfulID: String! ){
-    home:contentfulProduct(contentful_id: {eq: $contentfulID}) {
+    product:contentfulProduct(contentful_id: {eq: $contentfulID}) {
         slug
         title
-        description {
-            raw
-        }
+        intro{ raw }
+        description { raw }
+        level
         picture { file { url } }
+        #pictures
       }
 }
 `

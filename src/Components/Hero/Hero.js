@@ -11,12 +11,14 @@ import {
 } from 'gatsby-plugin-image'
 
 import Search from './Search'
+import Paper from '../../Images/Paper.jpg'
 
 const HeroSearch = ({ handleLoadSearchEngine }) => {
     return (
         <Box
             h='90vh'
             w='100vw'
+            overflow='hidden'
         >
             <Flex
                 position='relative'
@@ -36,11 +38,14 @@ const HeroSearch = ({ handleLoadSearchEngine }) => {
                 w='100vw'
                 position='absolute'
                 top='0'
-                left='0'>
+                left='0'
+                overflow='hidden'
+
+            >
                 <StaticImage
                     w='100vw'
                     h='100%'
-                    src='https://images.unsplash.com/photo-1601584115508-dac19b7e9a1c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                    src='../../Images/Paper.jpg'
                     alt="Qu'allez-vous coudre aujourd'hui"
 
                 />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
 
@@ -15,30 +15,37 @@ import {
     Heading,
     Box
 } from '@chakra-ui/react'
+import Wrapper from '../Components/Layouts/Wrapper'
+import Helmet from 'react-helmet'
 
-const HomeTemplate = ( props ) => {
+const HomeTemplate = (props) => {
     const pageContent = props.data.page
     const univers = props.data.univers.edges
     const products = props.data.products.edges
 
-    const [showEngine, setShowEngine] = useState( false )
-    return(
+    const [showEngine, setShowEngine] = useState(false)
+    return (
         <Layout
-            enableBackButton = { false }
+            enableBackButton={false}
         >
-            {/* <Heading as='h1'>Home: { pageContent.title }</Heading> */}
-            {/* <pre>
-                { JSON.stringify( props.data, null, 1 )}
-            </pre> */}
-            <HeroSearch handleLoadSearchEngine={()=> setShowEngine( true ) } />
-
-            <Nav data={ univers } />
-
-            <RichContent data={ pageContent.description } />
-            <ProductsSummary data={ products } />
-            
-            <SearchEngineLoader filter={{ type:'skirt'}} onClose={ ()=>setShowEngine(false) } />
-            { showEngine ? <SearchEngineLoader filter={{ type:'skirt'}} onClose={ ()=>setShowEngine(false) } /> : null }
+            <Helmet>
+                <title>{pageContent.title}</title>
+                <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
+            </Helmet>
+            <HeroSearch handleLoadSearchEngine={() => setShowEngine(true)} />
+            <Wrapper>
+                <Nav data={univers} />
+                <Box
+                    fontSize={{ 
+                        base:'lg',
+                        lg:'larger'
+                    }}
+                >
+                    <RichContent data={pageContent.description} />
+                </Box>
+                {/* <ProductsSummary data={products} /> */}
+            </Wrapper>
+            { showEngine ? <SearchEngineLoader filter={{ type: 'skirt' }} onClose={() => setShowEngine(false)} /> : null}
         </Layout>
     )
 }

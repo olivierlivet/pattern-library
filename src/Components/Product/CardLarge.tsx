@@ -25,6 +25,7 @@ import {
     ModalBody,
     ModalCloseButton,
 } from "@chakra-ui/react"
+import ProductPage from './ProductPage'
 
 const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
     product,
@@ -36,7 +37,7 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
         <Modal
             isOpen={true}
             size='full'
-            onClose={()=>onClose()}
+            onClose={() => onClose()}
             motionPreset="slideInBottom"
             id={`modal-product-detail`}
 
@@ -46,44 +47,18 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
             <ModalCloseButton />
             <ModalContent>
                 <ModalBody
-                            my={'0'}
-                   marginTop='0'
-                   borderRadius='0'
-
+                    my={'0'}
+                    marginTop='0'
+                    borderRadius='0'
                 >
                     <Button
-                        onClick={()=>onClose()}
+                        onClick={() => onClose()}
                     >Retour</Button>
 
+                    <ProductPage
+                        data={ product }
+                    />
 
-                    <Box
-                        w='100%'
-                        maxW='1100px'
-                        mx='auto'
-                        bg='white'
-                    >
-                        <Grid
-                            templateColumns={{
-                                base: '100%',
-                                lg: '500px 1fr'
-                            }}
-                            gap={10}
-                        >
-                            <Box>
-                                <StaticImage
-                                    src='https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg'
-                                    alt={product.title}
-                                />
-                            </Box>
-                            <Box
-                                p={5}
-                            >
-                                <Heading>{product.title}</Heading>
-                                <Text>Level : {product.level}</Text>
-
-                            </Box>
-                        </Grid>
-                    </Box>
                 </ModalBody>
             </ModalContent>
         </Modal>

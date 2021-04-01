@@ -39,7 +39,7 @@ const SearchBox = ({ handleLoadSearchEngine }) => {
             bg='white'
             p={4}
             borderRadius='3xl'
-            boxShadow='dark-lg'
+            boxShadow='md'
         >
             <HStack
                 as={'form'}
