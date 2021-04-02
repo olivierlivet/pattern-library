@@ -12,7 +12,7 @@ import {
 
 import Search from './Search'
 
-const HeroSearch = ({ handleLoadSearchEngine }) => {
+const HeroSearch = ({ handleLoadSearchEngine, setCategory, setVariant }) => {
     return (
         <Box
             h='90vh'
@@ -27,7 +27,11 @@ const HeroSearch = ({ handleLoadSearchEngine }) => {
                 h='100%'
             >
                 <Box>
-                    <Search handleLoadSearchEngine={()=> handleLoadSearchEngine() } />
+                    <Search
+                        handleLoadSearchEngine={()=> handleLoadSearchEngine() }
+                        setCategory={(value)=>setCategory(value)}
+                        setVariant={(value)=>setVariant(value)}
+                    />
                 </Box>
             </Flex>
 

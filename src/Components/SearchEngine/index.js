@@ -17,6 +17,10 @@ import ProductCardSmall from '../Product/CardSmall'
 import ProductCardLarge from '../Product/CardLarge'
 import RichContent from '../../Components/RichContent'
 
+import CissorsLoader from '../Loaders/Cissors'
+
+import Filters from './filters'
+
 const contentful = require("contentful");
 const client = contentful.createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
@@ -30,13 +34,56 @@ class SearchEngine extends Component {
         super(props)
         this.state = {
             products: null,
-            singleProduct: null
+            singleProduct: null,
+            mainFilters:{},
+            subFilters:{}
         }
     }
 
+    categoryFilter () {
+        let categoryFilter = Filters.getCategoryFilter( this.state.mainFilters )
+        if (categoryFilter){
+            return Filters.getCategoryFilter( this.state.mainFilters )
+        }else{
+            return null
+        }
+        
+    }
+
+    variantFilter () {
+        let variantFilter = Filters.getVariantFilter( this.state.mainFilters )
+        if (variantFilter){
+            return Filters.getVariantFilter( this.state.mainFilters )
+        }else{
+            return null
+        }
+        
+    }
+
+    // variantFilter () {
+    //     let variantFilter = Filters.getVariantFilter( this.state.mainFilters.variant )
+    //     if (variantFilter){
+    //                 return Filters.getVariantFilter( this.state.mainFilters.variant )
+
+    //     }else{
+    //         return null
+    //     }
+    //     // return { "fields.category.sys.id" : "2aMnwR8nnDdeb0PNj2SBe9" } // Hauts
+    //     // return { "fields.category.sys.id" : "3v7MEyPWB0d1FOYFa9odJV" } // Jupes
+        
+    // }
+
     componentDidMount() {
+        this.loadProducts()
+    }
+
+    loadProducts(){
+        console.log('LoadProducts', this.state.mainFilters)
         let baseQuery = {
             content_type: "product",
+            ...this.categoryFilter( this.state.mainFilters.category ),
+            ...this.variantFilter( this.state.mainFilters.variant )
+            // ...this.variantFilter( this.state.mainFilters.variant )
             // "fields.level[gt]": 1
             // "fields.specs.level":3
             // locale: process.env.GATSBY_LANG,
@@ -62,6 +109,19 @@ class SearchEngine extends Component {
             .catch(console.error)
     }
 
+    handleChange(e){
+        this.setState({products: []})
+
+        setTimeout(()=>{
+            let mainFilters = this.state.mainFilters
+            mainFilters[e.target.name]=e.target.value
+            if ( e.target.name === 'category' ) { delete mainFilters.variant }
+            this.setState({ mainFilters: mainFilters}, this.loadProducts())
+        }, 1000)
+
+
+    }
+
     render() {
         const { products, singleProduct } = this.state
 
@@ -78,17 +138,33 @@ class SearchEngine extends Component {
                     >
                         <HStack >
                             <Text whiteSpace='pre'>Il y a <Text as='span' bg='yellow.100'>12</Text> patrons de :</Text>
-                            <Select w='200px'>
-                                <option>Jupe</option>
-                                <option>Haut</option>
-                                <option>Pantalon</option>
-                                <option>Manteau / veste</option>
+                            <Select
+                                w='200px'
+                                onChange={(e)=>this.handleChange(e)}
+                                value={ this.state.mainFilters.category }
+                                name='category'
+                                placeholder='Genre'
+                            >
+                                {Filters.getCategoryOptions().map( option =>
+                                    <option value={option.variantId}>{option.label}</option>
+                                )}
                             </Select>
-                            <Select>
-                                <option>Jupe portefeuille</option>
-                                <option>Jupe à pli</option>
+                            {
+                                this.state.mainFilters.category
+                                && Filters.getVariantOptions( this.state.mainFilters.category )
+                                && Filters.getVariantOptions( this.state.mainFilters.category ).length
+                            ? 
+                            <Select
+                                onChange={(e)=>this.handleChange(e)}
+                                value={ this.state.mainFilters.variant ? this.state.mainFilters.variant : '' }
+                                name='variant'
+                                placeholder='Pièce'
+                            >
+                                {Filters.getVariantOptions( this.state.mainFilters.category ).map( option =>
+                                    <option value={option.variantId}>{option.label}</option>
+                                )}
                             </Select>
-
+                            : <div>test</div>}
                         </HStack>
                         <Box>
                             <Button>Favorites</Button>
@@ -158,31 +234,35 @@ class SearchEngine extends Component {
                                 spacing={10}
                                 shouldWrapChildren={true}
                             >
-                                {products && products.map(product =>
-                                    <ProductCardSmall
-                                        productId={product.sys.id}
-                                        title={product.fields.title}
-                                        level={product.fields.level}
-                                        rating={product.fields.rating}
-                                        intro={<RichContent data={product.fields.intro} />}
+                                {products && products.length ?
+                                    products.map(product =>
+                                        <ProductCardSmall
+                                            productId={product.sys.id}
+                                            title={product.fields.title}
+                                            level={product.fields.level}
+                                            rating={product.fields.rating}
+                                            intro={<RichContent data={product.fields.intro} />}
 
 
-                                        //Actions
-                                        onOpen={() => this.setState({ singleProduct: product.fields })}
-                                    />
-                                    // <Box
-                                    //     w='500px'
-                                    //     mx='auto'
-                                    // >
-                                    //     <Center
-                                    //         bg='white'
-                                    //         h='500px'
-                                    //     >
+                                            //Actions
+                                            onOpen={() => this.setState({ singleProduct: product.fields })}
+                                        />
+                                        // <Box
+                                        //     w='500px'
+                                        //     mx='auto'
+                                        // >
+                                        //     <Center
+                                        //         bg='white'
+                                        //         h='500px'
+                                        //     >
 
-                                    //         {product.fields.title}
-                                    //     </Center>
-                                    // </Box>
-                                )}
+                                        //         {product.fields.title}
+                                        //     </Center>
+                                        // </Box>
+                                ):
+                                <CissorsLoader />
+                                }
+
                             </VStack>
                         </Box>
                         {/* { products ?

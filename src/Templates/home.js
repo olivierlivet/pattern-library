@@ -24,6 +24,8 @@ const HomeTemplate = (props) => {
     const products = props.data.products.edges
 
     const [showEngine, setShowEngine] = useState(false)
+    const [category, setCategory] = useState(false)
+    const [variant, setVariant] = useState(false)
     return (
         <Layout
             enableBackButton={false}
@@ -32,7 +34,11 @@ const HomeTemplate = (props) => {
                 <title>{pageContent.title}</title>
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
-            <HeroSearch handleLoadSearchEngine={() => setShowEngine(true)} />
+            <HeroSearch
+                handleLoadSearchEngine={() => setShowEngine(true)}
+                setCategory={( value )=>setCategory(value)}
+                setVariant={( value )=>setVariant(value)}
+            />
             <Wrapper>
                 <Nav data={univers} />
                 <Box
@@ -45,7 +51,23 @@ const HomeTemplate = (props) => {
                 </Box>
                 {/* <ProductsSummary data={products} /> */}
             </Wrapper>
-            { showEngine ? <SearchEngineLoader filter={{ type: 'skirt' }} onClose={() => setShowEngine(false)} /> : null}
+            { showEngine ?
+                <SearchEngineLoader
+                    filter={{
+                        category: category ? category : null,
+                        variant: variant ? variant : null
+                    }}
+                    onClose={() => setShowEngine(false)}
+                />
+            :
+                <SearchEngineLoader
+                    filter={{
+                        category: category ? category : null,
+                        variant: variant ? variant : null
+                    }}
+                    onClose={() => setShowEngine(false)}
+                />
+            }
         </Layout>
     )
 }
