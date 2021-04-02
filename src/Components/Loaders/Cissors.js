@@ -5,7 +5,7 @@ import {
     Image
 } from '@chakra-ui/react'
 
-import CissorsImage from '../../Images/CissorsAnimated.svg'
+import CissorsImage from './Cissors.svg'
 
 const CissorsLoader = () => {
     return(
