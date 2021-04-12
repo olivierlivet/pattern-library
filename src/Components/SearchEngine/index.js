@@ -272,13 +272,13 @@ class SearchEngine extends Component {
                         <Box
                             // bg='white'
                             // mt={10}
-                            pt={ 20 }
+                            pt='14'
                             pb={ 20 }
                         >
                             {products && products.length ?
-                                <Center p={4 }>
-                                    <Text>
-                                        {`${products.length} patrons correspondent à votre recherche`}
+                                <Center p={2 }>
+                                    <Text fontSize='15px' letterSpacing='wide'> 
+                                        <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>{products.length}</Text>{` patrons correspondent à votre recherche`}
                                     </Text>
                                 </Center>
                                 : `Pas de patron correspondent à votre recherche`}

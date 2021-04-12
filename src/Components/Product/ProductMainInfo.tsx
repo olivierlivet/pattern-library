@@ -12,7 +12,9 @@ import {
     Stack,
     Flex,
     Text,
-    HStack
+    HStack,
+    SimpleGrid,
+    Center
 } from '@chakra-ui/react'
 import RichContent from '../RichContent'
 
@@ -26,18 +28,29 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                     {data.title}
                 </Heading>
             </Box>
+            <SimpleGrid
+                columns={3}
+                gap={4}
+            >
 
-            <Box>
-                Évaluation : { data.level }/5
-            </Box>
+            <Flex wrap='wrap'>
+                <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='13px' letterSpacing='wider'>Évaluation</Text>
+                <Text w='100%'>4****</Text>
+            </Flex>
 
-            <Box>
-                Taille : 36/44
-            </Box>
+            <Flex wrap='wrap'>
+                <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='13px' letterSpacing='wider'>Taille</Text>
+                <Text w='100%'>36→44</Text>
+            </Flex>
 
-            <Box>
-                Prix : { data.price }€
-            </Box>
+            <Flex wrap='wrap'>
+                <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='13px' letterSpacing='wider'>Prix</Text>
+                <Text w='100%'>{ data.price }€</Text>
+            </Flex>
+
+            </SimpleGrid>
+
+            
 
             <HStack>
                 <Box
@@ -73,7 +86,6 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
             </HStack>
 
             <RichContent data={data.intro} />
-            <Text>Détail des mesures, inspirations, accédez à tous les détails de ce patron.</Text>
             <HStack>
                 <Button as='a' href='#details' size="sm">Détails</Button>
                 <Button as='a' href='#details' size="sm">Inspirations</Button>
