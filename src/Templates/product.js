@@ -53,6 +53,7 @@ query adQuery( $contentfulID: String! ){
         intro{ raw }
         description { raw }
         level
+        price
         picture { file { url } }
         #pictures
         editor{ title }

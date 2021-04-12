@@ -34,7 +34,10 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                     borderBottomColor='#88a7aa'
                     display='inline-block'
                     h='22px'
-                >{data.editor.title}{data.editor.fields.title}</Link>
+                >
+                    { data.editor ? data.editor.title : null }
+                    { data.editor.fields ? data.editor.fields.name : null }
+                </Link>
             </Box>
             <RichContent data={data.intro} />
 
