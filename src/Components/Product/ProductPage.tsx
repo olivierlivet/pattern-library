@@ -31,7 +31,7 @@ const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
     return (
         <Wrapper>
             <CloseButton onClose={()=>onClose()} />
-            <Stack spacing={{ base:4, lg:8 }}>
+            <Stack spacing={{ base:4, lg:8 }} pb={ 20 }>
 
                 <SimpleGrid
                     columns={{ base: 1, xl: 2 }}
