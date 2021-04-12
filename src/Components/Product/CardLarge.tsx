@@ -48,15 +48,21 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
             <ModalContent>
                 <ModalBody
                     my={'0'}
+                    px='0'
+                    mx='0'
+
+                    py='0'
+                    my='0'
                     marginTop='0'
                     borderRadius='0'
                 >
-                    <Button
+                    {/* <Button
                         onClick={() => onClose()}
-                    >Retour</Button>
+                    >Retour</Button> */}
 
                     <ProductPage
                         data={ product }
+                        onClose={()=>onClose()}
                     />
 
                 </ModalBody>

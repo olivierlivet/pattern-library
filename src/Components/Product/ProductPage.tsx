@@ -7,9 +7,12 @@ import ProductInspirations from './ProductInspirations'
 import ProductRatingAdnAdvices from './ProductRatingAndAdvices'
 import ProductIllustration from './ProductIllustration'
 import ProductMainInfo from './ProductMainInfo'
+import CloseButton from './CloseButton'
 import {
     Box,
+    Button,
     Center,
+    Flex,
     Heading,
     SimpleGrid,
     Stack
@@ -20,33 +23,41 @@ import RichContent from '../RichContent'
 
 
 type props = {
-    data: Object
+    data: Object,
+    onClose: Function
 }
 
-const ProductPage: FunctionComponent<props> = ({ data }) => {
+const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
     return (
         <Wrapper>
-            <Stack spacing={10}>
+            <CloseButton onClose={()=>onClose()} />
+            <Stack spacing={{ base:4, lg:8 }}>
 
                 <SimpleGrid
                     columns={{ base: 1, xl: 2 }}
-                    gap={{ base:0, lg:10 }}
-                    my={10}
+                    gap={{ base: 0, lg: 10 }}
+                    my={{ base: 0, lg: 10 }}
                 >
                     <Box>
                         <ProductIllustration data={data} />
                     </Box>
-                    <Center>
+                    <Center
+                        p={{ base:5, lg:0 }}
+                        wrap='wrap'
+                    >
                         <ProductMainInfo data={data} />
                     </Center>
                 </SimpleGrid>
 
-                <Box>
+                <Box
+                    px={{ base:5, lg:0 }}
+                    fontSize='15px'
+                    id='details'
+                >
                     <RichContent data={data.description} />
-
                 </Box>
 
-                <Tabs>
+                <Tabs id="details">
                     <TabList>
                         <Tab>Informations détaillées</Tab>
                         <Tab>Inspirations</Tab>

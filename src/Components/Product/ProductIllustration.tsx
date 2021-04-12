@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react'
 
 type props = {
-    data: Object
+    data: Object,
 }
 
 import { 
+    Button,
     Box,
     Center,
     Grid,
@@ -21,9 +22,21 @@ const ProductIllustration:FunctionComponent<props> = ({ data }) => {
                 base:'100%',
                 lg:'100px 1fr'
             }}
-            gap={ 5 }
+            gap={{ base: 0, lg:5 }}
         >
-            <Box>
+            <Center
+                bg='green.50'
+                order={{ base: 1, lg: 2 }}
+            >
+                <img
+                    src={`https://cdn3.rascol.com/77963/465x465/patron-de-robe-mademoiselle-josephine-p-m-patterns.jpg`}
+                    alt={data.title}
+                />
+            </Center>
+            <Box
+                order={{ base: 2, lg: 1 }}
+                display={{ base: 'none', lg:'initial'}}
+            >
                 <VStack>
                 <Box bg='gray.200' w='100px' h='100px'></Box>
                 <Box bg='gray.200' w='100px' h='100px'></Box>
@@ -32,16 +45,6 @@ const ProductIllustration:FunctionComponent<props> = ({ data }) => {
                 <Box bg='gray.200' w='100px' h='100px'></Box>
                 </VStack>
             </Box>
-            <Center
-                bg='green.50'
-            >
-                <img
-                    src={`https://cdn3.rascol.com/77963/465x465/patron-de-robe-mademoiselle-josephine-p-m-patterns.jpg`}
-                    alt={data.title}
-                />
-            </Center>
-
-
         </Grid>
     )
 }

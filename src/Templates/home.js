@@ -34,11 +34,11 @@ const HomeTemplate = (props) => {
                 <title>{pageContent.title}</title>
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
-            <HeroSearch
+            {/* <HeroSearch
                 handleLoadSearchEngine={() => setShowEngine(true)}
                 setCategory={( value )=>setCategory(value)}
                 setVariant={( value )=>setVariant(value)}
-            />
+            /> */}
             <Wrapper>
                 <Nav data={univers} />
                 <Box
@@ -51,7 +51,7 @@ const HomeTemplate = (props) => {
                 </Box>
                 {/* <ProductsSummary data={products} /> */}
             </Wrapper>
-            { showEngine ?
+            { !showEngine ?
                 <SearchEngineLoader
                     filter={{
                         category: category ? category : null,
@@ -60,13 +60,7 @@ const HomeTemplate = (props) => {
                     onClose={() => setShowEngine(false)}
                 />
             :
-                <SearchEngineLoader
-                    filter={{
-                        category: category ? category : null,
-                        variant: variant ? variant : null
-                    }}
-                    onClose={() => setShowEngine(false)}
-                />
+                null
             }
         </Layout>
     )

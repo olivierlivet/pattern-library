@@ -50,10 +50,10 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     return (
         <Box
             position='relative'
-            w='700px'
             bg='white'
             boxShadow='sm'
             borderRadius='xl'
+            bgColor='white'
             cursor='pointer'
             border='solid 2px'
             borderColor='transparent'
@@ -62,24 +62,23 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
             _hover={{
                 "borderColor": 'green.100'
             }}
+            w={{ base:'auto', lg:'700px' }}
+            // m={ 4 }
         >
             <Grid
                 templateColumns={{
                     base: '100%',
                     lg: '300px 1fr'
                 }}
-                gap={10}
+                gap={{base: 0, lg:10}}
             >
                 <Box>
-
-
                     <ProductIllustrationWithSwap
                         imagesUrl={[
                             'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',
                             'https://www.ladroguerie.com/wp-content/uploads/2020/02/patron-couture-deauville-chemise-homme-mesures.jpg'
                         ]}
                     />
-                    {/* <AddTo */}
                 </Box>
 
                 <VStack
@@ -100,9 +99,9 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                         fontSize='28px'
                         letterSpacing='wide'
                     >{title}</Heading>
-                    <Box fontSize='small'>
+                    {/* <Box fontSize='small'>
                         { intro }
-                    </Box>
+                    </Box> */}
                     <HStack>
                         <Badge>12€</Badge>
                         <Badge>Pochette</Badge>
