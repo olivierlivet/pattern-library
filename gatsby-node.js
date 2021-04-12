@@ -195,6 +195,46 @@ exports.createPages = ({ graphql, actions }) => {
 
 
 
+    /*
+    #####
+    EDITORS
+    #####
+  */
+    const editorTemplate = path.resolve('src/Templates/editor.js')
+    const editors = graphql(`
+    {
+      allEditors:allContentfulEditor{
+        edges {
+          node {
+            node_locale
+            contentful_id
+            slug
+            #name
+          }
+        }
+      }
+    }
+    `).then(result => {
+      if (result.errors) {
+        Promise.reject(result.errors);
+      }
+      // Create univers pages
+      const allEditors = result.data.allEditors.edges;
+      allEditors.forEach((edge) => {
+        createPage({
+          path: `${edge.node.node_locale}${edge.node.slug}`,
+          component: editorTemplate,
+          context: {
+            slug: edge.node.slug,
+            contentfulID: edge.node.contentful_id,
+            locale: edge.node.node_locale
+          }
+        });
+      });
+    });
+
+
+
   
 
   return Promise.all([

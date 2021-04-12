@@ -30,6 +30,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     level,
     rating,
     intro,
+    editor,
 
     onOpen
 }) => {
@@ -88,17 +89,21 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     justify='center'
 
                 >
-                    <Text
-                        textTransform='uppercase'
-                        letterSpacing='wide'
-                        fontSize='small'
-                        color='green.500'
-                    >La république du Chiffon</Text>
+                    
                     <Heading
                         as='h3'
                         fontSize='28px'
                         letterSpacing='wide'
                     >{title}</Heading>
+                    {/* <Text
+                    color='gray.600'
+                    borderBottom='solid 4px'
+                    borderBottomColor='#88a7aa'
+                    display='inline-block'
+                    h='22px'
+                >
+                    { editor && editor.title ? editor.title : editor.fields ? editor.fields.title : null }
+                </Text> */}
                     {/* <Box fontSize='small'>
                         { intro }
                     </Box> */}

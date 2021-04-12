@@ -11,7 +11,7 @@ const baseLayout = ({ children, enableBackButton }) => {
         <Box
             // maxW='1300px'
             // mx='auto'
-            px={{ base:2, lg:0 }}
+            px={{ base:0, lg:0 }}
             as='main'
             position='relative'
         >

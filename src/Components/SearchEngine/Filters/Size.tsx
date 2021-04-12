@@ -14,7 +14,7 @@ import ClearButton from './ClearButton'
 const Filter: FunctionComponent = () => {
     return (
         <>
-            <Label>Taille :</Label>
+            <Label>Mensurations :</Label>
             <AccordionPanel>
                 <Select>
                     <option>36</option>

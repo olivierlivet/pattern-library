@@ -34,11 +34,15 @@ type props = {
 
 const conf = {
     "3v7MEyPWB0d1FOYFa9odJV": { // Jupes
-        size: true,
+        length: true,
         pocket: true,
-        length: false,
+        waist: true,
+        closing: true,
+        asymetrical: true,
+
+        size: true,
         level: true,
-        document: true
+        document: true,
     },
     "2aMnwR8nnDdeb0PNj2SBe9": { // Haut
         size: true,
@@ -64,9 +68,13 @@ const RefineFilters: FunctionComponent<props> = ({ mainFilters, handleChange, re
     //     console.log( item )
     // })
     const allFilters = {
-        size: Size,
-        pocket: Pocket,
         length: Length,
+        asymetrical: Asymetrical,
+        pocket: Pocket,
+        closeing: Closing,
+        waist: Waist,
+
+        size: Size,
         level: Level,
         document: DocumentType
     }
@@ -99,9 +107,9 @@ const RefineFilters: FunctionComponent<props> = ({ mainFilters, handleChange, re
             > */}
 
             <Text p={4 }>Affiner par : </Text>
-            <pre>
+            {/* <pre>
                 { JSON.stringify( refineFilters, null, 1 )}
-            </pre>
+            </pre> */}
             <Accordion defaultIndex={[0]} allowMultiple>
                 {Filters}
             </Accordion>

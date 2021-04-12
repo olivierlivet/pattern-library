@@ -1,19 +1,28 @@
-import React, { FunctionComponent } from 'react'
-
-import { Box, Select } from '@chakra-ui/react'
+import React, { FunctionComponent, useState } from 'react'
+import {
+    AccordionPanel,
+    Box,
+    Button,
+    Stack,
+    Checkbox,
+    CheckboxGroup,
+    Select
+} from '@chakra-ui/react'
 import Label from './FilterLabel'
-const Filter:FunctionComponent = () => {
-    return(
-        <Box>
-            <Label>Longueur :</Label>
-            <Select>
-                <option>Épaule</option>
-                <option>Genou</option>
-                <option>Genou</option>
-            </Select>
-        </Box>
-    )
+import ClearButton from './ClearButton'
 
+const Filter: FunctionComponent = () => {
+    return (
+        <>
+            <Label>Longueur :</Label>
+            <AccordionPanel>
+                <Stack spacing={2} direction="column">
+                    <Checkbox value='length' name="pocket" >Genou</Checkbox>
+                    <Checkbox value='length' name="pocket" >Basse</Checkbox>
+                </Stack>
+            </AccordionPanel>
+        </>
+    )
 }
 
 export default Filter

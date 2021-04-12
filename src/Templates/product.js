@@ -55,6 +55,7 @@ query adQuery( $contentfulID: String! ){
         level
         picture { file { url } }
         #pictures
+        editor{ title }
       }
 }
 `

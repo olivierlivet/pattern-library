@@ -30,6 +30,9 @@ type props = {
 const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
     return (
         <Wrapper>
+            {/* <pre>
+                { JSON.stringify( data, null, 1 )}
+            </pre> */}
             <CloseButton onClose={()=>onClose()} />
             <Stack spacing={{ base:4, lg:8 }} pb={ 20 }>
 
