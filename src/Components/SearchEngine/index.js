@@ -25,6 +25,8 @@ import Wrapper from '../Layouts/Wrapper'
 import FavoriteIcon from '../../Images/Icons/Favorite'
 import ShoppingBagIcon from '../../Images/Icons/ShoppingBag'
 
+import CategoryChoiceButton from './CategoryChoiceButton'
+
 const contentful = require("contentful");
 const client = contentful.createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
@@ -159,6 +161,20 @@ class SearchEngine extends Component {
 
     }
 
+    updateMainFilters( key, value ) {
+        this.setState({ products: [] })
+
+        // setTimeout(()=>{
+        let mainFilters = this.state.mainFilters
+        console.log(key, value)
+        mainFilters[ key ] = value
+        if ( key === 'category') { delete mainFilters.variant }
+        this.setState({ mainFilters: mainFilters }, this.loadProducts())
+        // }, 1000)
+
+
+    }
+
     render() {
         const { products, singleProduct, mainFilters, refineFilters } = this.state
 
@@ -179,50 +195,88 @@ class SearchEngine extends Component {
                 // boxShadow='sm'
                 // display='none'
                 >
-                    <Flex justify='flex-end'>
-                        <Center
-                            position='relative'
-                            w={8}
-                            h={8}
-                        >
-                            <FavoriteIcon />
+                    <Flex justify='space-between'>
+                        {/* <pre>
+                            { JSON.stringify( mainFilters, null, 1 )}
+                        </pre> */}
+                        <CategoryChoiceButton
+                            mainFilters={ mainFilters }
+                            categories={ Filters.getCategoryOptions() }
+                            variants={ Filters.getVariantOptions(this.state.mainFilters.category) }
+
+                            setCategory={(value)=> this.updateMainFilters('category', value) }
+                            setVariant={(value)=> this.updateMainFilters('variant', value) }
+                        />
+
+                                {products && products.length ?
+                                <Center p={0}>
+                                    <Text fontSize='15px' letterSpacing='wide' display={{ base:'block', lg:'none' }}>
+                                        <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
+                                            {products.length}
+                                        </Text>
+                                        {` patrons`}
+                                    </Text>
+                                    <Text fontSize='15px' letterSpacing='wide' display={{ base:'none', lg:'block' }}>
+                                        <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
+                                            {products.length}
+                                        </Text>
+                                        {` patrons correspondent à votre recherche`}
+                                    </Text>
+                                </Center>
+                                : 
+                                <Center p={2}>
+                                    <Text fontSize='15px' letterSpacing='wide'>
+                                        { `Chargement des résultats` }
+                                    </Text>
+                                </Center>
+                                }
+
+                        <HStack spacing={2} justify='flex-end'>
                             <Center
-                                backgroundColor='red.500'
-                                color='white'
-                                borderRadius='full'
-                                p={1.5}
-                                w='10px'
-                                h='10px'
-                                position='absolute'
-                                fontSize='x-small'
-                                top='0'
-                                right='0'
+                                position='relative'
+                                w={8}
+                                h={8}
                             >
-                                2
+                                <FavoriteIcon w={{ base:4, lg:6}} h={{ base:4, lg:6}} />
+                                <Center
+                                    backgroundColor='red.500'
+                                    color='white'
+                                    borderRadius='full'
+                                    p={1.5}
+                                    w='10px'
+                                    h='10px'
+                                    position='absolute'
+                                    fontSize='x-small'
+                                    top='0'
+                                    right='0'
+                                >
+                                    2
+                                </Center>
                             </Center>
-                        </Center>
-                        <Center w={8} h={8} position='relative'>
-                            <ShoppingBagIcon />
-                            <Center
-                                backgroundColor='red.500'
-                                color='white'
-                                borderRadius='full'
-                                p={1.5}
-                                w='10px'
-                                h='10px'
-                                position='absolute'
-                                fontSize='x-small'
-                                top='0'
-                                right='0'
-                            >
-                                4
+                            <Center w={8} h={8} position='relative'>
+                                <ShoppingBagIcon w={{ base:4, lg:6}} h={{ base:4, lg:6}} />
+                                <Center
+                                    backgroundColor='red.500'
+                                    color='white'
+                                    borderRadius='full'
+                                    p={1.5}
+                                    w='10px'
+                                    h='10px'
+                                    position='absolute'
+                                    fontSize='x-small'
+                                    top='0'
+                                    right='0'
+                                >
+                                    4
+                                </Center>
                             </Center>
-                        </Center>
+                        </HStack>
                     </Flex>
                         <Flex
                             justify='space-between'
                         >
                             <HStack
+                                display='none'
                                 w='auto'
                                 justify='flex-start'
                             >
@@ -306,13 +360,16 @@ class SearchEngine extends Component {
                                 // w='100%'
                                 justifyContent='space-between'
                             >
+                                <Box>
                                 <RefinerFilters
                                     mainFilters={mainFilters}
                                     category={mainFilters.category}
                                     key={{ category: mainFilters.category, refine: refineFilters }}
                                     refineFilters={refineFilters}
                                     handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
-                                />   
+                                />  
+                                </Box>
+ 
                             </Box>
                         </Box>
 
@@ -322,13 +379,13 @@ class SearchEngine extends Component {
                             pt={20}
                             pb={20}
                         >
-                            {products && products.length ?
+                            {/* {products && products.length ?
                                 <Center p={2}>
                                     <Text fontSize='15px' letterSpacing='wide'>
                                         <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>{products.length}</Text>{` patrons correspondent à votre recherche`}
                                     </Text>
                                 </Center>
-                                : `Pas de patron correspondent à votre recherche`}
+                                : `Pas de patron correspondent à votre recherche`} */}
                             <VStack
                                 w='100%'
                                 py={{ base: 0, lg: 20 }}

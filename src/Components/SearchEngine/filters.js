@@ -17,11 +17,11 @@ class Filters {
         return [
             {
                 label: "Jupes",
-                variantId: "3v7MEyPWB0d1FOYFa9odJV"
+                categoryId: "3v7MEyPWB0d1FOYFa9odJV"
             },
             {
                 label: "Haut",
-                variantId: "2aMnwR8nnDdeb0PNj2SBe9"
+                categoryId: "2aMnwR8nnDdeb0PNj2SBe9"
             }
         ]
     }
