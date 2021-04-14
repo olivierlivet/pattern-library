@@ -243,7 +243,7 @@ class SearchEngine extends Component {
                                 w={8}
                                 h={8}
                             >
-                                <FavoriteIcon w={{ base:4, lg:6}} h={{ base:4, lg:6}} />
+                                <FavoriteIcon w={{ base:5, lg:6}} h={{ base:5, lg:6}} />
                                 <Center
                                     backgroundColor='red.500'
                                     color='white'
@@ -260,7 +260,7 @@ class SearchEngine extends Component {
                                 </Center>
                             </Center>
                             <Center w={8} h={8} position='relative'>
-                                <ShoppingBagIcon w={{ base:4, lg:6}} h={{ base:4, lg:6}} />
+                                <ShoppingBagIcon w={{ base:5, lg:6}} h={{ base:5, lg:6}} />
                                 <Center
                                     backgroundColor='red.500'
                                     color='white'
