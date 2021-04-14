@@ -39,7 +39,7 @@ const CategoryChoiceOverlay: FunctionComponent<props> = ({ isVisible, onClick })
                     bottom={0}
                     left={0}
                     right={0}
-                    bg='whiteAlpha.700'
+                    bg='whiteAlpha.900'
                     zIndex='docked'
 
                     style={{

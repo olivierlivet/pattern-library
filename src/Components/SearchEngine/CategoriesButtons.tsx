@@ -17,7 +17,7 @@ const duration = 300;
 
 const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
-    transform: `translateY(-10px)`,
+    transform: `translateY(-15px)`,
     opacity: 0,
     pointerEvents: `none`
 }
@@ -57,16 +57,14 @@ const CategoriesButtons: FunctionComponent <props> = (
         <Transition in={isVisible} timeout={duration}>
             {state => (
                 <Stack
-                    bg='white'
+                    bg='whiteAlpha.800'
                     position='absolute'
-                    boxShadow='md'
+                    // boxShadow='md'
                     borderRadius={4}
-                    top={10}
+                    top={20}
                     w='max'
-                    p={2}
                     zIndex='overlay'
-
-                    w='md'
+                    w={{ base:'xs', lg:'md' }}
                     spacing={ 4 }
 
                     style={{

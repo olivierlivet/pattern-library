@@ -6,6 +6,7 @@ import { Box, Button, Center, Divider, SimpleGrid, Stack } from '@chakra-ui/reac
 import {
     ArrowDownIcon
 } from '@chakra-ui/icons'
+import SettingsIcon from '../../Images/Icons/Settings'
 
 
 
@@ -28,11 +29,10 @@ const CategoryChoiceButton: FunctionComponent<props> = (
     const [detailsOpen, setDetailsOpen] = useState(false)
     return (
         <>
-            
             <Box
                 position='relative'
+                zIndex='dropdown'
             >
-                <CategoryChoiceOverlay isVisible={detailsOpen} onClick={() => setDetailsOpen(!detailsOpen)} />
                 {/* <pre>
                     { JSON.stringify( mainFilters, null, 1 )}
                 </pre> */}
@@ -45,9 +45,6 @@ const CategoryChoiceButton: FunctionComponent<props> = (
                     borderRadius='md'
 
                     cursor='s-resize'
-                    position='relative'
-                    zIndex='dropdown'
-
 
                     _hover={{
                         bg: '#81a3a7'
@@ -57,22 +54,10 @@ const CategoryChoiceButton: FunctionComponent<props> = (
                     onClick={() => setDetailsOpen(!detailsOpen)}
 
                 >
-                    <Center h='100%' p={2}>
-                        <Box>
-                            Catégorie
-                        </Box>
-                        <ArrowDownIcon ml={2} />
+                    <Center h='100%' p={1}>
+                        <SettingsIcon w={6} h={6} />
                     </Center>
                 </Box>
-                <CategoriesButtons
-                    isVisible={detailsOpen}
-                    onClick={() => setDetailsOpen(!detailsOpen)}
-                    mainFilters={ mainFilters }
-                    categories={ categories }
-                    variants={ variants }
-                    setCategory={ (value)=>setCategory(value) }
-                    setVariant={ (value)=>setVariant(value) }
-                />
             </Box>
 
         </>

@@ -10,7 +10,8 @@ import {
     HStack,
     Select,
     Text,
-    Badge
+    Badge,
+    Spinner
 } from '@chakra-ui/react'
 import config from '../../Utils/config'
 import ProductCardSmall from '../Product/CardSmall'
@@ -22,10 +23,11 @@ import CissorsLoader from '../Loaders/Cissors'
 import Filters from './filters'
 import RefinerFilters from './RefineFilters'
 import Wrapper from '../Layouts/Wrapper'
-import FavoriteIcon from '../../Images/Icons/Favorite'
-import ShoppingBagIcon from '../../Images/Icons/ShoppingBag'
+import FavoriteIcon from '../../images/Icons/Favorite'
+import ShoppingBagIcon from '../../images/Icons/ShoppingBag'
 
 import CategoryChoiceButton from './CategoryChoiceButton'
+import FilterButton from './FilterButton'
 
 const contentful = require("contentful");
 const client = contentful.createClient({
@@ -199,14 +201,18 @@ class SearchEngine extends Component {
                         {/* <pre>
                             { JSON.stringify( mainFilters, null, 1 )}
                         </pre> */}
-                        <CategoryChoiceButton
-                            mainFilters={ mainFilters }
-                            categories={ Filters.getCategoryOptions() }
-                            variants={ Filters.getVariantOptions(this.state.mainFilters.category) }
+                        <HStack>
+                            <CategoryChoiceButton
+                                mainFilters={ mainFilters }
+                                categories={ Filters.getCategoryOptions() }
+                                variants={ Filters.getVariantOptions(this.state.mainFilters.category) }
 
-                            setCategory={(value)=> this.updateMainFilters('category', value) }
-                            setVariant={(value)=> this.updateMainFilters('variant', value) }
-                        />
+                                setCategory={(value)=> this.updateMainFilters('category', value) }
+                                setVariant={(value)=> this.updateMainFilters('variant', value) }
+                            />
+                            <FilterButton />
+                        </HStack>
+                        
 
                                 {products && products.length ?
                                 <Center p={0}>
@@ -225,9 +231,7 @@ class SearchEngine extends Component {
                                 </Center>
                                 : 
                                 <Center p={2}>
-                                    <Text fontSize='15px' letterSpacing='wide'>
-                                        { `Chargement des résultats` }
-                                    </Text>
+                                    <Spinner size='sm' color='#88a7aa' />
                                 </Center>
                                 }
 
