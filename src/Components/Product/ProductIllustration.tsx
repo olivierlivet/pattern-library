@@ -42,7 +42,6 @@ const ProductIllustration:FunctionComponent<props> = ({ data }) => {
                 <Box bg='gray.200' w='100px' h='100px'></Box>
                 <Box bg='gray.200' w='100px' h='100px'></Box>
                 <Box bg='gray.200' w='100px' h='100px'></Box>
-                <Box bg='gray.200' w='100px' h='100px'></Box>
                 </VStack>
             </Box>
         </Grid>

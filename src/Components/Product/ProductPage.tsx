@@ -42,29 +42,36 @@ const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
                     my={{ base: 0, lg: 10 }}
                 >
                     <Box>
+                        <Box
+                        position={{ base:'initial', lg:'sticky'}}
+                        top={20}
+                        >
                         <ProductIllustration data={data} />
+
+                        </Box>
                     </Box>
                     <Center
                         p={{ base:5, lg:0 }}
+                        pt={{ base:5, lg:10 }}
                         wrap='wrap'
                     >
                         <ProductMainInfo data={data} />
                     </Center>
                 </SimpleGrid>
 
-                <Box
+                {/* <Box
                     px={{ base:5, lg:0 }}
                     fontSize='15px'
                     id='details'
                 >
                     <RichContent data={data.description} />
-                </Box>
+                </Box> */}
 
                 <Tabs id="details">
                     <TabList>
-                        <Tab>Informations détaillées</Tab>
+                        <Tab>Détails</Tab>
                         <Tab>Inspirations</Tab>
-                        <Tab>Avis & conseils</Tab>
+                        <Tab>Conseils</Tab>
                     </TabList>
 
                     <TabPanels>

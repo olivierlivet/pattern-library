@@ -24,6 +24,7 @@ import { StarIcon } from '@chakra-ui/icons'
 import ProductIllustrationWithSwap from './ProductIllustrationWithSwap'
 import { navigate } from 'gatsby-link'
 import Favorite from '../../Services/Favorite'
+import HeartIcon from '../../Images/Icons/Favorite'
 const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     productId,
     title,
@@ -131,12 +132,12 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     variant='outline'
                     colorScheme={Favorite.isFavorite(productId) ? 'white' : 'gray'}
                 >
-                    <StarIcon
-                        color={ Favorite.isFavorite(productId) ? 'red.500' : 'gray.400'}
+                    <HeartIcon />
+                        {/* color={ Favorite.isFavorite(productId) ? 'red.500' : 'gray.400'}
                         pointerEvents='none'
                         w={3}
                         h={3}
-                    />
+                    /> */}
                 </Button>
             </Box>
         </Box>
