@@ -1,67 +1,45 @@
-import React, { FunctionComponent, useState } from 'react'
-import CategoryChoiceOverlay from './CategoryChoiceOverlay'
-import CategoriesButtons from './CategoriesButtons'
+import React, { FunctionComponent, } from 'react'
 
-import { Box, Button, Center, Divider, SimpleGrid, Stack } from '@chakra-ui/react'
-import {
-    ArrowDownIcon
-} from '@chakra-ui/icons'
+import { Box, Center } from '@chakra-ui/react'
+
 import SettingsIcon from '../../Images/Icons/Settings'
 
 
 
 type props = {
-    categories: Object,
-    variants: Object,
-    mainFilters: Object,
-    setCategory: Function
-    setVariant: Function
+    onClick: Function
 }
 
-const CategoryChoiceButton: FunctionComponent<props> = (
+const FilterButton: FunctionComponent<props> = (
     {
-        categories,
-        variants,
-        mainFilters,
-        setCategory,
-        setVariant
+        onClick
     }) => {
-    const [detailsOpen, setDetailsOpen] = useState(false)
     return (
         <>
             <Box
-                position='relative'
-                zIndex='dropdown'
+                bg='#88a7aa'
+                color='white'
+                letterSpacing='wide'
+                textTransform='uppercase'
+                fontSize='xs'
+                borderRadius='md'
+
+                cursor='s-resize'
+
+                _hover={{
+                    bg: '#81a3a7'
+                }}
+
+                onClick={() => onClick()}
+
             >
-                {/* <pre>
-                    { JSON.stringify( mainFilters, null, 1 )}
-                </pre> */}
-                <Box
-                    bg='#88a7aa'
-                    color='white'
-                    letterSpacing='wide'
-                    textTransform='uppercase'
-                    fontSize='xs'
-                    borderRadius='md'
-
-                    cursor='s-resize'
-
-                    _hover={{
-                        bg: '#81a3a7'
-                    }}
-
-
-                    onClick={() => setDetailsOpen(!detailsOpen)}
-
-                >
-                    <Center h='100%' p={1}>
-                        <SettingsIcon w={6} h={6} />
-                    </Center>
-                </Box>
+                <Center h='100%' p={1}>
+                    <SettingsIcon w={6} h={6} />
+                </Center>
             </Box>
 
         </>
     )
 }
 
-export default CategoryChoiceButton
+export default FilterButton

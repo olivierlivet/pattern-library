@@ -210,7 +210,9 @@ class SearchEngine extends Component {
                                 setCategory={(value)=> this.updateMainFilters('category', value) }
                                 setVariant={(value)=> this.updateMainFilters('variant', value) }
                             />
-                            <FilterButton />
+                            <FilterButton 
+                                onClick={() => this.setState({ showFilter: !this.state.showFilter })}
+                            />
                         </HStack>
                         
 
@@ -317,23 +319,7 @@ class SearchEngine extends Component {
                                         </Select>
                                         : null}
                             </HStack>
-                            <Center w='100%' display={{ base: 'initial', lg: 'none' }}>
-                                <Button
-                                    // display={{ base:'initial', lg:'none' }}
-                                    // position='fixed'
-                                    // zIndex='tooltip'
-                                    // bottom={10}
-                                    // left={10}
-                                    size='sm'
-                                    variant='link'
-                                    onClick={() => this.setState({ showFilter: !this.state.showFilter })}
-                                >
-
-                                    {this.refineFiltersCount() ? `Filtres (${this.refineFiltersCount()})` : `Filtrer`}
-                                </Button>
-                            </Center>
                         </Flex>
-
                 </Box>
                 <Box
                     // pt='105px'
