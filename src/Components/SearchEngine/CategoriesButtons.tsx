@@ -94,14 +94,17 @@ const CategoriesButtons: FunctionComponent <props> = (
                     <>
                     <Text>
                         Quel style ?{' '}
-                        <Text as='span' fontSize='sm' color='gray.500' letterSpacing='wider'>(Facultatif)</Text>
+                        <Text as='span' fontSize='sm' color='gray.500' letterSpacing='wide'>(Facultatif)</Text>
                     </Text>
                     <SimpleGrid gap={2} columns={{ base: 2, lg: 3 }} color='gray.700'>
                         {variants && variants.map( item =>
                             <Button
                                 size="sm"
                                 colorScheme={ mainFilters.variant === item.variantId ? 'blue' : 'gray' }
-                                onClick={()=>setVariant( item.variantId )}
+                                onClick={()=>{
+                                    setVariant( item.variantId );
+                                    onClick();
+                                }}
                             >{ item.label }</Button>
                         )}
                     </SimpleGrid>

@@ -24,7 +24,7 @@ import { StarIcon } from '@chakra-ui/icons'
 import ProductIllustrationWithSwap from './ProductIllustrationWithSwap'
 import { navigate } from 'gatsby-link'
 import Favorite from '../../Services/Favorite'
-import HeartIcon from '../../images/Icons/Favorite'
+import HeartIcon from '../../Images/Icons/Favorite'
 const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     productId,
     title,
