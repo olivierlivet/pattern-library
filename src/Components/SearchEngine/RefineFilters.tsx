@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
+import { Transition } from 'react-transition-group';
 
-import { Box, Flex, Stack, VStack, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Stack, VStack, Text } from '@chakra-ui/react'
 import filters from './filters'
 
 import {
@@ -29,7 +30,38 @@ import {
 type props = {
     mainFilters: Object,
     refineFilters: Object,
-    handleChange: Function
+    handleChange: Function,
+    hideFilter: Function,
+    isVisible: Boolean
+}
+
+const duration = 300;
+
+const defaultStyle = {
+    transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
+    transform: `translateX(-100%)`,
+    opacity: 0,
+    pointerEvents: `none`
+}
+
+const transitionStyles = {
+    entering: {
+        opacity: 1,
+        transform: `translateX(0)`,
+    },
+    entered: {
+        opacity: 1,
+        pointerEvents: `auto`,
+        transform: `translateX(0)`,
+    },
+    exiting: {
+        opacity: 0,
+        transform: `translateX(-10px)`
+    },
+    exited: {
+        opacity: 0,
+        transform: `translateX(-10px)`,
+    },
 }
 
 const conf = {
@@ -52,7 +84,14 @@ const conf = {
     }
 }
 
-const RefineFilters: FunctionComponent<props> = ({ mainFilters, handleChange, refineFilters }) => {
+const RefineFilters: FunctionComponent<props> = (
+    {
+        mainFilters,
+        handleChange,
+        refineFilters,
+        isVisible,
+        hideFilter
+    }) => {
     if (!mainFilters.category) { return false }
 
     // const FiltersList = (
@@ -86,7 +125,7 @@ const RefineFilters: FunctionComponent<props> = ({ mainFilters, handleChange, re
         if (value && FilterComponent) {
             Filters.push(
                 <AccordionItem>
-                    <FilterComponent key={key} handleChange={(name,value)=> handleChange( name, value )} />
+                    <FilterComponent key={key} handleChange={(name, value) => handleChange(name, value)} />
                 </AccordionItem>
             )
         }
@@ -97,24 +136,44 @@ const RefineFilters: FunctionComponent<props> = ({ mainFilters, handleChange, re
     //     Filters.push( key )
     //   }
     return (
-        <Box
-            maxH='100vh'
-            overflowY='scroll'
-        >
-            {/* <Stack
-                spacing={ 8 }   
-                m={{ base:2, lg:2 }}
-            > */}
+        <Transition in={isVisible} timeout={duration}>
+            {state => (
+                <Box
+                    w={{ base:'100vw', lg:'350px' }}
+                    h={{ base:'100vh', lg:'auto'}}
+                    position='fixed'
+                    left={0}
+                    top={{ base:0, lg:32 }}
+                    zIndex='sticky'
 
-            <Text p={4 }>Affiner par : </Text>
-            {/* <pre>
-                { JSON.stringify( refineFilters, null, 1 )}
-            </pre> */}
-            <Accordion defaultIndex={[0]} allowMultiple>
-                {Filters}
-            </Accordion>
-            {/* </Stack> */}
-        </Box>
+                    overflowY='scroll'
+                    maxH={{ base:'auto', lg:'75vh' }}
+
+                    background='white'
+                    p={4}
+                    borderRadius='0 1rem 1rem 0'
+
+                    style={{
+                        ...defaultStyle,
+                        ...transitionStyles[state]
+                    }}
+
+                >
+                    <Box
+
+
+
+
+                    >
+                        <Text p={2}>Affiner par : </Text>
+                        <Accordion defaultIndex={[0]} allowMultiple>
+                            {Filters}
+                        </Accordion>
+                        <Button mt={2} onClick={()=> hideFilter()}>Valider</Button>
+                    </Box>
+                </Box>
+            )}
+        </Transition>
     )
 }
 

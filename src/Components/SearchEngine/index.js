@@ -178,7 +178,7 @@ class SearchEngine extends Component {
     }
 
     render() {
-        const { products, singleProduct, mainFilters, refineFilters } = this.state
+        const { products, singleProduct, mainFilters, refineFilters, showFilter } = this.state
 
         return (
             <>
@@ -215,29 +215,28 @@ class SearchEngine extends Component {
                             />
                         </HStack>
                         
-
-                                {products && products.length ?
-                                <Center p={0}>
-                                    <Text fontSize='15px' letterSpacing='wide' display={{ base:'block', lg:'none' }}>
-                                        <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
-                                            {products.length}
-                                        </Text>
-                                        {` patrons`}
+                        {products && products.length ?
+                            <Center p={0}>
+                                <Text fontSize='15px' letterSpacing='wide' display={{ base:'block', lg:'none' }}>
+                                    <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
+                                        {products.length}
                                     </Text>
-                                    <Text fontSize='15px' letterSpacing='wide' display={{ base:'none', lg:'block' }}>
-                                        <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
-                                            {products.length}
-                                        </Text>
-                                        {` patrons correspondent à votre recherche`}
+                                    {` patrons`}
+                                </Text>
+                                <Text fontSize='15px' letterSpacing='wide' display={{ base:'none', lg:'block' }}>
+                                    <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
+                                        {products.length}
                                     </Text>
-                                </Center>
-                                : 
-                                <Center p={2}>
-                                    <Spinner size='sm' color='#88a7aa' />
-                                </Center>
-                                }
+                                    {` patrons correspondent à votre recherche`}
+                                </Text>
+                            </Center>
+                        : 
+                            <Center p={2}>
+                                <Spinner size='sm' color='#88a7aa' />
+                            </Center>
+                        }
 
-                        <HStack spacing={2} justify='flex-end'>
+                        <HStack spacing={2} justify='flex-end' w={{ base:'auto', lg:'145px' }}>
                             <Center
                                 position='relative'
                                 w={8}
@@ -321,47 +320,34 @@ class SearchEngine extends Component {
                             </HStack>
                         </Flex>
                 </Box>
-                <Box
-                    // pt='105px'
-                    maxW='1300px'
-                    mx='auto'
-                >
 
-                    <Grid
-                        templateColumns={{
-                            base: `100%`,
-                            lg: `300px 1fr`
-                        }}
-                    >
-                        <Box
-                            minH='calc(100vh - 105px )'
-                            display={{ base: this.state.showFilter ? 'block' : 'none', lg: 'block' }}
-                            pt={20}
-                        >
-                            <Box
-                                position='sticky'
-                                top={20}
-                                // borderBottom='solid 1px'
-                                // borderBottomColor='gray.100'
-                                // position='fixed'
-                                // zIndex='banner'
-                                // top='0'
-                                // right='0'
-                                // w='100%'
-                                justifyContent='space-between'
-                            >
-                                <Box>
+
+
+                
                                 <RefinerFilters
                                     mainFilters={mainFilters}
                                     category={mainFilters.category}
                                     key={{ category: mainFilters.category, refine: refineFilters }}
                                     refineFilters={refineFilters}
                                     handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
+                                    isVisible={ showFilter }
+                                    hideFilter={()=> this.setState({ 'showFilter': !showFilter } )}
                                 />  
-                                </Box>
- 
-                            </Box>
-                        </Box>
+
+
+                <Box
+                    // pt='105px'
+                    maxW='1300px'
+                    mx='auto'
+                >
+
+                    {/* <Grid
+                        templateColumns={{
+                            base: `100%`,
+                            lg: `300px 1fr`
+                        }}
+                    > */}
+
 
                         <Box
                             // bg='white'
@@ -430,7 +416,7 @@ class SearchEngine extends Component {
                                 onClose={() => this.setState({ singleProduct: null })}
                             />
                             : null}
-                    </Grid>
+                    {/* </Grid> */}
                 </Box>
             </>
         )
