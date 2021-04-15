@@ -6,7 +6,8 @@ type productCardPropsTypes = {
     rating: number,
     productId: string,
     intro: string,
-    price: int
+    price: number,
+    pictures: Array<string>
 
     onOpen: Function
 }
@@ -28,15 +29,16 @@ import ProductIllustrationWithSwap from './ProductIllustrationWithSwap'
 import { navigate } from 'gatsby-link'
 import Favorite from '../../Services/Favorite'
 import HeartIcon from '../../Images/Icons/Favorite'
+import ProductIllustrationWithSwipe from './ProductIllustrationWithSwipe'
 const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     productId,
     title,
     level,
     rating,
     intro,
-    editor,
+    // editor,
     price,
-
+    pictures,
     onOpen
 }) => {
     const favoriteButton = useRef()
@@ -83,13 +85,14 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     h={{ base:'400px'}}
                     overflowY='hidden'
                 >
-                    <ProductIllustrationWithSwap
+                    <ProductIllustrationWithSwipe
                         alt={ title }
-                        imagesUrl={[
-                            'https://img.ltwebstatic.com/images3_pi/2020/10/19/160308384184b44973720f8dfb2b5c9625c3e7faac_thumbnail_600x.webp',
-                            'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',
-                            'https://www.ladroguerie.com/wp-content/uploads/2020/02/patron-couture-deauville-chemise-homme-mesures.jpg'
-                        ]}
+                        imagesUrl={ pictures }
+                        // imagesUrl={[
+                        //     'https://img.ltwebstatic.com/images3_pi/2020/10/19/160308384184b44973720f8dfb2b5c9625c3e7faac_thumbnail_600x.webp',
+                        //     'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',
+                        //     'https://www.ladroguerie.com/wp-content/uploads/2020/02/patron-couture-deauville-chemise-homme-mesures.jpg'
+                        // ]}
                     />
                 </Box>
 

@@ -386,6 +386,7 @@ class SearchEngine extends Component {
                                             level={product.fields.level}
                                             rating={product.fields.rating}
                                             editor={product.fields.editor}
+                                            pictures={product.fields.pictures}
                                             intro={<RichContent data={product.fields.intro} />}
 
 
