@@ -221,7 +221,7 @@ class SearchEngine extends Component {
                                     <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
                                         {products.length}
                                     </Text>
-                                    {` patrons`}
+                                    { products.length === 1 ? ` patron` : ` patrons`}
                                 </Text>
                                 <Text fontSize='15px' letterSpacing='wide' display={{ base:'none', lg:'block' }}>
                                     <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
@@ -352,7 +352,7 @@ class SearchEngine extends Component {
                         <Box
                             // bg='white'
                             // mt={10}
-                            pt={32}
+                            pt={{ base: '14', lg:32 }}
                             pb={20}
                         >
                             {/* {products && products.length ?
@@ -369,7 +369,7 @@ class SearchEngine extends Component {
                                 spacing={{ base: 5, lg: 10 }}
                                 shouldWrapChildren={true}
                                 bg='gray.50'
-                                p={{ base: 2, lg: 4 }}
+                                p={{ base: 4, lg: 4 }}
                             >
 
                                 {products && products.length ?
