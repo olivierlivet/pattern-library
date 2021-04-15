@@ -1,11 +1,16 @@
 import React, {FunctionComponent, useState} from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 
 type propTypes = {
-    imagesUrl: Array<string>
+    imagesUrl: Array<string>,
+    alt: string
 }
 
-const ProductIllustrationWithSwap:FunctionComponent<propTypes> = ({ imagesUrl }) => {
+const ProductIllustrationWithSwap:FunctionComponent<propTypes> = (
+    {
+        alt,
+        imagesUrl
+    }) => {
     const [isHover, setIsHover] = useState( false )
     return (
         <Box
@@ -15,10 +20,13 @@ const ProductIllustrationWithSwap:FunctionComponent<propTypes> = ({ imagesUrl })
             // maxW={{ base:'80%', lg:'100%' }}
             // maxH={{ base:''}}
             h='100%'
+            w='100%'
             mx='auto'
         >
-            <img
-                style={{ objectFit: 'cover' }}
+            <Image
+                objectFit='cover'
+                w='100%'
+                alt={ alt }
                 src={
                 !isHover ?
                     imagesUrl[0]
