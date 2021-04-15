@@ -66,7 +66,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
             // border='solid 2px'
             // borderColor='transparent'
             overflow='hidden'
-            // onClick={(e) => handleClick(e)}
+            onClick={(e) => handleClick(e)}
             _hover={{
                 // "borderColor": 'green.100'
             }}

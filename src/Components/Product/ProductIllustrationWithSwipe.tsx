@@ -40,8 +40,9 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                 <ReactSwipe
                     className="carousel"
                     swipeOptions={{
-                        continuous: true,
-                        callback: function (index, elem) { setIndex(index) }
+                        continuous: false,
+                        stopPropagation: true,
+                        transitionEnd: function (index, elem) { setIndex(index) }
                     }}
                     ref={el => (reactSwipeEl = el)}
 
@@ -61,9 +62,9 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                             // mx='auto'
                             >
                                 <Image
-                                    objectFit='cover'
-                                    w='100%'
-                                    h='100%'
+                                    // objectFit='cover'
+                                    // w='100%'
+                                    // h='100%'
                                     alt={alt}
                                     src={item} />
                             </Box>
