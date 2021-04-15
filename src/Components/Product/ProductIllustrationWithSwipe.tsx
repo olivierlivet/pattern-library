@@ -15,12 +15,19 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
     // const [isHover, setIsHover] = useState(false)
     let reactSwipeEl;
 
+    if( reactSwipeEl ){
+        console.log( 'reactSwipeEl.getNumSlides()', reactSwipeEl.getPos() )
+
+    }
+
+
     return (
+        <>
         <ReactSwipe
             className="carousel"
-            swipeOptions={{ continuous: false }}
+            swipeOptions={{ continuous: true }}
             ref={el => (reactSwipeEl = el)}
-        >
+            >
 
 {/* <button onClick={() => reactSwipeEl.next()}>Next</button>
 <button onClick={() => reactSwipeEl.prev()}>Previous</button> */}
@@ -33,6 +40,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                     // p={{ base:4, lg: 8 }}
                     // maxW={{ base:'80%', lg:'100%' }}
                     // maxH={{ base:''}}
+                    key={ item }
                     h='100%'
                     minH='100%'
                     // w='100%'
@@ -49,7 +57,28 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
 
 
                 : null}
+                <Box
+                    position='absolute'
+                    top='0'
+                >
+                    <button onClick={() => reactSwipeEl.prev()}>Previous</button>
+                </Box>
+                
+                {/* <Box position='absolute' top='0' left='0'>{ getPos()}</Box> */}
+
+
         </ReactSwipe>
+        {/* <Box
+                    position='absolute'
+                    top='0'
+                    left='0'
+                    zIndex='tooltip'
+                >
+                    { reactSwipeEl ? reactSwipeEl.getPos() : 'No index detected'}
+                    <button onClick={() => reactSwipeEl.next()}>Next</button>
+
+                </Box> */}
+        </>
     )
 }
 

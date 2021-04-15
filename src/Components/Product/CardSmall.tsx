@@ -84,6 +84,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     w={{ base:'100%', lg:'300px'}}
                     h={{ base:'400px'}}
                     overflowY='hidden'
+                    position='relative'
                 >
                     <ProductIllustrationWithSwipe
                         alt={ title }
