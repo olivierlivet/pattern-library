@@ -40,7 +40,7 @@ const transitionStyles = {
         opacity: 0,
         transform: `translateY(-10px)`,
     },
-};
+}
 
 
 const CategoriesButtons: FunctionComponent <props> = (

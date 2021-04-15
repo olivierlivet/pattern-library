@@ -374,10 +374,15 @@ class SearchEngine extends Component {
 
                                 {products && products.length ?
                                     products.map(product =>
+                                        <>
+                                        {/* <pre>
+                                            { JSON.stringify( product.fields.intro, null, 1 )}
+                                        </pre> */}
                                         <ProductCardSmall
                                             key={product.sys.id}
                                             productId={product.sys.id}
                                             title={product.fields.title}
+                                            price={product.fields.price}
                                             level={product.fields.level}
                                             rating={product.fields.rating}
                                             editor={product.fields.editor}
@@ -387,6 +392,7 @@ class SearchEngine extends Component {
                                             //Actions
                                             onOpen={() => this.setState({ singleProduct: product.fields })}
                                         />
+                                        </>
                                         // <Box
                                         //     w='500px'
                                         //     mx='auto'

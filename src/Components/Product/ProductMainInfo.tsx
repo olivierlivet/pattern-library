@@ -88,7 +88,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 gap={4}
             >
                 <Flex wrap='wrap'>
-                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='13px' letterSpacing='wider'>Évaluation</Text>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Évaluation</Text>
                     <Flex align='center'>
                         <Text w='100%' mr={2}>4/5</Text>
                         <StarIcon color='yellow.300' w={3} h={3} />
@@ -99,12 +99,12 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 </Flex>
 
                 <Flex wrap='wrap'>
-                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='13px' letterSpacing='wider'>Taille</Text>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Taille</Text>
                     <Text w='100%'>36→44</Text>
                 </Flex>
 
                 <Flex wrap='wrap'>
-                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='13px' letterSpacing='wider'>Prix</Text>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Prix</Text>
                     <Text w='100%'>{data.price}
                         <Text as="sup">€</Text>
                     </Text>

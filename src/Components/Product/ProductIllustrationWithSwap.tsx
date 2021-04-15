@@ -11,11 +11,15 @@ const ProductIllustrationWithSwap:FunctionComponent<propTypes> = ({ imagesUrl })
         <Box
             onMouseEnter={()=> setIsHover( true )}
             onMouseLeave={()=>setIsHover( false)}
-            p={{ base:4, lg: 8 }}
-            maxW={{ base:'80%', lg:'100%' }}
+            // p={{ base:4, lg: 8 }}
+            // maxW={{ base:'80%', lg:'100%' }}
+            // maxH={{ base:''}}
+            h='100%'
             mx='auto'
         >
-            <img src={
+            <img
+                style={{ objectFit: 'cover' }}
+                src={
                 !isHover ?
                     imagesUrl[0]
                 : 

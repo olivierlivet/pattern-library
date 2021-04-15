@@ -5,7 +5,8 @@ type productCardPropsTypes = {
     level: number,
     rating: number,
     productId: string,
-    intro: string
+    intro: string,
+    price: int
 
     onOpen: Function
 }
@@ -18,7 +19,9 @@ import {
     Button,
     HStack,
     Badge,
-    VStack
+    VStack,
+    SimpleGrid,
+    Flex
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import ProductIllustrationWithSwap from './ProductIllustrationWithSwap'
@@ -32,6 +35,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     rating,
     intro,
     editor,
+    price,
 
     onOpen
 }) => {
@@ -57,12 +61,12 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
             borderRadius='xl'
             bgColor='white'
             cursor='pointer'
-            border='solid 2px'
-            borderColor='transparent'
+            // border='solid 2px'
+            // borderColor='transparent'
             overflow='hidden'
             onClick={(e) => handleClick(e)}
             _hover={{
-                "borderColor": 'green.100'
+                // "borderColor": 'green.100'
             }}
             w={{ base:'auto', lg:'700px' }}
             // m={ 4 }
@@ -74,9 +78,13 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 }}
                 gap={{base: 0, lg:10}}
             >
-                <Box>
+                <Box
+                    w={{ base:'300px'}}
+                    h={{ base:'400px'}}
+                >
                     <ProductIllustrationWithSwap
                         imagesUrl={[
+                            'https://img.ltwebstatic.com/images3_pi/2020/10/19/160308384184b44973720f8dfb2b5c9625c3e7faac_thumbnail_600x.webp',
                             'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',
                             'https://www.ladroguerie.com/wp-content/uploads/2020/02/patron-couture-deauville-chemise-homme-mesures.jpg'
                         ]}
@@ -105,14 +113,42 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 >
                     { editor && editor.title ? editor.title : editor.fields ? editor.fields.title : null }
                 </Text> */}
-                    {/* <Box fontSize='small'>
+                    <Box fontSize='small'>
                         { intro }
-                    </Box> */}
-                    <HStack>
+                    </Box>
+                    {/* <HStack>
                         <Badge>12€</Badge>
                         <Badge>Pochette</Badge>
                         <Badge variant='subtle' colorScheme='cyan'>Niveau 3</Badge>
-                    </HStack>
+                    </HStack> */}
+
+                    <SimpleGrid
+                columns={3}
+                gap={4}
+            >
+                <Flex wrap='wrap'>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Évaluation</Text>
+                    <Flex align='center'>
+                        <Text w='100%' mr={2}>4/5</Text>
+                        <StarIcon color='yellow.300' w={3} h={3} />
+                        <StarIcon color='yellow.300' w={3} h={3} />
+                        <StarIcon color='yellow.300' w={3} h={3} />
+                        <StarIcon color='yellow.300' w={3} h={3} />
+                    </Flex>
+                </Flex>
+
+                <Flex wrap='wrap'>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Taille</Text>
+                    <Text w='100%'>36→44</Text>
+                </Flex>
+
+                <Flex wrap='wrap'>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Prix</Text>
+                    <Text w='100%'>{price}
+                        <Text as="sup">€</Text>
+                    </Text>
+                </Flex>
+            </SimpleGrid>
 
 
                 </VStack>
