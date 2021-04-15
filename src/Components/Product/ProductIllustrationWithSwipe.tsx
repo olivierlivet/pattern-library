@@ -21,6 +21,10 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
             swipeOptions={{ continuous: false }}
             ref={el => (reactSwipeEl = el)}
         >
+
+{/* <button onClick={() => reactSwipeEl.next()}>Next</button>
+<button onClick={() => reactSwipeEl.prev()}>Previous</button> */}
+
             {imagesUrl && imagesUrl[0] ?
                 imagesUrl.map( item =>
                     <Box
@@ -30,12 +34,14 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                     // maxW={{ base:'80%', lg:'100%' }}
                     // maxH={{ base:''}}
                     h='100%'
-                    w='100%'
-                    mx='auto'
+                    minH='100%'
+                    // w='100%'
+                    // mx='auto'
                 >
                     <Image
                         objectFit='cover'
                         w='100%'
+                        h='100%'
                         alt={alt}
                         src={ item } />
                 </Box>
