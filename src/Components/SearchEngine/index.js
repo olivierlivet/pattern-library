@@ -352,7 +352,7 @@ class SearchEngine extends Component {
                         <Box
                             // bg='white'
                             // mt={10}
-                            pt={{ base: '14', lg:32 }}
+                            pt={{ base: '16', lg:32 }}
                             pb={20}
                         >
                             {/* {products && products.length ?
