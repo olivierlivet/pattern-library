@@ -46,10 +46,6 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                     ref={el => (reactSwipeEl = el)}
 
                 >
-
-                    {/* <button onClick={() => reactSwipeEl.next()}>Next</button>
-<button onClick={() => reactSwipeEl.prev()}>Previous</button> */}
-
                     {imagesUrl && imagesUrl[0] ?
                         imagesUrl.map(item =>
                             <Box
@@ -76,13 +72,9 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
 
                         : null}
 
-
-                    {/* <Box position='absolute' top='0' left='0'>{ getPos()}</Box> */}
-
-
                 </ReactSwipe>
 
-                <Box
+                {/* <Box
                     position='absolute'
                     top='0'
                 >
@@ -95,7 +87,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                 {reactSwipeEl ?
                     reactSwipeEl.getPos()
                     : null
-                }
+                } */}
 
             </Box>
             <Box
