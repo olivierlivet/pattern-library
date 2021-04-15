@@ -82,7 +82,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
             >
                 <Box
                     w={{ base:'100%', lg:'300px'}}
-                    h={{ base:'400px'}}
+                    // h={{ base:'400px'}}
                     overflowY='hidden'
                     position='relative'
                 >

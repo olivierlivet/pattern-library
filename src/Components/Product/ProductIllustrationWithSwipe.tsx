@@ -1,6 +1,7 @@
-import React, { FunctionComponent, useState } from 'react'
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import React, { createRef, FunctionComponent, useState, useMemo } from 'react'
+import { Box, Button, Center, Flex, Image, Text } from '@chakra-ui/react'
 import ReactSwipe from 'react-swipe';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 type propTypes = {
     imagesUrl: Array<string>,
@@ -19,18 +20,30 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
         console.log('reactSwipeEl.getNumSlides()', reactSwipeEl.getPos())
 
     }
-
-    const [currentIndex, setIndex] = useState(0)
+    const [currentPicture, setPicture] = useState(0)
 
     const Pagination = () => (
         imagesUrl ?
             <Flex fontSize='xl' justifyContent='center' w='100%'>
                 { imagesUrl.length
-                ? imagesUrl.map((item, index) => <Text color={ index === currentIndex ? 'blue.300' : 'white'} key={item}>•</Text>)
+                ? imagesUrl.map((item, index) =>
+                    <Text
+                        color={ index === currentPicture  ? 'blue.300' : 'white'} key={item}>•</Text>)
                 : <div>no photo</div>}
             </Flex>
         : null
     )
+
+    const swipeOptions = useMemo(
+        () => ({
+            continuous: true,
+            stopPropagation: true,
+          transitionEnd( index ) {
+            setPicture( index );
+          }
+        }),
+        []
+      );
 
     return (
         <>
@@ -39,11 +52,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
 
                 <ReactSwipe
                     className="carousel"
-                    swipeOptions={{
-                        continuous: false,
-                        stopPropagation: true,
-                        transitionEnd: function (index, elem) { setIndex(index) }
-                    }}
+                    swipeOptions={ swipeOptions }
                     ref={el => (reactSwipeEl = el)}
 
                 >
@@ -75,26 +84,35 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
 
                 </ReactSwipe>
 
-                {/* <Box
+                <Box
                     position='absolute'
-                    top='0'
+                    bottom={2}
+                    right={2}
                 >
-                    <div>{currentIndex}</div>
-                    <button onClick={() => reactSwipeEl.prev()}>Previous</button>
-                    <button onClick={() => reactSwipeEl.next()}>Previous</button>
-                    <button onClick={() => console.log(reactSwipeEl.getPos())}> Index ?</button>
-                </Box>
 
-                {reactSwipeEl ?
-                    reactSwipeEl.getPos()
-                    : null
-                } */}
+                    <Button
+                        // bg='transparent'
+                        variant='outline'
+                        borderRadius='full'
+           
+                        p={0}
+                        onClick={(e) =>{
+                        e.stopPropagation();
+                        reactSwipeEl.next();  
+                    } }>
+                        <Center w={6} h={6}>
+                        <ArrowForwardIcon />
+
+                        </Center>
+                    </Button>
+                </Box>
 
             </Box>
             <Box
                 position='absolute'
                 bottom={0}
                 w='100%'
+                display={{ base: 'block', lg:'none' }}
             >
             <Pagination />
             </Box>
