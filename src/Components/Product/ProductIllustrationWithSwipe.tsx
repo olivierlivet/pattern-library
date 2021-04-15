@@ -88,6 +88,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                     position='absolute'
                     bottom={2}
                     right={2}
+                    display={{ base:'none', lg='block'}}
                 >
 
                     <Button
