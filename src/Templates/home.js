@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
+import FacebookLogin from 'react-facebook-login';
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -37,21 +38,18 @@ const HomeTemplate = (props) => {
             </Helmet>
             <HeroSearch
                 handleLoadSearchEngine={() => setShowEngine(true)}
-                setCategory={( value )=>setCategory(value)}
-                setVariant={( value )=>setVariant(value)}
+                setCategory={(value) => setCategory(value)}
+                setVariant={(value) => setVariant(value)}
             />
             <Wrapper>
                 <Nav data={univers} />
                 <Box
-                    fontSize={{ 
-                        base:'lg',
-                        lg:'larger'
+                    fontSize={{
+                        base: 'lg',
+                        lg: 'larger'
                     }}
                 >
                     <RichContent data={pageContent.description} />
-                </Box>
-                <Box>
-                    <Button>Login</Button>
                 </Box>
                 {/* <ProductsSummary data={products} /> */}
             </Wrapper>
@@ -63,7 +61,7 @@ const HomeTemplate = (props) => {
                     }}
                     onClose={() => setShowEngine(false)}
                 />
-            :
+                :
                 null
             }
         </Layout>

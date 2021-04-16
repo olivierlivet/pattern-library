@@ -17,8 +17,14 @@ const Header = () => {
         <Flex
             as={'header'}
             p={ 10 }
-            background='#efccbf'
+            bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,.75) 100%)'
             justifyContent='space-between'
+
+            position='fixed'
+            top={ 0 }
+            left={ 0 }
+            right={ 0 }
+            zIndex='banner'
         >
             <Text>
                 Patterns Corner

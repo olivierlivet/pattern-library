@@ -30,6 +30,22 @@ exports.createPages = ({ graphql, actions }) => {
     }
   });
 
+    /*
+    #####
+    Homepage
+    #####
+  */
+    const accountTemplate = path.resolve('src/Templates/account.js')
+    createPage({
+      path: `${'/fr/compte'}`,
+      component: accountTemplate,
+      context: {
+        // slug: edge.node.slug,
+        // contentfulID: '3t0pwYmEBxvCykiqoJbMVG',
+        locale: 'fr'
+      }
+    });
+
   /*
     #####
     Univers
