@@ -65,7 +65,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                                     w='100%'
                                     h='100%'
                                     alt={alt}
-                                    src={item} />
+                                    src={item.content ? item.content : item} />
                             </Box>
                         )
                     : null}

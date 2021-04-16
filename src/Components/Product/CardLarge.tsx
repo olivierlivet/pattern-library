@@ -63,6 +63,7 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
                     <ProductPage
                         data={ product }
                         onClose={()=>onClose()}
+                        displayCloseButton={ true }
                     />
 
                 </ModalBody>

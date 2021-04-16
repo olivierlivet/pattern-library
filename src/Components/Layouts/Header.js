@@ -21,7 +21,7 @@ const Header = () => {
             justifyContent='space-between'
         >
             <Text>
-                La Patronthèque v0
+                Patterns Corner
             </Text>
             <HStack>
                 {/* <Link to={`/fr/a-propos/`}>
@@ -30,13 +30,13 @@ const Header = () => {
                 <Link to={`/fr/a-propos/#newsletter`}>
                     Newsletter
                 </Link> */}
-                <Button onClick={()=> setMenuVisible( !menuVisible )}>
+                {/* <Button onClick={()=> setMenuVisible( !menuVisible )}>
                     <SmallAddIcon w={6} h={6} /> Menu
-                </Button>
+                </Button> */}
             </HStack>
             
         </Flex>
-        <Menu visible={ menuVisible } onClose={()=> setMenuVisible( !menuVisible )} />
+        {/* <Menu visible={ menuVisible } onClose={()=> setMenuVisible( !menuVisible )} /> */}
         </>
     )
 }

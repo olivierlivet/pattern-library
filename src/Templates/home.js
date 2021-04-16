@@ -13,7 +13,8 @@ import HeroSearch from '../Components/Hero/Hero'
 import RichContent from '../Components/RichContent'
 import {
     Heading,
-    Box
+    Box,
+    Button
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
@@ -34,11 +35,11 @@ const HomeTemplate = (props) => {
                 <title>{pageContent.title}</title>
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
-            {/* <HeroSearch
+            <HeroSearch
                 handleLoadSearchEngine={() => setShowEngine(true)}
                 setCategory={( value )=>setCategory(value)}
                 setVariant={( value )=>setVariant(value)}
-            /> */}
+            />
             <Wrapper>
                 <Nav data={univers} />
                 <Box
@@ -49,9 +50,12 @@ const HomeTemplate = (props) => {
                 >
                     <RichContent data={pageContent.description} />
                 </Box>
+                <Box>
+                    <Button>Login</Button>
+                </Box>
                 {/* <ProductsSummary data={products} /> */}
             </Wrapper>
-            { !showEngine ?
+            { showEngine ?
                 <SearchEngineLoader
                     filter={{
                         category: category ? category : null,

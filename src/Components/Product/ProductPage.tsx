@@ -25,10 +25,16 @@ import SharingButtons from './SharingButtons'
 
 type props = {
     data: Object,
-    onClose: Function
+    onClose: Function,
+    displayCloseButton: boolean
 }
 
-const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
+const ProductPage: FunctionComponent<props> = (
+    {
+        data,
+        onClose,
+        displayCloseButton
+    }) => {
     return (
         <Wrapper>
             <Box
@@ -38,7 +44,7 @@ const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
             {/* <pre>
                 { JSON.stringify( data, null, 1 )}
             </pre> */}
-            <CloseButton onClose={()=>onClose()} />
+            { displayCloseButton ? <CloseButton onClose={()=>onClose()} /> : null }
             <Stack spacing={{ base:4, lg:8 }} pb={ 20 }>
 
                 <Grid

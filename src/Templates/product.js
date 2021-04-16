@@ -2,12 +2,16 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
 import ProductPage from '../Components/Product/ProductPage'
+import HierarchicalNav from '../Components/Nav/Hierarchical'
 // import {
 //     StaticImage,
 //     // GatsbyImage
 // } from "gatsby-plugin-image"
 
 import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
     Heading
 } from '@chakra-ui/react'
 
@@ -15,19 +19,24 @@ const ProductTemplate = ( props ) => {
     const pageContent = props.data.product
     return(
         <Layout
-            enableBackButton = { true }
+            enableBackButton = { false }
         >
+            {/* <pre>
+                { JSON.stringify( pageContent.pictures, null, 1 )}
+            </pre> */}
+            <HierarchicalNav
+                data={ pageContent }
+            />
             <ProductPage
                 data={ props.data.product }
+                displayCloseButton= { false }
             />
             {/* <StaticImage
                 src="https://placekitten.com/800/600"
                 alt="A kitten"
                 formats={['auto', 'avif', 'webp']}
             /> */}
-            {/* <pre>
-                { JSON.stringify( pageContent, null, 1 )}
-            </pre> */}
+
             
             <div>
                 {/* <StaticImage
@@ -55,8 +64,11 @@ query adQuery( $contentfulID: String! ){
         level
         price
         picture { file { url } }
-        #pictures
+        pictures{ content }
         editor{ title }
+        univers{ title slug }
+        category{ title slug }
+        variant{ title slug }
       }
 }
 `
