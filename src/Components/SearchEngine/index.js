@@ -321,39 +321,32 @@ class SearchEngine extends Component {
                         </Flex>
                 </Box>
 
-
-
-                
-                                <RefinerFilters
-                                    mainFilters={mainFilters}
-                                    category={mainFilters.category}
-                                    key={{ category: mainFilters.category, refine: refineFilters }}
-                                    refineFilters={refineFilters}
-                                    handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
-                                    isVisible={ showFilter }
-                                    hideFilter={()=> this.setState({ 'showFilter': !showFilter } )}
-                                />  
-
+                <RefinerFilters
+                    mainFilters={mainFilters}
+                    category={mainFilters.category}
+                    key={{ category: mainFilters.category, refine: refineFilters }}
+                    refineFilters={refineFilters}
+                    handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
+                    isVisible={ showFilter }
+                    hideFilter={()=> this.setState({ 'showFilter': !showFilter } )}
+                />  
 
                 <Box
                     // pt='105px'
                     maxW='1300px'
                     mx='auto'
                 >
-
                     {/* <Grid
                         templateColumns={{
                             base: `100%`,
                             lg: `300px 1fr`
                         }}
                     > */}
-
-
                         <Box
                             // bg='white'
                             // mt={10}
                             pt={{ base: '16', lg:32 }}
-                            pb={20}
+                            pb={'32'}
                         >
                             {/* {products && products.length ?
                                 <Center p={2}>

@@ -149,7 +149,7 @@ const RefineFilters: FunctionComponent<props> = (
                     overflowY='scroll'
                     maxH={{ base:'auto', lg:'75vh' }}
 
-                    background='white'
+                    background={{ base:'transparent' }}
                     p={4}
                     borderRadius='0 1rem 1rem 0'
 

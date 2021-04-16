@@ -28,7 +28,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                 { imagesUrl.length
                 ? imagesUrl.map((item, index) =>
                     <Text
-                        color={ index === currentPicture  ? 'blue.300' : 'white'} key={item}>•</Text>)
+                        color={ index === currentPicture  ? '#88a7aa' : 'white'} key={item}>•</Text>)
                 : <div>no photo</div>}
             </Flex>
         : null
@@ -48,53 +48,49 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
     return (
         <>
             <Box>
-
-
                 <ReactSwipe
                     className="carousel"
                     swipeOptions={ swipeOptions }
                     ref={el => (reactSwipeEl = el)}
-
                 >
                     {imagesUrl && imagesUrl[0] ?
                         imagesUrl.map(item =>
                             <Box
-                                // onMouseEnter={()=> setIsHover( true )}
-                                // onMouseLeave={()=>setIsHover( false)}
-                                // p={{ base:4, lg: 8 }}
-                                // maxW={{ base:'80%', lg:'100%' }}
-                                // maxH={{ base:''}}
                                 key={item}
                                 h='100%'
                                 minH='100%'
-                            // w='100%'
-                            // mx='auto'
                             >
                                 <Image
                                     // objectFit='cover'
-                                    // w='100%'
-                                    // h='100%'
+                                    w='100%'
+                                    h='100%'
                                     alt={alt}
                                     src={item} />
                             </Box>
                         )
-
-
-                        : null}
-
+                    : null}
                 </ReactSwipe>
 
-                <Box
+                <Flex
+                    alignItems='center'
                     position='absolute'
-                    bottom={2}
-                    right={2}
-                    display={{ base:'none', lg:'block'}}
+                    bottom={0}
+                    top={0}
+                    right={0}
+                    h='100%'
+                    pr={3}
+                    display={{ base:'none', lg:'flex'}}
                 >
-
                     <Button
-                        // bg='transparent'
                         variant='outline'
                         borderRadius='full'
+                        color='white'
+                        bg='blackAlpha.400'
+                        _hover={{
+                            color:'gray.800',
+                            bg:'whiteAlpha.300'
+                        }}
+                        textShadow='lg'
            
                         p={0}
                         onClick={(e) =>{
@@ -106,7 +102,7 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
 
                         </Center>
                     </Button>
-                </Box>
+                </Flex>
 
             </Box>
             <Box

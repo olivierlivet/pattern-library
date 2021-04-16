@@ -13,6 +13,7 @@ import {
     Button,
     Center,
     Flex,
+    Grid,
     Heading,
     SimpleGrid,
     Stack
@@ -20,7 +21,7 @@ import {
 
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
 import RichContent from '../RichContent'
-
+import SharingButtons from './SharingButtons'
 
 type props = {
     data: Object,
@@ -30,14 +31,21 @@ type props = {
 const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
     return (
         <Wrapper>
+            <Box
+                maxW='1100px'
+                mx='auto'
+            >
             {/* <pre>
                 { JSON.stringify( data, null, 1 )}
             </pre> */}
             <CloseButton onClose={()=>onClose()} />
             <Stack spacing={{ base:4, lg:8 }} pb={ 20 }>
 
-                <SimpleGrid
-                    columns={{ base: 1, xl: 2 }}
+                <Grid
+                    templateColumns={{
+                        base:'100%',
+                        xl: '600px 1fr'
+                    }}
                     gap={{ base: 0, lg: 10 }}
                     my={{ base: 0, lg: 10 }}
                 >
@@ -46,8 +54,8 @@ const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
                         position={{ base:'initial', lg:'sticky'}}
                         top={20}
                         >
-                        <ProductIllustration data={data} />
-
+                            <ProductIllustration data={data} />
+                            <SharingButtons url={data.slug} title={data.title} />
                         </Box>
                     </Box>
                     <Center
@@ -57,7 +65,7 @@ const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
                     >
                         <ProductMainInfo data={data} />
                     </Center>
-                </SimpleGrid>
+                </Grid>
 
                 {/* <Box
                     px={{ base:5, lg:0 }}
@@ -87,7 +95,7 @@ const ProductPage: FunctionComponent<props> = ({ data, onClose }) => {
                     </TabPanels>
                 </Tabs>
             </Stack>
-
+            </Box>
         </Wrapper>
     )
 }

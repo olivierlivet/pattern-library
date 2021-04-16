@@ -110,23 +110,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                         fontSize='28px'
                         letterSpacing='wide'
                     >{title}</Heading>
-                    {/* <Text
-                    color='gray.600'
-                    borderBottom='solid 4px'
-                    borderBottomColor='#88a7aa'
-                    display='inline-block'
-                    h='22px'
-                >
-                    { editor && editor.title ? editor.title : editor.fields ? editor.fields.title : null }
-                </Text> */}
-                    <Box fontSize='small'>
-                        { intro }
-                    </Box>
-                    {/* <HStack>
-                        <Badge>12€</Badge>
-                        <Badge>Pochette</Badge>
-                        <Badge variant='subtle' colorScheme='cyan'>Niveau 3</Badge>
-                    </HStack> */}
+                  
 
                     <SimpleGrid
                 columns={3}
