@@ -32,7 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     /*
     #####
-    Homepage
+    Account
     #####
   */
     const accountTemplate = path.resolve('src/Templates/account.js')
@@ -44,6 +44,44 @@ exports.createPages = ({ graphql, actions }) => {
         // contentfulID: '3t0pwYmEBxvCykiqoJbMVG',
         locale: 'fr'
       }
+    });
+
+  /*
+    #####
+    Pages
+    #####
+  */
+    const pageTemplate = path.resolve('src/Templates/page.js')
+    const pages = graphql(`
+    {
+      allPages:allContentfulPage{
+        edges {
+          node {
+            node_locale
+            contentful_id
+            slug
+            #name
+          }
+        }
+      }
+    }
+    `).then(result => {
+      if (result.errors) {
+        Promise.reject(result.errors);
+      }
+      // Create univers pages
+      const allPages = result.data.allPages.edges;
+      allPages.forEach((edge) => {
+        createPage({
+          path: `${edge.node.node_locale}${edge.node.slug}`,
+          component: pageTemplate,
+          context: {
+            slug: edge.node.slug,
+            contentfulID: edge.node.contentful_id,
+            locale: edge.node.node_locale
+          }
+        });
+      });
     });
 
   /*

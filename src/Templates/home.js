@@ -14,11 +14,14 @@ import RichContent from '../Components/RichContent'
 import {
     Heading,
     Box,
-    Button
+    Button,
+    Text
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
 import FacebookLogin from 'react-facebook-login';
+import EntrySummary from '../Components/EntrySummary'
+import Title from '../Components/Title'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -36,11 +39,51 @@ const HomeTemplate = (props) => {
                 <title>{pageContent.title}</title>
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
+
+            <Box textAlign='center'>
+                <Text
+                    fontFamily='DM Sans'
+                    textTransform='uppercase'
+                    color='gray.600'
+                    fontSize='sm'
+                    letterSpacing='wide'
+                >the</Text>
+                <Text
+                    fontSize={{ base:'xx-large', lg:'xxx-large' }}
+                    fontFamily='Noe Display'
+                >Patterns Corner</Text>
+
+                <Text
+                    fontFamily='DM Sans'
+                    fontSize='16px'
+                    fontWeight='normal'
+                >
+                    Le plus grand choix de
+                    {' '}<Heading
+                            as='h1'
+                            display='inline'
+                            fontWeight='normal'
+                            fontSize='inherit'
+                            borderBottom='solid 3px'
+                            borderBottomColor='#EFCBBF'
+                            display='inline-block'
+                            lineHeight='11px'
+                        >patrons de couture</Heading>
+                </Text>
+            </Box>
+
             <HeroSearch
                 handleLoadSearchEngine={() => setShowEngine(true)}
                 setCategory={(value) => setCategory(value)}
                 setVariant={(value) => setVariant(value)}
             />
+
+            <Box>
+                <Title>Le journal The Patterns Corner</Title>
+                <EntrySummary />
+                <Button>Voir plus</Button>
+            </Box>
+
             <Wrapper>
                 <Nav data={univers} />
                 <Box
@@ -53,6 +96,8 @@ const HomeTemplate = (props) => {
                 </Box>
                 {/* <ProductsSummary data={products} /> */}
             </Wrapper>
+
+
             { showEngine ?
                 <SearchEngineLoader
                     filter={{
