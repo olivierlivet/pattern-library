@@ -27,6 +27,7 @@ import EntrySummary from '../Components/EntrySummary'
 import Title from '../Components/Title'
 import NewsletterCta from '../Components/NewsletterCta'
 import LinksList from '../Components/LinksList'
+import CtaSearch from '../Components/CtaSearch'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -77,7 +78,13 @@ const HomeTemplate = (props) => {
                 </Text>
             </Box>
 
-            <HeroSearch
+            {/* <HeroSearch
+                handleLoadSearchEngine={() => setShowEngine(true)}
+                setCategory={(value) => setCategory(value)}
+                setVariant={(value) => setVariant(value)}
+            /> */}
+
+            <CtaSearch
                 handleLoadSearchEngine={() => setShowEngine(true)}
                 setCategory={(value) => setCategory(value)}
                 setVariant={(value) => setVariant(value)}
