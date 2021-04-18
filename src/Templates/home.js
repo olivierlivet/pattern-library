@@ -89,6 +89,29 @@ const HomeTemplate = (props) => {
                 py={8}
                 spacing={4}
             >
+                <Title>Vos patrons préférés</Title>
+                <EntrySummary />
+                <Box
+                    px={ 4 }
+                >
+                    <Button
+                        bg='#EFCBBF'
+                        color='gray.600'
+                        textTransform='uppercase'
+                        letterSpacing='wide'
+                        fontFamily='DM Sans'
+                        fontWeight='normal'
+                        borderRadius={2}
+                    >Voir plus</Button>
+                </Box>
+            </VStack>
+
+            <VStack
+                bg='#D9E6E6'
+                align='flex-start'
+                py={8}
+                spacing={4}
+            >
                 <Title>Le journal The Patterns Corner</Title>
                 <EntrySummary />
                 <Box
@@ -105,6 +128,10 @@ const HomeTemplate = (props) => {
                     >Voir plus</Button>
                 </Box>
             </VStack>
+
+            <Box>
+                The Patterns Corner c'est ...
+            </Box>
 
 
             <Stack
