@@ -17,7 +17,8 @@ import {
     Button,
     Text,
     HStack,
-    VStack
+    VStack,
+    Stack
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
@@ -25,6 +26,7 @@ import FacebookLogin from 'react-facebook-login';
 import EntrySummary from '../Components/EntrySummary'
 import Title from '../Components/Title'
 import NewsletterCta from '../Components/NewsletterCta'
+import LinksList from '../Components/LinksList'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -104,15 +106,31 @@ const HomeTemplate = (props) => {
                 </Box>
             </VStack>
 
+
+            <Stack
+                spacing={ 4 }
+                p={ 4 }
+            >
+                <Heading>
+                    Les différentes familles de patrons
+                </Heading>
+                <Text>
+                    Notre catalogue est très complet avec énormément de modèles de jupes pour rassasier vos envies. Voici les différentes famille selon le style de ces jupes :
+                </Text>
+                <LinksList
+                    data={ univers }
+                    columnsCount={{ base: 2, lg: 2 }}
+                />
+            </Stack>
             <NewsletterCta />
 
             <Wrapper>
-                <Nav data={univers} />
                 <Box
                     fontSize={{
                         base: 'lg',
                         lg: 'larger'
                     }}
+                    p={ 4 }
                 >
                     <RichContent data={pageContent.description} />
                 </Box>
