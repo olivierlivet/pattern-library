@@ -49,8 +49,8 @@ const EntrySummary = () => {
 
         >
             <HStack
-                w='1250px'
-                spacing='10px'
+                w='1300px'
+                spacing='20px'
             >
                 <Card />
                 <Card />

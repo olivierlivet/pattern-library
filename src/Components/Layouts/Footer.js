@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import { PhoneIcon, AddIcon, WarningIcon, SmallAddIcon } from '@chakra-ui/icons'
 import Menu from './Menu'
+import { Link as GatsbyLink } from 'gatsby'
 import {
     Button,
+    Heading,
     Flex,
     Link,
     Text,
     Box, 
-    HStack
+    HStack,
+    SimpleGrid,
+    List,
+    ListItem
 } from '@chakra-ui/react'
 
 const Footer = () => {
@@ -15,8 +20,44 @@ const Footer = () => {
     return(
         <Box
             as='footer'
+            bg='#235C62'
         >
-            Footer
+            <SimpleGrid
+                columns={{ base:1, lg:3 }}
+                gap={{ base: 6, lg:10 }}
+                color='white'
+                p={ 6 }
+            >
+                <Box>
+                    <Text
+                        fontFamily='Noe Display'
+                        fontSize='xx-large'
+                    >The Patterns Corner</Text>
+                </Box>
+                <Box>
+                <Heading as='p' mb={2} fontSize='normal' fontWeight='normal' color='#EFCBBF' fontFamily='Noe Display'>Éditeurs de patrons</Heading>
+                    <List>
+                        <ListItem>—{' '}
+                            <Link as={GatsbyLink}>Pourquoi Patterns Corner</Link>
+                        </ListItem>
+                        <ListItem>—{' '}
+                            <Link as={GatsbyLink}>Mentions légales</Link>
+                        </ListItem>
+                    </List>
+                </Box>
+                <Box>
+                    <Heading as='p' mb={2} fontSize='normal' fontWeight='normal' color='#EFCBBF' fontFamily='Noe Display'>Éditeurs de patrons</Heading>
+                    <List>
+                        <ListItem>—{' '}
+                            <Link as={GatsbyLink}>Vendre sur TPC</Link>
+                        </ListItem>
+                        <ListItem>—{' '}
+                            <Link as={GatsbyLink}>Accès plateforme éditeurs</Link>
+                        </ListItem>
+                    </List>
+                </Box>
+
+            </SimpleGrid>
         </Box>
     )
 }
