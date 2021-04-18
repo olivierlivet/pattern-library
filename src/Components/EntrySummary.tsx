@@ -9,19 +9,19 @@ import React from 'react'
 
 const EntrySummary = () => {
     const Card = () => (
-        <Box w='200px' h='300px' bg='gray.300'>
+        <Box w='240px' h='400px' bg='gray.300'>
             <Image
                 src='https://republiqueduchiffon.com/wp-content/uploads/2021/02/Sewing-pattern-BILLY-6-600x600.jpg'
                 alt='Image alt'
                 w='100%'
-                h='150px'
+                h='240px'
                 objectFit='cover'
             />
             <Stack
                 bg='white'
                 p={ 4 }
                 spacing={ 2 }
-                h='150px'
+                h='160px'
 
             >
                 <Text
@@ -46,9 +46,10 @@ const EntrySummary = () => {
             w='100%'
             overflowX='scroll'
             p={4}
+
         >
             <HStack
-                w='1050px'
+                w='1250px'
                 spacing='10px'
             >
                 <Card />

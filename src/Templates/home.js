@@ -15,7 +15,9 @@ import {
     Heading,
     Box,
     Button,
-    Text
+    Text,
+    HStack,
+    VStack
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
@@ -78,11 +80,28 @@ const HomeTemplate = (props) => {
                 setVariant={(value) => setVariant(value)}
             />
 
-            <Box>
+            <VStack
+                bg='#D9E6E6'
+                align='flex-start'
+                py={8}
+                spacing={4}
+            >
                 <Title>Le journal The Patterns Corner</Title>
                 <EntrySummary />
-                <Button>Voir plus</Button>
-            </Box>
+                <Box
+                    px={ 4 }
+                >
+                    <Button
+                        bg='#EFCBBF'
+                        color='gray.600'
+                        textTransform='uppercase'
+                        letterSpacing='wide'
+                        fontFamily='DM Sans'
+                        fontWeight='normal'
+                        borderRadius={2}
+                    >Voir plus</Button>
+                </Box>
+            </VStack>
 
             <Wrapper>
                 <Nav data={univers} />
