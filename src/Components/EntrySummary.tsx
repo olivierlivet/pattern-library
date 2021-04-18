@@ -21,7 +21,7 @@ const EntrySummary = () => {
                 bg='white'
                 p={ 4 }
                 spacing={ 2 }
-                h='100%'
+                h='150px'
 
             >
                 <Text

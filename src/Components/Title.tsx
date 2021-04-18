@@ -7,7 +7,8 @@ const Title = ({ children }) => {
         <Heading
             px={ 4 }
             fontSize={{ base:'x-large', lg:'xx-large'}}
-            fontFamily='Neo Display'
+            fontWeight='normal'
+            fontFamily='Noe Display'
         >
             {children}
         </Heading>
