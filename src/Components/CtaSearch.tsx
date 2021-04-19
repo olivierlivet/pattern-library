@@ -21,7 +21,6 @@ const transitionStyles = {
         transform: `translateY(0)`
     },
     entered: {
-        top:'-20px',
         opacity: 1,
         transform: `translateY(0)`,
         // pointerEvents: `auto`
@@ -47,15 +46,15 @@ const CtaSearch = ({ }) => {
                         borderRadius={3}
                         fontFamily='Noe Display'
                         fontWeight='normal'
-                        p={4}
-                        py={2}
+                        p={6}
+                        py={3}
                         color='white'
                         zIndex='docked'
                         position='relative'
                         onClick={() => setStep(step === 0 ? 1 : 0)}
 
                     >
-                        Je cherche un patron pour
+                        Je cherche un patron
                         <ArrowDownIcon ml={2} />
                     </Box>
 
@@ -69,7 +68,7 @@ const CtaSearch = ({ }) => {
 
 
                                 position='absolute'
-                                top='-20px'
+                                top='-10px'
                                 left='-10px'
                                 right='-10px'
                                 borderRadius='xl'

@@ -33,11 +33,14 @@ const Header = () => {
                 fontFamily='DM Sans'
                 textTransform='uppercase'
                 fontWeight='normal'
-                fontSize='10px'
+                fontSize='8px'
                 color='gray.600'
-                mr={1}
-                line-height='22px'
-                transform='rotate(-90deg)'
+                // mr={1}
+                // w='10px'
+                // h='10px'
+                whiteSpace='pre'
+                // line-height='22px'
+                transform='rotate(-90deg) translateY(4px)'
             >
                 The
             </Text>
