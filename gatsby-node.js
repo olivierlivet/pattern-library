@@ -288,7 +288,12 @@ exports.createPages = ({ graphql, actions }) => {
     });
 
 
-
+  const { createRedirect } = actions;
+  
+  createRedirect({
+    fromPath: `/`,
+    toPath: `/fr`,
+  });
   
 
   return Promise.all([
