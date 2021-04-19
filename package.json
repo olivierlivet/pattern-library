@@ -40,8 +40,10 @@
     "react-dom": "^17.0.1",
     "react-facebook-login": "^4.1.1",
     "react-helmet": "^6.1.0",
+    "react-multi-carousel": "^2.6.2",
     "react-swipe": "^6.0.4",
     "react-transition-group": "^4.4.1",
+    "slick-carousel": "^1.8.1",
     "swipe-js-iso": "^2.1.5"
   }
 }
