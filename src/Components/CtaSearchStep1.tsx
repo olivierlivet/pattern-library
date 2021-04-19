@@ -13,32 +13,34 @@ const duration = 300;
 
 
 const defaultStyle = {
-    // transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
-    // opacity: 0,
-    // // top: 0,
-    // // left: 0,
-    // // transform: `translateX(-100%)`,
-    // pointerEvents: `none`
+    transition: `opacity ${duration}ms ease-in-out, max-height  ${duration}ms ease-in-out`,
+    maxHeight: 0
 }
 
 const transitionStyles = {
-    // entering: {
-    //     opacity: 1,
-    //     // transform: `translateX(0)`
-    // },
-    // entered: {
-    //     opacity: 1,
-    //     // transform: `translateX(0)`,
-    //     // pointerEvents: `auto`
-    // },
-    // exiting: {
-    //     opacity: 0,
-    //     // transform: `translateX(-100%)`
-    // },
-    // exited: {
-    //     opacity: 0,
-    //     transform: `translateX(-100%)`,
-    // },
+    entering: {
+        opacity: 1,
+        maxHeight: '1000px'
+        // transform: `translateX(0)`
+    },
+    entered: {
+        opacity: 1,
+        maxHeight: '1000px'
+
+        // transform: `translateX(0)`,
+        // pointerEvents: `auto`
+    },
+    exiting: {
+        opacity: 0,
+        maxHeight: '0px'
+        // transform: `translateX(-100%)`
+    },
+    exited: {
+        opacity: 0,
+        maxHeight: '0px'
+
+
+    },
 }
 
 const CtaSearchStep1: FunctionComponent<props> = ({ isVisible, handleNextStep }) => {
@@ -66,7 +68,7 @@ const CtaSearchStep1: FunctionComponent<props> = ({ isVisible, handleNextStep })
                                 variant='ghost'
                                 w='100%'
                                 justifyContent='space-between'
-                                
+
                                 _hover={{
                                     bg:'none',
                                     border:'none'

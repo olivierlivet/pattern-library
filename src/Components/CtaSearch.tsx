@@ -5,8 +5,9 @@ import CtaSearchStep1 from './CtaSearchStep1'
 import CtaSearchStep2 from './CtaSearchStep2'
 
 import { Transition } from 'react-transition-group';
+import { ArrowDownIcon } from '@chakra-ui/icons';
 
-const duration = 150;
+const duration = 200;
 
 const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
@@ -34,8 +35,7 @@ const CtaSearch = ({ }) => {
     return (
         <>
             <Center
-                p={20}
-                minH='100vh'
+                // p={20}
 
             >
                 <Box
@@ -50,12 +50,14 @@ const CtaSearch = ({ }) => {
                         p={4}
                         py={2}
                         color='white'
-                        zIndex='tooltip'
+                        zIndex='docked'
                         position='relative'
                         onClick={() => setStep(step === 0 ? 1 : 0)}
 
                     >
-                        Je chercher un patron ↓</Box>
+                        Je cherche un patron pour
+                        <ArrowDownIcon ml={2} />
+                    </Box>
 
                     <Transition in={step > 0} timeout={duration}>
                         {state => (
@@ -63,6 +65,9 @@ const CtaSearch = ({ }) => {
                             <Box
                                 // border='solid 2px'
                                 // borderColor='#88A7AA'
+                                bg='white'
+
+
                                 position='absolute'
                                 top='-20px'
                                 left='-10px'
@@ -81,8 +86,16 @@ const CtaSearch = ({ }) => {
                                     columns={ 2 }
                                     pt='70px'
                                     w='200%'
-                                    transform={`translateX(${ step===1 ? '0' : '-50%'})`}
+                                    // transform={`translateX(${ step===1 ? '0' : '-50%'})`}
                                     transition='transform 200ms ease'
+                                    style={
+                                        step === 2
+                                            ?
+                                                {transform:`translateX(-50%)`}
+                                            :
+                                                {transform:`none`}
+
+                                    }
                                 >
                                     <CtaSearchStep1
                                         isVisible={step === 1 ? true : false}

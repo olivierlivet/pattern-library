@@ -16,7 +16,7 @@ const Header = () => {
         <>
         <Flex
             as={'header'}
-            p={ 10 }
+            p={{ base:4, lg: 10 } }
             bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,.75) 100%)'
             justifyContent='space-between'
 
@@ -26,7 +26,10 @@ const Header = () => {
             right={ 0 }
             zIndex='banner'
         >
-            <Text>
+            <Text
+                fontFamily='Noe Display'
+                fontWeight='normal'
+            >
                 Patterns Corner
             </Text>
             <HStack>

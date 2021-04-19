@@ -18,7 +18,8 @@ import {
     Text,
     HStack,
     VStack,
-    Stack
+    Stack,
+    Center
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
@@ -46,25 +47,32 @@ const HomeTemplate = (props) => {
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
 
-            <Box textAlign='center'>
-                <Text
-                    fontFamily='DM Sans'
-                    textTransform='uppercase'
-                    color='gray.600'
-                    fontSize='sm'
-                    letterSpacing='wide'
-                >the</Text>
-                <Text
-                    fontSize={{ base:'xx-large', lg:'xxx-large' }}
-                    fontFamily='Noe Display'
-                >Patterns Corner</Text>
-
-                <Text
-                    fontFamily='DM Sans'
-                    fontSize='16px'
-                    fontWeight='normal'
-                >
-                    Le plus grand choix de
+            <Center
+                textAlign='center'
+                minH='80vh'
+                px={{ base:'6', lg: '56'}}
+            >
+                <VStack spacing={{ base: 6, lg: 8 }}>
+                    <Box>
+                        <Text
+                            fontFamily='DM Sans'
+                            textTransform='uppercase'
+                            color='gray.600'
+                            fontSize='sm'
+                            letterSpacing='wide'
+                            m='0'
+                        >the</Text>
+                        <Text
+                            fontSize={{ base: 'xx-large', lg: 'xxx-large' }}
+                            fontFamily='Noe Display'
+                            lineHeight='shorter'
+                        >Patterns Corner</Text>
+                        <Text
+                        fontFamily='DM Sans'
+                        fontSize='16px'
+                        fontWeight='normal'
+                    >
+                        Le plus grand choix de
                     {' '}<Heading
                             as='h1'
                             display='inline'
@@ -75,8 +83,28 @@ const HomeTemplate = (props) => {
                             display='inline-block'
                             lineHeight='11px'
                         >patrons de couture</Heading>
-                </Text>
-            </Box>
+                    </Text>
+                    </Box>
+                    <Text
+                        fontFamily='Noe Display'
+                        fontWeight='normal'
+                        color='gray.700'
+                    >
+                    Votre futur projet n’attend pas, 
+                    trouvez le patron de  vos rêves 
+                    parmi les
+                    {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text> 
+                    {' '}patrons.
+                    </Text>
+                    
+                    
+                    <CtaSearch
+                        handleLoadSearchEngine={() => setShowEngine(true)}
+                        setCategory={(value) => setCategory(value)}
+                        setVariant={(value) => setVariant(value)}
+                    />
+                </VStack>
+            </Center>
 
             {/* <HeroSearch
                 handleLoadSearchEngine={() => setShowEngine(true)}
@@ -84,11 +112,7 @@ const HomeTemplate = (props) => {
                 setVariant={(value) => setVariant(value)}
             /> */}
 
-            <CtaSearch
-                handleLoadSearchEngine={() => setShowEngine(true)}
-                setCategory={(value) => setCategory(value)}
-                setVariant={(value) => setVariant(value)}
-            />
+
 
             <VStack
                 bg='#D9E6E6'
@@ -99,7 +123,7 @@ const HomeTemplate = (props) => {
                 <Title>Vos patrons préférés</Title>
                 <EntrySummary />
                 <Box
-                    px={ 4 }
+                    px={4}
                 >
                     <Button
                         bg='#EFCBBF'
@@ -122,7 +146,7 @@ const HomeTemplate = (props) => {
                 <Title>Le journal The Patterns Corner</Title>
                 <EntrySummary />
                 <Box
-                    px={ 4 }
+                    px={4}
                 >
                     <Button
                         bg='#EFCBBF'
@@ -142,8 +166,8 @@ const HomeTemplate = (props) => {
 
 
             <Stack
-                spacing={ 4 }
-                p={ 4 }
+                spacing={4}
+                p={4}
             >
                 <Heading>
                     Les différentes familles de patrons
@@ -152,7 +176,7 @@ const HomeTemplate = (props) => {
                     Notre catalogue est très complet avec énormément de modèles de jupes pour rassasier vos envies. Voici les différentes famille selon le style de ces jupes :
                 </Text>
                 <LinksList
-                    data={ univers }
+                    data={univers}
                     columnsCount={{ base: 2, lg: 2 }}
                 />
             </Stack>
@@ -164,7 +188,7 @@ const HomeTemplate = (props) => {
                         base: 'lg',
                         lg: 'larger'
                     }}
-                    p={ 4 }
+                    p={4}
                 >
                     <RichContent data={pageContent.description} />
                 </Box>
