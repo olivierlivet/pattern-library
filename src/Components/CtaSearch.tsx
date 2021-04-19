@@ -7,7 +7,7 @@ import CtaSearchStep2 from './CtaSearchStep2'
 import { Transition } from 'react-transition-group';
 import { ArrowDownIcon } from '@chakra-ui/icons';
 
-const duration = 200;
+const duration = 300;
 
 const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
@@ -87,7 +87,7 @@ const CtaSearch = ({ }) => {
                                     pt='70px'
                                     w='200%'
                                     // transform={`translateX(${ step===1 ? '0' : '-50%'})`}
-                                    transition='transform 200ms ease'
+                                    transition={`transform ${duration}ms ease`}
                                     style={
                                         step === 2
                                             ?

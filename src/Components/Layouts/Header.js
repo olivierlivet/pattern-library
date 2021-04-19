@@ -25,13 +25,31 @@ const Header = () => {
             left={ 0 }
             right={ 0 }
             zIndex='banner'
-        >
+
+            alignContent='flex-end'
+        >   
+        <Flex>
+        <Text
+                fontFamily='DM Sans'
+                textTransform='uppercase'
+                fontWeight='normal'
+                fontSize='10px'
+                color='gray.600'
+                mr={1}
+                line-height='22px'
+                transform='rotate(-90deg)'
+            >
+                The
+            </Text>
+            
             <Text
                 fontFamily='Noe Display'
                 fontWeight='normal'
             >
                 Patterns Corner
             </Text>
+        </Flex>
+
             <HStack>
                 {/* <Link to={`/fr/a-propos/`}>
                     À propos
