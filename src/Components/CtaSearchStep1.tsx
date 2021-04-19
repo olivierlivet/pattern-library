@@ -61,7 +61,21 @@ const CtaSearchStep1: FunctionComponent<props> = ({ isVisible, handleNextStep })
                         >
                             <Button
                                 onClick={()=>handleNextStep()}
-                                fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
+                                fontWeight='normal'
+                                fontFamily='DM Sans'
+                                variant='ghost'
+                                w='100%'
+                                justifyContent='space-between'
+                                
+                                _hover={{
+                                    bg:'none',
+                                    border:'none'
+                                }}
+                                _focus={{
+                                    bg:'none',
+                                    border:'none'
+                                }}
+                            >
                                 Pour une femme
                                 <ArrowForwardIcon />
                             </Button>

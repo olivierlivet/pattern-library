@@ -57,7 +57,23 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack })
                         borderBottom='solid 1px'
                         borderBottomColor='gray.200'
                     >
-                        <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='flex-start' onClick={() => handleStepBack()}>
+                        <Button
+                            fontWeight='normal'
+                            fontFamily='DM Sans'
+                            variant='ghost'
+                            w='100%'
+                            justifyContent='flex-start'
+                            onClick={() => handleStepBack()}
+
+                            _hover={{
+                                bg:'none',
+                                border:'none'
+                            }}
+                            _focus={{
+                                bg:'none',
+                                border:'none'
+                            }}
+                        >
                             <ArrowBackIcon mr={2} />
                             Retour
                         </Button>
