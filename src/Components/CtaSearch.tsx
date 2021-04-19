@@ -1,4 +1,4 @@
-import { Box, Button, Center } from '@chakra-ui/react'
+import { Box, Button, Center, SimpleGrid } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import CtaSearchStep1 from './CtaSearchStep1'
@@ -11,21 +11,19 @@ const duration = 150;
 const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
     opacity: 0,
-    top: '40px',
-    left: 0,
-    transform: `translateY(-40px)`,
-    pointerEvents: `none`
+    transform: `translateY(-20px)`,
 }
 
 const transitionStyles = {
     entering: {
         opacity: 1,
-        transform: `translateX(0)`
+        transform: `translateY(0)`
     },
     entered: {
+        top:'-20px',
         opacity: 1,
-        transform: `translateX(0)`,
-        pointerEvents: `auto`
+        transform: `translateY(0)`,
+        // pointerEvents: `auto`
     },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
@@ -52,6 +50,8 @@ const CtaSearch = ({ }) => {
                         p={4}
                         py={2}
                         color='white'
+                        zIndex='tooltip'
+                        position='relative'
                         onClick={() => setStep(step === 0 ? 1 : 0)}
 
                     >
@@ -61,27 +61,39 @@ const CtaSearch = ({ }) => {
                         {state => (
 
                             <Box
-                                border='solid 2px'
-                                borderColor='#88A7AA'
-                                w='200px'
+                                // border='solid 2px'
+                                // borderColor='#88A7AA'
                                 position='absolute'
-                                top='30px'
-                                left='0'
-
+                                top='-20px'
+                                left='-10px'
+                                right='-10px'
+                                borderRadius='xl'
+                                boxShadow='xl'
+                                // pt={20}
                                 overflow='hidden'
-
+                                zIndex='base'
                                 style={{
                                     ...defaultStyle,
                                     ...transitionStyles[state]
                                 }}
                             >
-                                <CtaSearchStep1
-                                    isVisible={step === 1 ? true : false}
-                                    handleChangeStep={()=> setStep( step + 1 )}
-                                />
-                                <CtaSearchStep2
-                                    isVisible={step === 2 ? true : false}
-                                />
+                                <SimpleGrid
+                                    columns={ 2 }
+                                    pt='70px'
+                                    w='200%'
+                                    transform={`translateX(${ step===1 ? '0' : '-50%'})`}
+                                    transition='transform 200ms ease'
+                                >
+                                    <CtaSearchStep1
+                                        isVisible={step === 1 ? true : false}
+                                        handleNextStep={()=> setStep( step + 1 )}
+                                    />
+                                    <CtaSearchStep2
+                                        isVisible={step === 2 ? true : false}
+                                        handleStepBack={()=> setStep(1)}
+                                    />
+                                </SimpleGrid>
+                                
                             </Box>
                         )}
                     </Transition>
