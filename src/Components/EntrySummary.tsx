@@ -21,7 +21,6 @@ const EntrySummary = () => {
         <Box
             w='240px' h='400px' bg='gray.300'
             // ml={ index === 0 ? 4 : 0 }
-            mx={ 4 }
         >
             <Image
                 src='https://republiqueduchiffon.com/wp-content/uploads/2021/02/Sewing-pattern-BILLY-6-600x600.jpg'
@@ -66,7 +65,7 @@ const EntrySummary = () => {
                     breakpoints= {{
                         320: {
                             slidesPerView: 1.4,
-                            spaceBetween: 10,
+                            spaceBetween: 20,
                           },
                         640: {
                           slidesPerView: 4,

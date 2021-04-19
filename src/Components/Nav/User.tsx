@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 import { Button, Text } from '@chakra-ui/react'
 import FavoriteIcon from '../../Images/Icons/Favorite'
 import CartIcon from '../../Images/Icons/ShoppingBag'
@@ -28,6 +29,8 @@ const UserNav = () => {
                 </Text>
             </Button>
             <Button
+                as={ GatsbyLink }
+                to='/fr/compte'
                 p={{ base:1, lg:2 }}
                 h='auto'
                 w='auto'

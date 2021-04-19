@@ -82,6 +82,7 @@ const HomeTemplate = (props) => {
                                 fontSize='inherit'
                                 borderBottom='solid 3px'
                                 borderBottomColor='#EFCBBF'
+                                fontFamily='DM Sans'
                                 display='inline-block'
                                 lineHeight='11px'
                             >patrons de couture</Heading>
@@ -121,7 +122,7 @@ const HomeTemplate = (props) => {
                 align='flex-start'
                 py={8}
                 spacing={4}
-                p={{ base: 6, lg: 24 }}
+                p={{ base: 0, lg: 24 }}
             >
                 <Title>Vos patrons préférés</Title>
                 <EntrySummary />
@@ -152,6 +153,8 @@ const HomeTemplate = (props) => {
                 py={8}
                 spacing={4}
                 p={{ base: 6, lg: 24 }}
+
+                display='none'
 
             >
                 <Title>Le journal The Patterns Corner</Title>

@@ -13,13 +13,19 @@ import HeroSearch from '../Components/Hero/Hero'
 import RichContent from '../Components/RichContent'
 import {
     Heading,
+    Button,
     Box,
-    Button
+    Center,
+    HStack,
+    ButtonGroup
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
 import FacebookLogin from 'react-facebook-login';
 import LoginForm from '../Components/Account/Login'
+import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
+import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
+
 const AccountTemplate = (props) => {
 
     return (
@@ -34,18 +40,42 @@ const AccountTemplate = (props) => {
             <Wrapper>
                 {/* <Nav data={univers} /> */}
                 <Box
-                    fontSize={{
-                        base: 'lg',
-                        lg: 'larger'
-                    }}
+                    minH={'90vh'}
                 >
-                    Compte
+
+                
+                <Center                     minH={'90vh'}
+>
+                    <Box
+                        bg='white'
+                        w={{ base:'md'}}
+                        p={{ base:10 }}
+                    >
+                    <Box
+                        fontSize={{
+                            base: 'lg',
+                            lg: 'larger'
+                        }}
+                    >
+                        Compte
+                    </Box>
+                    <LoginForm />
+                    <HStack>
+                        <ButtonGroup>
+                            <GoogleLoginButton />
+                            <FacebookLoginButton />
+                        </ButtonGroup>
+                    </HStack>
+                    </Box>
+                </Center>
                 </Box>
-                <LoginForm />
-                {/* <ProductsSummary data={products} /> */}
+
             </Wrapper>
         </Layout>
     )
 }
 
 export default AccountTemplate
+
+// Google Id 
+// 55523564131-074cqlp79q4pv4rgkm2rqfu58474l4ls.apps.googleusercontent.com

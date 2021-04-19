@@ -10,6 +10,7 @@ import {
     HStack
 } from '@chakra-ui/react'
 import UserNav from '../Nav/User'
+import { navigate } from 'gatsby-link'
 
 const Header = () => {
     const [menuVisible, setMenuVisible] = useState( false )
@@ -31,7 +32,10 @@ const Header = () => {
             alignContent='flex-end'
             alignItems='center'
         >   
-        <Flex>
+        <Flex
+            onClick={()=> navigate('/fr')}
+            cursor='pointer'
+        >
         <Text
                 fontFamily='DM Sans'
                 textTransform='uppercase'
