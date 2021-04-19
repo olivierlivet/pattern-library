@@ -7,33 +7,15 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-const responsive = {
-    superLargeDesktop: {
-        // the naming can be any, depends on you.
-        breakpoint: { max: 4000, min: 3000 },
-        items: 10
-    },
-    desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 5
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1.3
-    }
-};
+// Import Swiper styles
+import 'swiper/swiper-bundle.min.css';
 
 const EntrySummary = () => {
+
+    const listOfData = [1, 2, 3, 4, 5, 6, 7]
 
     const Card = ({ index }) => (
         <Box w='240px' h='400px' bg='gray.300'>
@@ -64,38 +46,33 @@ const EntrySummary = () => {
                         pr={2}
                     >Jupe</Text>
                 </Text>
-                <Text>#{index} Les 10 plus belles jupes pour l'été →</Text>
+                <Text>#{index ? index : null} Les 10 plus belles jupes pour l'été →</Text>
             </Stack>
         </Box>
     )
+    const renderCard = (index, modIndex, cursor) => {
+        const item = listOfData[modIndex]
+        // render the item
+    }
+
     return (
         <Box maxW='100vw' position='relative' mx={4}>
             <Box px={4}>
-            <Carousel
-                responsive={responsive}
-                swipeToSlide={ true }
-                swipe={ true }
-                swipeable={true}
-                draggable={true}
-                showDots={false}
-                ssr={true} // means to render carousel on server-side.
-                infinite={false}
-                autoPlaySpeed={1000}
-                keyBoardControl={true}
-                customTransition="all .5"
-                transitionDuration={500}
-                containerClass="carousel-container"
-                removeArrowOnDeviceType={["tablet", "mobile"]}
-                deviceType={'superLargeDesktop'}
-                dotListClass="custom-dot-list-style"
-                itemClass="carousel-item-padding-40-px"
-            >
-                { [1,2,3,4,5,6,7,8,9,10].map( (item, i) => <Card index={i} />)}
-            </Carousel>
+                <Swiper
+                    spaceBetween={50}
+                    slidesPerView={1.4}
+                    freeMode={true}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                >
+
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) => <SwiperSlide><Card index={i} /></SwiperSlide>)}
+
+                </Swiper>
             </Box>
 
 
-            
+
         </Box>
     )
 }
