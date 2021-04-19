@@ -19,7 +19,7 @@ const baseLayout = ({ children, enableBackButton }) => {
             as='main'
             position='relative'
             minH='100vh'
-            pt={'56px'}
+            pt={'48px'}
         >
             { enableBackButton ?   <BackButton /> : null }
             {children}

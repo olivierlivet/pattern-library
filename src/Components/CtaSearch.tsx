@@ -13,6 +13,7 @@ const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out, transform  ${duration}ms ease-in-out`,
     opacity: 0,
     transform: `translateY(-20px)`,
+    pointerEvents: 'none'
 }
 
 const transitionStyles = {
@@ -23,7 +24,7 @@ const transitionStyles = {
     entered: {
         opacity: 1,
         transform: `translateY(0)`,
-        // pointerEvents: `auto`
+        pointerEvents: `auto`
     },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
@@ -41,7 +42,7 @@ const CtaSearch = ({ }) => {
                     position='relative'
 
                 >
-                    <Box
+                    <Button
                         bg='#88A7AA'
                         borderRadius={3}
                         fontFamily='Noe Display'
@@ -49,14 +50,27 @@ const CtaSearch = ({ }) => {
                         p={6}
                         py={3}
                         color='white'
-                        zIndex='docked'
+                        zIndex='overlay'
                         position='relative'
                         onClick={() => setStep(step === 0 ? 1 : 0)}
+                        _hover={{
+                            bg:'#4D767A',
+                            outline:'none'
 
+                        }}
+                        _active={{
+                            bg:'#4D767A',
+                            outline:'none'
+
+                        }}
+                        _focus={{
+                            bg:'#4D767A',
+                            outline:'none'
+                        }}
                     >
                         Je cherche un patron
                         <ArrowDownIcon ml={2} />
-                    </Box>
+                    </Button>
 
                     <Transition in={step > 0} timeout={duration}>
                         {state => (
@@ -75,7 +89,7 @@ const CtaSearch = ({ }) => {
                                 boxShadow='xl'
                                 // pt={20}
                                 overflow='hidden'
-                                zIndex='base'
+                                zIndex='banner'
                                 style={{
                                     ...defaultStyle,
                                     ...transitionStyles[state]

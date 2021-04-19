@@ -54,31 +54,31 @@ const EntrySummary = () => {
             </Stack>
         </Box>
     )
-    const renderCard = (index, modIndex, cursor) => {
-        const item = listOfData[modIndex]
-        // render the item
-    }
 
     return (
         <Box maxW='100vw' position='relative' mx={4}>
             <Box>
                 <Swiper
-                    spaceBetween={30}
+                    spaceBetween={10}
                     slidesPerView={1.4}
                     freeMode={true}
 
                     breakpoints= {{
+                        320: {
+                            slidesPerView: 1.4,
+                            spaceBetween: 10,
+                          },
                         640: {
-                          slidesPerView: 2,
-                          spaceBetween: 20,
+                          slidesPerView: 4,
+                          spaceBetween: 10,
                         },
                         768: {
-                          slidesPerView: 4,
-                          spaceBetween: 40,
+                          slidesPerView: 5,
+                          spaceBetween: 10,
                         },
                         1024: {
-                          slidesPerView: 5,
-                          spaceBetween: 50,
+                          slidesPerView: 6,
+                          spaceBetween: 10,
                         },
                     }}
 

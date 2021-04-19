@@ -17,6 +17,7 @@ const Header = () => {
         <Flex
             as={'header'}
             p={{ base:4, lg: 10 } }
+            pb={ 2 }
             bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,.75) 100%)'
             justifyContent='space-between'
 
@@ -24,7 +25,7 @@ const Header = () => {
             top={ 0 }
             left={ 0 }
             right={ 0 }
-            zIndex='banner'
+            zIndex='toast'
 
             alignContent='flex-end'
         >   
