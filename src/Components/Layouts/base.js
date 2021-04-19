@@ -4,10 +4,31 @@ import Footer from './Footer'
 import BackButton from './BackButton'
 import { ChakraProvider, CSSReset, Box } from "@chakra-ui/react"
 import '../../Fonts/stylesheet.css'
+import { extendTheme } from "@chakra-ui/react"
+
+const colors = {
+
+        pink:{
+            400:'#E7B8A9',
+            300:'#EFCBBF'
+        },
+
+  }
+const fonts = {
+
+        body: "DM Sans",
+        heading: "Noe Display, serif",
+        mono: "Menlo, monospace",
+
+}
+const theme = extendTheme({
+    "colors":colors,
+    "fonts":fonts
+})
 
 const baseLayout = ({ children, enableBackButton }) => {
     return(
-    <ChakraProvider>
+    <ChakraProvider theme={ theme }>
         <CSSReset />
         <Header />
         <Box

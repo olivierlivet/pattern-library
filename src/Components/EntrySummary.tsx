@@ -73,11 +73,11 @@ const EntrySummary = () => {
                           spaceBetween: 10,
                         },
                         768: {
-                          slidesPerView: 5,
+                          slidesPerView: 4,
                           spaceBetween: 10,
                         },
                         1024: {
-                          slidesPerView: 6,
+                          slidesPerView: 5,
                           spaceBetween: 10,
                         },
                     }}

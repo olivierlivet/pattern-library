@@ -16,6 +16,7 @@ import {
     Box,
     Button,
     Text,
+    Grid,
     HStack,
     VStack,
     Stack,
@@ -29,6 +30,7 @@ import Title from '../Components/Title'
 import NewsletterCta from '../Components/NewsletterCta'
 import LinksList from '../Components/LinksList'
 import CtaSearch from '../Components/CtaSearch'
+import AccordionBlock from '../Components/AccordionBlock'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -50,7 +52,7 @@ const HomeTemplate = (props) => {
             <Center
                 textAlign='center'
                 minH='60vh'
-                px={{ base:'6', lg: '56'}}
+                px={{ base: '6', lg: '56' }}
             >
                 <VStack spacing={{ base: 6, lg: 8 }}>
                     <Box>
@@ -68,36 +70,36 @@ const HomeTemplate = (props) => {
                             lineHeight='shorter'
                         >Patterns Corner</Text>
                         <Text
-                        fontFamily='DM Sans'
-                        fontSize='16px'
-                        fontWeight='normal'
-                    >
-                        Le plus grand choix de
-                    {' '}<Heading
-                            as='h1'
-                            display='inline'
+                            fontFamily='DM Sans'
+                            fontSize='16px'
                             fontWeight='normal'
-                            fontSize='inherit'
-                            borderBottom='solid 3px'
-                            borderBottomColor='#EFCBBF'
-                            display='inline-block'
-                            lineHeight='11px'
-                        >patrons de couture</Heading>
-                    </Text>
+                        >
+                            Le plus grand choix de
+                    {' '}<Heading
+                                as='h1'
+                                display='inline'
+                                fontWeight='normal'
+                                fontSize='inherit'
+                                borderBottom='solid 3px'
+                                borderBottomColor='#EFCBBF'
+                                display='inline-block'
+                                lineHeight='11px'
+                            >patrons de couture</Heading>
+                        </Text>
                     </Box>
                     <Text
                         fontFamily='Noe Display'
                         fontWeight='normal'
                         color='gray.700'
                     >
-                    Votre futur projet n’attend pas, 
-                    trouvez le patron de  vos rêves 
-                    parmi les
-                    {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text> 
-                    {' '}patrons.
+                        Votre futur projet n’attend pas,
+                        trouvez le patron de  vos rêves
+                        parmi les
+                    {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text>
+                        {' '}patrons.
                     </Text>
-                    
-                    
+
+
                     <CtaSearch
                         handleLoadSearchEngine={() => setShowEngine(true)}
                         setCategory={(value) => setCategory(value)}
@@ -119,6 +121,7 @@ const HomeTemplate = (props) => {
                 align='flex-start'
                 py={8}
                 spacing={4}
+                p={{ base: 6, lg: 24 }}
             >
                 <Title>Vos patrons préférés</Title>
                 <EntrySummary />
@@ -137,11 +140,19 @@ const HomeTemplate = (props) => {
                 </Box>
             </VStack>
 
+
+            <AccordionBlock
+                title="The Patterns Corner c’est&nbsp;:"
+                more={<Button>Voir plus</Button>}
+            />
+
             <VStack
                 bg='#D9E6E6'
                 align='flex-start'
                 py={8}
                 spacing={4}
+                p={{ base: 6, lg: 24 }}
+
             >
                 <Title>Le journal The Patterns Corner</Title>
                 <EntrySummary />
@@ -160,26 +171,33 @@ const HomeTemplate = (props) => {
                 </Box>
             </VStack>
 
-            <Box>
-                The Patterns Corner c'est ...
-            </Box>
 
 
-            <Stack
-                spacing={4}
-                p={4}
+
+            <Grid
+                templateColumns={{
+                    base: '100%',
+                    lg: '500px 1fr'
+                }}
+                p={{ base: 6, lg: 24 }}
             >
-                <Heading>
+                <Heading
+                    fontWeight='normal'
+                    fontSize={{ base: '2xl', lg: '4xl' }}
+                    mb={{ base: 8 }}
+                >
                     Les différentes familles de patrons
                 </Heading>
-                <Text>
-                    Notre catalogue est très complet avec énormément de modèles de jupes pour rassasier vos envies. Voici les différentes famille selon le style de ces jupes :
-                </Text>
-                <LinksList
-                    data={univers}
-                    columnsCount={{ base: 2, lg: 2 }}
-                />
-            </Stack>
+                <Box>
+                    <Text mb={4}>
+                        Notre catalogue est très complet avec énormément de modèles de jupes pour rassasier vos envies. Voici les différentes famille selon le style de ces jupes :
+                    </Text>
+                    <LinksList
+                        data={univers}
+                        columnsCount={{ base: 2, lg: 2 }}
+                    />
+                </Box>
+            </Grid>
             <NewsletterCta />
 
             <Wrapper>
