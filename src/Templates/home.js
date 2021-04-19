@@ -49,7 +49,7 @@ const HomeTemplate = (props) => {
 
             <Center
                 textAlign='center'
-                minH='80vh'
+                minH='65vh'
                 px={{ base:'6', lg: '56'}}
             >
                 <VStack spacing={{ base: 6, lg: 8 }}>
