@@ -18,7 +18,11 @@ const EntrySummary = () => {
     const listOfData = [1, 2, 3, 4, 5, 6, 7]
 
     const Card = ({ index }) => (
-        <Box w='240px' h='400px' bg='gray.300'>
+        <Box
+            w='240px' h='400px' bg='gray.300'
+            // ml={ index === 0 ? 4 : 0 }
+            mx={ 4 }
+        >
             <Image
                 src='https://republiqueduchiffon.com/wp-content/uploads/2021/02/Sewing-pattern-BILLY-6-600x600.jpg'
                 alt='Image alt'
@@ -57,16 +61,33 @@ const EntrySummary = () => {
 
     return (
         <Box maxW='100vw' position='relative' mx={4}>
-            <Box px={4}>
+            <Box>
                 <Swiper
-                    spaceBetween={50}
+                    spaceBetween={30}
                     slidesPerView={1.4}
                     freeMode={true}
+
+                    breakpoints= {{
+                        640: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        768: {
+                          slidesPerView: 4,
+                          spaceBetween: 40,
+                        },
+                        1024: {
+                          slidesPerView: 5,
+                          spaceBetween: 50,
+                        },
+                    }}
+
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                 >
 
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) => <SwiperSlide><Card index={i} /></SwiperSlide>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) =>
+                        <SwiperSlide><Card index={i} /></SwiperSlide>)}
 
                 </Swiper>
             </Box>
