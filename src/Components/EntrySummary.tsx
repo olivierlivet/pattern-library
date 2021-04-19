@@ -73,10 +73,11 @@ const EntrySummary = () => {
             <Box px={4}>
             <Carousel
                 responsive={responsive}
-
+                swipeToSlide={ true }
+                swipe={ true }
                 swipeable={true}
                 draggable={true}
-                showDots={true}
+                showDots={false}
                 ssr={true} // means to render carousel on server-side.
                 infinite={false}
                 autoPlaySpeed={1000}
@@ -86,7 +87,7 @@ const EntrySummary = () => {
                 containerClass="carousel-container"
                 removeArrowOnDeviceType={["tablet", "mobile"]}
                 deviceType={'superLargeDesktop'}
-                // dotListClass="custom-dot-list-style"
+                dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
                 { [1,2,3,4,5,6,7,8,9,10].map( (item, i) => <Card index={i} />)}
