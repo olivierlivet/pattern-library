@@ -9,6 +9,7 @@ import {
     Box, 
     HStack
 } from '@chakra-ui/react'
+import UserNav from '../Nav/User'
 
 const Header = () => {
     const [menuVisible, setMenuVisible] = useState( false )
@@ -28,6 +29,7 @@ const Header = () => {
             zIndex='toast'
 
             alignContent='flex-end'
+            alignItems='center'
         >   
         <Flex>
         <Text
@@ -36,7 +38,7 @@ const Header = () => {
                 fontWeight='normal'
                 fontSize='8px'
                 color='gray.600'
-                // mr={1}
+                mr={1}
                 // w='10px'
                 // h='10px'
                 whiteSpace='pre'
@@ -54,16 +56,8 @@ const Header = () => {
             </Text>
         </Flex>
 
-            <HStack>
-                {/* <Link to={`/fr/a-propos/`}>
-                    À propos
-                </Link>
-                <Link to={`/fr/a-propos/#newsletter`}>
-                    Newsletter
-                </Link> */}
-                {/* <Button onClick={()=> setMenuVisible( !menuVisible )}>
-                    <SmallAddIcon w={6} h={6} /> Menu
-                </Button> */}
+            <HStack spacing={ 4 }>
+                <UserNav />
             </HStack>
             
         </Flex>
