@@ -26,7 +26,42 @@ import LoginForm from '../Components/Account/Login'
 import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
 import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 
+import { Router } from '@reach/router'
+
 const AccountTemplate = (props) => {
+    let Home = () => <div>Home</div>
+    let Dash = () => <div>Dash</div>
+    const Login = () => {
+        return (
+            <Box
+                minH={'90vh'}
+            >
+                <Center minH={'90vh'}   >
+                    <Box
+                        bg='white'
+                        w={{ base: 'md' }}
+                        p={{ base: 10 }}
+                    >
+                        <Box
+                            fontSize={{
+                                base: 'lg',
+                                lg: 'larger'
+                            }}
+                        >
+                            Compte
+                    </Box>
+                        <LoginForm />
+                        <HStack>
+                            <ButtonGroup>
+                                <GoogleLoginButton />
+                                <FacebookLoginButton />
+                            </ButtonGroup>
+                        </HStack>
+                    </Box>
+                </Center>
+            </Box>
+        )
+    }
 
     return (
         <Layout
@@ -38,37 +73,14 @@ const AccountTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                {/* <Nav data={univers} /> */}
-                <Box
-                    minH={'90vh'}
-                >
 
-                
-                <Center                     minH={'90vh'}
->
-                    <Box
-                        bg='white'
-                        w={{ base:'md'}}
-                        p={{ base:10 }}
-                    >
-                    <Box
-                        fontSize={{
-                            base: 'lg',
-                            lg: 'larger'
-                        }}
-                    >
-                        Compte
-                    </Box>
-                    <LoginForm />
-                    <HStack>
-                        <ButtonGroup>
-                            <GoogleLoginButton />
-                            <FacebookLoginButton />
-                        </ButtonGroup>
-                    </HStack>
-                    </Box>
-                </Center>
-                </Box>
+                <Router>
+                    <Home path="/" />
+                    <Dash path="dashboard" />
+                    <Login path="login" />
+                </Router>
+                {/* <Nav data={univers} /> */}
+
 
             </Wrapper>
         </Layout>

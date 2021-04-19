@@ -24,6 +24,7 @@
     "dotenv": "^8.2.0",
     "framer-motion": "^4.1.4",
     "gatsby": "^3.3.0",
+    "gatsby-plugin-create-client-paths": "^3.3.0",
     "gatsby-plugin-gatsby-cloud": "^2.3.0",
     "gatsby-plugin-google-analytics": "^3.3.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
