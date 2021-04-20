@@ -193,7 +193,6 @@ class SearchEngine extends Component {
                     pt={{ base: 4, lg: 10 }}
 
                     bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,1) 100%)'
-                    zIndex='tooltip'
                 // boxShadow='sm'
                 // display='none'
                 >

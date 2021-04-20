@@ -21,7 +21,6 @@ const AccountNav = ({ }) => {
                 <Button mx={2} variant='link' as={ NavLink } to='/fr/compte/cart'>Panier</Button>
                 <Button mx={2} variant='link' as={ NavLink } to='/fr/compte/order'>Patrons</Button>
                 <Button mx={2} variant='link' as={ NavLink } to='/fr/compte/contribution'>Avis & Publications</Button>
-                <Button mx={2} variant='link' as={ NavLink } to='/fr/compte/subscription'>Abonnements</Button>
                 <Button mx={2} variant='link' as={ NavLink } to='/fr/compte/profil'>Profil</Button>
             </Center>
         </Box>

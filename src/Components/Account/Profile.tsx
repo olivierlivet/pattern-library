@@ -10,11 +10,14 @@ import {
 
 import { Router, Link as NavLink, Match } from "@reach/router";
 import AccountWrapper from './Wrapper';
+import AccountTitle from './Title';
 
 const AccountProfile = ({ }) => {
     return(
         <AccountWrapper>
-            Profil
+            <AccountTitle>
+                Votre profil
+            </AccountTitle>
         </AccountWrapper>
     )
 }

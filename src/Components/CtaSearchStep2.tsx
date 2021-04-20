@@ -6,7 +6,8 @@ import { Transition } from 'react-transition-group';
 
 type props = {
     isVisibe: boolean,
-    handleStepBack: Function
+    handleStepBack: Function,
+    handleSubmit: Function
 }
 
 const duration = 300;
@@ -43,7 +44,7 @@ const transitionStyles = {
     },
 }
 
-const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack }) => {
+const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack, handleSubmit }) => {
     return (
         <Transition in={isVisible} timeout={duration}>
             {state => (
@@ -88,8 +89,9 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack })
                             borderBottomColor='gray.50'
                         >
                             <Button
+                                onClick={()=>handleSubmit()}
                                 
-                                fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' onClick={()=>handleChangeStep()}>
+                                fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
                                 Une robe
                                 <ArrowForwardIcon />
                             </Button>
@@ -98,7 +100,7 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack })
                             borderBottom='solid 1px'
                             borderBottomColor='gray.50'
                         >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' onClick={()=>handleChangeStep()}>
+                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
                                 Une jupe
                                 <ArrowForwardIcon />
                             </Button>
@@ -107,7 +109,7 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack })
                             borderBottom='solid 1px'
                             borderBottomColor='gray.50'
                         >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' onClick={()=>handleChangeStep()}>
+                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
                                 Un haut
                                 <ArrowForwardIcon />
                             </Button>
@@ -116,7 +118,7 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack })
                             borderBottom='solid 1px'
                             borderBottomColor='gray.50'
                         >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' onClick={()=>handleChangeStep()}>
+                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
                                 Un pantalon
                                 <ArrowForwardIcon />
                             </Button>

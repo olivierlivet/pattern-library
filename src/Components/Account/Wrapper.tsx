@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 
 
-const AccountWrapper = ({ children }) => {
+const AccountWrapper = ({ children, size }) => {
     return(
         <Center
             // minH='100vh'
@@ -14,7 +14,7 @@ const AccountWrapper = ({ children }) => {
             <Box
                 py='2rem'
                 bg='white'
-                w='6xl'
+                w={ size ? size : '6xl' }
                 p={{ base:10, lg: 26 }}
             >
                 { children }

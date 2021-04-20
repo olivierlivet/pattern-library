@@ -30,8 +30,10 @@ const transitionStyles = {
     exited: { opacity: 0 },
 }
 
-const CtaSearch = ({ }) => {
+const CtaSearch = ({  handleLoadSearchEngine }) => {
     const [step, setStep] = useState(0)
+    const [ univers, setUnivers ]       = useState(null)
+    const [ category, setCategory ]     = useState(null)
     return (
         <>
             <Center
@@ -112,11 +114,15 @@ const CtaSearch = ({ }) => {
                                 >
                                     <CtaSearchStep1
                                         isVisible={step === 1 ? true : false}
+                                        setUnivers={( value )=>setUnivers( value )}
                                         handleNextStep={()=> setStep( step + 1 )}
                                     />
                                     <CtaSearchStep2
                                         isVisible={step === 2 ? true : false}
+                                        setCategory={( value )=>setCategory( value )}
                                         handleStepBack={()=> setStep(1)}
+
+                                        handleSubmit={()=> handleLoadSearchEngine()}
                                     />
                                 </SimpleGrid>
                                 

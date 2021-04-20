@@ -27,7 +27,7 @@ const Header = () => {
             top={ 0 }
             left={ 0 }
             right={ 0 }
-            zIndex='toast'
+            zIndex='dropdown'
 
             alignContent='flex-end'
             alignItems='center'
