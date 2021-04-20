@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from '@chakra-ui/button'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Center, Grid } from '@chakra-ui/layout'
 import { Textarea, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
@@ -60,7 +61,9 @@ const QuestionAssociationWithOtherFabric = ({ id, index, setStep }) => {
                 </Text>
 
             </Grid>
-
+            <Center>
+                <Button variant='link' onClick={()=> setStep()}>Valider <ArrowForwardIcon /></Button>                
+            </Center>
         </Box >
     )
 }
