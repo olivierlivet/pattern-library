@@ -14,6 +14,7 @@ import RichContent from '../Components/RichContent'
 import {
     Heading,
     Button,
+    Link,
     Box,
     Center,
     HStack,
@@ -26,7 +27,7 @@ import LoginForm from '../Components/Account/Login'
 import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
 import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 
-import { Router } from '@reach/router'
+import { Router, Link as NavLink, Match } from "@reach/router";
 
 const AccountTemplate = (props) => {
     let Home = () => <div>Home</div>
@@ -73,11 +74,21 @@ const AccountTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
+                <Box mt={20}>
+                    <Link as={ NavLink } to='/fr/compte/login'>Login</Link>
+                    <Link as={ NavLink } to='/fr/compte/dashboard'>Login</Link>
 
-                <Router>
+
+                </Box>
+
+                <Router
+                    basepath='/fr/compte'
+                    default='/'
+                    // basepath='/fr/compte'
+                >
                     <Home path="/" />
-                    <Dash path="dashboard" />
-                    <Login path="login" />
+                    <Dash path="/dashboard" />
+                    <Login path="/login" />
                 </Router>
                 {/* <Nav data={univers} /> */}
 
