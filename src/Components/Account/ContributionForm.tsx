@@ -5,6 +5,7 @@ import {
     Box,
     Button,
     Center,
+    Heading,
     Link,
     Stack,
     Text
@@ -19,17 +20,37 @@ const ContributionForm = ({ productId }) => {
     return (
         !hasStarted ?
             // <AccountWrapper size='xl'>
-            <Center
-                h='100vh'
+            <Box
+                h='80vh'
+                py={{ base: 6, lg: 24 }}
+                px={{ base: 8, lg: 0 }}
             >
+
+                <Heading
+                    fontSize={{ base: 'xl', lg: 'x-large' }}
+                    fontWeight='normal'
+                    textAlign='center'
+                    py={{ base: 6, lg: 10 }}
+                    px={{ base: 0, lg: 12 }}
+
+
+                >
+                    Partager votre expérience avec la communeauté des couturières 🧵
+
+                     </Heading>
+
                 <Stack
+                    mx='auto'
                     spacing={{ base: 3, lg: 6 }}
                     bg='white'
-                    w={{ base:'full', lg:'3xl' }}
-                    p={{ base: 12, lg: 26 }}
+                    w={{ base: 'full', lg: '3xl' }}
+                    p={{ base: 6, lg: 26 }}
                     boxShadow='sm'
                     borderRadius={3}
                 >
+
+
+
                     <Text>
                         Quelle joie, l'offre de patrons s'enrichie au fil des saisons ! Mais il n'est pas toujours facile de trouver le patron qui correspond parfaitement à son envie, sa morphologie, le coupon que l'on a au fond du placard ou son niveau.
                     </Text>
@@ -43,18 +64,18 @@ const ContributionForm = ({ productId }) => {
                         <Button onClick={() => setHasStarted(true)}>✂️{' '}On commence ?</Button>
                     </Box>
                 </Stack>
-            </Center>
+            </Box>
 
             // </AccountWrapper>
-        :
+            :
             <Box
                 minH='100vh'
-                py={{ base:6, lg:24 }}
-                px={{ base:8, lg: 0}}
+                py={{ base: 6, lg: 24 }}
+                px={{ base: 8, lg: 0 }}
             >
                 <Box
                     mx='auto'
-                    w={{ base:'full', lg:'3xl' }}
+                    w={{ base: 'full', lg: '3xl' }}
                 >
                     <Form />
                 </Box>

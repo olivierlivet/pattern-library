@@ -29,8 +29,7 @@ import LoginForm from '../Components/Account/Login'
 import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
 import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 
-import { Router, Link as NavLink, Match } from "@reach/router";
-import AccountNav from '../Components/Nav/Account'
+import { Router, Link as NavLink, Match, useLocation, Location } from "@reach/router";
 import AccountHome from '../Components/Account/Home'
 import AccountCart from '../Components/Account/Cart'
 import AccountProfile from '../Components/Account/Profile'
@@ -41,6 +40,8 @@ import ContributionForm from '../Components/Account/ContributionForm'
 
 
 const AccountTemplate = (props) => {
+
+    const location = useLocation()
     const Login = () => {
         return (
             <Box
@@ -76,6 +77,8 @@ const AccountTemplate = (props) => {
         )
     }
 
+    
+
     return (
         <Layout
             enableBackButton={false}
@@ -87,13 +90,6 @@ const AccountTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                <Box
-                    mt={20}
-                    display='none'
-                >
-                    <AccountNav />
-                </Box>
-
                 <Router
                     basepath='/fr/compte'
                     default='/'

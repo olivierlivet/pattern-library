@@ -4,10 +4,18 @@ import {
     Box,
     Center,
 } from '@chakra-ui/react'
+import AccountNav from '../../Components/Nav/Account'
 
 
 const AccountWrapper = ({ children, size }) => {
     return(
+        <>
+        <Box
+            mt={20}
+            // display='none'
+        >
+            <AccountNav />
+        </Box>
         <Center
             // minH='100vh'
         >
@@ -20,6 +28,7 @@ const AccountWrapper = ({ children, size }) => {
                 { children }
             </Box>
         </Center>
+        </>
     )
 }
 
