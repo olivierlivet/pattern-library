@@ -127,4 +127,4 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
     )
 }
 
-export default ProductIllustrationWithSwipe
+export default ProductIllustrationWithSwipe 

@@ -5,7 +5,8 @@ import {
     Box,
     Button,
     Center,
-    Link
+    Link,
+    Text
 } from '@chakra-ui/react'
 
 import { Router, Link as NavLink, Match } from "@reach/router";
@@ -18,6 +19,8 @@ const AccountProfile = ({ }) => {
             <AccountTitle>
                 Votre profil
             </AccountTitle>
+            <Text>Modification email, mot de passe, image de profil, abonnement newsletter</Text>
+
         </AccountWrapper>
     )
 }

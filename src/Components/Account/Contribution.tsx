@@ -5,7 +5,8 @@ import {
     Box,
     Button,
     Center,
-    Link
+    Link,
+    Text
 } from '@chakra-ui/react'
 
 import { Router, Link as NavLink, Match } from "@reach/router";
@@ -18,6 +19,7 @@ const AccountContribution = ({ }) => {
             <AccountTitle>
                 Vos contributions
             </AccountTitle>
+            <Text>Liste des avis, inspirations publiés</Text>
         </AccountWrapper>
     )
 }

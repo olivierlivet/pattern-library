@@ -79,6 +79,7 @@ const AccountTemplate = (props) => {
     return (
         <Layout
             enableBackButton={false}
+            isFooterHidden={true}
         >
             <Helmet>
                 <title>{`Votre compte`}</title>
@@ -86,7 +87,10 @@ const AccountTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                <Box mt={20}>
+                <Box
+                    mt={20}
+                    display='none'
+                >
                     <AccountNav />
                 </Box>
 

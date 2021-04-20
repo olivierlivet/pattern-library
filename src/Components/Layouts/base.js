@@ -27,7 +27,12 @@ const theme = extendTheme({
     "fonts": fonts
 })
 
-const baseLayout = ({ children, enableBackButton }) => {
+const baseLayout = (
+    {
+        children,
+        isFooterHidden,
+        enableBackButton
+    }) => {
     return (
         <ChakraProvider theme={theme}>
             <CSSReset />
@@ -46,7 +51,7 @@ const baseLayout = ({ children, enableBackButton }) => {
                 {enableBackButton ? <BackButton /> : null}
                 {children}
             </Box>
-            <Footer />
+            { !isFooterHidden ? <Footer /> : null }
 
         </ChakraProvider>
     )

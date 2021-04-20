@@ -5,7 +5,8 @@ import {
     Box,
     Button,
     Center,
-    Link
+    Link,
+    Text
 } from '@chakra-ui/react'
 
 import { Router, Link as NavLink, Match } from "@reach/router";
@@ -18,6 +19,8 @@ const AccountOrder = ({ }) => {
             <AccountTitle>
                 Vos commandes
             </AccountTitle>
+            <Text>Liste des commandes de patron, accès au téléchargement de patron dématérialisé</Text>
+
             
         </AccountWrapper>
     )

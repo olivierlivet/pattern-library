@@ -27,8 +27,7 @@ const ContributionForm = ({ }) => {
                 /* and other goodies */
             }) => (
                 <form onSubmit={handleSubmit}>
-                    <Step1
-                    />
+                    <Step1 />
                     {/* <input
                         type="email"
                         name="email"
