@@ -18,7 +18,9 @@ import {
     Box,
     Center,
     HStack,
-    ButtonGroup
+    ButtonGroup,
+    Text,
+    Stack
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
@@ -28,20 +30,28 @@ import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
 import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 
 import { Router, Link as NavLink, Match } from "@reach/router";
+import AccountNav from '../Components/Nav/Account'
+import AccountHome from '../Components/Account/Home'
+import AccountCart from '../Components/Account/Cart'
+import AccountProfile from '../Components/Account/Profile'
+import AccountOrder from '../Components/Account/Order'
+import AccountContribution from '../Components/Account/Contribution'
+import AccountSubscription from '../Components/Account/Subscription'
+import ContributionForm from '../Components/Account/ContributionForm'
+
 
 const AccountTemplate = (props) => {
-    let Home = () => <div>Home</div>
-    let Dash = () => <div>Dash</div>
     const Login = () => {
         return (
             <Box
                 minH={'90vh'}
             >
                 <Center minH={'90vh'}   >
-                    <Box
+                    <Stack
                         bg='white'
                         w={{ base: 'md' }}
                         p={{ base: 10 }}
+                        spacing={{ base:4, lg:6 }}
                     >
                         <Box
                             fontSize={{
@@ -49,16 +59,18 @@ const AccountTemplate = (props) => {
                                 lg: 'larger'
                             }}
                         >
-                            Compte
-                    </Box>
-                        <LoginForm />
+                            Accès à votre compte
+                        </Box>
                         <HStack>
                             <ButtonGroup>
                                 <GoogleLoginButton />
-                                <FacebookLoginButton />
+                                {/* <FacebookLoginButton /> */}
                             </ButtonGroup>
                         </HStack>
-                    </Box>
+                        <Text>Ou</Text>
+                        <LoginForm />
+                        
+                    </Stack>
                 </Center>
             </Box>
         )
@@ -75,10 +87,7 @@ const AccountTemplate = (props) => {
 
             <Wrapper>
                 <Box mt={20}>
-                    <Link as={ NavLink } to='/fr/compte/login'>Login</Link>
-                    <Link as={ NavLink } to='/fr/compte/dashboard'>Login</Link>
-
-
+                    <AccountNav />
                 </Box>
 
                 <Router
@@ -86,9 +95,14 @@ const AccountTemplate = (props) => {
                     default='/'
                     // basepath='/fr/compte'
                 >
-                    <Home path="/" />
-                    <Dash path="/dashboard" />
+                    <AccountHome path="/" />
                     <Login path="/login" />
+                    <AccountCart path="/cart" />
+                    <AccountOrder path="/order" />
+                    <AccountContribution path="/contribution" />
+                    <AccountSubscription path="/subscription" />                    
+                    <ContributionForm path="/contribution/create/:productId" />
+                    <AccountProfile path="/profil" />
                 </Router>
                 {/* <Nav data={univers} /> */}
 
