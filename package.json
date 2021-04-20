@@ -46,6 +46,7 @@
     "react-google-login": "^5.2.2",
     "react-helmet": "^6.1.0",
     "react-multi-carousel": "^2.6.2",
+    "react-slider": "^1.1.4",
     "react-swipe": "^6.0.4",
     "react-touch-carousel": "^0.9.4",
     "react-transition-group": "^4.4.1",

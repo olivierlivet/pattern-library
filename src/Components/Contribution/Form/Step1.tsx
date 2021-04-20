@@ -9,7 +9,10 @@ import {
     QuestionSizeAndFabricLength,
     QuestionFabricFamily,
     QuestionNoticeComprehensibility,
-    QuestionProductCustomisation
+    QuestionProductCustomisation,
+    QuestionCuttingSatisfaction,
+    QuestionAssociationWithOtherFabric,
+    QuestionGlobalRating
 } from './Questions'
 
 
@@ -86,6 +89,9 @@ const allQuestions = {
     FabricFamily: QuestionFabricFamily,
     NoticeComprehensibility: QuestionNoticeComprehensibility,
     ProductCustomisation: QuestionProductCustomisation,
+    CuttingSatisfacition: QuestionCuttingSatisfaction,
+    AssociationWithOtherFabric: QuestionAssociationWithOtherFabric,
+    GlobalRating: QuestionGlobalRating
 }
 
 const questions = [
@@ -110,13 +116,25 @@ const questions = [
         name:"ProductCustomisation",
         title: "Avez-vous apporté des modifications à votre réalisation ? 🪡"
     },
+    {
+        name:"CuttingSatisfacition",
+        title: "Etes-vous satisfaite de la coupe ? 👗"
+    },
+    {
+        name:"AssociationWithOtherFabric",
+        title: "Est-ce que [nom du patron] s'associe facilement aux autres pièces de votre garde robe ? 👗"
+    },
+    {
+        name:"GlobalRating",
+        title: "Quel note globale donnez vous au patron ? 🌟"
+    },
 
 
 ]
 
 const Step1 = ({ }) => {
 
-    const [step, setStep] = useState(0)
+    const [step, setStep] = useState(6)
 
     let QuestionsList = []
 
