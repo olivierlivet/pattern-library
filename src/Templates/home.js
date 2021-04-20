@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import Layout from '../Components/Layouts/base'
 
 import {
@@ -24,7 +24,6 @@ import {
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
-import FacebookLogin from 'react-facebook-login';
 import EntrySummary from '../Components/EntrySummary'
 import Title from '../Components/Title'
 import NewsletterCta from '../Components/NewsletterCta'
@@ -102,7 +101,7 @@ const HomeTemplate = (props) => {
 
 
                     <CtaSearch
-                        handleLoadSearchEngine={() => setShowEngine(true)}
+                        handleLoadSearchEngine={() => navigate(`/fr/search`)}
                         setCategory={(value) => setCategory(value)}
                         setVariant={(value) => setVariant(value)}
                     />
@@ -216,18 +215,6 @@ const HomeTemplate = (props) => {
                 {/* <ProductsSummary data={products} /> */}
             </Wrapper>
 
-
-            { showEngine ?
-                <SearchEngineLoader
-                    filter={{
-                        category: category ? category : null,
-                        variant: variant ? variant : null
-                    }}
-                    onClose={() => setShowEngine(false)}
-                />
-                :
-                null
-            }
         </Layout>
     )
 }

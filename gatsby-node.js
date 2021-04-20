@@ -30,7 +30,23 @@ exports.createPages = ({ graphql, actions }) => {
     }
   });
 
-    /*
+  /*
+    #####
+    Search
+    #####
+  */
+    const searchTemplate = path.resolve('src/Templates/search.js')
+    createPage({
+      path: `${'/fr/search'}`,
+      component: searchTemplate,
+      context: {
+        // slug: edge.node.slug,
+        // contentfulID: '3t0pwYmEBxvCykiqoJbMVG',
+        locale: 'fr'
+      }
+    });
+
+  /*
     #####
     Account
     #####
