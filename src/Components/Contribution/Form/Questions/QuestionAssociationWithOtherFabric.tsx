@@ -26,7 +26,7 @@ const QuestionAssociationWithOtherFabric = ({ id, index, setStep }) => {
                             fontSize='3xl'
                             w='50px'
                             h='50px'
-                            transform='translateY(-20px) translateX(-50%)'
+                            transform='translateY(-20px)'
                             boxShadow='xl'
                             border='solid 1px'
                             borderColor='gray.200'

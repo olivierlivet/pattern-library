@@ -134,7 +134,7 @@ const questions = [
 
 const Step1 = ({ }) => {
 
-    const [step, setStep] = useState(6)
+    const [step, setStep] = useState(0)
 
     let QuestionsList = []
 

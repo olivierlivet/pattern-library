@@ -1,5 +1,5 @@
 import { Button, ButtonGroup } from '@chakra-ui/button'
-import { Stack } from '@chakra-ui/layout'
+import { Box, HStack, Stack, VStack } from '@chakra-ui/layout'
 import { Textarea } from '@chakra-ui/textarea'
 import React, { useState } from 'react'
 
@@ -8,10 +8,14 @@ const QuestionCuttingSatisfaction = ({ id, index, setStep }) => {
     return (
         <Stack>
             { !showDetails ?
-                <ButtonGroup>
-                    <Button w='50%' onClick={() => setShowDetails(true)}>Oui</Button>
-                    <Button w='50%' onClick={() => setStep()}>Non</Button>
-                </ButtonGroup>
+                <VStack>
+                    <Button onClick={() => setStep()}>
+                        Oui, je me sens très à l'aise lorsque je porte [nom du patron]
+                    </Button>
+                    <Button onClick={() => setShowDetails(true)}>
+                        Quelques modifications me semblent nécessaires pour en faire une pièce phare de mon dressing
+                    </Button>
+                </VStack>
                 :
                 <>
                     <Textarea placeholder='Expliquez nous lesquelles ?'></Textarea>
