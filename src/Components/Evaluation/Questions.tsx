@@ -11,7 +11,7 @@ import {
     QuestionNoticeComprehensibility,
     QuestionProductCustomisation,
     QuestionCuttingSatisfaction,
-    QuestionAssociationWithOtherFabric,
+    QuestionWearability,
     QuestionGlobalRating
 } from './Questions/index'
 
@@ -90,14 +90,14 @@ const allQuestions = {
     NoticeComprehensibility: QuestionNoticeComprehensibility,
     ProductCustomisation: QuestionProductCustomisation,
     CuttingSatisfacition: QuestionCuttingSatisfaction,
-    AssociationWithOtherFabric: QuestionAssociationWithOtherFabric,
+    Wearability: QuestionWearability,
     GlobalRating: QuestionGlobalRating
 }
 
 const questions = [
     {
         name: "Intro",
-        title: "Partager votre expérience avec la communeauté des couturières 🧵",
+        title: "Partager votre expérience avec la communeauté des couturières ✂️",
     },
     {
         name:"NoticeComprehensibility",
@@ -120,12 +120,12 @@ const questions = [
         title: "Etes-vous satisfaite de la coupe ? 👗"
     },
     {
-        name:"AssociationWithOtherFabric",
-        title: "Est-ce que [nom du patron] s'associe facilement aux autres pièces de votre garde robe ? 👗"
+        name:"Wearability",
+        title: "Est-ce que votre réalisation est régulièrement portée ? 👗"
     },
     {
         name:"GlobalRating",
-        title: "Quel note globale donnez vous au patron ? 🌟"
+        title: "Quelle note globale donnez vous au patron [pattern full name] de [brand pattern] ? 🌟"
     },
 ]
 

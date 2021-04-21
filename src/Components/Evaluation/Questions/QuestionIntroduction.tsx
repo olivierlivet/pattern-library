@@ -6,6 +6,7 @@ import {
     Stack,
     Text
 } from '@chakra-ui/react'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
 
 const QuestionIntroduction = ({ id, index, setStep }) => {
     return (
@@ -17,7 +18,7 @@ const QuestionIntroduction = ({ id, index, setStep }) => {
                 The Patterns Corner vous propose de partager votre avis sur le patron [nom du patron] de [marque de patron] pour éclairer les couturières dans leurs futures recherches et les créatrices dans leurs futurs projets.
             </Text>
             <Box>
-                <Button onClick={() => setStep()}>✂️{' '}On commence ?</Button>
+                <Button onClick={() => setStep()}>Parlons couture <ArrowForwardIcon ml={ 2 } /></Button>
             </Box>
         </Stack>
     )

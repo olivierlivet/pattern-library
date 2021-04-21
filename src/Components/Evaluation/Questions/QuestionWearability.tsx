@@ -13,10 +13,10 @@ const QuestionAssociationWithOtherFabric = ({ id, index, setStep, setFieldValue 
                 justifyContent='space-between'
             >
                 <Text fontSize='small' textAlign='left' w='30%'>
-                    Pour le quotidien
+                    Oui, c'est un essentiel du quotidien.
                 </Text>
                 <Text fontSize='small' textAlign='right' w='30%'>
-                    Pour les grands jours
+                    Plutôt un vêtement des grands jours.
                 </Text>
 
             </Flex>

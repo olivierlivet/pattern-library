@@ -9,9 +9,16 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
     return (
         <Stack>
             { !showDetails ?
-                <ButtonGroup>
+            <>
                     <Button
-                        w='50%'
+                        onClick={
+                            () =>{
+                                setFieldValue('ProductCustomisation', false);
+                                setStep();
+                            }
+                        }
+                        >Non, j'ai suivi les instructions à la lettre</Button>
+                    <Button
                         onClick={
                             () =>{
                                 setFieldValue('ProductCustomisation', true);
@@ -19,17 +26,8 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
 
                             }
                         }
-                        >Oui</Button>
-                    <Button
-                        w='50%'
-                        onClick={
-                            () =>{
-                                setFieldValue('ProductCustomisation', false);
-                                setStep();
-                            }
-                        }
-                        >Non</Button>
-                </ButtonGroup >
+                        >Oui, j'ai apporté ma petite touche personnelle. </Button>
+                </ >
             :
                 <>
                     <Field name='ProductCustomisationDetails'>

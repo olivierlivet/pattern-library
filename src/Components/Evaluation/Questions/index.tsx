@@ -5,7 +5,7 @@ import QuestionNoticeComprehensibility from './QuestionNoticeComprehensibility'
 import QuestionProductCustomisation from './QuestionProductCustomisation'
 
 import QuestionCuttingSatisfaction from './QuestionCuttingSatisfaction'
-import QuestionAssociationWithOtherFabric from './QuestionAssociationWithOtherFabric'
+import QuestionWearability from './QuestionWearability'
 import QuestionGlobalRating from './QuestionGlobalRating'
 
 export {
@@ -15,6 +15,6 @@ export {
     QuestionNoticeComprehensibility,
     QuestionProductCustomisation,
     QuestionCuttingSatisfaction,
-    QuestionAssociationWithOtherFabric,
+    QuestionWearability,
     QuestionGlobalRating
 }
