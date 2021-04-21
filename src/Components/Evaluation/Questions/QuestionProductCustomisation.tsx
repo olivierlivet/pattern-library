@@ -20,7 +20,7 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
                                 setStep();
                             }
                         }
-                        >Non, j'ai suivi les instructions à la lettre</Button>
+                        >Non, j'ai suivi les instructions à la lettre.</Button>
                     <Button
                         whiteSpace='pre-wrap'
                         h='auto'

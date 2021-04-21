@@ -18,7 +18,7 @@ const QuestionNoticeComprehensibility = ({ id, index, setStep, setFieldValue, va
                     justifyContent='space-between'
                 >
                     <Text fontSize='small' textAlign='left' w='30%'>
-                        Pas toujours
+                        Pas toujours.
                 </Text>
                     <Text fontSize='small' textAlign='right' w='30%'>
                         Oui, top !

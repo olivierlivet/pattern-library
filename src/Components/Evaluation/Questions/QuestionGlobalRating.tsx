@@ -32,7 +32,7 @@ export default class QuestionGlobalRating extends Component {
                         justifyContent='space-between'
                     >
                         <Text fontSize='small' textAlign='left' w='30%'>
-                            Bof
+                            Bof.
                 </Text>
                         <Text fontSize='small' textAlign='right' w='30%'>
                             Génial !

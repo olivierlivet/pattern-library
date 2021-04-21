@@ -97,7 +97,7 @@ const allQuestions = {
 const questions = [
     {
         name: "Intro",
-        title: "Partager votre expérience avec la communeauté des couturières ✂️",
+        title: "Partager votre expérience sur le patron (patron fullname) de (brand pattern) avec la communauté des couturières ✂️",
     },
     {
         name:"NoticeComprehensibility",

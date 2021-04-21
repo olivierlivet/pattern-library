@@ -6,26 +6,31 @@ import React, { useState } from 'react'
 const QuestionFabricFamily = ({ id, index, setStep, setFieldValue }) => {
     const [seeMore, setSeeMore] = useState(false)
     const primaryList = [
-        "La popeline",
-        "Le jersey",
-        "La cretonne",
-        "Le piqué de coton",
-        "Le coton gratté"
+        "Coton",
+        "Lainage",
+        "Lin",
+        "Soie",
+        "Viscoce & tencel",
+        "Polyester",
+        "Simili cuir & suédine"
     ]
 
     const secondaryList = [
-        "L’éponge ou le coton bouclette",
-        "Le tissu éponge",
-        "La flanelle",
-        "Le velours",
-        "Le voile de coton",
-        "Le denim",
-        "Le chambray",
-        "Le madras",
-        "La toile de panama",
-        "Les broderies anglaises",
-        "Le lin",
-        "La laine et le cachemire",
+        "Broderie anglaise",
+        "Dentelle",
+        "Chambray",
+        "Crêpe",
+        "Denim",
+        "Double gaze",
+        "Gabardine",
+        "Jacquard",
+        "Jersey",
+        "Molleton & sweat",
+        "Popeline",
+        "Satin",
+        "Twill & sergé",
+        "Velours",
+        "Autre : champ libre"
     ]
 
 
