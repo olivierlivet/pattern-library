@@ -85,7 +85,7 @@ const ProductPage: FunctionComponent<props> = (
                     <TabList>
                         <Tab>Détails</Tab>
                         <Tab>Inspirations</Tab>
-                        <Tab>Conseils</Tab>
+                        <Tab>Questions / Réponses</Tab>
                     </TabList>
 
                     <TabPanels>
