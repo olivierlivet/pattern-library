@@ -5,7 +5,7 @@ import { Textarea, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import ReactSlider from 'react-slider'
 
-const QuestionAssociationWithOtherFabric = ({ id, index, setStep }) => {
+const QuestionAssociationWithOtherFabric = ({ id, index, setStep, setFieldValue }) => {
     const [showValidate, setShowValidate] = useState(false)
     return (
         <Box>
@@ -58,8 +58,18 @@ const QuestionAssociationWithOtherFabric = ({ id, index, setStep }) => {
                                     {state.valueNow < 50 ? '☕' : '🍸'}
                                 </Center>}
                             renderTrack={(props, state) =>
-                                <Box h='10px' bgGradient="linear(to-r, green.200, green.300)" borderRadius='3px' {...props} />}
-                            onAfterChange={(props,state)=> setShowValidate( true )}
+                                <Box
+                                    h='10px'
+                                    bgGradient="linear(to-r, green.200, green.300)"
+                                    borderRadius='3px'
+                                    {...props}
+                                />
+                            }
+                            onAfterChange={(props,state)=>{
+                                setFieldValue( 'AssociationWithOtherFabricScore', props )
+                                setShowValidate( true );
+                                
+                            } }
                         />
                     </Box>
                 </Center>

@@ -32,9 +32,9 @@ const AccountNav = ({ }) => {
                             <ArrowBackIcon mr={1} />
                             Retour au site
                         </Button>
-                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/cart'>Panier</Button>
-                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/order'>Patrons</Button>
-                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/contribution'>Avis & Publications</Button>
+                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/cart'>Favoris</Button>
+                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/order'>Achats</Button>
+                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/contribution'>Discussion</Button>
                         <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/profil'>Profil</Button>
                     </ButtonGroup>
                 </Center>

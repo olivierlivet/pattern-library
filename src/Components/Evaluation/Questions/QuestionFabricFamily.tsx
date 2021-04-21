@@ -3,7 +3,7 @@ import { Stack } from '@chakra-ui/layout'
 import { Textarea } from '@chakra-ui/textarea'
 import React, { useState } from 'react'
 
-const QuestionFabricFamily = ({ id, index, setStep }) => {
+const QuestionFabricFamily = ({ id, index, setStep, setFieldValue }) => {
     const [seeMore, setSeeMore] = useState(false)
     const primaryList = [
         "La popeline",
@@ -32,7 +32,10 @@ const QuestionFabricFamily = ({ id, index, setStep }) => {
     return (
         <Stack>
             { primaryList.map(item =>
-                <Button onClick={ ()=> setStep() }>{item}</Button>)}
+                <Button onClick={ ()=>{
+                    setFieldValue('FabricFamily', item );
+                    setStep();
+                } }>{item}</Button>)}
             { !seeMore ?
                 <Button variant='outline' onClick={() => setSeeMore(!seeMore)}>Voir plus de choix ...</Button>
                 :

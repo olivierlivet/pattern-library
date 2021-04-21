@@ -13,7 +13,7 @@ import {
     QuestionCuttingSatisfaction,
     QuestionAssociationWithOtherFabric,
     QuestionGlobalRating
-} from './Questions'
+} from './Questions/index'
 
 
 const duration = 300;
@@ -100,21 +100,20 @@ const questions = [
         title: "Partager votre expérience avec la communeauté des couturières 🧵",
     },
     {
-        name: "SizeAndFabricLength",
-        title: "En quelle taille avez-vous cousu le patron et combien de métrage avez vous utilisé ? ✂️",
-    },
-    {
-        name: "FabricFamily",
-        title: "Quel tissu avez vous choisi pour votre Jupe Rita ? ✂️",
-
-    },
-    {
         name:"NoticeComprehensibility",
         title:"Les explications accompagnant le patron sont elles claires ? 🔍" 
     },
     {
         name:"ProductCustomisation",
         title: "Avez-vous apporté des modifications à votre réalisation ? 🪡"
+    },
+    {
+        name: "SizeAndFabricLength",
+        title: "En quelle taille avez-vous cousu le patron et combien de métrage avez vous utilisé ? ✂️",
+    },
+    {
+        name: "FabricFamily",
+        title: "Quel tissu avez vous choisi pour votre Jupe Rita ? ✂️",
     },
     {
         name:"CuttingSatisfacition",
@@ -128,11 +127,16 @@ const questions = [
         name:"GlobalRating",
         title: "Quel note globale donnez vous au patron ? 🌟"
     },
-
-
 ]
 
-const Step1 = ({ }) => {
+const Questions = ({
+    values,
+    setFieldValue,
+    setFieldError,
+    setFieldTouched,
+    handleSubmit
+
+}) => {
 
     const [step, setStep] = useState(0)
 
@@ -173,6 +177,13 @@ const Step1 = ({ }) => {
                                 id={question.name}
                                 index={index}
                                 setStep={()=>setStep( index + 1 )}
+
+                                values={values}
+                                setFieldValue={setFieldValue}
+                                setFieldError={setFieldError}
+                                setFieldTouched={setFieldTouched}
+
+                                handleSubmit={handleSubmit}
                             />
                         </Box>
                         <Box
@@ -188,7 +199,6 @@ const Step1 = ({ }) => {
             </Transition>
         )
     }
-
     return (
         <>
             { QuestionsList}
@@ -196,4 +206,4 @@ const Step1 = ({ }) => {
     )
 }
 
-export default Step1
+export default Questions

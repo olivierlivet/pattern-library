@@ -27,9 +27,6 @@ const InspirationForm = ({ productId }) => {
                     mx='auto'
                     w={{ base: 'full', lg: '3xl' }}
                 >
-
-                    {/* Maintenant si vous le souhaitez, nous aimerions que vous partagiez le résultat de votre réalisation. Quelques photos, un commentaire et le lien votre compte Instagram ou votre blog. */}
-                    {/* Il pourra donner des idées aux autre couturières et transmettre votre inspiration. */}
                     <Form />
                 </Box>
             </Box>
