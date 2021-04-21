@@ -1,6 +1,6 @@
 import Intro from './Intro'
 import Upload from './Upload'
-import Comment from './Comment'
+import Comment from './CommentLoader'
 import BlogAndNetwork from './BlogAndNetwork'
 import Thankyou from './Thankyou'
 // import QuestionFabricFamily from './QuestionFabricFamily'
