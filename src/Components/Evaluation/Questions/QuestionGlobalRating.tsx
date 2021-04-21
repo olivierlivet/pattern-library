@@ -44,6 +44,7 @@ import { navigate } from 'gatsby-link'
                 >
                     <Box w='100%'>
                         <ReactSlider
+                            defaultValue={ 50 }
                             renderThumb={(props, state) =>
                                 <Center
                                     defaultValue={ 50 }
