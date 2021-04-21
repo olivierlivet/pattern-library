@@ -30,6 +30,7 @@ const QuestionNoticeComprehensibility = ({ id, index, setStep, setFieldValue, va
                 >
                     <Box w='100%'>
                         <ReactSlider
+                            defaultValue={ 50 }
                             renderThumb={(props, state) =>
                                 <Center
                                     bg='white'
@@ -67,7 +68,7 @@ const QuestionNoticeComprehensibility = ({ id, index, setStep, setFieldValue, va
                                                 : state.valueNow < 80 ? '🙂'
                                                     : state.valueNow < 90 ? '😃'
                                                         : state.valueNow < 90 ? '😃'
-                                                            : '😍'
+                                                            : '😇'
 
 
                                     }

@@ -31,6 +31,7 @@ const QuestionCuttingSatisfaction = ({ id, index, setStep, setFieldValue }) => {
                 >
                     <Box w='100%'>
                         <ReactSlider
+                            defaultValue={ 50 }
                             renderThumb={(props, state) =>
                                 <Center
                                     bg='white'

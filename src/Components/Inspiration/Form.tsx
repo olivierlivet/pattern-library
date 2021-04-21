@@ -24,10 +24,19 @@ const ContributionForm = ({ }) => {
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                setFieldError,
+                setFieldTouched,
+                setFieldValue
                 /* and other goodies */
             }) => (
                 <form onSubmit={handleSubmit}>
-                    <Questions />
+                    <Questions
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        setFieldError={setFieldError}
+                        setFieldTouched={setFieldTouched}
+                        handleSubmit={handleSubmit}
+                    />
                 </form>
             )}
         </Formik>

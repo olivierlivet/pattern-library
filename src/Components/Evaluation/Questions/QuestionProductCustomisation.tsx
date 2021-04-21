@@ -11,6 +11,9 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
             { !showDetails ?
             <>
                     <Button
+                        whiteSpace='pre-wrap'
+                        h='auto'
+                        p={2}
                         onClick={
                             () =>{
                                 setFieldValue('ProductCustomisation', false);
@@ -19,6 +22,9 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
                         }
                         >Non, j'ai suivi les instructions à la lettre</Button>
                     <Button
+                        whiteSpace='pre-wrap'
+                        h='auto'
+                        p={2}
                         onClick={
                             () =>{
                                 setFieldValue('ProductCustomisation', true);

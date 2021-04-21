@@ -45,9 +45,9 @@ const EvaluationForm = ({ }) => {
                         handleSubmit={handleSubmit}
                     />
 
-                    <pre>
+                    {/* <pre>
                         { JSON.stringify( values , null, 1)}
-                    </pre>
+                    </pre> */}
                 </Form>
             )}
         </Formik>

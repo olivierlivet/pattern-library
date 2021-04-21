@@ -46,6 +46,7 @@ import { navigate } from 'gatsby-link'
                         <ReactSlider
                             renderThumb={(props, state) =>
                                 <Center
+                                    defaultValue={ 50 }
                                     bg='white'
                                     borderRadius='full'
                                     fontSize='3xl'
