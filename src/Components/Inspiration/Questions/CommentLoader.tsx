@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import Loadable from "@loadable/component"
 const Comment = Loadable(() => import('./Comment'))
 
-const CommentLoader = () => {
-
+const CommentLoader = ({ setStep }) => {
 
         return (
-            <Comment />
+            <Comment setStep={setStep} />
         )
     }
 
