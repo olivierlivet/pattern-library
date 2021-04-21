@@ -55,9 +55,9 @@ export default class Comment extends Component {
                 <Text>
                     Dites-nous librement quel était votre état d'esprit, votre motivation à réaliser ce patron. Une occasion particulière, combler un manque dans votre garde robe. Avez-vous hésité avec un autre modèle ?
             </Text>
-                <Text>
+            {/* <Text>
                     Tout simplement, qu'est ce que vous a convaincu à coudre <strong>ce patron</strong>.
-            </Text>
+            </Text> */}
                 <Box
                     border='solid 1px'
                     borderColor='gray.200'
@@ -68,7 +68,7 @@ export default class Comment extends Component {
                         //   toolbarOnFocus="true"
                         value="test"
                         placeholder={
-                            `Tout simplement, qu'est ce qui vous a convaincu à coudre ce patron.`
+                            `Tout simplement, qu'est ce qui vous a convaincu à coudre ce patron ?`
                         }
                         toolbar={toolbarOptions}
                         editorState={editorState}
@@ -78,7 +78,7 @@ export default class Comment extends Component {
                     />
                 </Box>
                 <Box>
-                    <Button onClick={() => setStep()}>Valider✂️{' '}</Button>
+                    <Button onClick={() => setStep()}>Enregistrer{' '}</Button>
                 </Box>
             </Stack>
         )

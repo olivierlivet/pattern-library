@@ -20,7 +20,7 @@ const BlogAndNetwork = ({ id, index, setStep }) => {
                     Un compte Instagram ?
                     <Input name='instagramAccount' placeholder='@patternscorner' />
                 </FormLabel>
-                <FormHelperText>On mettra le lien de votre compte à la suite des photos de votre réalisation</FormHelperText>
+                <FormHelperText>On mettra le lien de votre compte à la suite des photos de votre réalisation.</FormHelperText>
             </FormControl>
             <FormControl>
                 <FormLabel>
@@ -30,7 +30,7 @@ const BlogAndNetwork = ({ id, index, setStep }) => {
                 <FormHelperText>Si vous en avez-un, sinon, pas d'importance !</FormHelperText>
             </FormControl>
             <Box>
-                <Button onClick={() => setStep()}>✂️{' '}Suivant ?</Button>
+                <Button onClick={() => setStep()}>Valider</Button>
             </Box>
         </Stack>
     )
