@@ -10,6 +10,7 @@ import {
 
 import { Router, Link as NavLink, Match } from "@reach/router";
 import AccountWrapper from './Wrapper';
+import AccountNav from '../Nav/Account';
 
 const AccountHome = ({ }) => {
     return(

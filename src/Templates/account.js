@@ -36,7 +36,8 @@ import AccountProfile from '../Components/Account/Profile'
 import AccountOrder from '../Components/Account/Order'
 import AccountContribution from '../Components/Account/Contribution'
 import AccountSubscription from '../Components/Account/Subscription'
-import ContributionForm from '../Components/Account/ContributionForm'
+import EvaluationForm from '../Components/Account/EvaluationForm'
+import InspirationForm from '../Components/Account/InspirationForm'
 
 
 const AccountTemplate = (props) => {
@@ -101,7 +102,8 @@ const AccountTemplate = (props) => {
                     <AccountOrder path="/order" />
                     <AccountContribution path="/contribution" />
                     <AccountSubscription path="/subscription" />                    
-                    <ContributionForm path="/contribution/create/:productId" />
+                    <EvaluationForm path="/contribution/evaluation/:productId" />
+                    <InspirationForm path="/contribution/inspiration/:productId" />
                     <AccountProfile path="/profil" />
                 </Router>
                 {/* <Nav data={univers} /> */}

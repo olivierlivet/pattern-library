@@ -9,10 +9,22 @@ const QuestionCuttingSatisfaction = ({ id, index, setStep }) => {
         <Stack>
             { !showDetails ?
                 <VStack>
-                    <Button onClick={() => setStep()}>
+                    <Button
+                        whiteSpace='pre-wrap'
+                        h='auto'
+                        p={2}
+                        w='full'
+                        onClick={() => setStep()}
+                    >
                         Oui, je me sens très à l'aise lorsque je porte [nom du patron]
                     </Button>
-                    <Button onClick={() => setShowDetails(true)}>
+                    <Button
+                        whiteSpace='pre-wrap'
+                        h='auto'
+                        p={2}
+                        w='full'
+                        onClick={() => setShowDetails(true)}
+                    >
                         Quelques modifications me semblent nécessaires pour en faire une pièce phare de mon dressing
                     </Button>
                 </VStack>

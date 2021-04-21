@@ -14,7 +14,7 @@ import {
 import { Router, Link as NavLink, Match } from "@reach/router";
 import AccountWrapper from './Wrapper';
 import Form from '../Contribution/Form'
-const ContributionForm = ({ productId }) => {
+const EvaluationForm = ({ productId }) => {
 
     return (
 
@@ -34,4 +34,4 @@ const ContributionForm = ({ productId }) => {
     )
 }
 
-export default ContributionForm
+export default EvaluationForm
