@@ -1,5 +1,12 @@
 import React from 'react'
-import { Box, Button, Text, Input } from '@chakra-ui/react'
+import {
+    Box,
+    Button,
+    Text,
+    Input,
+    InputGroup,
+    InputRightAddon
+} from '@chakra-ui/react'
 
 const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
     return (
@@ -7,25 +14,23 @@ const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
             <Text>
                 J'ai cousu
                 {` la Jupe Rita `}
-                en taille
-                <Button mx={2} size='sm'>42</Button>
-                et j'ai utilisé{' '}
+                en taille{' '}
                 <Box
                     display='inline-block'
-                    borderBottom='solid 3px'
-                    borderBottomColor='brand.pink.300'
-                    h='35px'
                 >
-                    <Input
-                        display='inline-block'
-                        border='none'
-                        w='30px'
-                        p={0}
-
-                        py={2}
-                        name="cm"
-                    />
-                    cm
+                    <InputGroup size="sm" w='80px'>
+                        <Input type='number' min='20' placeholder="100" />
+                        {/* <InputRightAddon children="cm" /> */}
+                    </InputGroup>
+                </Box>
+                {' '} et j'ai utilisé{' '}
+                <Box
+                    display='inline-block'
+                >
+                    <InputGroup size="sm" w='100px'>
+                        <Input type='number' min='20' placeholder="100" />
+                        <InputRightAddon children="cm" />
+                    </InputGroup>
                 </Box>
                 {' '}de tissu.
                 </Text>

@@ -68,7 +68,7 @@ const QuestionNoticeComprehensibility = ({ id, index, setStep, setFieldValue, va
                                                 : state.valueNow < 80 ? '🙂'
                                                     : state.valueNow < 90 ? '😃'
                                                         : state.valueNow < 90 ? '😃'
-                                                            : '😇'
+                                                            : '😍'
 
 
                                     }
