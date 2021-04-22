@@ -28,6 +28,7 @@ import ShoppingBagIcon from '../../Images/Icons/ShoppingBag'
 
 import CategoryChoiceButton from './CategoryChoiceButton'
 import FilterButton from './FilterButton'
+import MainFiltersButton from './MainFiltersButton'
 
 const contentful = require("contentful");
 const client = contentful.createClient({
@@ -43,7 +44,9 @@ class SearchEngine extends Component {
         this.state = {
             products: null,
             singleProduct: null,
-            mainFilters: {},
+            mainFilters: {
+                category: '3v7MEyPWB0d1FOYFa9odJV'
+            },
             refineFilters: { 'test': 'test' },
             showFilter: false
         }
@@ -163,14 +166,14 @@ class SearchEngine extends Component {
 
     }
 
-    updateMainFilters( key, value ) {
+    updateMainFilters(key, value) {
         this.setState({ products: [] })
 
         // setTimeout(()=>{
         let mainFilters = this.state.mainFilters
         console.log(key, value)
-        mainFilters[ key ] = value
-        if ( key === 'category') { delete mainFilters.variant }
+        mainFilters[key] = value
+        if (key === 'category') { delete mainFilters.variant }
         this.setState({ mainFilters: mainFilters }, this.loadProducts())
         // }, 1000)
 
@@ -182,194 +185,182 @@ class SearchEngine extends Component {
 
         return (
             <>
-                <Box
-                    // bg='white'
-                    position='fixed'
-                    top='0'
-                    left='0'
-                    right='0'
-                    p={{ base: 4, lg: 10 }}
-                    pb={{ base: 10, lg: 10 }}
-                    pt={{ base: 4, lg: 10 }}
 
-                    bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,1) 100%)'
-                // boxShadow='sm'
-                // display='none'
+                <Grid
+                    templateColumns={{
+                        base: `100%`,
+                        lg: `300px 1fr`,
+                        xl: `400px 1fr`
+                    }}
+                    minH='100vh'
                 >
-                    <Flex justify='space-between'>
-                        {/* <pre>
-                            { JSON.stringify( mainFilters, null, 1 )}
-                        </pre> */}
-                        <HStack>
-                            <CategoryChoiceButton
-                                mainFilters={ mainFilters }
-                                categories={ Filters.getCategoryOptions() }
-                                variants={ Filters.getVariantOptions(this.state.mainFilters.category) }
+                    <Box
+                        bg='white'
+                        p={{ base: 0, lg: 8 }}
 
-                                setCategory={(value)=> this.updateMainFilters('category', value) }
-                                setVariant={(value)=> this.updateMainFilters('variant', value) }
-                            />
-                            <FilterButton 
-                                onClick={() => this.setState({ showFilter: !this.state.showFilter })}
-                            />
-                        </HStack>
-                        
-                        {products && products.length ?
-                            <Center p={0}>
-                                <Text fontSize='15px' letterSpacing='wide' display={{ base:'block', lg:'none' }}>
-                                    <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
-                                        {products.length}
-                                    </Text>
-                                    { products.length === 1 ? ` patron` : ` patrons`}
-                                </Text>
-                                <Text fontSize='15px' letterSpacing='wide' display={{ base:'none', lg:'block' }}>
-                                    <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
-                                        {products.length}
-                                    </Text>
-                                    {` patrons correspondent à votre recherche`}
-                                </Text>
-                            </Center>
-                        : 
-                            <Center p={2}>
-                                <Spinner size='sm' color='#88a7aa' />
-                            </Center>
-                        }
-
-                        <HStack spacing={2} justify='flex-end' w={{ base:'auto', lg:'145px' }}>
-                            <Center
-                                position='relative'
-                                w={8}
-                                h={8}
-                            >
-                                <FavoriteIcon w={{ base:5, lg:6}} h={{ base:5, lg:6}} />
-                                <Center
-                                    backgroundColor='red.500'
-                                    color='white'
-                                    borderRadius='full'
-                                    p={1.5}
-                                    w='10px'
-                                    h='10px'
-                                    position='absolute'
-                                    fontSize='x-small'
-                                    top='0'
-                                    right='0'
-                                >
-                                    2
-                                </Center>
-                            </Center>
-                            <Center w={8} h={8} position='relative'>
-                                <ShoppingBagIcon w={{ base:5, lg:6}} h={{ base:5, lg:6}} />
-                                <Center
-                                    backgroundColor='red.500'
-                                    color='white'
-                                    borderRadius='full'
-                                    p={1.5}
-                                    w='10px'
-                                    h='10px'
-                                    position='absolute'
-                                    fontSize='x-small'
-                                    top='0'
-                                    right='0'
-                                >
-                                    4
-                                </Center>
-                            </Center>
-                        </HStack>
-                    </Flex>
-                        <Flex
-                            justify='space-between'
+                    >
+                        <Box
+                            position='sticky'
+                            top={10}
+                            p={{ base:0, lg:4 }}
                         >
-                            <HStack
-                                display='none'
-                                w='auto'
-                                justify='flex-start'
-                            >
-                                {/* <Text whiteSpace='pre' display={{ base: 'none', lg: 'initial' }} >Il y a <Text as='span' bg='yellow.100'>12</Text> patrons de :</Text> */}
-                                <Select
-                                    w='200px'
-                                    onChange={(e) => this.handleChange(e)}
-                                    value={this.state.mainFilters.category}
-                                    name='category'
-                                    placeholder='Genre'
-                                    bg='white'
-                                >
-                                    {Filters.getCategoryOptions().map(option =>
-                                        <option key={option.variantId} value={option.variantId}>{option.label}</option>
-                                    )}
-                                </Select>
-                                {
-                                    this.state.mainFilters.category
-                                        && Filters.getVariantOptions(this.state.mainFilters.category)
-                                        && Filters.getVariantOptions(this.state.mainFilters.category).length
-                                        ?
-                                        <Select
-                                            onChange={(e) => this.handleChange(e)}
-                                            value={this.state.mainFilters.variant ? this.state.mainFilters.variant : ''}
-                                            name='variant'
-                                            placeholder='Pièce'
-                                            bg='white'
 
+                            <MainFiltersButton />
 
-                                        >
-                                            {Filters.getVariantOptions(this.state.mainFilters.category).map(option =>
-                                                <option value={option.variantId}>{option.label}</option>
-                                            )}
-                                        </Select>
-                                        : null}
-                            </HStack>
-                        </Flex>
-                </Box>
-
-                <RefinerFilters
-                    mainFilters={mainFilters}
-                    category={mainFilters.category}
-                    key={{ category: mainFilters.category, refine: refineFilters }}
-                    refineFilters={refineFilters}
-                    handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
-                    isVisible={ showFilter }
-                    hideFilter={()=> this.setState({ 'showFilter': !showFilter } )}
-                />  
-
-                <Box
-                    // pt='105px'
-                    maxW='1300px'
-                    mx='auto'
-                >
-                    {/* <Grid
-                        templateColumns={{
-                            base: `100%`,
-                            lg: `300px 1fr`
-                        }}
-                    > */}
+                            <RefinerFilters
+                                mainFilters={mainFilters}
+                                category={
+                                    // mainFilters.category
+                                    '3v7MEyPWB0d1FOYFa9odJV'
+                                }
+                                key={{ category: mainFilters.category, refine: refineFilters }}
+                                refineFilters={refineFilters}
+                                handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
+                                isVisible={
+                                    // showFilter
+                                    true
+                                }
+                                hideFilter={() => this.setState({ 'showFilter': !showFilter })}
+                            />
+                        </Box>
+                    </Box>
+                    <Box>
                         <Box
                             // bg='white'
-                            // mt={10}
-                            pt={{ base: '16', lg:32 }}
-                            pb={'32'}
+                            zIndex='banner'
+                            position='fixed'
+                            top='0'
+                            left={{
+                                base: 0,
+                                lg: '300px',
+                                xl: '400px'
+                            }}
+                            right='0'
+                            p={{ base: 4, lg: 10 }}
+                            pb={{ base: 10, lg: 10 }}
+                            pt={{ base: 4, lg: 10 }}
+
+                            bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,1) 100%)'
+                        // boxShadow='sm'
+                        // display='none'
                         >
-                            {/* {products && products.length ?
-                                <Center p={2}>
-                                    <Text fontSize='15px' letterSpacing='wide'>
-                                        <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>{products.length}</Text>{` patrons correspondent à votre recherche`}
-                                    </Text>
-                                </Center>
-                                : `Pas de patron correspondent à votre recherche`} */}
-                            <VStack
-                                w='100%'
-                                py={{ base: 0, lg: 20 }}
-                                // bg='gray.100'
-                                spacing={{ base: 5, lg: 10 }}
-                                shouldWrapChildren={true}
-                                bg='gray.50'
-                                p={{ base: 4, lg: 4 }}
+                            <Flex justify='space-between'>
+                                {/* <pre>
+                            { JSON.stringify( mainFilters, null, 1 )}
+                        </pre> */}
+                                <Box>
+                                    {/* <Button
+                                display={{ base:'none', lg:'flex'}}
                             >
+                                Retour au site
+                            </Button> */}
+                                    <Box
+                                        display={{ base:'none', lg:'block'}}
+                                        visibility='hidden'
+                                        w='145px'
+                                    />
+                                    <HStack
+                                        display={{  base:'flex', lg: 'none' }}
+                                    >
+                                        <CategoryChoiceButton
+                                            mainFilters={mainFilters}
+                                            categories={Filters.getCategoryOptions()}
+                                            variants={Filters.getVariantOptions(this.state.mainFilters.category)}
+
+                                            setCategory={(value) => this.updateMainFilters('category', value)}
+                                            setVariant={(value) => this.updateMainFilters('variant', value)}
+                                        />
+                                        <FilterButton
+                                            onClick={() => this.setState({ showFilter: !this.state.showFilter })}
+                                        />
+                                    </HStack>
+
+                                </Box>
+
 
                                 {products && products.length ?
-                                    products.map(product =>
-                                        <>
-                                        {/* <pre>
-                                            { JSON.stringify( product.fields.intro, null, 1 )}
-                                        </pre> */}
+                                    <Center p={0}>
+                                        <Text fontSize='15px' letterSpacing='wide' display={{ base: 'block', lg: 'none' }}>
+                                            <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
+                                                {products.length}
+                                            </Text>
+                                            {products.length === 1 ? ` patron` : ` patrons`}
+                                        </Text>
+                                        <Text fontSize='15px' letterSpacing='wide' display={{ base: 'none', lg: 'block' }}>
+                                            <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
+                                                {products.length}
+                                            </Text>
+                                            {` patrons correspondent à votre recherche`}
+                                        </Text>
+                                    </Center>
+                                    :
+                                    <Center p={2}>
+                                        <Spinner size='sm' color='#88a7aa' />
+                                    </Center>
+                                }
+
+                                <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
+                                    <Center
+                                        position='relative'
+                                        w={8}
+                                        h={8}
+                                    >
+                                        <FavoriteIcon w={{ base: 5, lg: 6 }} h={{ base: 5, lg: 6 }} />
+                                        <Center
+                                            backgroundColor='red.500'
+                                            color='white'
+                                            borderRadius='full'
+                                            p={1.5}
+                                            w='10px'
+                                            h='10px'
+                                            position='absolute'
+                                            fontSize='x-small'
+                                            top='0'
+                                            right='0'
+                                        >
+                                            2
+                                </Center>
+                                    </Center>
+                                    <Center w={8} h={8} position='relative'>
+                                        <ShoppingBagIcon w={{ base: 5, lg: 6 }} h={{ base: 5, lg: 6 }} />
+                                        <Center
+                                            backgroundColor='red.500'
+                                            color='white'
+                                            borderRadius='full'
+                                            p={1.5}
+                                            w='10px'
+                                            h='10px'
+                                            position='absolute'
+                                            fontSize='x-small'
+                                            top='0'
+                                            right='0'
+                                        >
+                                            4
+                                </Center>
+                                    </Center>
+                                </HStack>
+                            </Flex>
+                        </Box>
+
+
+
+                        <VStack
+                            w='100%'
+                            py={{ base: 0, lg: 20 }}
+                            // bg='gray.100'
+                            spacing={{ base: 5, lg: 10 }}
+                            shouldWrapChildren={true}
+                            bg='gray.50'
+                            // p={{ base: 4, lg: 4 }}
+
+                            pt={{ base: '16', lg: 32 }}
+                            pb={'32'}
+                        >
+
+                            {products && products.length ?
+                                products.map(product =>
+                                    <>
+
                                         <ProductCardSmall
                                             key={product.sys.id}
                                             productId={product.sys.id}
@@ -385,38 +376,29 @@ class SearchEngine extends Component {
                                             //Actions
                                             onOpen={() => this.setState({ singleProduct: product.fields })}
                                         />
-                                        </>
-                                        // <Box
-                                        //     w='500px'
-                                        //     mx='auto'
-                                        // >
-                                        //     <Center
-                                        //         bg='white'
-                                        //         h='500px'
-                                        //     >
+                                    </>
 
-                                        //         {product.fields.title}
-                                        //     </Center>
-                                        // </Box>
-                                    ) :
-                                    <CissorsLoader />
-                                }
+                                ) :
+                                <CissorsLoader />
+                            }
 
-                            </VStack>
-                        </Box>
-                        {/* { products ?
-                    <pre>
-                        {JSON.stringify(products, null, 1)}
-                    </pre>
-                    : null} */}
-                        {singleProduct ?
-                            <ProductCardLarge
-                                product={singleProduct}
-                                onClose={() => this.setState({ singleProduct: null })}
-                            />
-                            : null}
-                    {/* </Grid> */}
-                </Box>
+                        </VStack>
+
+
+                    </Box>
+
+
+                </Grid>
+
+
+
+                {singleProduct ?
+                    <ProductCardLarge
+                        product={singleProduct}
+                        onClose={() => this.setState({ singleProduct: null })}
+                    />
+                    : null}
+
             </>
         )
     }

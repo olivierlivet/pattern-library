@@ -2,6 +2,8 @@ import React, { FunctionComponent } from 'react'
 import { Transition } from 'react-transition-group';
 
 import { Box, Button, Flex, Stack, VStack, Text } from '@chakra-ui/react'
+import CtaSearch from '../CtaSearch'
+
 import filters from './filters'
 
 import {
@@ -139,18 +141,17 @@ const RefineFilters: FunctionComponent<props> = (
         <Transition in={isVisible} timeout={duration}>
             {state => (
                 <Box
-                    w={{ base:'100vw', lg:'350px' }}
-                    h={{ base:'100vh', lg:'auto'}}
-                    position='fixed'
+                    w={{ base: '100vw', lg: 'auto' }}
+                    h={{ base: '100vh', lg: 'auto' }}
+                    position={{ base:'fixed', lg:'initial' }}
                     left={0}
-                    top={{ base:0, lg:32 }}
+                    top={{ base: 0, lg: 32 }}
                     zIndex='sticky'
 
                     overflowY='scroll'
-                    maxH={{ base:'auto', lg:'75vh' }}
+                    maxH={{ base: 'auto', lg: '75vh' }}
 
-                    background={{ base:'transparent' }}
-                    p={4}
+                    background={{ base: 'white', lg:'transparent' }}
                     borderRadius='0 1rem 1rem 0'
 
                     style={{
@@ -159,17 +160,12 @@ const RefineFilters: FunctionComponent<props> = (
                     }}
 
                 >
-                    <Box
-
-
-
-
-                    >
+                    <Box>
                         <Text p={2}>Affiner par : </Text>
                         <Accordion defaultIndex={[0]} allowMultiple>
                             {Filters}
                         </Accordion>
-                        <Button mt={2} onClick={()=> hideFilter()}>Valider</Button>
+                        <Button mt={2} onClick={() => hideFilter()}>Valider</Button>
                     </Box>
                 </Box>
             )}

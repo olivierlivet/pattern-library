@@ -109,6 +109,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                         as='h3'
                         fontSize='28px'
                         letterSpacing='wide'
+                        fontWeight='normal'
                     >{title}</Heading>
                   
 
