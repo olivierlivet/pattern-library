@@ -1,17 +1,4 @@
 import React, { FunctionComponent, useRef } from 'react'
-
-type productCardPropsTypes = {
-    title: string,
-    level: number,
-    rating: number,
-    productId: string,
-    intro: string,
-    price: number,
-    pictures: Array<string>
-
-    onOpen: Function
-}
-
 import {
     Box,
     Heading,
@@ -30,6 +17,21 @@ import { navigate } from 'gatsby-link'
 import Favorite from '../../Services/Favorite'
 import HeartIcon from '../../Images/Icons/Favorite'
 import ProductIllustrationWithSwipe from './ProductIllustrationWithSwipe'
+import FavoriteButton from '../Favorite/Button'
+
+type productCardPropsTypes = {
+    title: string,
+    level: number,
+    rating: number,
+    productId: string,
+    intro: string,
+    price: number,
+    pictures: Array<string>
+
+    onOpen: Function
+}
+
+
 const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     productId,
     title,
@@ -149,7 +151,8 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 top={5}
                 right={5}
             >
-                <Button
+                <FavoriteButton />
+                {/* <Button
                     mt={0}
                     pt={0}
                     size='sm'
@@ -160,12 +163,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     colorScheme={Favorite.isFavorite(productId) ? 'white' : 'gray'}
                 >
                     <HeartIcon />
-                        {/* color={ Favorite.isFavorite(productId) ? 'red.500' : 'gray.400'}
-                        pointerEvents='none'
-                        w={3}
-                        h={3}
-                    /> */}
-                </Button>
+                </Button> */}
             </Box>
         </Box>
     )

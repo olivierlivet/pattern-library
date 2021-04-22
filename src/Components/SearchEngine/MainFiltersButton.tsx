@@ -1,11 +1,12 @@
-import { Box, Button, Center, SimpleGrid } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Center, SimpleGrid } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
-// import CtaSearchStep1 from './CtaSearchStep1'
-// import CtaSearchStep2 from './CtaSearchStep2'
+import CtaSearchStep1 from '../CtaSearchStep1'
+import CtaSearchStep2 from '../CtaSearchStep2'
 
 import { Transition } from 'react-transition-group';
-import { ArrowDownIcon } from '@chakra-ui/icons';
+import { ArrowDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { navigate } from 'gatsby-link';
 
 const duration = 300;
 
@@ -30,10 +31,15 @@ const transitionStyles = {
     exited: { opacity: 0 },
 }
 
-const MainFiltersButton = ({  handleLoadSearchEngine }) => {
+const MainFiltersButton = (
+    {
+        handleLoadSearchEngine,
+        setCategory,
+        setVariant
+    }) => {
     const [step, setStep] = useState(0)
     const [ univers, setUnivers ]       = useState(null)
-    const [ category, setCategory ]     = useState(null)
+    // const [ category, setCategory ]     = useState(null)
     return (
         <>
                 <Box
@@ -41,6 +47,7 @@ const MainFiltersButton = ({  handleLoadSearchEngine }) => {
                     mb={4}
 
                 >
+                    <ButtonGroup w='full'>
                     <Button
                         bg='#66878a'
                         borderRadius={3}
@@ -51,7 +58,7 @@ const MainFiltersButton = ({  handleLoadSearchEngine }) => {
                         color='white'
                         zIndex='overlay'
                         position='relative'
-                        w='100%'
+                        w='85%'
                         onClick={() => setStep(step === 0 ? 1 : 0)}
                         _hover={{
                             bg:'#4D767A',
@@ -72,6 +79,14 @@ const MainFiltersButton = ({  handleLoadSearchEngine }) => {
                         {/* Je cherche un patron */}
                         <ArrowDownIcon ml={2} />
                     </Button>
+                    <Button
+                        w='15%'
+                        variant='outline'
+                        onClick={()=>navigate('/fr')}
+                    >
+                        <SmallCloseIcon />
+                    </Button>
+                    </ButtonGroup>
 
                     <Transition in={step > 0} timeout={duration}>
                         {state => (
@@ -111,18 +126,23 @@ const MainFiltersButton = ({  handleLoadSearchEngine }) => {
 
                                     }
                                 >
-                                    {/* <CtaSearchStep1
+                                    <CtaSearchStep1
                                         isVisible={step === 1 ? true : false}
                                         setUnivers={( value )=>setUnivers( value )}
                                         handleNextStep={()=> setStep( step + 1 )}
+                                        setCategory={(value)=> setCategory( value )}
                                     />
                                     <CtaSearchStep2
                                         isVisible={step === 2 ? true : false}
                                         setCategory={( value )=>setCategory( value )}
                                         handleStepBack={()=> setStep(1)}
 
-                                        handleSubmit={()=> handleLoadSearchEngine()}
-                                    /> */}
+                                        handleSubmit={( value )=>{
+                                            setCategory( value );
+                                            setStep(0);
+                                        }
+                                        }
+                                    />
                                 </SimpleGrid>
                                 
                             </Box>

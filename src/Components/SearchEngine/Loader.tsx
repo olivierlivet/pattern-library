@@ -35,17 +35,14 @@ const SearchEngineLoader: FunctionComponent<propTypes> = ({ filter, onClose, isO
             borderRadius={{ base: 0, lg: 0 }}
             bg='gray.50'
         >
-            {/* <ModalHeader>Patterns search engine</ModalHeader> */}
-            {/* <ModalCloseButton /> */}
             <ModalBody p={0}>
-                <SearchEngine filter={ filter } onClose={()=>onClose()} />
+                <SearchEngine
+                    mainFilters={ filter }
+                    onClose={()=>onClose()}
+                />
             </ModalBody>
         </ModalContent>
     </Modal>
 )
 
 export default SearchEngineLoader
-
-
-// let myAdd: (x: number, y: number) => number = function (
-// const OtherComponent = loadable(() => import('./OtherComponent'))

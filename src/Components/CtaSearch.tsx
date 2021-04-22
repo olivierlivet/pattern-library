@@ -122,7 +122,7 @@ const CtaSearch = ({  handleLoadSearchEngine }) => {
                                         setCategory={( value )=>setCategory( value )}
                                         handleStepBack={()=> setStep(1)}
 
-                                        handleSubmit={()=> handleLoadSearchEngine()}
+                                        handleSubmit={( value )=> handleLoadSearchEngine( value )}
                                     />
                                 </SimpleGrid>
                                 

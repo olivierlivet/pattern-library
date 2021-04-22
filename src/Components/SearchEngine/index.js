@@ -45,7 +45,6 @@ class SearchEngine extends Component {
             products: null,
             singleProduct: null,
             mainFilters: {
-                category: '3v7MEyPWB0d1FOYFa9odJV'
             },
             refineFilters: { 'test': 'test' },
             showFilter: false
@@ -107,6 +106,8 @@ class SearchEngine extends Component {
     }
 
     componentDidMount() {
+        this.updateMainFilters('category', this.props.mainFilters.category)
+
         this.loadProducts()
     }
 
@@ -185,7 +186,10 @@ class SearchEngine extends Component {
 
         return (
             <>
-
+                {/* <pre>
+                { JSON.stringify( this.props, null, 1)}
+                { JSON.stringify( this.state, null, 1)}
+                </pre> */}
                 <Grid
                     templateColumns={{
                         base: `100%`,
@@ -201,11 +205,15 @@ class SearchEngine extends Component {
                     >
                         <Box
                             position='sticky'
-                            top={10}
-                            p={{ base:0, lg:4 }}
+                            top={8}
                         >
 
-                            <MainFiltersButton />
+                            <MainFiltersButton
+                                setCategory={(value)=> this.updateMainFilters('category', value)}
+                                setVariant={(value)=>this.updateMainFilters('variant', value)}
+                                // handleSubmit={(value)=>this.updateMainFilters('variant', value)}
+                                // this.updateMainFilters('variant', value)}
+                            />
 
                             <RefinerFilters
                                 mainFilters={mainFilters}
@@ -267,8 +275,8 @@ class SearchEngine extends Component {
                                             categories={Filters.getCategoryOptions()}
                                             variants={Filters.getVariantOptions(this.state.mainFilters.category)}
 
+                                            setUnivers={(value) => this.updateMainFilters('univers', value)}
                                             setCategory={(value) => this.updateMainFilters('category', value)}
-                                            setVariant={(value) => this.updateMainFilters('variant', value)}
                                         />
                                         <FilterButton
                                             onClick={() => this.setState({ showFilter: !this.state.showFilter })}
@@ -374,6 +382,7 @@ class SearchEngine extends Component {
 
 
                                             //Actions
+                                            // onOpen={() => console.log('open')}
                                             onOpen={() => this.setState({ singleProduct: product.fields })}
                                         />
                                     </>

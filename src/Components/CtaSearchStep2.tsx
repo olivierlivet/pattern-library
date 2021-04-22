@@ -89,10 +89,10 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack, h
                             borderBottomColor='gray.50'
                         >
                             <Button
-                                onClick={()=>handleSubmit()}
+                                onClick={()=>handleSubmit( '3v7MEyPWB0d1FOYFa9odJV')}
                                 
                                 fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
-                                Une robe
+                                Une jupe
                                 <ArrowForwardIcon />
                             </Button>
                         </Box>
@@ -100,8 +100,16 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack, h
                             borderBottom='solid 1px'
                             borderBottomColor='gray.50'
                         >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
-                                Une jupe
+                            <Button
+                                onClick={()=>handleSubmit( '2aMnwR8nnDdeb0PNj2SBe9')}
+                                                            
+                                fontWeight='normal'
+                                fontFamily='DM Sans'
+                                variant='ghost'
+                                w='100%'
+                                justifyContent='space-between'
+                            >
+                                Un haut
                                 <ArrowForwardIcon />
                             </Button>
                         </Box>

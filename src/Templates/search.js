@@ -42,7 +42,6 @@ const SearchTemplate = ( props ) => {
                     category: qs.category ? qs.category : null,
                     // variant: variant ? variant : null
                 }}
-                // onClose={() => setShowEngine(false)}
             />
         </Layout>
     )

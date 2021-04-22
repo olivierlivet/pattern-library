@@ -103,9 +103,7 @@ const HomeTemplate = (props) => {
 
 
                     <CtaSearch
-                        handleLoadSearchEngine={() => navigate(`/fr/search`)}
-                        setCategory={(value) => setCategory(value)}
-                        setVariant={(value) => setVariant(value)}
+                        handleLoadSearchEngine={(value) => navigate(`/fr/search?category=${value}`)}
                     />
                 </VStack>
             </Center>
