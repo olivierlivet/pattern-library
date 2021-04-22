@@ -206,9 +206,10 @@ const HomeTemplate = (props) => {
                 <Box
                     fontSize={{
                         base: 'lg',
-                        lg: 'larger'
+                        lg: 'md'
                     }}
-                    p={4}
+                    p={{ base: 6, lg: 24 }}
+
                 >
                     <RichContent data={pageContent.description} />
                 </Box>

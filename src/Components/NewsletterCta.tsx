@@ -1,29 +1,30 @@
 import { FormLabel } from '@chakra-ui/form-control'
-import { Box, Input, Text } from '@chakra-ui/react'
+import { Box, Grid, Input, Text } from '@chakra-ui/react'
 import React from 'react'
 import Title from './Title'
+import NewsletterForm from './Newsletter/Form'
+const NewsletterCta = ({ }) => {
+    return (
 
-const NewsletterCta = ({}) => {
-    return(
-        <Box
+        <Grid
             bg='#606060'
             color='white'
-            p={ 4 }
+            p={{ base: 6, lg: 24 }}
+            templateColumns={{
+                base: '100%',
+                lg: '500px 1fr'
+            }}
+            gap={{ base:2, lg:12 }}
         >
-            <Title>
-                Inscription à la newsletter
-            </Title>
-            <Text>
-                Pour recevoir nos bons plans, les infos sur les derniers patrons et des inspirations, il suffit de laisser votre adresse mail.
-            </Text>
-            <FormLabel>
-                <Input
-                    type='email'
-                    placeholder='Votre email'
-                />
-            </FormLabel>
-
-        </Box>
+            <Box>
+                <Title>
+                    Inscription à la newsletter
+                </Title>
+            </Box>
+            <Box>
+                <NewsletterForm />
+            </Box>
+        </Grid>
     )
 }
 
