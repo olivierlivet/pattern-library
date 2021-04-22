@@ -69,7 +69,7 @@ const HomeTemplate = (props) => {
                             fontSize={{ base: 'xx-large', lg: 'xxx-large' }}
                             fontFamily='Noe Display'
                             lineHeight='shorter'
-                        >Patterns Corner</Text>
+                        >Patterns Corner</Text> BETA
                         <Text
                             fontFamily='DM Sans'
                             fontSize='16px'
