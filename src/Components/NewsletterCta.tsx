@@ -21,7 +21,9 @@ const NewsletterCta = ({ }) => {
                     Inscription à la newsletter
                 </Title>
             </Box>
-            <Box>
+            <Box
+                maxW='500px'
+            >
                 <NewsletterForm />
             </Box>
         </Grid>

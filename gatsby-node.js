@@ -6,11 +6,6 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 });
 
-console.log('end', process.env.NODE_ENV)
-
-  
-
-
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
