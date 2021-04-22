@@ -10,7 +10,7 @@ import {
 
 import { Field } from 'formik'
 
-const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
+const QuestionSizeAndFabricLength = ({ id, index, setStep, values }) => {
     return (
         <>
             <Text
@@ -26,7 +26,7 @@ const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
                     <Field name='size'>
                         {({ props, field }) => (
                             <InputGroup size="sm" w='60px'>
-                                <Input {...field} lineHeight='auto' textAlign='center' fontSize='16px' type='number' pattern="[0-9]*" min='20' placeholder="40" />
+                                <Input {...field} lineHeight='20px' textAlign='center' fontSize='16px' type='number' pattern="[0-9]*" min='20' placeholder="40" />
                                 {/* <InputRightAddon children="cm" /> */}
                             </InputGroup>
                         )}
@@ -39,17 +39,25 @@ const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
                     <Field name='fabricLength'>
                         {({ props, field }) => (
                             <InputGroup size="sm" w='100px'>
-                                <Input {...field} lineHeight='auto' type='number' fontSize='16px' pattern="[0-9]*" min='20' placeholder="100" />
+                                <Input {...field} lineHeight='20px' type='number' fontSize='16px' pattern="[0-9]*" min='20' placeholder="100" />
                                 <InputRightAddon children="cm" />
                             </InputGroup>
                         )}
                     </Field>
                 </Box>
                 {' '}de tissu.
-                </Text>
+            </Text>
+            {
+                !values.size && !values.fabricLength ? 
             <Box mt={4}>
                 <Text>Ou alors,  <Button size='sm' variant='link' onClick={() => setStep(3)}>je ne sais pas</Button></Text>
             </Box>
+            : 
+            <Box mt={4}>
+                <Button onClick={() => setStep(3)}>Valider</Button>
+            </Box>
+        }
+
         </>
     )
 }
