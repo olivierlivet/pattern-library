@@ -8,9 +8,18 @@ require('dotenv').config({
 
 console.log('end', process.env.NODE_ENV)
 
+  
+
+
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
+  const { createRedirect } = actions;
 
+  createRedirect({
+    fromPath: `/`,
+    toPath: `/fr`,
+  });
 
 // 3t0pwYmEBxvCykiqoJbMVG
 
@@ -302,14 +311,6 @@ exports.createPages = ({ graphql, actions }) => {
         });
       });
     });
-
-
-  const { createRedirect } = actions;
-  
-  createRedirect({
-    fromPath: `/`,
-    toPath: `/fr`,
-  });
   
 
   return Promise.all([
