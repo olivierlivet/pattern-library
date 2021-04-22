@@ -8,6 +8,8 @@ import {
     InputRightAddon
 } from '@chakra-ui/react'
 
+import { Field } from 'formik'
+
 const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
     return (
         <>
@@ -21,19 +23,27 @@ const QuestionSizeAndFabricLength = ({ id, index, setStep }) => {
                 <Box
                     display='inline-block'
                 >
-                    <InputGroup size="sm" w='60px'>
-                        <Input textAlign='center' fontSize='16px' type='number' pattern="[0-9]*" min='20' placeholder="40" />
-                        {/* <InputRightAddon children="cm" /> */}
-                    </InputGroup>
+                    <Field name='size'>
+                        {({ props, field }) => (
+                            <InputGroup size="sm" w='60px'>
+                                <Input {...field} lineHeight='auto' textAlign='center' fontSize='16px' type='number' pattern="[0-9]*" min='20' placeholder="40" />
+                                {/* <InputRightAddon children="cm" /> */}
+                            </InputGroup>
+                        )}
+                    </Field>
                 </Box>
                 {' '} et j'ai utilisé{' '}
                 <Box
                     display='inline-block'
                 >
-                    <InputGroup size="sm" w='100px'>
-                        <Input type='number' fontSize='16px' pattern="[0-9]*" min='20' placeholder="100" />
-                        <InputRightAddon children="cm" />
-                    </InputGroup>
+                    <Field name='fabricLength'>
+                        {({ props, field }) => (
+                            <InputGroup size="sm" w='100px'>
+                                <Input {...field} lineHeight='auto' type='number' fontSize='16px' pattern="[0-9]*" min='20' placeholder="100" />
+                                <InputRightAddon children="cm" />
+                            </InputGroup>
+                        )}
+                    </Field>
                 </Box>
                 {' '}de tissu.
                 </Text>
