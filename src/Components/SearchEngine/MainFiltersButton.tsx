@@ -1,11 +1,11 @@
-import { Box, Button, ButtonGroup, Center, SimpleGrid } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Center, MenuIcon, SimpleGrid } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import CtaSearchStep1 from '../CtaSearchStep1'
 import CtaSearchStep2 from '../CtaSearchStep2'
 
 import { Transition } from 'react-transition-group';
-import { ArrowDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, ArrowDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { navigate } from 'gatsby-link';
 
 const duration = 300;
@@ -38,16 +38,23 @@ const MainFiltersButton = (
         setVariant
     }) => {
     const [step, setStep] = useState(0)
-    const [ univers, setUnivers ]       = useState(null)
+    const [univers, setUnivers] = useState(null)
     // const [ category, setCategory ]     = useState(null)
     return (
         <>
-                <Box
-                    position='relative'
-                    mb={4}
-
-                >
-                    <ButtonGroup w='full'>
+            <Box
+                position='relative'
+                mb={4}
+                display={{ base: 'none', lg: 'block' }}
+            >
+                <ButtonGroup w='full'>
+                    <Button
+                        w='15%'
+                        variant='outline'
+                        onClick={() => navigate('/fr')}
+                    >
+                        <ArrowBackIcon />
+                    </Button>
                     <Button
                         bg='#66878a'
                         borderRadius={3}
@@ -61,94 +68,88 @@ const MainFiltersButton = (
                         w='85%'
                         onClick={() => setStep(step === 0 ? 1 : 0)}
                         _hover={{
-                            bg:'#4D767A',
-                            outline:'none'
+                            bg: '#4D767A',
+                            outline: 'none'
 
                         }}
                         _active={{
-                            bg:'#4D767A',
-                            outline:'none'
+                            bg: '#4D767A',
+                            outline: 'none'
 
                         }}
                         _focus={{
-                            bg:'#4D767A',
-                            outline:'none'
+                            bg: '#4D767A',
+                            outline: 'none'
                         }}
                     >
                         Femme / Jupe
                         {/* Je cherche un patron */}
                         <ArrowDownIcon ml={2} />
                     </Button>
-                    <Button
-                        w='15%'
-                        variant='outline'
-                        onClick={()=>navigate('/fr')}
-                    >
-                        <SmallCloseIcon />
-                    </Button>
-                    </ButtonGroup>
 
-                    <Transition in={step > 0} timeout={duration}>
-                        {state => (
+                </ButtonGroup>
 
-                            <Box
-                                // border='solid 2px'
-                                // borderColor='#88A7AA'
-                                bg='white'
+                <Transition in={step > 0} timeout={duration}>
+                    {state => (
+
+                        <Box
+                            // border='solid 2px'
+                            // borderColor='#88A7AA'
+                            bg='white'
 
 
-                                position='absolute'
-                                top='-10px'
-                                left='-10px'
-                                right='-10px'
-                                borderRadius='xl'
-                                boxShadow='xl'
-                                // pt={20}
-                                overflow='hidden'
-                                zIndex='banner'
-                                style={{
-                                    ...defaultStyle,
-                                    ...transitionStyles[state]
-                                }}
+                            position='absolute'
+                            top='-10px'
+                            left='-10px'
+                            right='-10px'
+                            borderRadius='xl'
+                            boxShadow='xl'
+                            // pt={20}
+                            overflow='hidden'
+                            zIndex='banner'
+                            style={{
+                                ...defaultStyle,
+                                ...transitionStyles[state]
+                            }}
+                        >
+                            <SimpleGrid
+                                columns={2}
+                                pt='70px'
+                                w='200%'
+                                // transform={`translateX(${ step===1 ? '0' : '-50%'})`}
+                                transition={`transform ${duration}ms ease`}
+                                style={
+                                    step === 2
+                                        ?
+                                        { transform: `translateX(-50%)` }
+                                        :
+                                        { transform: `none` }
+
+                                }
                             >
-                                <SimpleGrid
-                                    columns={ 2 }
-                                    pt='70px'
-                                    w='200%'
-                                    // transform={`translateX(${ step===1 ? '0' : '-50%'})`}
-                                    transition={`transform ${duration}ms ease`}
-                                    style={
-                                        step === 2
-                                            ?
-                                                {transform:`translateX(-50%)`}
-                                            :
-                                                {transform:`none`}
+                                <CtaSearchStep1
+                                    isVisible={step === 1 ? true : false}
+                                    setUnivers={(value) => setUnivers(value)}
+                                    handleNextStep={() => setStep(step + 1)}
+                                    setCategory={(value) => setCategory(value)}
+                                />
+                                <CtaSearchStep2
+                                    isVisible={step === 2 ? true : false}
+                                    setCategory={(value) => setCategory(value)}
+                                    handleStepBack={() => setStep(1)}
 
+                                    handleSubmit={(value) => {
+                                        setCategory(value);
+                                        setStep(0);
                                     }
-                                >
-                                    <CtaSearchStep1
-                                        isVisible={step === 1 ? true : false}
-                                        setUnivers={( value )=>setUnivers( value )}
-                                        handleNextStep={()=> setStep( step + 1 )}
-                                        setCategory={(value)=> setCategory( value )}
-                                    />
-                                    <CtaSearchStep2
-                                        isVisible={step === 2 ? true : false}
-                                        setCategory={( value )=>setCategory( value )}
-                                        handleStepBack={()=> setStep(1)}
+                                    }
+                                />
+                            </SimpleGrid>
 
-                                        handleSubmit={( value )=>{
-                                            setCategory( value );
-                                            setStep(0);
-                                        }
-                                        }
-                                    />
-                                </SimpleGrid>
-                                
-                            </Box>
-                        )}
-                    </Transition>
-                </Box>
+                        </Box>
+                    )}
+                </Transition>
+            </Box>
 
         </>
     )

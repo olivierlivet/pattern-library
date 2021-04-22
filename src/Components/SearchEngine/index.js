@@ -36,7 +36,6 @@ const client = contentful.createClient({
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
 });
 
-
 class SearchEngine extends Component {
 
     constructor(props) {
@@ -253,15 +252,7 @@ class SearchEngine extends Component {
                         // display='none'
                         >
                             <Flex justify='space-between'>
-                                {/* <pre>
-                            { JSON.stringify( mainFilters, null, 1 )}
-                        </pre> */}
                                 <Box>
-                                    {/* <Button
-                                display={{ base:'none', lg:'flex'}}
-                            >
-                                Retour au site
-                            </Button> */}
                                     <Box
                                         display={{ base:'none', lg:'block'}}
                                         visibility='hidden'
@@ -282,9 +273,7 @@ class SearchEngine extends Component {
                                             onClick={() => this.setState({ showFilter: !this.state.showFilter })}
                                         />
                                     </HStack>
-
                                 </Box>
-
 
                                 {products && products.length ?
                                     <Center p={0}>
@@ -360,9 +349,8 @@ class SearchEngine extends Component {
                             shouldWrapChildren={true}
                             bg='gray.50'
                             // p={{ base: 4, lg: 4 }}
-
-                            pt={{ base: '16', lg: 32 }}
-                            pb={'32'}
+                            px={{ base:4, lg: 0 }}
+                            py={{ base:24, lg: 24 }}
                         >
 
                             {products && products.length ?
