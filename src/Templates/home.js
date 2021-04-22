@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { graphql, navigate } from 'gatsby'
 import Layout from '../Components/Layouts/base'
-
+import { Link as GatsbyLink } from 'gatsby'
 import {
     StaticImage,
     // GatsbyImage
@@ -16,6 +16,7 @@ import {
     Box,
     Button,
     Text,
+    Link,
     Grid,
     HStack,
     VStack,
@@ -30,6 +31,7 @@ import NewsletterCta from '../Components/NewsletterCta'
 import LinksList from '../Components/LinksList'
 import CtaSearch from '../Components/CtaSearch'
 import AccordionBlock from '../Components/AccordionBlock'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -116,29 +118,49 @@ const HomeTemplate = (props) => {
 
 
 
-            <VStack
+            <Grid
                 bg='#D9E6E6'
-                align='flex-start'
-                py={8}
-                spacing={4}
-                p={{ base: 0, lg: 24 }}
+                templateColumns={{
+                    base: '100%',
+                    lg: '450px 1fr'
+                }}
+                p={{ base: 6, lg: 24 }}
             >
-                <Title>Vos patrons préférés</Title>
-                <EntrySummary />
-                <Box
-                    px={4}
+                <Stack
+                    px={{ base: 4, lg: 26 }}
+                    spacing={4}
                 >
-                    <Button
-                        bg='#EFCBBF'
+                    <Title>Vos patrons préférés</Title>
+                    <Text
                         color='gray.600'
-                        textTransform='uppercase'
-                        letterSpacing='wide'
-                        fontFamily='DM Sans'
-                        fontWeight='normal'
-                        borderRadius={2}
-                    >Voir plus</Button>
-                </Box>
-            </VStack>
+                    >
+                        Voici les patrons préférés de la communeauté, ceux qui ont reçu les meilleures évaluations.
+                    </Text>
+                    <Text>
+                        En savoir plus sur le système d'<Link as={GatsbyLink} to='/fr/a-propos'>évaluation des patrons <ArrowForwardIcon /></Link>
+                    </Text>
+                </Stack>
+                <Stack
+                    spacing={{ base:4, lg:6 }}
+                    maxW='800px'
+                >
+                    <EntrySummary />
+                    <Box
+                        px={{ base: 4, lg: 26 }}
+                    >
+                        <Button
+                            bg='#EFCBBF'
+                            color='gray.600'
+                            textTransform='uppercase'
+                            letterSpacing='wide'
+                            fontFamily='DM Sans'
+                            fontWeight='normal'
+                            borderRadius={2}
+                        >Voir plus</Button>
+                    </Box>
+                </Stack>
+
+            </Grid>
 
 
             <AccordionBlock
@@ -146,7 +168,7 @@ const HomeTemplate = (props) => {
                 more={<Button>Voir plus</Button>}
             />
 
-<VStack
+            {/* <VStack
                 bg='#D9E6E6'
                 align='flex-start'
                 py={8}
@@ -168,7 +190,7 @@ const HomeTemplate = (props) => {
                         borderRadius={2}
                     >Voir plus</Button>
                 </Box>
-            </VStack>
+            </VStack> */}
 
 
             <VStack

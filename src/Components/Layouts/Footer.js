@@ -34,14 +34,14 @@ const Footer = () => {
                         fontSize='xx-large'
                     >The Patterns Corner</Text>
                 </Box>
-                {/* <Box>
+                <Box>
                     <Heading as='p' mb={2} fontSize='normal' fontWeight='normal' color='#EFCBBF' fontFamily='Noe Display'>Éditeurs de patrons</Heading>
                     <List>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink}>Pourquoi Patterns Corner</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos'>Pourquoi Patterns Corner</Link>
                         </ListItem>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink}>Mentions légales</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos'>Mentions légales</Link>
                         </ListItem>
                     </List>
                 </Box>
@@ -49,13 +49,13 @@ const Footer = () => {
                     <Heading as='p' mb={2} fontSize='normal' fontWeight='normal' color='#EFCBBF' fontFamily='Noe Display'>Éditeurs de patrons</Heading>
                     <List>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink}>Vendre sur TPC</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos'>Vendre sur TPC</Link>
                         </ListItem>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink}>Accès plateforme éditeurs</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos'>Accès plateforme éditeurs</Link>
                         </ListItem>
                     </List>
-                </Box> */}
+                </Box>
 
             </SimpleGrid>
         </Box>

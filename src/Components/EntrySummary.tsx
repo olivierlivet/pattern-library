@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css';
+import '../Styles/Swipper.css'
 
 const EntrySummary = () => {
 
@@ -20,7 +21,7 @@ const EntrySummary = () => {
     const Card = ({ index }) => (
         <Box
             w='240px' h='400px' bg='gray.300'
-            // ml={ index === 0 ? 4 : 0 }
+        // ml={ index === 0 ? 4 : 0 }
         >
             <Image
                 src='https://republiqueduchiffon.com/wp-content/uploads/2021/02/Sewing-pattern-BILLY-6-600x600.jpg'
@@ -55,44 +56,42 @@ const EntrySummary = () => {
     )
 
     return (
-        <Box maxW='100vw' position='relative' mx={4}>
-            <Box>
-                <Swiper
-                    spaceBetween={10}
-                    slidesPerView={1.4}
-                    freeMode={true}
+        <Box
+            // maxW='100vw'
+            position='relative'
+            mx={{ base:4, lg:26 }}
+        >
+            <Swiper
+                spaceBetween={10}
+                // slidesPerView={1.4}
+                freeMode={true}
 
-                    breakpoints= {{
-                        320: {
-                            slidesPerView: 1.4,
-                            spaceBetween: 20,
-                          },
-                        640: {
-                          slidesPerView: 4,
-                          spaceBetween: 10,
-                        },
-                        768: {
-                          slidesPerView: 4,
-                          spaceBetween: 10,
-                        },
-                        1024: {
-                          slidesPerView: 5,
-                          spaceBetween: 10,
-                        },
-                    }}
+                breakpoints={{
+                    320: {
+                        slidesPerView: 1.4,
+                        spaceBetween: 10,
+                    },
+                    640: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                    },
+                }}
 
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
-                >
-
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) =>
-                        <SwiperSlide><Card index={i} /></SwiperSlide>)}
-
-                </Swiper>
-            </Box>
-
-
-
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+            >
+                <Box mx={4}>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) => <SwiperSlide><Card index={i} /></SwiperSlide>)}
+                </Box>
+            </Swiper>
         </Box>
     )
 }

@@ -45,14 +45,26 @@ const NewsletterForm = ({ }) => {
                 <Form>
                     <Field name="email">
                     {({ props, field }) => (
-                            <FormControl>
+                            <FormControl maxW='100%'>
                                 <FormLabel>
                                     Pour recevoir nos bons plans, les infos sur les derniers patrons et des inspirations, il suffit de laisser votre adresse mail.
                                 </FormLabel>
                                 <Stack direction="row" spacing={4}>
-                                    <Input {...field} variant='flushed' type='email' placeholder='votre@email.fr' />
-                                    <Button type='submit' minW='120px' variant='outline' colorScheme='black'>Je m'abonne</Button>
-
+                                    <Input
+                                        {...field}
+                                        variant='flushed'
+                                        type='email'
+                                        placeholder='votre@email.fr'
+                                        // w={{ base: 'full', lg:'auto'}}
+                                    />
+                                    <Button
+                                        type='submit'
+                                        minW='120px'
+                                        variant='outline'
+                                        colorScheme='black'
+                                    >
+                                        Je m'abonne
+                                    </Button>
                                 </Stack>
                                 <FormHelperText color='gray.200'>Votre email est conservée de façon très sécurisée et la désinscription est facile</FormHelperText>
                             </FormControl>

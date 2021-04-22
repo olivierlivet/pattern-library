@@ -45,7 +45,7 @@ const CtaSearch = ({  handleLoadSearchEngine }) => {
 
                 >
                     <Button
-                        bg='#88A7AA'
+                        bg='#66878a'
                         borderRadius={3}
                         fontFamily='Noe Display'
                         fontWeight='normal'
