@@ -402,11 +402,6 @@ class SearchEngine extends Component {
                             px={{ base:4, lg: 0 }}
                             py={{ base:24, lg: 24 }}
                         >
-                            <pre>
-                                {/* { JSON.stringify( variants, null, 1 )} */}
-                                { JSON.stringify( this.state.mainFilters, null, 1 )}
-
-                            </pre>
 
                             {products && products.length ?
                                 products.map(product =>
