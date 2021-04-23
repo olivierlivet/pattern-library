@@ -1,18 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
     Box,
-    ButtonGroup,
-    Button,
     Flex,
-    Stack,
     Text,
     Tag,
     TagLabel,
     TagCloseButton
 } from '@chakra-ui/react'
-
-
 
 const VariantFiltersButtons = (
     {
@@ -20,22 +15,6 @@ const VariantFiltersButtons = (
         selectedVariant,
         setVariant
     }) => {
-
-
-    const handleChange = (value) => {
-        console.log(value)
-        // if( selectedVariant.includes( value )){
-        //     // remove item
-        // }else{
-        //     const currentValues = selectedVariant;
-        //     currentValues.push( value )
-        //     console.log( currentValues)
-        //     setSelectedVariant( currentValues )
-        //     // setSelectedVariant( selectedVariant.push( value ) )
-        // }
-    }
-
-   
 
     return (
         variants && variants.length ?

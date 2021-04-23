@@ -100,8 +100,6 @@ const HomeTemplate = (props) => {
                     {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text>
                         {' '}patrons.
                     </Text>
-
-
                     <CtaSearch
                         handleLoadSearchEngine={(value) => navigate(`/fr/search?category=${value}`)}
                     />

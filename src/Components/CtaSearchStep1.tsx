@@ -6,6 +6,7 @@ import { Transition } from 'react-transition-group';
 
 type props = {
     isVisibe: boolean,
+    univers: object,
     handleNextStep: Function
 }
 
@@ -43,7 +44,13 @@ const transitionStyles = {
     },
 }
 
-const CtaSearchStep1: FunctionComponent<props> = ({ isVisible, handleNextStep }) => {
+const CtaSearchStep1: FunctionComponent<props> = (
+    {
+        isVisible,
+        handleNextStep,
+        univers
+    }) => {
+        console.log( univers )
     return (
         <Transition in={isVisible} timeout={duration}>
             {state => (
@@ -56,8 +63,39 @@ const CtaSearchStep1: FunctionComponent<props> = ({ isVisible, handleNextStep })
                         ...defaultStyle,
                         ...transitionStyles[state]
                     }}
-                    >
+                > 
+
+                    {univers && univers.length ? univers.map(item =>
                         <Box
+                            borderBottom='solid 1px'
+                            borderBottomColor='gray.50'
+                        >
+        
+                            <Button
+                                onClick={() => handleNextStep( item.sys.id )}
+                                fontWeight='normal'
+                                fontFamily='DM Sans'
+                                variant='ghost'
+                                w='100%'
+                                justifyContent='space-between'
+
+                                _hover={{
+                                    bg: 'none',
+                                    border: 'none'
+                                }}
+                                _focus={{
+                                    bg: 'none',
+                                    border: 'none'
+                                }}
+                            >
+                                {item.fields.title}
+                            <ArrowForwardIcon />
+                            </Button>
+                        </Box>
+                    ) : null }
+
+
+                    {/* <Box
                             borderBottom='solid 1px'
                             borderBottomColor='gray.50'
                         >
@@ -81,42 +119,7 @@ const CtaSearchStep1: FunctionComponent<props> = ({ isVisible, handleNextStep })
                                 Pour une femme
                                 <ArrowForwardIcon />
                             </Button>
-                        </Box>
-                        <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between'
-                                onClick={()=>handleNextStep()}
-                            >
-                                Pour un enfant
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
-                        <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between'
-                                onClick={()=>handleNextStep()}
-
-                            >
-                                Pour un homme
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
-                        <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between'
-                                onClick={()=>handleNextStep()}
-
-                            >
-                                Pour un accessoire
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
+                        </Box> */}
                 </Box>
             )}
         </Transition>
