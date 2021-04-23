@@ -34,13 +34,12 @@ const SearchTemplate = ( props ) => {
                 <title>Recherche de patrons de couture ¬ ThePatternsCorner</title>
                 <meta name='canonical' content={`https://thepatternscorner.com/fr`} />
             </Helmet>
-            <pre>
+            {/* <pre>
                 { JSON.stringify( qs, null, 1 )}
-            </pre>
+            </pre> */}
             <SearchEngineLoader
                 filter={{
                     category: qs.category ? qs.category : null,
-                    // variant: variant ? variant : null
                 }}
             />
         </Layout>

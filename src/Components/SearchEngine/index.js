@@ -11,7 +11,8 @@ import {
     Select,
     Text,
     Badge,
-    Spinner
+    Spinner,
+    Stack
 } from '@chakra-ui/react'
 import config from '../../Utils/config'
 import ProductCardSmall from '../Product/CardSmall'
@@ -26,9 +27,15 @@ import Wrapper from '../Layouts/Wrapper'
 import FavoriteIcon from '../../Images/Icons/Favorite'
 import ShoppingBagIcon from '../../Images/Icons/ShoppingBag'
 
+import ProductsCountIndicator from './ProductsCountIndicator'
+
 import CategoryChoiceButton from './CategoryChoiceButton'
 import FilterButton from './FilterButton'
 import MainFiltersButton from './MainFiltersButton'
+import VariantFiltersButtons from './VariantFiltersButtons'
+
+
+import getVariants from '../Data/getVariants'
 
 const contentful = require("contentful");
 const client = contentful.createClient({
@@ -41,9 +48,13 @@ class SearchEngine extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            variants: null,
             products: null,
             singleProduct: null,
             mainFilters: {
+                univers: null,
+                category: null,
+                variants: []
             },
             refineFilters: { 'test': 'test' },
             showFilter: false
@@ -61,13 +72,13 @@ class SearchEngine extends Component {
     }
 
     variantFilter() {
-        let variantFilter = Filters.getVariantFilter(this.state.mainFilters)
-        if (variantFilter) {
-            return Filters.getVariantFilter(this.state.mainFilters)
-        } else {
-            return null
-        }
 
+        if( this.state.mainFilters.variants && this.state.mainFilters.variants.length ){
+            return(
+                { "fields.variant.sys.id[in]": this.state.mainFilters.variants.join(',') }
+            )
+        }
+        return null
     }
 
     // variantFilter () {
@@ -101,13 +112,23 @@ class SearchEngine extends Component {
     handleUpdateRefineFilters(key, value) {
         let { refineFilters } = this.state
         refineFilters[key] = value
-        this.setState({ "refineFilters": refineFilters }, this.loadProducts())
+        this.setState({ "refineFilters": refineFilters },
+            ()=>{
+                 this.loadProducts();
+                //  this.updateVariants();
+            }
+       )
     }
 
     componentDidMount() {
         this.updateMainFilters('category', this.props.mainFilters.category)
-
+        this.getVariants()
         this.loadProducts()
+    }
+
+    getVariants() {
+        console.log( 'update variants with category', this.state.mainFilters.category )
+        const variants = getVariants( this.state.mainFilters.category ).then((response)=> this.setState({ variants: response.items }));
     }
 
     loadProducts() {
@@ -166,6 +187,41 @@ class SearchEngine extends Component {
 
     }
 
+    updateVariants( value ){
+        console.log(`Update variant ${value}`)
+        let mainFilters = this.state.mainFilters;
+        let currentVariants = this.state.mainFilters.variants;
+
+        if( currentVariants && currentVariants.includes( value )){
+            for (let index = 0; index < currentVariants.length; index++) {
+                if( currentVariants[index] === value ) {
+                    currentVariants.splice(index, 1);
+                }
+                
+            }
+            console.log('remove variant')
+        }else{
+            console.log('ad variant')
+            if ( currentVariants && currentVariants.length ){
+                currentVariants.push( value )
+            }else{
+                currentVariants = [ value ]
+            }
+
+            mainFilters['variants'] = currentVariants
+
+            console.log('updatedVariants', currentVariants)
+
+            
+        }
+
+        this.setState({
+            mainFilters: mainFilters
+        }, this.loadProducts() )
+        // this.setState({ products: [] })
+
+    }
+
     updateMainFilters(key, value) {
         this.setState({ products: [] })
 
@@ -174,14 +230,19 @@ class SearchEngine extends Component {
         console.log(key, value)
         mainFilters[key] = value
         if (key === 'category') { delete mainFilters.variant }
-        this.setState({ mainFilters: mainFilters }, this.loadProducts())
+        this.setState({ mainFilters: mainFilters },
+            ()=>{
+                this.getVariants()
+                this.loadProducts();
+            }
+        )
         // }, 1000)
 
 
     }
 
     render() {
-        const { products, singleProduct, mainFilters, refineFilters, showFilter } = this.state
+        const { products, singleProduct, mainFilters, refineFilters, showFilter, variants } = this.state
 
         return (
             <>
@@ -202,16 +263,24 @@ class SearchEngine extends Component {
                         p={{ base: 0, lg: 8 }}
 
                     >
-                        <Box
+                        <Stack
                             position='sticky'
                             top={8}
+                            spacing={{ base:4, lg:8 }}
                         >
 
                             <MainFiltersButton
                                 setCategory={(value)=> this.updateMainFilters('category', value)}
-                                setVariant={(value)=>this.updateMainFilters('variant', value)}
+                                // setVariant={(value)=>this.updateMainFilters('variant', value)}
                                 // handleSubmit={(value)=>this.updateMainFilters('variant', value)}
                                 // this.updateMainFilters('variant', value)}
+                            />
+
+                            <VariantFiltersButtons
+                                key={ variants }
+                                variants={ variants }
+                                selectedVariant={ mainFilters.variants }
+                                setVariant={(value)=>this.updateVariants(value)}
                             />
 
                             <RefinerFilters
@@ -229,7 +298,7 @@ class SearchEngine extends Component {
                                 }
                                 hideFilter={() => this.setState({ 'showFilter': !showFilter })}
                             />
-                        </Box>
+                        </Stack>
                     </Box>
                     <Box>
                         <Box
@@ -274,27 +343,8 @@ class SearchEngine extends Component {
                                         />
                                     </HStack>
                                 </Box>
+                                <ProductsCountIndicator count = { products && products.length ? products.length : null } />
 
-                                {products && products.length ?
-                                    <Center p={0}>
-                                        <Text fontSize='15px' letterSpacing='wide' display={{ base: 'block', lg: 'none' }}>
-                                            <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
-                                                {products.length}
-                                            </Text>
-                                            {products.length === 1 ? ` patron` : ` patrons`}
-                                        </Text>
-                                        <Text fontSize='15px' letterSpacing='wide' display={{ base: 'none', lg: 'block' }}>
-                                            <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>
-                                                {products.length}
-                                            </Text>
-                                            {` patrons correspondent à votre recherche`}
-                                        </Text>
-                                    </Center>
-                                    :
-                                    <Center p={2}>
-                                        <Spinner size='sm' color='#88a7aa' />
-                                    </Center>
-                                }
 
                                 <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
                                     <Center
@@ -352,6 +402,11 @@ class SearchEngine extends Component {
                             px={{ base:4, lg: 0 }}
                             py={{ base:24, lg: 24 }}
                         >
+                            <pre>
+                                {/* { JSON.stringify( variants, null, 1 )} */}
+                                { JSON.stringify( this.state.mainFilters, null, 1 )}
+
+                            </pre>
 
                             {products && products.length ?
                                 products.map(product =>
