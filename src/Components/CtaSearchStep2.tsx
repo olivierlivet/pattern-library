@@ -1,11 +1,14 @@
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { Button } from '@chakra-ui/button';
 import { ArrowBackIcon, ArrowForwardIcon, CloseIcon } from '@chakra-ui/icons';
 import { Box } from '@chakra-ui/layout'
-import React, { FunctionComponent } from 'react'
+
 import { Transition } from 'react-transition-group';
+import getCategories from '../Data/getCategories'
 
 type props = {
     isVisibe: boolean,
+    univers: string,
     handleStepBack: Function,
     handleSubmit: Function
 }
@@ -44,7 +47,24 @@ const transitionStyles = {
     },
 }
 
-const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack, handleSubmit }) => {
+const CtaSearchStep2: FunctionComponent<props> = (
+    {
+        univers,
+        isVisible,
+        handleStepBack,
+        handleSubmit
+    }) => {
+    const [categories, setCategories] = useState(null)
+
+    useEffect(() => {
+        // console.log('Load CtaSearch')
+        getCategories( univers ).then((response) =>{
+            setCategories(response.items)
+            console.log( response.items )
+        }
+        )
+    }, [])
+
     return (
         <Transition in={isVisible} timeout={duration}>
             {state => (
@@ -72,66 +92,37 @@ const CtaSearchStep2: FunctionComponent<props> = ({ isVisible, handleStepBack, h
                             onClick={() => handleStepBack()}
 
                             _hover={{
-                                bg:'none',
-                                border:'none'
+                                bg: 'none',
+                                border: 'none'
                             }}
                             _focus={{
-                                bg:'none',
-                                border:'none'
+                                bg: 'none',
+                                border: 'none'
                             }}
                         >
                             <ArrowBackIcon mr={2} />
                             Retour
                         </Button>
                     </Box>
+                    { categories ?
+                        categories.length && categories.map( category =>
                     <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button
-                                onClick={()=>handleSubmit( '3v7MEyPWB0d1FOYFa9odJV')}
-                                
-                                fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
-                                Une jupe
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
-                        <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button
-                                onClick={()=>handleSubmit( '2aMnwR8nnDdeb0PNj2SBe9')}
-                                                            
-                                fontWeight='normal'
-                                fontFamily='DM Sans'
-                                variant='ghost'
-                                w='100%'
-                                justifyContent='space-between'
-                            >
-                                Un haut
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
-                        <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
-                                Un haut
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
-                        <Box
-                            borderBottom='solid 1px'
-                            borderBottomColor='gray.50'
-                        >
-                            <Button fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
-                                Un pantalon
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Box>
+                        borderBottom='solid 1px'
+                        borderBottomColor='gray.50'
+                    >
+                        <Button
+                            onClick={() => handleSubmit( category.sys.id )}
+
+                            fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
+                            { category.fields.title }
+                            <ArrowForwardIcon />
+                        </Button>
+                    </Box>
+                        )
+                    : null }
                     
+                   
+
                 </Box>
             )}
         </Transition>

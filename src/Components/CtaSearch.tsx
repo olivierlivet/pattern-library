@@ -6,8 +6,7 @@ import CtaSearchStep2 from './CtaSearchStep2'
 
 import { Transition } from 'react-transition-group';
 import { ArrowDownIcon } from '@chakra-ui/icons';
-import getUnivers from './Data/getUnivers';
-import getCategory from './Data/';
+import getUnivers from '../Data/getUnivers';
 
 const duration = 300;
 

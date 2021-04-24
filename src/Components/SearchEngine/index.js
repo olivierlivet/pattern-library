@@ -35,7 +35,7 @@ import MainFiltersButton from './MainFiltersButton'
 import VariantFiltersButtons from './VariantFiltersButtons'
 
 
-import getVariants from '../Data/getVariants'
+import getVariants from '../../Data/getVariants'
 
 const contentful = require("contentful");
 const client = contentful.createClient({
@@ -271,6 +271,7 @@ class SearchEngine extends Component {
 
                             <MainFiltersButton
                                 setCategory={(value)=> this.updateMainFilters('category', value)}
+                                label={ 'Femme/Jupe' }
                                 // setVariant={(value)=>this.updateMainFilters('variant', value)}
                                 // handleSubmit={(value)=>this.updateMainFilters('variant', value)}
                                 // this.updateMainFilters('variant', value)}

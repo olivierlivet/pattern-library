@@ -1,8 +1,12 @@
+import React, { FunctionComponent, useState, useEffect } from 'react'
+
 import { Button } from '@chakra-ui/button';
 import { ArrowForwardIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import { Box } from '@chakra-ui/layout'
-import React, { FunctionComponent } from 'react'
 import { Transition } from 'react-transition-group';
+
+import getUnivers from '../Data/getUnivers'
+
 
 type props = {
     isVisibe: boolean,
@@ -48,8 +52,17 @@ const CtaSearchStep1: FunctionComponent<props> = (
     {
         isVisible,
         handleNextStep,
-        univers
     }) => {
+
+        const [univers, setUnivers ] = useState(null)
+
+
+useEffect(() => {
+    // console.log('Load CtaSearch')
+    getUnivers().then((response) => setUnivers( response.items ))
+}, [])
+
+
         console.log( univers )
     return (
         <Transition in={isVisible} timeout={duration}>

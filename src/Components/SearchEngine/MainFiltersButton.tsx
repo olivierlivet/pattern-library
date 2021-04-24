@@ -1,5 +1,6 @@
+import React, { useState, useEffect } from 'react'
 import { Box, Button, ButtonGroup, Center, MenuIcon, SimpleGrid } from '@chakra-ui/react'
-import React, { useState } from 'react'
+
 
 import CtaSearchStep1 from '../CtaSearchStep1'
 import CtaSearchStep2 from '../CtaSearchStep2'
@@ -7,6 +8,7 @@ import CtaSearchStep2 from '../CtaSearchStep2'
 import { Transition } from 'react-transition-group';
 import { ArrowBackIcon, ArrowDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { navigate } from 'gatsby-link';
+
 
 const duration = 300;
 
@@ -34,14 +36,23 @@ const transitionStyles = {
 const MainFiltersButton = (
     {
         handleLoadSearchEngine,
-        setCategory,
-        setVariant
+        setVariant,
+        label
     }) => {
     const [step, setStep] = useState(0)
     const [univers, setUnivers] = useState(null)
-    // const [ category, setCategory ]     = useState(null)
+    const [ universList, setUniversList ]       = useState(null)
+    const [ category, setCategory ]     = useState(null)
+
+
+
+
+
     return (
         <>
+        <pre>
+            { JSON.stringify( univers, null, 1 )}
+        </pre>
             <Box
                 position='relative'
                 mb={4}
@@ -82,8 +93,7 @@ const MainFiltersButton = (
                             outline: 'none'
                         }}
                     >
-                        Femme / Jupe
-                        {/* Je cherche un patron */}
+                        { label }
                         <ArrowDownIcon ml={2} />
                     </Button>
 

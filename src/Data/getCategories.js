@@ -5,6 +5,7 @@ const client = contentful.createClient({
 });
 
 const getCategories = ( universId ) => {
+    console.log('getCategories', universId )
     let universQuery = {
         content_type: "category",
         "fields.univers.sys.id": universId
