@@ -68,6 +68,22 @@ exports.createPages = ({ graphql, actions }) => {
 
   /*
     #####
+    Account
+    #####
+  */
+    const editorAccountTemplate = path.resolve('src/Templates/accountEditor.js')
+    createPage({
+      path: `${'/fr/editor'}`,
+      component: editorAccountTemplate,
+      context: {
+        // slug: edge.node.slug,
+        // contentfulID: '3t0pwYmEBxvCykiqoJbMVG',
+        locale: 'fr'
+      }
+    });
+
+  /*
+    #####
     Pages
     #####
   */
