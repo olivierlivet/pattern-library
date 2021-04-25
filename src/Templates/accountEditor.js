@@ -71,6 +71,12 @@ const AccountEditorTemplate = (props) => {
         )
     }
 
+    const AccountSales = () => {
+        return(
+            <div>sales</div>
+        )
+    }
+
     
 
     return (
@@ -89,7 +95,8 @@ const AccountEditorTemplate = (props) => {
                     default='/'
                     // basepath='/fr/compte'
                 >
-                    <AccountHome path="/" />
+                    <AccountHome path='/' />
+                    <AccountSales path='/sales' />
                     
                 </Router>
                 {/* <Nav data={univers} /> */}
