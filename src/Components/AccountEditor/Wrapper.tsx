@@ -4,7 +4,7 @@ import {
     Box,
     Center,
 } from '@chakra-ui/react'
-import AccountNav from '../../Components/Nav/Account'
+import AccountEditorNav from '../../Components/Nav/AccountEditor'
 
 
 const AccountWrapper = ({ children, size }) => {
@@ -14,7 +14,7 @@ const AccountWrapper = ({ children, size }) => {
             mt={20}
             // display='none'
         >
-            <AccountNav />
+            <AccountEditorNav />
         </Box>
         <Center
             // minH='100vh'

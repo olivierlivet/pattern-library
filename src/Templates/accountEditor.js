@@ -30,7 +30,11 @@ import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
 import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 
 import { Router, Link as NavLink, Match, useLocation, Location } from "@reach/router";
-import AccountHome from '../Components/accountEditor/Home'
+import AccountHome from '../Components/AccountEditor/Home'
+import AccountProducts from '../Components/AccountEditor/Products'
+import AccountSales from '../Components/accountEditor/Sales'
+import AccountSettings from '../Components/AccountEditor/Settings'
+import AccountRatings from '../Components/AccountEditor/Ratings'
 
 
 const AccountEditorTemplate = (props) => {
@@ -70,13 +74,6 @@ const AccountEditorTemplate = (props) => {
             </Box>
         )
     }
-
-    const AccountSales = () => {
-        return(
-            <div>sales</div>
-        )
-    }
-
     
 
     return (
@@ -96,7 +93,10 @@ const AccountEditorTemplate = (props) => {
                     // basepath='/fr/compte'
                 >
                     <AccountHome path='/' />
+                    <AccountProducts path='/products' />
                     <AccountSales path='/sales' />
+                    <AccountRatings path='/ratings' />
+                    <AccountSettings path='/settings' />
                     
                 </Router>
                 {/* <Nav data={univers} /> */}
