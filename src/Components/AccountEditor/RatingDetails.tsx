@@ -25,11 +25,17 @@ const RatingDetails = ({ }) => {
         <Center
             mt={10}
             borderRadius='md'
-            p={{ base:32, lg:'96'}}
+            p={{ base:32, lg:'64'}}
             border='dashed 3px'
             borderColor='gray.100'
         >
-            Rating details
+            <Text
+                letterSpacing='widest'
+                color='gray.500'
+                textTransform='uppercase'
+            >
+                Rating details
+            </Text>
         </Center>
     )
 }

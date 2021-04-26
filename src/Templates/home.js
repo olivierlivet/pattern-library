@@ -102,7 +102,7 @@ const HomeTemplate = (props) => {
                         {' '}patrons.
                     </Text>
                     <CtaSearch
-                        handleLoadSearchEngine={(value, btnLabel) => navigate(`/fr/search?category=${value.id}&label=${btnLabel}`)}
+                        handleSubmit={(value) => navigate(`/fr/search?category=${value.id}&label=${value.label}`)}
                     />
                 </VStack>
             </Center>

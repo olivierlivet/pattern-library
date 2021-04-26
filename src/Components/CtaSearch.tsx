@@ -31,11 +31,12 @@ const transitionStyles = {
     exited: { opacity: 0 },
 }
 
-const CtaSearch = ({  handleLoadSearchEngine }) => {
+const CtaSearch = ({  handleSubmit }) => {
     const [step, setStep] = useState(0)
     const [ universList, setUniversList ]       = useState(null)
     const [ univers, setUnivers ]       = useState(null)
     const [ category, setCategory ]     = useState(null)
+    const [ btnLabel , setBtnLabel ] = useState();
 
 
     useEffect(() => {
@@ -128,8 +129,8 @@ const CtaSearch = ({  handleLoadSearchEngine }) => {
                                         isVisible={step === 1 ? true : false}
                                         univers={ universList }
                                         handleNextStep={( value)=>{
-                                            console.log('choose univers', value)
-                                            setUnivers( value )
+                                            setBtnLabel(value.label);
+                                            setUnivers( value.id )
                                             setStep( step + 1 )
 
                                         }}
@@ -141,7 +142,10 @@ const CtaSearch = ({  handleLoadSearchEngine }) => {
                                         setCategory={( value )=>setCategory( value )}
                                         handleStepBack={()=> setStep(1)}
 
-                                        handleSubmit={( value )=> handleLoadSearchEngine( value )}
+                                        handleSubmit={( value )=> 
+                                            handleSubmit( value )
+                                            // console.log( 'handlesubmit', value )
+                                        }
                                     />
                                 </SimpleGrid>
                                 

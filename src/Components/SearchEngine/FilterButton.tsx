@@ -22,7 +22,7 @@ const FilterButton: FunctionComponent<props> = (
                 letterSpacing='wide'
                 textTransform='uppercase'
                 fontSize='xs'
-                borderRadius='md'
+                borderRadius={4}
 
                 cursor='s-resize'
 

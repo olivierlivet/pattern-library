@@ -275,6 +275,7 @@ class SearchEngine extends Component {
                                 setCategory={(value) => this.updateMainFilters('category', value)}
                                 label={'Femme/Jupe'}
                                 display={{ base: 'none', lg: 'block' }}
+                                size='large'
                             />
 
                             <VariantFiltersButtons
@@ -313,8 +314,8 @@ class SearchEngine extends Component {
                                 xl: '400px'
                             }}
                             right='0'
-                            p={{ base: 4, lg: 10 }}
-                            pb={{ base: 10, lg: 10 }}
+                            p={{ base: 2, lg: 10 }}
+                            pb={{ base: 4, lg: 10 }}
                             pt={{ base: 4, lg: 10 }}
 
                             bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,1) 100%)'
@@ -335,6 +336,7 @@ class SearchEngine extends Component {
                                             setCategory={(value) => this.updateMainFilters('category', value)}
                                             label={'Femme/Jupe'}
                                             display={{ base: 'block', lg: 'none' }}
+                                            size='small'
                                         />
                                         {/* <CategoryChoiceButton
                                             mainFilters={mainFilters}
