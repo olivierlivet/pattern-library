@@ -42,7 +42,7 @@ const Hierarchical: FunctionComponent<props> = ({ data }) => {
                         </BreadcrumbItem>
                         : null}
 
-                    {data.category ?
+                    {data.variant ?
                         <BreadcrumbItem>
                             <BreadcrumbLink as={GatsbyLink} to={`/fr${data.variant.slug}`}>{data.variant.title}</BreadcrumbLink>
                         </BreadcrumbItem>

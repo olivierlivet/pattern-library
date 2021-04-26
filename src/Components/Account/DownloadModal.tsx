@@ -40,8 +40,8 @@ const DownloadModal = ({ isVisible, onClose }) => {
                 <ModalBody>
                     <VStack spacing={4}>
                         <Text color='gray.600'>Vous êtes sur le point de télécharger le patron <Text as='span' borderBottom='solid 2px' borderBottomColor='brand.pink.400'>Jupe Rita</Text> pour démarrer un super projet.</Text>
-                        <Text color='gray.600'>Avant cela, il est important que vous sachiez que les patrons de la République du Chiffon sont téléchargeables 3 fois. Cela permet d'assurer à leur éditrice que ses créations sont distribuées avec soin.</Text>
-                        <Text color='gray.600'>Ainsi, soyez attentive et consciente que ces téléchargements n'étant pas illimités, vous devez de votre côté l'archiver personnelement dans vos documents.</Text>
+                        <Text color='gray.600'>Avant cela, il est important que vous sachiez que les patrons de la République du Chiffon sont téléchargeables 3 fois. Cela permet d'assurer à leur éditrice que ses créations sont transmises avec attention aux couturières.</Text>
+                        <Text color='gray.600'>Ainsi, soyez attentive au fait que ces téléchargements n'étant pas illimités, il vous faut l'archiver de façon sûre dans vos documents.</Text>
 
                             <Button
                                 bg='brand.pink.400'
