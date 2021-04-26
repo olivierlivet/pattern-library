@@ -142,13 +142,12 @@ const RefineFilters: FunctionComponent<props> = (
             {state => (
                 <Box
                     w={{ base: 'full', lg: 'auto' }}
-                    h={{ base: '100vh', lg: 'auto' }}
+                    // h={{ base: '100vh', lg: 'auto' }}
 
-                    overflowY='scroll'
+                    // overflowY='scroll'
                     maxH={{ base: 'auto', lg: '75vh' }}
 
                     background={{ base: 'white', lg:'transparent' }}
-                    borderRadius='0 1rem 1rem 0'
 
                     style={{
                         ...defaultStyle,
@@ -161,7 +160,11 @@ const RefineFilters: FunctionComponent<props> = (
                         <Accordion defaultIndex={[0]} allowMultiple>
                             {Filters}
                         </Accordion>
-                        <Button mt={2} onClick={() => hideFilter()}>Valider</Button>
+                        <Button
+                            mt={2}
+                            w={{ base:'full', lg:'auto'}}
+                            onClick={() => hideFilter()}
+                        >Valider</Button>
                     </Box>
                 </Box>
             )}

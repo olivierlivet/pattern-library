@@ -6,7 +6,9 @@ import {
     Stack,
     Checkbox,
     CheckboxGroup,
-    Select
+    Select,
+    AccordionIcon,
+    AccordionButton
 } from '@chakra-ui/react'
 import Label from './FilterLabel'
 import ClearButton from './ClearButton'
@@ -14,7 +16,10 @@ import ClearButton from './ClearButton'
 const Filter: FunctionComponent = () => {
     return (
         <>
-            <Label>Mensurations :</Label>
+            <AccordionButton>
+                <Box flex="1" textAlign="left">Mensurations&nbsp;:</Box>
+                <AccordionIcon />
+            </AccordionButton>  
             <AccordionPanel>
                 <Select>
                     <option>36</option>

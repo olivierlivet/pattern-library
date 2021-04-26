@@ -5,7 +5,9 @@ import {
     Button,
     Stack,
     Checkbox,
-    CheckboxGroup
+    CheckboxGroup,
+    AccordionIcon,
+    AccordionButton
 } from '@chakra-ui/react'
 import Label from './FilterLabel'
 import ClearButton from './ClearButton'
@@ -18,7 +20,12 @@ const Filter: FunctionComponent<props> = ({ handleChange }) => {
     const [values, setValues] = useState()
     return (
         <>
-            <Label>Poches :</Label>
+
+            <AccordionButton>
+                <Box flex="1" textAlign="left">Poches&nbsp;:</Box>
+                <AccordionIcon />
+            </AccordionButton>
+
             <AccordionPanel>
                 <CheckboxGroup
                     onChange={value => {
@@ -30,7 +37,7 @@ const Filter: FunctionComponent<props> = ({ handleChange }) => {
                         <Checkbox value='with' name="pocket" >Avec poche</Checkbox>
                         <Checkbox value='without' name="pocket" >Sans poche</Checkbox>
                     </Stack>
-                    <ClearButton handleClear={()=>setValues( null )} />
+                    {/* <ClearButton handleClear={()=>setValues( null )} /> */}
                 </CheckboxGroup>
             </AccordionPanel>
         </>

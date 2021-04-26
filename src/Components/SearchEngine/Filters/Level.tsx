@@ -20,7 +20,10 @@ const Filter: FunctionComponent<props> = ({ handleChange }) => {
     const [values, setValues] = useState()
     return (
         <>
-            <Label>Niveau de pratique :</Label>
+            <AccordionButton>
+                <Box flex="1" textAlign="left">Niveau de pratique&nbsp;:</Box>
+                <AccordionIcon />
+            </AccordionButton>
             <AccordionPanel>
                 <CheckboxGroup
                     onChange={value => {

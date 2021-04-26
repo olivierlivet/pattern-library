@@ -259,14 +259,14 @@ class SearchEngine extends Component {
                         p={{ base: 0, lg: 8 }}
 
                     >
-                        <Stack
+                        <Box
                             bg={{ base:'white', lg:'none'}}
                             
                             spacing={{ base: 4, lg: 8 }}
 
                             display={{ base:showFilter ? 'block' : 'none', lg:'block' }}
                             position={{ base:'fixed', lg:'sticky' }}
-                            top={{ base:'64px', lg:10 }}
+                            top={{ base:'0px', lg:10 }}
                             left={0}
                             bottom={0}
                             right={0}
@@ -276,8 +276,13 @@ class SearchEngine extends Component {
                             id='filters'
 
                             p={{ base: 4, lg:0 }}
+                            pt={{ base:20, lg:0 }}
+
+                            maxH={{ base:'100vh', base:'auto' }}
+                            overflowY={{ base:'scroll', lg:'auto' }}
 
                         >
+                        <Stack>
 
                             <MainFiltersButton
                                 setCategory={(value) => this.updateMainFilters('category', value)}
@@ -309,6 +314,7 @@ class SearchEngine extends Component {
                                 hideFilter={() => this.setState({ 'showFilter': !showFilter })}
                             />
                         </Stack>
+                        </Box>
                     </Box>
                     <Box>
                         <Box

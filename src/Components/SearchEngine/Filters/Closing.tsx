@@ -5,7 +5,9 @@ import {
     Button,
     Stack,
     Checkbox,
-    CheckboxGroup
+    CheckboxGroup,
+    AccordionIcon,
+    AccordionButton
 } from '@chakra-ui/react'
 import Label from './FilterLabel'
 
@@ -13,7 +15,10 @@ const Filter: FunctionComponent = () => {
     const [ values, setValues ] = useState()
     return (
         <Box>
-            <Label>Fermeture :</Label>
+            <AccordionButton>
+                <Box flex="1" textAlign="left">Fermeture&nbsp;:</Box>
+                <AccordionIcon />
+            </AccordionButton>
             <CheckboxGroup
                 onChange={value => {
                     console.log('onChange', value);
@@ -26,7 +31,7 @@ const Filter: FunctionComponent = () => {
                 <Checkbox value='zip' name="zip" >Zip</Checkbox>
                 <Checkbox value='elastic' name="elastic" >Elastique</Checkbox>
             </Stack>
-            <Button onClick={()=> setValues( null )}>Annuler</Button>
+            {/* <Button onClick={()=> setValues( null )}>Annuler</Button> */}
             </CheckboxGroup>
         </Box>
     )
