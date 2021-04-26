@@ -18,7 +18,7 @@ import { Router, Link as NavLink, Match } from "@reach/router"
 import AccountWrapper from './Wrapper'
 import AccountNav from '../Nav/Account'
 import RatingDetails from './RatingDetails'
-import { AddIcon, ChatIcon, CopyIcon, InfoOutlineIcon, StarIcon, SunIcon, ViewIcon } from '@chakra-ui/icons';
+import { AddIcon, ChatIcon, CopyIcon, InfoOutlineIcon, MinusIcon, StarIcon, SunIcon, ViewIcon } from '@chakra-ui/icons';
 
 const AccountRatings = ({ }) => {
     const [ racingDetail, setRatingDeatail ] = useState( false )
@@ -47,7 +47,6 @@ const AccountRatings = ({ }) => {
                         px={5}
                         borderRadius='lg'
 
-                        onClick={()=>setRatingDeatail( item )}
                     >
                         <Flex justify='space-between' align='center'>
                             <Heading fontSize='md' fontFamily='Noe display' fontWeight='normal' color='#66878a' textTransform='none' letterSpacing='wider' p='0' m='0'>
@@ -76,7 +75,19 @@ const AccountRatings = ({ }) => {
                                 <Text>
                                     25/04/2021 @ 15h55
                                         </Text>
-                                <Button size='sm'><AddIcon /></Button>
+                                <Button
+                                    size='sm'
+                                    onClick={()=>setRatingDeatail( racingDetail !== item ? item : false )}
+
+                                >
+                                    {
+                                        racingDetail !== item ?
+                                            <AddIcon />
+                                        :
+                                            <MinusIcon />
+                                    }
+                                    
+                                </Button>
 
 
 

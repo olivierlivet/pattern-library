@@ -246,10 +246,10 @@ class SearchEngine extends Component {
 
         return (
             <>
-                {/* <pre>
-                { JSON.stringify( this.props, null, 1)}
-                { JSON.stringify( this.state, null, 1)}
-                </pre> */}
+                <pre>
+                {/* { JSON.stringify( this.props, null, 1)} */}
+                {/* { JSON.stringify( this.state, null, 1)} */}
+                </pre>
                 <Grid
                     templateColumns={{
                         base: `100%`,
