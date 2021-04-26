@@ -148,7 +148,7 @@ exports.createPages = ({ graphql, actions }) => {
       const allUnivers = result.data.allUnivers.edges;
       allUnivers.forEach((edge) => {
         createPage({
-          path: `${edge.node.node_locale}${edge.node.slug}`,
+          path: `${edge.node.slug}`,
           component: universTemplate,
           context: {
             slug: edge.node.slug,
@@ -187,7 +187,7 @@ exports.createPages = ({ graphql, actions }) => {
       const allCategories = result.data.allCategories.edges;
       allCategories.forEach((edge) => {
         createPage({
-          path: `${edge.node.node_locale}${edge.node.slug}`,
+          path: `${edge.node.slug}`,
           component: categoryTemplate,
           context: {
             slug: edge.node.slug,
@@ -229,7 +229,7 @@ exports.createPages = ({ graphql, actions }) => {
       const allVariants = result.data.allVariants.edges;
       allVariants.forEach((edge) => {
         createPage({
-          path: `${edge.node.node_locale}${edge.node.slug}`,
+          path: `${edge.node.slug}`,
           component: variantTemplate,
           context: {
             slug: edge.node.slug,
@@ -273,7 +273,7 @@ exports.createPages = ({ graphql, actions }) => {
     const allProducts = result.data.allProducts.edges;
     allProducts.forEach((edge) => {
       createPage({
-        path: `${edge.node.node_locale}${edge.node.slug}`,
+        path: `${edge.node.slug}`,
         component: productTemplate,
         context: {
           slug: edge.node.slug,
@@ -313,7 +313,7 @@ exports.createPages = ({ graphql, actions }) => {
       const allEditors = result.data.allEditors.edges;
       allEditors.forEach((edge) => {
         createPage({
-          path: `${edge.node.node_locale}${edge.node.slug}`,
+          path: `${edge.node.slug}`,
           component: editorTemplate,
           context: {
             slug: edge.node.slug,
