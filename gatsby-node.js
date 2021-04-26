@@ -110,7 +110,7 @@ exports.createPages = ({ graphql, actions }) => {
       allPages.forEach((edge) => {
         createPage({
           // ${edge.node.node_locale}
-          path: `${edge.node.slug}`,
+          path: `${edge.node.node_locale}${edge.node.slug}`,
           component: pageTemplate,
           context: {
             slug: edge.node.slug,
