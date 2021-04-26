@@ -61,6 +61,10 @@ const PageTemplate = (props) => {
                 </Text>
             </Box>
 
+            <Heading>
+                { pageContent.title }
+            </Heading>
+
 
             {/* <StaticImage
                 src="https://placekitten.com/800/600"
