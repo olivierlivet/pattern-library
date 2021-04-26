@@ -27,6 +27,7 @@ module.exports = {
       options: {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         spaceId: process.env.CONTENTFUL_SPACE_ID,
+        host: process.env.CONTENTFUL_HOST,
         localeFilter: locale => locale.code === 'fr' // Limite only to fr node for the moment
       },
     },
