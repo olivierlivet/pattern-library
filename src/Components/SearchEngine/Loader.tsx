@@ -31,6 +31,7 @@ const SearchEngineLoader: FunctionComponent<propTypes> = ({ filter, onClose, isO
                 size='full'
                 onClose={()=>onClose()}
                 id='modalSearchForm'
+                motionPreset="slideInBottom"
             >
                 <ModalOverlay />
                 <ModalContent
