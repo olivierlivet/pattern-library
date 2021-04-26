@@ -17,7 +17,7 @@ import {
 import { Router, Link as NavLink, Match } from "@reach/router";
 import AccountWrapper from './Wrapper';
 import AccountNav from '../Nav/Account';
-import { AddIcon, StarIcon } from '@chakra-ui/icons';
+import { AddIcon, CopyIcon, StarIcon, ViewIcon } from '@chakra-ui/icons';
 
 const AccountHome = ({ }) => {
     return (
@@ -38,6 +38,7 @@ const AccountHome = ({ }) => {
                                 align='flex-start'
                                 spacing={0}
                             >
+                                <CopyIcon color="white" w={30} h={30} />
                                 <Text fontSize='7xl' fontFamily='Noe Display' color='white'>14</Text>
                                 <Text fontSize='md' color='white'>patrons</Text>
                             </VStack>
@@ -47,6 +48,7 @@ const AccountHome = ({ }) => {
                                 align='flex-start'
                                 spacing={0}
                             >
+                                <ViewIcon color="white" w={30} h={30} />
                                 <Text fontSize='7xl' fontFamily='Noe Display' color='white'>1000</Text>
                                 <Text fontSize='md' color='white'>visites cumulées</Text>
                             </VStack>
@@ -56,15 +58,16 @@ const AccountHome = ({ }) => {
                                 align='flex-start'
                                 spacing={0}
                             >
-                                <Text fontSize='7xl' fontFamily='Noe Display' color='white'>2,3%</Text>
-                                <Text fontSize='md' color='white'>taux de conversion global</Text>
+                                <StarIcon color="white" w={30} h={30} />
+                                <Text fontSize='7xl' fontFamily='Noe Display' color='white'>4,8</Text>
+                                <Text fontSize='md' color='white'>Évaluation globale cumulée</Text>
                             </VStack>
-                        </Box>                    
+                        </Box>
                     </VStack>
                 </Box>
                 <Box>
                     <VStack spacing={8}>
-                        {[1, 2, 3, 4, 5,6,7,8,9,10].map(item =>
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item =>
                             <Box bg='white' w='full' boxShadow='md' py={3} px={5} borderRadius='lg'>
                                 <Flex justify='space-between' align='center'>
                                     <Heading fontSize='md' fontFamily='Noe display' fontWeight='normal' color='#66878a' textTransform='none' letterSpacing='wider' p='0' m='0'>
