@@ -60,16 +60,17 @@ const HomeTemplate = (props) => {
                         <Text
                             fontFamily='DM Sans'
                             textTransform='uppercase'
-                            color='gray.600'
+                            color='gray.500'
                             fontSize='sm'
                             letterSpacing='wide'
                             m='0'
-                        >the</Text>
+                        >the (BETA)</Text>
                         <Text
                             fontSize={{ base: 'xx-large', lg: 'xxx-large' }}
                             fontFamily='Noe Display'
                             lineHeight='shorter'
-                        >Patterns Corner</Text> BETA
+                            color='green.900'
+                        >Patterns Corner</Text>
                         <Text
                             fontFamily='DM Sans'
                             fontSize='16px'
@@ -95,13 +96,13 @@ const HomeTemplate = (props) => {
                         color='gray.700'
                     >
                         Votre futur projet n’attend pas,
-                        trouvez le patron de  vos rêves
+                        trouvez maintenant le patron de  vos rêves
                         parmi les
                     {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text>
                         {' '}patrons.
                     </Text>
                     <CtaSearch
-                        handleLoadSearchEngine={(value) => navigate(`/fr/search?category=${value}`)}
+                        handleLoadSearchEngine={(value, btnLabel) => navigate(`/fr/search?category=${value.id}&label=${btnLabel}`)}
                     />
                 </VStack>
             </Center>

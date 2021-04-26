@@ -85,7 +85,7 @@ useEffect(() => {
                         >
         
                             <Button
-                                onClick={() => handleNextStep( item.sys.id )}
+                                onClick={() => handleNextStep( { id:item.sys.id, label: item.fields.title } )}
                                 fontWeight='normal'
                                 fontFamily='DM Sans'
                                 variant='ghost'

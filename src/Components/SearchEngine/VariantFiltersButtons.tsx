@@ -25,9 +25,17 @@ const VariantFiltersButtons = (
                 border={ selectedVariant.includes(id) ? 'solid 1px' : 'dashed 1px' }
                 borderColor={ selectedVariant.includes(id) ? '#66878a' : 'gray.200' }
                 borderRadius='full'
-
+                
                 bg={ selectedVariant.includes(id) ? '#66878a' : 'white' }
                 color={ selectedVariant.includes(id) ? 'white' : 'gray.700' }
+
+                _hover={{
+                    bg:selectedVariant.includes(id) ? '#66878a' : 'gray.50',
+                    borderStyle:'solid',
+                    borderColor:selectedVariant.includes(id) ? '#66878a' : 'gray.400'
+                }}
+
+                cursor='pointer'
 
                 fontSize='sm'
                 px={2}

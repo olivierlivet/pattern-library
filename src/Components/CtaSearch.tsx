@@ -127,7 +127,6 @@ const CtaSearch = ({  handleLoadSearchEngine }) => {
                                     <CtaSearchStep1
                                         isVisible={step === 1 ? true : false}
                                         univers={ universList }
-                                        setUnivers={( value )=>setUnivers( value )}
                                         handleNextStep={( value)=>{
                                             console.log('choose univers', value)
                                             setUnivers( value )
@@ -136,6 +135,7 @@ const CtaSearch = ({  handleLoadSearchEngine }) => {
                                         }}
                                     />
                                     <CtaSearchStep2
+                                        key={ univers }
                                         isVisible={step === 2 ? true : false}
                                         univers={ univers }
                                         setCategory={( value )=>setCategory( value )}

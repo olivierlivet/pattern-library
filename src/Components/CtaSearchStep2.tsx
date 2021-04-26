@@ -58,11 +58,9 @@ const CtaSearchStep2: FunctionComponent<props> = (
 
     useEffect(() => {
         // console.log('Load CtaSearch')
-        getCategories( univers ).then((response) =>{
-            setCategories(response.items)
-            console.log( response.items )
+        if( univers ){
+            getCategories( univers ).then((response) =>{ setCategories(response.items) })
         }
-        )
     }, [])
 
     return (
@@ -111,7 +109,7 @@ const CtaSearchStep2: FunctionComponent<props> = (
                         borderBottomColor='gray.50'
                     >
                         <Button
-                            onClick={() => handleSubmit( category.sys.id )}
+                            onClick={() => handleSubmit( { id: category.sys.id, label: category.fields.title } )}
 
                             fontWeight='normal' fontFamily='DM Sans' variant='ghost' w='100%' justifyContent='space-between' >
                             { category.fields.title }

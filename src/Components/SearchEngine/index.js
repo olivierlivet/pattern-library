@@ -73,8 +73,8 @@ class SearchEngine extends Component {
 
     variantFilter() {
 
-        if( this.state.mainFilters.variants && this.state.mainFilters.variants.length ){
-            return(
+        if (this.state.mainFilters.variants && this.state.mainFilters.variants.length) {
+            return (
                 { "fields.variant.sys.id[in]": this.state.mainFilters.variants.join(',') }
             )
         }
@@ -113,11 +113,11 @@ class SearchEngine extends Component {
         let { refineFilters } = this.state
         refineFilters[key] = value
         this.setState({ "refineFilters": refineFilters },
-            ()=>{
-                 this.loadProducts();
+            () => {
+                this.loadProducts();
                 //  this.updateVariants();
             }
-       )
+        )
     }
 
     componentDidMount() {
@@ -127,8 +127,8 @@ class SearchEngine extends Component {
     }
 
     getVariants() {
-        console.log( 'update variants with category', this.state.mainFilters.category )
-        const variants = getVariants( this.state.mainFilters.category ).then((response)=> this.setState({ variants: response.items }));
+        console.log('update variants with category', this.state.mainFilters.category)
+        const variants = getVariants(this.state.mainFilters.category).then((response) => this.setState({ variants: response.items }));
     }
 
     loadProducts() {
@@ -187,37 +187,37 @@ class SearchEngine extends Component {
 
     }
 
-    updateVariants( value ){
+    updateVariants(value) {
         console.log(`Update variant ${value}`)
         let mainFilters = this.state.mainFilters;
         let currentVariants = this.state.mainFilters.variants;
 
-        if( currentVariants && currentVariants.includes( value )){
+        if (currentVariants && currentVariants.includes(value)) {
             for (let index = 0; index < currentVariants.length; index++) {
-                if( currentVariants[index] === value ) {
+                if (currentVariants[index] === value) {
                     currentVariants.splice(index, 1);
                 }
-                
+
             }
             console.log('remove variant')
-        }else{
+        } else {
             console.log('ad variant')
-            if ( currentVariants && currentVariants.length ){
-                currentVariants.push( value )
-            }else{
-                currentVariants = [ value ]
+            if (currentVariants && currentVariants.length) {
+                currentVariants.push(value)
+            } else {
+                currentVariants = [value]
             }
 
             mainFilters['variants'] = currentVariants
 
             console.log('updatedVariants', currentVariants)
 
-            
+
         }
 
         this.setState({
             mainFilters: mainFilters
-        }, this.loadProducts() )
+        }, this.loadProducts())
         // this.setState({ products: [] })
 
     }
@@ -231,7 +231,7 @@ class SearchEngine extends Component {
         mainFilters[key] = value
         if (key === 'category') { delete mainFilters.variant }
         this.setState({ mainFilters: mainFilters },
-            ()=>{
+            () => {
                 this.getVariants()
                 this.loadProducts();
             }
@@ -253,7 +253,7 @@ class SearchEngine extends Component {
                 <Grid
                     templateColumns={{
                         base: `100%`,
-                        lg: `300px 1fr`,
+                        lg: `320px 1fr`,
                         xl: `400px 1fr`
                     }}
                     minH='100vh'
@@ -266,22 +266,22 @@ class SearchEngine extends Component {
                         <Stack
                             position='sticky'
                             top={8}
-                            spacing={{ base:4, lg:8 }}
+                            spacing={{ base: 4, lg: 8 }}
+
+                            display={{ base:'none', lg:'block' }}
                         >
 
                             <MainFiltersButton
-                                setCategory={(value)=> this.updateMainFilters('category', value)}
-                                label={ 'Femme/Jupe' }
-                                // setVariant={(value)=>this.updateMainFilters('variant', value)}
-                                // handleSubmit={(value)=>this.updateMainFilters('variant', value)}
-                                // this.updateMainFilters('variant', value)}
+                                setCategory={(value) => this.updateMainFilters('category', value)}
+                                label={'Femme/Jupe'}
+                                display={{ base: 'none', lg: 'block' }}
                             />
 
                             <VariantFiltersButtons
-                                key={ variants }
-                                variants={ variants }
-                                selectedVariant={ mainFilters.variants }
-                                setVariant={(value)=>this.updateVariants(value)}
+                                key={variants}
+                                variants={variants}
+                                selectedVariant={mainFilters.variants}
+                                setVariant={(value) => this.updateVariants(value)}
                             />
 
                             <RefinerFilters
@@ -324,27 +324,32 @@ class SearchEngine extends Component {
                             <Flex justify='space-between'>
                                 <Box>
                                     <Box
-                                        display={{ base:'none', lg:'block'}}
+                                        display={{ base: 'none', lg: 'block' }}
                                         visibility='hidden'
                                         w='145px'
                                     />
                                     <HStack
-                                        display={{  base:'flex', lg: 'none' }}
+                                        display={{ base: 'flex', lg: 'none' }}
                                     >
-                                        <CategoryChoiceButton
+                                        <MainFiltersButton
+                                            setCategory={(value) => this.updateMainFilters('category', value)}
+                                            label={'Femme/Jupe'}
+                                            display={{ base: 'block', lg: 'none' }}
+                                        />
+                                        {/* <CategoryChoiceButton
                                             mainFilters={mainFilters}
                                             categories={Filters.getCategoryOptions()}
                                             variants={Filters.getVariantOptions(this.state.mainFilters.category)}
 
                                             setUnivers={(value) => this.updateMainFilters('univers', value)}
                                             setCategory={(value) => this.updateMainFilters('category', value)}
-                                        />
+                                        /> */}
                                         <FilterButton
                                             onClick={() => this.setState({ showFilter: !this.state.showFilter })}
                                         />
                                     </HStack>
                                 </Box>
-                                <ProductsCountIndicator count = { products && products.length ? products.length : null } />
+                                <ProductsCountIndicator count={products && products.length ? products.length : null} />
 
 
                                 <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
@@ -400,8 +405,8 @@ class SearchEngine extends Component {
                             shouldWrapChildren={true}
                             bg='gray.50'
                             // p={{ base: 4, lg: 4 }}
-                            px={{ base:4, lg: 0 }}
-                            py={{ base:24, lg: 24 }}
+                            px={{ base: 4, lg: 0 }}
+                            py={{ base: 24, lg: 24 }}
                         >
 
                             {products && products.length ?

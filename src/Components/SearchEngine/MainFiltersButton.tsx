@@ -35,34 +35,31 @@ const transitionStyles = {
 
 const MainFiltersButton = (
     {
-        handleLoadSearchEngine,
-        setVariant,
-        label
+        // handleLoadSearchEngine,
+        setCategory,
+        label,
+        display
     }) => {
     const [step, setStep] = useState(0)
     const [univers, setUnivers] = useState(null)
-    const [ universList, setUniversList ]       = useState(null)
-    const [ category, setCategory ]     = useState(null)
 
-
-
+    const [ btnLabel , setBtnLabel ] = useState();
 
 
     return (
         <>
-        <pre>
-            { JSON.stringify( univers, null, 1 )}
-        </pre>
+
             <Box
                 position='relative'
                 mb={4}
-                display={{ base: 'none', lg: 'block' }}
+                display={ display }
             >
                 <ButtonGroup w='full'>
                     <Button
                         w='15%'
                         variant='outline'
                         onClick={() => navigate('/fr')}
+                        display={{ base: 'none', lg:'block'}}
                     >
                         <ArrowBackIcon />
                     </Button>
@@ -93,12 +90,11 @@ const MainFiltersButton = (
                             outline: 'none'
                         }}
                     >
-                        { label }
+                        { btnLabel ? btnLabel : label }
                         <ArrowDownIcon ml={2} />
                     </Button>
 
                 </ButtonGroup>
-
                 <Transition in={step > 0} timeout={duration}>
                     {state => (
 
@@ -140,16 +136,23 @@ const MainFiltersButton = (
                                 <CtaSearchStep1
                                     isVisible={step === 1 ? true : false}
                                     setUnivers={(value) => setUnivers(value)}
-                                    handleNextStep={() => setStep(step + 1)}
+                                    handleNextStep={ value => {
+                                        setBtnLabel(value.label);
+                                        setUnivers( value.id );
+                                        setStep(step + 1);
+                                    } }
                                     setCategory={(value) => setCategory(value)}
                                 />
                                 <CtaSearchStep2
+                                    key={ univers }
                                     isVisible={step === 2 ? true : false}
                                     setCategory={(value) => setCategory(value)}
                                     handleStepBack={() => setStep(1)}
+                                    univers={ univers }
 
                                     handleSubmit={(value) => {
-                                        setCategory(value);
+                                        setCategory(value.id);
+                                        setBtnLabel( `${btnLabel}/${value.label}` );
                                         setStep(0);
                                     }
                                     }
