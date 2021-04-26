@@ -32,7 +32,7 @@ import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 import { Router, Link as NavLink, Match, useLocation, Location } from "@reach/router";
 import AccountHome from '../Components/AccountEditor/Home'
 import AccountProducts from '../Components/AccountEditor/Products'
-import AccountSales from '../Components/accountEditor/Sales'
+import AccountSales from '../Components/AccountEditor/SalesBackup'
 import AccountSettings from '../Components/AccountEditor/Settings'
 import AccountRatings from '../Components/AccountEditor/Ratings'
 
