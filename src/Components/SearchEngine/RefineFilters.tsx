@@ -141,12 +141,8 @@ const RefineFilters: FunctionComponent<props> = (
         <Transition in={isVisible} timeout={duration}>
             {state => (
                 <Box
-                    w={{ base: '100vw', lg: 'auto' }}
+                    w={{ base: 'full', lg: 'auto' }}
                     h={{ base: '100vh', lg: 'auto' }}
-                    position={{ base:'fixed', lg:'initial' }}
-                    left={0}
-                    top={{ base: 0, lg: 32 }}
-                    zIndex='sticky'
 
                     overflowY='scroll'
                     maxH={{ base: 'auto', lg: '75vh' }}

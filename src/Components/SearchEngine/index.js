@@ -246,10 +246,6 @@ class SearchEngine extends Component {
 
         return (
             <>
-                <pre>
-                {/* { JSON.stringify( this.props, null, 1)} */}
-                {/* { JSON.stringify( this.state, null, 1)} */}
-                </pre>
                 <Grid
                     templateColumns={{
                         base: `100%`,
@@ -264,11 +260,23 @@ class SearchEngine extends Component {
 
                     >
                         <Stack
-                            position='sticky'
-                            top={8}
+                            bg={{ base:'white', lg:'none'}}
+                            
                             spacing={{ base: 4, lg: 8 }}
 
-                            display={{ base:'none', lg:'block' }}
+                            display={{ base:showFilter ? 'block' : 'none', lg:'block' }}
+                            position={{ base:'fixed', lg:'sticky' }}
+                            top={{ base:'64px', lg:10 }}
+                            left={0}
+                            bottom={0}
+                            right={0}
+                            // pt={32}
+                            zIndex='banner'
+
+                            id='filters'
+
+                            p={{ base: 4, lg:0 }}
+
                         >
 
                             <MainFiltersButton
@@ -319,6 +327,7 @@ class SearchEngine extends Component {
                             pt={{ base: 4, lg: 10 }}
 
                             bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,1) 100%)'
+
                         // boxShadow='sm'
                         // display='none'
                         >
