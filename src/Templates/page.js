@@ -16,6 +16,8 @@ import {
     Heading,
     Text
 } from '@chakra-ui/react'
+import Wrapper from '../Components/Layouts/Wrapper'
+import RichContent from '../Components/RichContent'
 
 const PageTemplate = (props) => {
     const pageContent = props.data.page
@@ -29,41 +31,23 @@ const PageTemplate = (props) => {
             {/* <HierarchicalNav
                 data={ pageContent }
             /> */}
-            <Box textAlign='center'>
-                <Text
-                    fontFamily='DM Sans'
-                    textTransform='uppercase'
-                    color='gray.600'
-                    fontSize='sm'
-                    letterSpacing='wide'
-                >the</Text>
-                <Text
-                    fontSize={{ base:'xx-large', lg:'xxx-large' }}
-                    fontFamily='Noe Display'
-                >Patterns Corner</Text>
 
-                <Text
-                    fontFamily='DM Sans'
-                    fontSize='16px'
+            <Box
+                py={{ base: 24, lg: 32 }}
+            >
+                <Heading
+                    textAlign='center'
                     fontWeight='normal'
+                    as='h1'
                 >
-                    Le plus grand choix de
-                    {' '}<Heading
-                            as='h1'
-                            display='inline'
-                            fontWeight='normal'
-                            fontSize='inherit'
-                            borderBottom='solid 3px'
-                            borderBottomColor='#EFCBBF'
-                            display='inline-block'
-                            lineHeight='11px'
-                        >patrons de couture</Heading>
-                </Text>
+                    {pageContent.title}
+                </Heading>
+                <Wrapper>
+                    <RichContent data={pageContent.description} />
+
+                </Wrapper>
             </Box>
 
-            <Heading>
-                { pageContent.title }
-            </Heading>
 
 
             {/* <StaticImage
