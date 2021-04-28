@@ -43,40 +43,8 @@ import InspirationForm from '../Components/Account/InspirationForm'
 const AccountTemplate = (props) => {
 
     const location = useLocation()
-    const Login = () => {
-        return (
-            <Box
-                minH={'90vh'}
-            >
-                <Center minH={'90vh'}   >
-                    <Stack
-                        bg='white'
-                        w={{ base: 'md' }}
-                        p={{ base: 10 }}
-                        spacing={{ base:4, lg:6 }}
-                    >
-                        <Box
-                            fontSize={{
-                                base: 'lg',
-                                lg: 'larger'
-                            }}
-                        >
-                            Accès à votre compte
-                        </Box>
-                        <HStack>
-                            <ButtonGroup>
-                                <GoogleLoginButton />
-                                {/* <FacebookLoginButton /> */}
-                            </ButtonGroup>
-                        </HStack>
-                        <Text>Ou</Text>
-                        <LoginForm />
-                        
-                    </Stack>
-                </Center>
-            </Box>
-        )
-    }
+
+
 
     
 
@@ -97,7 +65,7 @@ const AccountTemplate = (props) => {
                     // basepath='/fr/compte'
                 >
                     <AccountHome path="/" />
-                    <Login path="/login" />
+                    <LoginForm path="/login" />
                     <AccountCart path="/cart" />
                     <AccountOrder path="/order" />
                     <AccountContribution path="/contribution" />

@@ -1,8 +1,13 @@
 import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control';
-import { Button, Input, Box, Stack } from '@chakra-ui/react';
+import { Button, Input, Box, Stack, HStack, ButtonGroup, Center, Text, Divider } from '@chakra-ui/react';
 import React, { FunctionComponent, useState } from 'react'
 import { Transition } from 'react-transition-group';
-
+import GoogleLoginButton from './LoginButtons/Google';
+import axios from 'axios'
+import FacebookLoginButton from './LoginButtons/Facebook';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { Field, Form, Formik } from 'formik';
+import {authenticationService} from '../../Service/auth'
 type props = {
 
 }
@@ -35,68 +40,150 @@ const transitionStyles = {
 const LoginForm: FunctionComponent<props> = ({ }) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+
+    const handleLoginThirdParty = (email) => {
+        authenticationService.login( email )
+        // axios.post(
+        //     `${process.env.API_URL}/user/login/`,
+        //     {
+        //         "email": email
+        //     }
+        // ).then(response => console.log(response.data))
+
+    }
+
+    const responseFacebook = (response) => {
+        console.log(response)
+    }
     return (
-        <Stack spacing={{ base: 2, lg: 4 }}>
-            <FormControl>
-                <FormLabel>Email :</FormLabel>
-                <Input
-                    name='email'
-                    type='email'
-                    placeholder='email'
+        <Center h='calc(100vh - 100px)'>
+            <Stack
+                bg='white'
+                p={{ base: 4, lg: 6 }}
+                spacing={{ base: 2, lg: 4 }}
+            >
 
-                    onBlur={(e)=> setEmail(e.target.value)}
-                />
-            </FormControl>
 
-            <Transition in={email} timeout={duration}>
-            {
-                state => (
-
-                    <FormControl
-                        style={{
-                            ...defaultStyle,
-                            ...transitionStyles[state]
-                        }}
-                    >
-                        <FormLabel>Password :</FormLabel>
-                        <Input
-                            name='password'
-                            type='password'
-                            placeholder='password'
-
-                            onBlur={(e)=> setPassword(e.target.value)}
-
+                <HStack>
+                    <ButtonGroup>
+                        <GoogleLoginButton
+                            handleLogin={(user) => handleLogin(user.email)}
                         />
-                        <FormHelperText>
-                            <Button variant='link' fontWeight='normal' justifyContent='flex-end' w='100%'>
-                                Mot de passe oublié ?
-                            </Button>
-                        </FormHelperText>
-                    </FormControl>
-                )
-            }
-            </Transition>
+                        <FacebookLogin
+                            appId={process.env.FACEBOOK_APP_ID}
+                            fields="name,email,picture"
+                            autoLoad={false}
+                            callback={(response) => handleLoginThirdParty(response.email)}
+                            render={renderProps => (
+                                <Button
+                                    onClick={renderProps.onClick}
+                                    border='solid 1px'
+                                    borderColor='facebook.700'
+                                    borderRadius='2px'
+                                    isLoading={renderProps.isProcessing}
+                                >
+                                    Via Facebook
+                                </Button>)}
+                        />
 
-            <Transition in={(email && password)} timeout={duration}>
-            {
-                state => (
+                    </ButtonGroup>
+                </HStack>
 
-                    <Box
-                        style={{
-                            ...defaultStyle,
-                            ...transitionStyles[state]
-                        }}
+                <Center
+                    py={4}
+                >
+                    <Center
+
                     >
-                        <Button>
-                            Valider
-                        </Button>
-                    </Box>
-                )
-            }
-            </Transition>
+                        <Center
+                            border='solid 1px'
+                            borderColor='gray.100'
+                            borderRadius='full'
+                            w='50px'
+                            h='50px'
+                            p={1}
+
+                        >
+                            Ou
+                        </Center>
+                    </Center>
+
+                </Center>
 
 
-        </Stack>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: ''
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                        }, 400);
+                    }}
+                >
+
+                    {({
+                        values,
+                        initialValues,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        setFieldError,
+                        setFieldValue,
+                        setFieldTouched
+                        /* and other goodies */
+                    }) => (
+                        <Form>
+
+                            <Stack
+                                spacing={{ base: 4, lg: 6 }}
+                            >
+                                <FormControl>
+                                    <FormLabel>Email : </FormLabel>
+                                    <Field name='email'>
+                                        {({ field, form }) => (
+                                            <Input {...field} placeholder='email@mail.com' />
+                                        )}
+                                    </Field>
+                                </FormControl>
+
+                                <FormControl>
+                                    <FormLabel>Password :</FormLabel>
+
+                                    <Field name='password'>
+                                        {({ field, form }) => (
+                                            <Input
+                                                {...field}
+                                                placeholder='************'
+                                            />
+                                        )}
+                                    </Field>
+                                    <FormHelperText>
+                                        <Button size='sm' variant='link' fontWeight='normal' justifyContent='flex-end' w='100%'>
+                                            Mot de passe oublié ?
+                                                    </Button>
+                                    </FormHelperText>
+                                </FormControl>
+
+                                <Box>
+                                    <Button
+                                        type='submit'
+                                        w='100%'
+                                    >
+                                        Valider
+                                    </Button>
+                                </Box>
+                            </Stack>
+                        </Form>
+                    )}
+                </Formik>
+            </Stack>
+        </Center>
     )
 }
 

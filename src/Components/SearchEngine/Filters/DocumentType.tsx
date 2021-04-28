@@ -22,7 +22,7 @@ const Filter: FunctionComponent<props> = ({ handleChange }) => {
     return (
         <>
             <AccordionButton>
-                <Box flex="1" textAlign="left">Format du patro&nbsp;:</Box>
+                <Box flex="1" textAlign="left">Format du patron&nbsp;:</Box>
                 <AccordionIcon />
             </AccordionButton>
             <AccordionPanel>

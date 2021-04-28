@@ -79,6 +79,8 @@ query pageQuery( $contentfulID: String! ){
         slug
         title
         description { raw }
+        descriptionSeo
+        titleSeo
       }
 }
 `
