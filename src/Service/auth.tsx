@@ -4,7 +4,7 @@ import { handleResponse } from '../Helper/handle-response';
 import { navigate } from 'gatsby'
 import axios from 'axios';
 
-const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
+// const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const authenticationService = {
     login,
@@ -12,8 +12,8 @@ export const authenticationService = {
     loginPasswordLess,
     logout,
     getUser,
-    currentUser: currentUserSubject.asObservable(),
-    get currentUserValue () { return currentUserSubject.value }
+    // currentUser: currentUserSubject.asObservable(),
+    // get currentUserValue () { return currentUserSubject.value }
 };
 
 function login(email) {
@@ -29,7 +29,7 @@ function login(email) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('tpcUser', JSON.stringify(user));
             navigate('/fr/compte');
-            currentUserSubject.next(user);
+            // currentUserSubject.next(user);
 
             return user;
         });
@@ -83,5 +83,5 @@ function getUser() {
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('tpcUser');
-    currentUserSubject.next(null);
+    // currentUserSubject.next(null);
 }
