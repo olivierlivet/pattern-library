@@ -20,6 +20,7 @@ import AccountWrapper from './Wrapper';
 import AccountTitle from './Title';
 import { Field, Form, Formik } from 'formik';
 
+import UserNewsletterForm from '../Account/Form/Newsletter'
 import UserProfileForm from '../Account/Form/Profile'
 import UserEmailForm from '../Account/Form/Email'
 import UserPasswordForm from '../Account/Form/Password'
@@ -37,7 +38,7 @@ export default class AccountProfile extends Component {
 
     componentDidMount() {
         axios.get(
-            `${config.apiUrl}/user/608999748bd7605f49f598ed`
+            `${config.apiUrl}/user/608abbfa83e8bec834cb1baf`
         ).then(response => this.setState({ user: response.data }))
     }
 
@@ -63,6 +64,16 @@ export default class AccountProfile extends Component {
                         <Text>Modification email, mot de passe, image de profil, abonnement newsletter</Text>
 
                         {/* <UserPictureForm /> */}
+
+                        <Grid
+                            templateColumns={{
+                                base: `100%`,
+                                lg: `300px 1fr`
+                            }}
+                        >
+                            <Heading fontFamily='DM Sans' fontSize={{ base: 'xl', lg: 'base' }}>Newsletter :</Heading>
+                            <UserNewsletterForm data={ user } />
+                        </Grid>
 
                         <Grid
                             templateColumns={{
@@ -96,7 +107,7 @@ export default class AccountProfile extends Component {
 
                         </Grid>
 
-                        <Grid
+                        {/* <Grid
                             templateColumns={{
                                 base: `100%`,
                                 lg: `300px 1fr`
@@ -104,7 +115,7 @@ export default class AccountProfile extends Component {
                         >
                             <Heading fontFamily='DM Sans' fontSize={{ base: 'xl', lg: 'base' }}>Image de profil :</Heading>
                             <UserPictureForm data={ user } />
-                        </Grid>
+                        </Grid> */}
 
                     </Stack>
                 : null}

@@ -35,6 +35,7 @@ import AccountProducts from '../Components/AccountEditor/Products'
 import AccountSales from '../Components/AccountEditor/SalesBackup'
 import AccountSettings from '../Components/AccountEditor/Settings'
 import AccountRatings from '../Components/AccountEditor/Ratings'
+import AccountLogin from '../Components/AccountEditor/Login'
 
 
 const AccountEditorTemplate = (props) => {
@@ -93,6 +94,7 @@ const AccountEditorTemplate = (props) => {
                     // basepath='/fr/compte'
                 >
                     <AccountHome path='/' />
+                    <AccountLogin path='/login' />
                     <AccountProducts path='/products' />
                     <AccountSales path='/sales' />
                     <AccountRatings path='/ratings' />

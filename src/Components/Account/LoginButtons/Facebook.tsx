@@ -6,6 +6,10 @@ import { Button } from '@chakra-ui/button';
 
 
 const FacebookLoginButton = () => {
+
+    const responseFacebook = (reponse) => {
+        console.log(reponse)
+    }
     return (
 
         // <FacebookLogin
@@ -40,13 +44,13 @@ const FacebookLoginButton = () => {
         // />
 
         <FacebookLogin
-  appId={ process.env.FACEBOOK_APP_ID }
-  autoLoad={ true }
-//   callback={responseFacebook}
-  render={renderProps => (
-    <button onClick={renderProps.onClick}>This is my custom FB button</button>
-  )}
-/>
+            appId={process.env.FACEBOOK_APP_ID}
+            autoLoad={true}
+            callback={responseFacebook}
+            render={renderProps => (
+                <button onClick={renderProps.onClick}>This is my custom FB button</button>
+            )}
+        />
 
     )
 }

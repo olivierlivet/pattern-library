@@ -8,6 +8,8 @@ import QuestionCuttingSatisfaction from './QuestionCuttingSatisfaction'
 import QuestionWearability from './QuestionWearability'
 import QuestionGlobalRating from './QuestionGlobalRating'
 
+import QuestionIdentification from './QuestionIdentification'
+
 export {
     QuestionIntroduction,
     QuestionFabricFamily,
@@ -16,5 +18,6 @@ export {
     QuestionProductCustomisation,
     QuestionCuttingSatisfaction,
     QuestionWearability,
-    QuestionGlobalRating
+    QuestionGlobalRating,
+    QuestionIdentification
 }

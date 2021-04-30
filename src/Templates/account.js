@@ -1,51 +1,48 @@
-import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import React, { useEffect } from 'react'
 import Layout from '../Components/Layouts/base'
 
-import {
-    StaticImage,
-    // GatsbyImage
-} from "gatsby-plugin-image"
-import SearchEngineLoader from '../Components/SearchEngine/Loader.tsx'
-import Nav from '../Components/Nav/Base'
-import ProductsSummary from '../Components/ProductsSummary/index.js'
-import HeroSearch from '../Components/Hero/Hero'
-import RichContent from '../Components/RichContent'
-import {
-    Heading,
-    Button,
-    Link,
-    Box,
-    Center,
-    HStack,
-    ButtonGroup,
-    Text,
-    Stack
-} from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
-import FacebookLogin from 'react-facebook-login';
 import LoginForm from '../Components/Account/Login'
-import GoogleLoginButton from '../Components/Account/LoginButtons/Google'
-import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
+import QuickLogin from '../Components/Account/QuickLogin'
 
-import { Router, Link as NavLink, Match, useLocation, Location } from "@reach/router";
+import {authenticationService} from '../Service/auth'
+
+import { Router, Link as NavLink, Match, useLocation, Location, navigate } from "@reach/router";
 import AccountHome from '../Components/Account/Home'
 import AccountCart from '../Components/Account/Cart'
 import AccountProfile from '../Components/Account/Profile'
 import AccountOrder from '../Components/Account/Order'
 import AccountContribution from '../Components/Account/Contribution'
 import AccountSubscription from '../Components/Account/Subscription'
+import EvaluationLogin from '../Components/Account/EvaluationLoginForm'
 import EvaluationForm from '../Components/Account/EvaluationForm'
 import InspirationForm from '../Components/Account/InspirationForm'
+import { Center } from '@chakra-ui/layout'
 
 
 const AccountTemplate = (props) => {
 
-    const location = useLocation()
+    useEffect(() => {
+          checkUserAuth()
+    }, []);
 
+      const checkUserAuth = () => {
+        const user = authenticationService.getUser()
+        if( !user ){
+            // navigate('/fr/compte/login')
+        }
+      }
 
-
+      const Login = () => (
+        <Center
+          minH='calc(100vh - 100px)'
+        >
+            <LoginForm
+                onCancel={()=> navigate('/fr/')}
+            />
+        </Center>
+    )
     
 
     return (
@@ -65,12 +62,14 @@ const AccountTemplate = (props) => {
                     // basepath='/fr/compte'
                 >
                     <AccountHome path="/" />
-                    <LoginForm path="/login" />
+                    <Login path="/login" />
+                    <QuickLogin path="/quick-login/:token" />
                     <AccountCart path="/cart" />
                     <AccountOrder path="/order" />
                     <AccountContribution path="/contribution" />
                     <AccountSubscription path="/subscription" />                    
                     <EvaluationForm path="/contribution/evaluation/:productId" />
+                    <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
                     <InspirationForm path="/contribution/inspiration/:productId" />
                     <AccountProfile path="/profil" />
                 </Router>

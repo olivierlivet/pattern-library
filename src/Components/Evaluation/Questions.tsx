@@ -12,7 +12,8 @@ import {
     QuestionProductCustomisation,
     QuestionCuttingSatisfaction,
     QuestionWearability,
-    QuestionGlobalRating
+    QuestionGlobalRating,
+    QuestionIdentification
 } from './Questions/index'
 
 
@@ -91,7 +92,8 @@ const allQuestions = {
     ProductCustomisation: QuestionProductCustomisation,
     CuttingSatisfacition: QuestionCuttingSatisfaction,
     Wearability: QuestionWearability,
-    GlobalRating: QuestionGlobalRating
+    GlobalRating: QuestionGlobalRating,
+    Identification: QuestionIdentification
 }
 
 const questions = [
@@ -126,7 +128,7 @@ const questions = [
     {
         name:"GlobalRating",
         title: "Quelle note globale donnez vous au patron [pattern full name] de [brand pattern] ? 🌟"
-    },
+    }
 ]
 
 const Questions = ({
@@ -135,7 +137,6 @@ const Questions = ({
     setFieldError,
     setFieldTouched,
     handleSubmit
-
 }) => {
 
     const [step, setStep] = useState( 0 )

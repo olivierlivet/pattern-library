@@ -9,14 +9,18 @@ import {
     FormLabel,
     Input,
     Link,
+    SimpleGrid,
     Stack,
     Text
 } from '@chakra-ui/react'
 
 
 import { Field, Form, Formik } from 'formik';
+import { useToast } from "@chakra-ui/react"
 
 const UserProfileForm = ({ data }) => {
+
+    const toast = useToast()
 
     const questions = [
         {
@@ -31,61 +35,69 @@ const UserProfileForm = ({ data }) => {
         }
     ]
 
-    return(
+    return (
         <Formik
-                initialValues={ data }
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
-            >
-                {({
-                    values,
-                    initialValues,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-                    setFieldError,
-                    setFieldValue,
-                    setFieldTouched
-                    /* and other goodies */
-                }) => (
-                    <Form>
-                        <Stack spacing={{ base:2, lg:6 }}>
+            initialValues={data}
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                    // alert(JSON.stringify(values, null, 2));
+                    // setSubmitting(false);
+                        toast({
+                            title: "Profil modifié !",
+                            description: "Votre profil a bien été modifié.",
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                        });
 
-                        { questions.map(item =>
-                            <Field name={item.name}>
-                                {({ field, form }) => (
-                                    <FormControl>
-                                        <FormLabel>{item.label} :</FormLabel>
-                                        <Input {...field} placeholder='' />
-                                    </FormControl>
-                                )}
-                            </Field>
-                        )}
-                        <Box
-                            display={ Object.keys(touched).length ? 'block' : 'none'}
+                }, 400);
+            }}
+        >
+            {({
+                values,
+                initialValues,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+                setFieldError,
+                setFieldValue,
+                setFieldTouched
+                /* and other goodies */
+            }) => (
+                <Form>
+                    <Stack spacing={{ base: 2, lg: 6 }}>
+                        <SimpleGrid
+                            columns={{ base: 1, lg: 2 }}
+                            gap={{ base: 4, lg: 8 }}
                         >
-                            <Button type='button'>Enregistrer</Button>
+
+                            {questions.map(item =>
+                                <Field name={item.name}>
+                                    {({ field, form }) => (
+                                        <FormControl>
+                                            <FormLabel>{item.label} :</FormLabel>
+                                            <Input {...field} placeholder='' />
+                                        </FormControl>
+                                    )}
+                                </Field>
+                            )}
+                        </SimpleGrid>
+                        <Box
+                            display={Object.keys(touched).length ? 'block' : 'none'}
+                        >
+                            <Button type='submit'>Enregistrer</Button>
                         </Box>
-                        </Stack>
+                    </Stack>
+                    {/* <pre>
+                        {JSON.stringify(touched, null, 1)}
+                    </pre> */}
+                </Form>
+            )}
 
-                        
-
-
-
-                        <pre>
-                            {JSON.stringify(touched, null, 1)}
-                        </pre>
-                    </Form>
-                )}
-
-            </Formik>
+        </Formik>
     )
 }
 export default UserProfileForm

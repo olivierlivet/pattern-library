@@ -24,7 +24,6 @@ import CissorsLoader from '../Loaders/Cissors'
 import Filters from './filters'
 import RefinerFilters from './RefineFilters'
 import Wrapper from '../Layouts/Wrapper'
-import FavoriteIcon from '../../Images/Icons/Favorite'
 import ShoppingBagIcon from '../../Images/Icons/ShoppingBag'
 
 import ProductsCountIndicator from './ProductsCountIndicator'
@@ -33,7 +32,7 @@ import CategoryChoiceButton from './CategoryChoiceButton'
 import FilterButton from './FilterButton'
 import MainFiltersButton from './MainFiltersButton'
 import VariantFiltersButtons from './VariantFiltersButtons'
-
+import FavoriteButton from '../Favorite/GlobalButton'
 
 import getVariants from '../../Data/getVariants'
 
@@ -370,27 +369,7 @@ class SearchEngine extends Component {
 
 
                                 <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
-                                    <Center
-                                        position='relative'
-                                        w={8}
-                                        h={8}
-                                    >
-                                        <FavoriteIcon w={{ base: 5, lg: 6 }} h={{ base: 5, lg: 6 }} />
-                                        <Center
-                                            backgroundColor='red.500'
-                                            color='white'
-                                            borderRadius='full'
-                                            p={1.5}
-                                            w='10px'
-                                            h='10px'
-                                            position='absolute'
-                                            fontSize='x-small'
-                                            top='0'
-                                            right='0'
-                                        >
-                                            2
-                                </Center>
-                                    </Center>
+                                    <FavoriteButton />
                                     <Center w={8} h={8} position='relative'>
                                         <ShoppingBagIcon w={{ base: 5, lg: 6 }} h={{ base: 5, lg: 6 }} />
                                         <Center

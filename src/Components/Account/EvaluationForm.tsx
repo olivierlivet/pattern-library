@@ -27,7 +27,7 @@ const EvaluationForm = ({ productId }) => {
                     mx='auto'
                     w={{ base: 'full', lg: '3xl' }}
                 >
-                    <Form />
+                    <Form productId={ productId } />
                 </Box>
             </Box>
 

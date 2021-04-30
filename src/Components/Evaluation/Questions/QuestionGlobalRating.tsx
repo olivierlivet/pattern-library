@@ -116,16 +116,9 @@ export default class QuestionGlobalRating extends Component {
                                 variant='ouline'
                                 isLoading={isSubmiting}
                                 onClick={() => {
-                                    this.setState({ 'isSubmiting': true })
+                                    this.props.handleSubmit()
+                                    // this.setState({ 'isSubmiting': true })
                                     this.reward.rewardMe()
-                                    setTimeout(
-                                        () => {
-                                            navigate(
-                                                `/fr/compte/contribution/inspiration/azeazea`
-                                            )
-                                        },
-                                        2000
-                                    )
                                 }}
                             >Valider <ArrowForwardIcon /></Button>
                         </Reward>

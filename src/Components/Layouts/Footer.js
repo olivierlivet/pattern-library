@@ -52,7 +52,7 @@ const Footer = () => {
                             <Link as={GatsbyLink} to='/fr/a-propos'>Vendre sur TPC</Link>
                         </ListItem>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink} to='/fr/a-propos'>Accès plateforme éditeurs</Link>
+                            <Link as={GatsbyLink} to='/fr/editor/login'>Accès plateforme éditeurs</Link>
                         </ListItem>
                     </List>
                 </Box>

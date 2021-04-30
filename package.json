@@ -57,6 +57,7 @@
     "react-transition-group": "^4.4.1",
     "slick-carousel": "^1.8.1",
     "swipe-js-iso": "^2.1.5",
-    "swiper": "^6.5.8"
+    "swiper": "^6.5.8",
+    "yup": "^0.32.9"
   }
 }

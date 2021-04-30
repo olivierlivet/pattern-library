@@ -9,42 +9,43 @@ import {
     FormLabel,
     Input,
     Link,
+    Select,
     SimpleGrid,
     Stack,
     Text
 } from '@chakra-ui/react'
-import { useToast } from "@chakra-ui/react"
 
 
 import { Field, Form, Formik } from 'formik';
+import { useToast } from "@chakra-ui/react"
 
-const UserProfileForm = ({ }) => {
+const UserNewsletterForm = ({ }) => {
     const toast = useToast()
 
     const questions = [
         {
-            name: 'email',
-            label: 'Email',
-            type: 'email'
+            name: 'password',
+            label: 'Mot de passe',
+            type: 'password'
         },
         {
-            name: 'emailConfirmation',
-            label: 'Confirmation',
-            type: 'email'
-        }
+            name: 'passwordConfirmation',
+            label: 'Confirmation de mot de passe',
+            type: 'password'
+        },
 
     ]
 
     return (
         <Formik
             initialValues={{
-                firstName: 'Olivier'
+                newsletter: false
             }}
             onSubmit={
                 () =>
                     toast({
-                        title: "Profil modifié !",
-                        description: "Votre email a bien été modifié, utilisez à présent singer.fanny@gmail.com pour vous identifier.",
+                        title: "Modification de votre abonnement enregistré !",
+                        description: "Votre mot de passe a bien été modifié.",
                         status: "success",
                         duration: 5000,
                         isClosable: true,
@@ -65,28 +66,21 @@ const UserProfileForm = ({ }) => {
                 setFieldTouched
                 /* and other goodies */
             }) => (
-
                 <Stack
                     as={Form}
-                    spacing={{ base: 2, lg: 4 }}
+                    spacing={{ base:2, lg:4 }}
                 >
-                    <SimpleGrid
-                        columns={{ base: 1, lg: 2 }}
-                        gap={{ base: 4, lg: 8 }}
-                    >
-
-
-                        {questions.map(item =>
-                            <Field name={item.name}>
-                                {({ field, form }) => (
-                                    <FormControl>
-                                        <FormLabel>{item.label} :</FormLabel>
-                                        <Input {...field} placeholder='' />
-                                    </FormControl>
-                                )}
-                            </Field>
+                    
+                    <Field name={'newsletterSubscription'}>
+                        {({ field, form }) => (
+                            <FormControl>
+                                <Select {...field}>
+                                    <option value={ true }>Oui je la veux</option>
+                                    <option value={ false }>Non merci</option>
+                                </Select>
+                            </FormControl>
                         )}
-                    </SimpleGrid>
+                    </Field>
 
                     { values && touched ?
                         <Box>
@@ -94,13 +88,15 @@ const UserProfileForm = ({ }) => {
                         </Box>
                     : null}
 
+
                     {/* <pre>
                         {JSON.stringify(values, null, 1)}
                     </pre> */}
+
                 </Stack>
             )}
 
         </Formik>
     )
 }
-export default UserProfileForm
+export default UserNewsletterForm

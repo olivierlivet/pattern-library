@@ -68,7 +68,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   /*
     #####
-    Account
+    Account Editor
     #####
   */
     const editorAccountTemplate = path.resolve('src/Templates/accountEditor.js')

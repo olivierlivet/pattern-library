@@ -11,8 +11,7 @@ const GoogleLoginButton:FunctionComponent< props > = ({ handleLogin }) => {
     const responseGoogle = (response) => {
         // console.log(response);
         handleLogin(
-            {
-                email: response.profileObj.email
+            response.profileObj
 
 // email: "oli.livet@gmail.com"
 // familyName: "Livet"
@@ -20,7 +19,7 @@ const GoogleLoginButton:FunctionComponent< props > = ({ handleLogin }) => {
 // googleId: "114413314934976709876"
 // imageUrl: "https://lh3.googleusercontent.com/a-/AOh14GjrEe7R9UiJgM6fUhyyhv4kUr9rmYbMvA4reYPrYw=s96-c"
 // name: "Olivier Livet"
-            }
+            
         )
     }
     return (
@@ -38,10 +37,18 @@ const GoogleLoginButton:FunctionComponent< props > = ({ handleLogin }) => {
                     isLoading={ renderProps.isProcessing }
                     border='solid 1px'
                     borderColor='#DE5246'
-                    borderRadius='2px'
+                    bg='#DB4437'
+                    color='white'
+
+                    borderRadius='4px'
                     fontFamily='DM Sans'
+                    w='full'
+                    _hover={{
+                        bg:'#f17e74',
+                        color:'white'
+                    }}
                 >
-                    Via Google
+                    Avec Google
                 </Button>
             )}
         />
