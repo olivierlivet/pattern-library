@@ -4,8 +4,11 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 // import FacebookLogin from 'react-facebook-login'
 import { Button } from '@chakra-ui/button';
 
+type props = {
+    handleLogin: Function
+}
 
-const FacebookLoginButton = () => {
+const FacebookLoginButton = ({ handleLogin }) => {
 
     const responseFacebook = (reponse) => {
         console.log(reponse)
@@ -43,14 +46,38 @@ const FacebookLoginButton = () => {
         //       )}
         // />
 
+        // <FacebookLogin
+        //     appId={process.env.FACEBOOK_APP_ID}
+        //     autoLoad={true}
+        //     callback={responseFacebook}
+        //     render={renderProps => (
+        //         <button onClick={renderProps.onClick}>This is my custom FB button</button>
+        //     )}
+        // />
+
         <FacebookLogin
             appId={process.env.FACEBOOK_APP_ID}
-            autoLoad={true}
-            callback={responseFacebook}
+            fields="name,email,picture"
+            autoLoad={false}
+            callback={(response) => handleLogin(response)}
             render={renderProps => (
-                <button onClick={renderProps.onClick}>This is my custom FB button</button>
-            )}
+                <Button
+                    onClick={renderProps.onClick}
+                    borderRadius='4px'
+                    color='white'
+                    border='solid 1px'
+                    borderColor='facebook.700'
+                    bg='facebook.700'
+                    isLoading={renderProps.isProcessing}
+                    _hover={{
+                        color: 'white',
+                        bg: 'facebook.300'
+                    }}
+                >
+                    Via Facebook
+                </Button>)}
         />
+
 
     )
 }

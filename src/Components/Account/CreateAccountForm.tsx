@@ -43,37 +43,10 @@ const transitionStyles = {
     exited: { opacity: 0, maxHeight: 0 },
 }
 
-const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel }) => {
+const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel, onLogin }) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [isError, setIsError] = useState(false)
-
-
-    // const handleLoginThirdParty = (email) => {
-    //     authenticationService.login(email)
-    //     // axios.post(
-    //     //     `${process.env.API_URL}/user/login/`,
-    //     //     {
-    //     //         "email": email
-    //     //     }
-    //     // ).then(response => console.log(response.data))
-
-    // }
-
-    // const handleLoginStandard = ({ email, password }) => {
-    //     console.log(
-    //         email, password
-    //     )
-    //     authenticationService.loginEmailPassword(email, password)
-    //     // authenticationService.login( email )
-    //     // axios.post(
-    //     //     `${process.env.API_URL}/user/login/`,
-    //     //     {
-    //     //         "email": email
-    //     //     }
-    //     // ).then(response => console.log(response.data))
-
-    // }
 
     const handleCreateAccount = (values) => {
         console.log(values)
@@ -81,7 +54,8 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel 
             `${config.apiUrl}/user`,
             values
         ).then((response) => {
-            handleLoggedIn(response.data._id)
+            localStorage.setItem('tpcUser', JSON.stringify(response.data));
+            onLogin(response.data.userId)
         })
     }
 
@@ -123,9 +97,6 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel 
             })
     }
 
-    const responseFacebook = (response) => {
-        console.log(response)
-    }
     return (
         <>
             <Stack
@@ -139,29 +110,6 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel 
                             handleLogin={(user) => handleCreateAccountPasswordLess(user.email, user.givenName, user.imageUrl)}
                         />
                         <FacebookLoginButton />
-                        {/* <FacebookLogin
-                            appId={process.env.FACEBOOK_APP_ID}
-                            fields="name,email,picture"
-                            autoLoad={false}
-                            callback={(response) => console.log( response )}
-                            render={renderProps => (
-                                <Button
-                                    onClick={renderProps.onClick}
-                                    border='solid 1px'
-                                    borderColor='facebook.700'
-                                    borderRadius='4px'
-                                    bg='facebook.500'
-                                    color='white'
-                                    isLoading={renderProps.isProcessing}
-                                    w='full'
-                                    _hover={{
-                                        bg: 'facebook.300'
-                                    }}
-                                >
-                                    Avec Facebook
-                                </Button>)}
-                        /> */}
-
                     </SimpleGrid>
                 </HStack>
 
@@ -171,9 +119,7 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel 
                 <Center
                     py={2}
                 >
-                    <Center
-
-                    >
+                    <Center>
                         <Center
                             bg='white'
                             border='solid 1px'
@@ -227,9 +173,6 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel 
                             email: yup.string().email('La syntaxe semble erronée').required('Champ obligatoire').nullable(),
                             password: yup.string().required('Champ obligatoire').min(6, '6 caractères mini svp').nullable(),
                             passwordConfirmation: yup.string().required('Champs obligatoire svp').oneOf([yup.ref('password'), null], 'Il ne correspond pas :/')
-
-
-
                         })
                     }
 
@@ -338,6 +281,10 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel 
                                                 && Object.keys(errors).length === 0 && errors.constructor === Object
                                             )
                                         }
+
+                                        _hover={{
+                                            bg:'#465e61'
+                                        }}
                                     >
                                         Valider
                                     </Button>

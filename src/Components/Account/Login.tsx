@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control';
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from '@chakra-ui/form-control';
 import { Button, Input, Box, Stack, HStack, ButtonGroup, Center, Text, Divider, Alert, AlertIcon, AlertTitle, AlertDescription, SimpleGrid } from '@chakra-ui/react';
 import React, { FunctionComponent, useState } from 'react'
 import { Transition } from 'react-transition-group';
@@ -10,9 +10,11 @@ import { Field, Form, Formik } from 'formik';
 import { authenticationService } from '../../Service/auth'
 import * as yup from 'yup';
 import { ArrowBackIcon } from '@chakra-ui/icons';
+import { Link as RouterLink } from '@reach/router'
 
 type props = {
-    onCancel: Function
+    onCancel: Function,
+    onLogin: Function
 }
 
 const duration = 300;
@@ -55,7 +57,6 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
         //         "email": email
         //     }
         // ).then(response => console.log(response.data))
-
     }
 
     const handleLoginStandard = ({ email, password }) => {
@@ -63,6 +64,11 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
             email, password
         )
         authenticationService.loginEmailPassword(email, password)
+            .then((response) => {
+                localStorage.setItem('tpcUser', JSON.stringify( response.data ));
+                onLogin( response.data );
+                console.log('logged !', response)
+            })
             .catch((error) => {
                 // Error 😨
                 setIsError(true)
@@ -97,9 +103,6 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
 
     }
 
-    const responseFacebook = (response) => {
-        console.log(response)
-    }
     return (
         // <Center h='calc(100vh - 100px)'>
         <Stack
@@ -114,23 +117,10 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
                 <GoogleLoginButton
                     handleLogin={(user) => handleLoginThirdParty(user.email)}
                 />
-                <FacebookLogin
-                    appId={process.env.FACEBOOK_APP_ID}
-                    fields="name,email,picture"
-                    autoLoad={false}
-                    callback={(response) => handleLoginThirdParty(response.email)}
-                    render={renderProps => (
-                        <Button
-                            onClick={renderProps.onClick}
-                            border='solid 1px'
-                            borderColor='facebook.700'
-                            borderRadius='2px'
-                            isLoading={renderProps.isProcessing}
-                        >
-                            Via Facebook
-                        </Button>)}
+                <FacebookLoginButton
+                    handleLogin={(user) => handleLoginThirdParty(user.email)}
+                    // handleLogin={(user) => handleLoginThirdParty(user.email)}
                 />
-
             </SimpleGrid>
 
             <Divider transform='translateY(50px)' />
@@ -185,6 +175,14 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
                     email: '',
                     password: ''
                 }}
+
+                validationSchema={
+                    yup.object().shape({
+                        email: yup.string().email('La syntaxe semble erronée').required('Champ obligatoire').nullable(),
+                        password: yup.string().required('Champ obligatoire').min(6, 'Votre mot de passe fait au moins 6 caractères').nullable(),
+                    })
+                }
+
                 onSubmit={(values, { setSubmitting }) => {
                     handleLoginStandard(values)
                     // setTimeout(() => {
@@ -214,10 +212,11 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
                         <Stack
                             spacing={{ base: 4, lg: 6 }}
                         >
-                            <FormControl>
-                                <FormLabel>Email : </FormLabel>
-                                <Field name='email'>
-                                    {({ field, form }) => (
+
+                            <Field name='email'>
+                                {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.email && form.touched.email}>
+                                        <FormLabel color='gray.600'>Email : </FormLabel>
                                         <Input
                                             {...field}
                                             autoComplete='username'
@@ -225,15 +224,17 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
                                             placeholder='email@mail.com'
                                             type='email'
                                         />
-                                    )}
-                                </Field>
-                            </FormControl>
+                                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                                    </FormControl>
+                                )}
+                            </Field>
 
-                            <FormControl>
-                                <FormLabel>Password :</FormLabel>
 
-                                <Field name='password'>
-                                    {({ field, form }) => (
+
+                            <Field name='password'>
+                                {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.password && form.touched.password}>
+                                        <FormLabel color='gray.600'>Mot de passe : </FormLabel>
                                         <Input
                                             {...field}
                                             autoComplete='current-password'
@@ -241,15 +242,17 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
                                             type='password'
                                             placeholder='************'
                                         />
-                                    )}
-                                </Field>
-                                <FormHelperText>
-                                    <Button size='sm' variant='link' fontWeight='normal' justifyContent='flex-end' w='100%'>
-                                        Mot de passe oublié ?
-                                                    </Button>
-                                </FormHelperText>
-                            </FormControl>
+                                        <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                                    </FormControl>
+                                )}
+                            </Field>
 
+                            <Button
+                                as={RouterLink}
+                                to='/fr/compte/new-password'
+                                size='sm' variant='link' fontWeight='normal' justifyContent='flex-end' w='100%'>
+                                Mot de passe oublié ?
+                            </Button>
                             <Box>
                                 <Button
                                     bg='rgb(102, 135, 138)'
@@ -259,7 +262,7 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
                                     w='100%'
                                 >
                                     Valider
-                                    </Button>
+                                </Button>
                             </Box>
                         </Stack>
                     </Form>

@@ -10,6 +10,7 @@ const AccountTitle:FunctionComponent< props >= ({ children }) => {
         <Heading
             fontSize={{ base: '3xl' , lg:'4xl'}}
             fontWeight='normal'
+            mb={{ base:2, lg:4 }}
         >
             { children }
         </Heading>

@@ -32,7 +32,7 @@ const AccountNav = ({ }) => {
                             <ArrowBackIcon mr={1} />
                             Retour au site
                         </Button>
-                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/cart'>Favoris</Button>
+                        <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/favorite'>Favoris</Button>
                         <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/order'>Achats</Button>
                         <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/contribution'>Discussion</Button>
                         <Button fontWeight='normal' bg='brand.pink.400' color='white' _hover={{ bg:'brand.pink.300'}} mx={2} as={NavLink} to='/fr/compte/profil'>Profil</Button>

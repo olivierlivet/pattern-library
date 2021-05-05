@@ -23,7 +23,7 @@ import RenewPassword from '../Components/Account/RenewPassword'
 import { Center } from '@chakra-ui/layout'
 
 
-const AccountTemplate = (props) => {
+const AdminTemplate = (props) => {
 
     useEffect(() => {
           checkUserAuth()
@@ -54,12 +54,15 @@ const AccountTemplate = (props) => {
             isFooterHidden={true}
         >
             <Helmet>
-                <title>{`Votre compte`}</title>
+                <title>{`ADMIN`}</title>
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
 
             <Wrapper>
-                <Router
+                <div>
+                    ADMIN
+                </div>
+                {/* <Router
                     basepath='/fr/compte'
                     default='/'
                     // basepath='/fr/compte'
@@ -77,7 +80,7 @@ const AccountTemplate = (props) => {
                     <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
                     <InspirationForm path="/contribution/inspiration/:productId" />
                     <AccountProfile path="/profil" />
-                </Router>
+                </Router> */}
                 {/* <Nav data={univers} /> */}
 
 
@@ -86,7 +89,7 @@ const AccountTemplate = (props) => {
     )
 }
 
-export default AccountTemplate
+export default AdminTemplate
 
 // Google Id 
 // 55523564131-074cqlp79q4pv4rgkm2rqfu58474l4ls.apps.googleusercontent.com

@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState } from 'react'
 
 type props = {
-  test: String,
+  title: String,
 
   onClose: Function,
-  onUserAuth: Function,
-  onCancel: Function
+  onLogin: Function,
+  onCancel: Function,
 }
 
 import {
@@ -32,9 +32,10 @@ import { ArrowBackIcon } from '@chakra-ui/icons'
 
 const FastLoginForm: FunctionComponent<props> = (
   {
+    title,
     onClose,
     onCancel,
-    onUserAuth
+    onLogin
   }) => {
 
   const [currentModule, setCurrentModule] = useState('choice');
@@ -72,10 +73,11 @@ const FastLoginForm: FunctionComponent<props> = (
               fontSize={{ base: 'xl', lg: 'xl' }}
               mb={2}
             >
-              {currentModule === 'choice' ?
-                `Pour ajouter des favoris, créez un compte ou identifiez-vous`
-                :
-                `Vous pouvez utiliser votre compte Facebook, Google ou votre adresse email.`
+              { title ? title :
+                  currentModule === 'choice' ?
+                  `Pour ajouter des favoris, créez un compte ou identifiez-vous`
+                  :
+                  `Vous pouvez utiliser votre compte Facebook, Google ou votre adresse email.`
               }
             </Heading>
             {currentModule === 'choice' ?
@@ -115,14 +117,16 @@ const FastLoginForm: FunctionComponent<props> = (
             : currentModule === 'createAccountForm' ?
 
               <CreateAccountForm
-                handleLoggedIn={(userId) => {
-                  onUserAuth(userId)
+                onLogin={(user) => {
+                  onLogin(user);
+                  onClose();
                 }}
                 onCancel={() => setCurrentModule('choice')}
               />
               :
               <LoginForm
-                onCancel={() => setCurrentModule('choice')}
+                onLogin={( user ) => onLogin( user ) }
+                onCancel={() => setCurrentModule('choice') }
               />
           }
 

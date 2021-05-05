@@ -28,11 +28,11 @@ const UserProfileForm = ({ data }) => {
             label: 'Prénom',
             type: 'text'
         },
-        {
-            name: 'lastName',
-            label: 'Nom',
-            type: 'text'
-        }
+        // {
+        //     name: 'lastName',
+        //     label: 'Nom',
+        //     type: 'text'
+        // }
     ]
 
     return (
@@ -92,7 +92,7 @@ const UserProfileForm = ({ data }) => {
                         </Box>
                     </Stack>
                     {/* <pre>
-                        {JSON.stringify(touched, null, 1)}
+                        {JSON.stringify(data, null, 1)}
                     </pre> */}
                 </Form>
             )}

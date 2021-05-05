@@ -22,7 +22,20 @@ export default class FavoriteButton extends Component {
         }
     }
 
+    componentDidMount(){
+        this.isButtonActive()
+    }
+
+    isButtonActive(){
+        let favorites = localStorage.getItem( 'Favorites' )
+        if( favorites && favorites.includes( this.props.product ) ){
+            this.setState( { isActive: true } )
+        }
+    }
+
     handleFavoriteClick() {
+
+        console.log(' Debug favorite 2 ')
 
         if (!authenticationService.getUser()) {
             this.setState({
@@ -48,14 +61,16 @@ export default class FavoriteButton extends Component {
     }
 
     saveFavorite( userId ){
+        console.log('debug favorite 1', userId)
         axios.put(
             `${config.apiUrl}/favorite`,
             {
                 user: userId,
-                product: '121212121'
+                product: this.props.product
 
             }
-        ).then(()=>{
+        ).then((response)=>{
+            this.updateLocalFavorite(response.data)
             this.setState({
                 showLoginForm: false,
                 isActive: !this.state.isActive
@@ -68,17 +83,27 @@ export default class FavoriteButton extends Component {
 
     }
 
+    updateLocalFavorite( favorites ){
+        console.log('favorites that need to update', favorites )
+        let newFavorites = []
+        for (let index = 0; index < favorites.length; index++) {
+            newFavorites.push( favorites[index].product )
+            // const element = favorites[index]; 
+        }
+        localStorage.setItem('Favorites', JSON.stringify( newFavorites ))
+    }
+
 
     render() {
-
         const { showLoginForm, isActive } = this.state;
         return (
             <>
                 { showLoginForm ?
                     <FastLoginForm
                         onClose={()=> this.setState({ showLoginForm: false })}
-                        onUserAuth={(userId)=>this.saveFavorite( userId )}
+                        onLogin={(user)=>this.saveFavorite( user )}
                         onCancel={()=> this.setState({ showLoginForm: false })}
+                        title='Identifiez-vous pour ajouter des favoris'
                     />
                 : null}
                 <Reward
@@ -92,9 +117,16 @@ export default class FavoriteButton extends Component {
                             e.stopPropagation();
                             this.handleFavoriteClick();
                         }}
-                        p={2}
+                        p={3}
                         // border='solid 1px'
+                        cursor='pointer'
                         borderColor='gray.100'
+                        borderRadius='3px'
+                        _hover={{
+                            background:!isActive ? 'red.400' : 'gray.100',
+                            color:'white'
+                        }}
+                        
                     >
                         { !isActive
                             ?

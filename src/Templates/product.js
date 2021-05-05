@@ -57,6 +57,7 @@ export default ProductTemplate
 export const pageQuery = graphql`
 query adQuery( $contentfulID: String! ){
     product:contentfulProduct(contentful_id: {eq: $contentfulID}) {
+        contentful_id
         slug
         title
         intro{ raw }

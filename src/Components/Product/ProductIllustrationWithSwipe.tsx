@@ -1,7 +1,7 @@
 import React, { createRef, FunctionComponent, useState, useMemo } from 'react'
 import { Box, Button, Center, Flex, Image, Text } from '@chakra-ui/react'
 import ReactSwipe from 'react-swipe';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 type propTypes = {
     imagesUrl: Array<string>,
@@ -72,15 +72,39 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
                 </ReactSwipe>
 
                 <Flex
+                    justify='space-between'
                     alignItems='center'
                     position='absolute'
                     bottom={0}
                     top={0}
+                    left={0}
                     right={0}
                     h='100%'
-                    pr={3}
+                    px={3}
                     display={{ base:'none', lg:'flex'}}
                 >
+                    <Button
+                        variant='outline'
+                        borderRadius='full'
+                        color='white'
+                        bg='blackAlpha.400'
+                        _hover={{
+                            color:'gray.800',
+                            bg:'whiteAlpha.300'
+                        }}
+                        textShadow='lg'
+           
+                        p={0}
+                        onClick={(e) =>{
+                        e.stopPropagation();
+                        reactSwipeEl.prev();  
+                    } }>
+                        <Center w={6} h={6}>
+                        <ArrowBackIcon />
+
+                        </Center>
+                    </Button>
+
                     <Button
                         variant='outline'
                         borderRadius='full'

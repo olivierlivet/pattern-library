@@ -5,12 +5,17 @@ import BackButton from './BackButton'
 import { ChakraProvider, CSSReset, Box } from "@chakra-ui/react"
 import '../../Fonts/stylesheet.css'
 import { extendTheme } from "@chakra-ui/react"
+import { ContentfulClient, ContentfulProvider } from 'react-contentful';
 
 const colors = {
     brand: {
         pink: {
             400: '#E7B8A9',
             300: '#EFCBBF'
+        },
+        green: {
+            500: '#66878a',
+            600: '#4D767A'
         }
     }
 
@@ -27,6 +32,11 @@ const theme = extendTheme({
     "fonts": fonts
 })
 
+const contentfulClient = new ContentfulClient({
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID
+  });
+
 const baseLayout = (
     {
         children,
@@ -34,6 +44,8 @@ const baseLayout = (
         enableBackButton
     }) => {
     return (
+        <ContentfulProvider client={contentfulClient}>
+
         <ChakraProvider theme={theme}>
             <CSSReset />
             <Header />
@@ -54,6 +66,7 @@ const baseLayout = (
             { !isFooterHidden ? <Footer /> : null }
 
         </ChakraProvider>
+        </ContentfulProvider>
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import { Link as GatsbyLink, navigate } from 'gatsby'
 import { config } from '../../config'
 import {
     Box,
@@ -26,6 +26,7 @@ import UserEmailForm from '../Account/Form/Email'
 import UserPasswordForm from '../Account/Form/Password'
 import UserPictureForm from '../Account/Form/Picture'
 import axios from 'axios';
+import {authenticationService} from '../../Service/auth'
 
 export default class AccountProfile extends Component {
 
@@ -37,9 +38,19 @@ export default class AccountProfile extends Component {
     }
 
     componentDidMount() {
+
+        const user = authenticationService.getUser()
+
+
         axios.get(
-            `${config.apiUrl}/user/608abbfa83e8bec834cb1baf`
+            `${config.apiUrl}/user/${user.userId}`
         ).then(response => this.setState({ user: response.data }))
+    }
+
+    handleLogout() {
+        authenticationService.logout();
+        navigate('/fr/')
+        console.log('logout')
     }
 
     render() {
@@ -61,10 +72,11 @@ export default class AccountProfile extends Component {
                         <AccountTitle>
                             Votre profil
                         </AccountTitle>
-                        <Text>Modification email, mot de passe, image de profil, abonnement newsletter</Text>
-
+                        <Text>
+                            Modification email, mot de passe, image de profil, abonnement newsletter.
+                            Vous pouvez également <Button onClick={()=>this.handleLogout()} variant='link'>vous déconnecter</Button> si vous le souhaitez.
+                        </Text>
                         {/* <UserPictureForm /> */}
-
                         <Grid
                             templateColumns={{
                                 base: `100%`,
@@ -118,7 +130,7 @@ export default class AccountProfile extends Component {
                         </Grid> */}
 
                     </Stack>
-                : null}
+                : 'you are not logged'}
 
 
 

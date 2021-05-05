@@ -1,23 +1,63 @@
-import React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import React, { useEffect, useState } from 'react'
+import { authenticationService } from '../../Service/auth'
 
 import {
     Box,
     Button,
     Center,
-    Link
+    Link,
+    Stack,
+    Text
 } from '@chakra-ui/react'
 
-import { Router, Link as NavLink, Match } from "@reach/router";
-import AccountWrapper from './Wrapper';
-import AccountTitle from './Title';
+import CartSummary from '../Cart/LargeSummary'
+import AccountWrapper from './Wrapper'
+import AccountTitle from './Title'
+import GoToPaymentButton from '../Cart/GoToPaymentButton'
+import axios from 'axios'
+import { config } from '../../config'
+import CartLargeSummary from '../Cart/LargeSummary'
 
 const AccountCart = ({ }) => {
-    return(
-        <AccountWrapper>
+
+    const [data, setData] = useState();
+
+    useEffect(async () => {
+        if (authenticationService.getUser()) {
+            const result = await axios.get(
+                `${config.apiUrl}/cart/${authenticationService.getUser().userId}/created`
+            );
+            setData(result.data);
+        }
+
+    }, []);
+
+    return (
+        <AccountWrapper
+            size='2xl'
+            hideNav={true}
+        >
             <AccountTitle>
                 Votre panier
             </AccountTitle>
+            <Stack spacing={{ base: 2, lg: 8 }} shouldWrapChildren={true}>
+                <Text>
+                    Voici le récapitulatif de vos achats, pour accéder au téléchargement, cliquez ci-dessous sur "payer." Vous accéderez à la page de téléchargement juste après avoir réglé la commande via Stripe, notre plateforme de paiement sécurisé.
+                </Text>
+                {data ?
+                    <CartLargeSummary
+                        isOpen={true}
+                        // key={isOpen}
+                        products={data.products}
+                        hideButton={true}
+                    />
+                    : null}
+                {data ?
+                    <GoToPaymentButton
+                        cart={data}
+                    />
+                : null}
+            </Stack>
         </AccountWrapper>
     )
 }

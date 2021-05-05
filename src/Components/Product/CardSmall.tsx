@@ -18,6 +18,7 @@ import Favorite from '../../Services/Favorite'
 import HeartIcon from '../../Images/Icons/Favorite'
 import ProductIllustrationWithSwipe from './ProductIllustrationWithSwipe'
 import FavoriteButton from '../Favorite/Button'
+import BuyButton from './BuyButton'
 
 type productCardPropsTypes = {
     title: string,
@@ -45,16 +46,17 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
 }) => {
     const favoriteButton = useRef()
     const handleClick = (e) => {
-        console.log(e.target, favoriteButton.current)
-        e.target !== favoriteButton.current ?
-            onOpen()
-            :
-            console.log('ad to favorite')
-        if (!Favorite.isFavorite(productId)) {
-            Favorite.add(productId)
-        } else {
-            Favorite.remove(productId)
-        }
+        onOpen()
+        // console.log(e.target, favoriteButton.current)
+        // e.target !== favoriteButton.current ?
+        //     onOpen()
+        //     :
+        //     console.log('ad to favorite')
+        // if (!Favorite.isFavorite(productId)) {
+        //     Favorite.add(productId)
+        // } else {
+        //     Favorite.remove(productId)
+        // }
 
     }
     return (
@@ -142,6 +144,9 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     </Text>
                 </Flex>
             </SimpleGrid>
+            <Box>
+                <BuyButton product = {productId} />
+            </Box>
 
 
                 </VStack>
@@ -151,7 +156,9 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 top={5}
                 right={5}
             >
-                <FavoriteButton />
+                <FavoriteButton
+                    product={ productId }
+                />
                 {/* <Button
                     mt={0}
                     pt={0}

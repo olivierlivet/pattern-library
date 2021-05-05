@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 
 import {
     Box,
@@ -6,18 +6,24 @@ import {
 } from '@chakra-ui/react'
 import AccountNav from '../../Components/Nav/Account'
 
+type props = {
+    children: Object,
+    size: String,
+    hideNav: Boolean
+}
 
-const AccountWrapper = ({ children, size }) => {
+const AccountWrapper:FunctionComponent<props> = ({ children, size, hideNav }) => {
     return(
         <>
+        { !hideNav ?
         <Box
             mt={20}
-            // display='none'
         >
             <AccountNav />
         </Box>
+        : null }
         <Center
-            // minH='100vh'
+            mx='auto'
         >
             <Box
                 py='2rem'

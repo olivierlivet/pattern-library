@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 import {
+    ArrowBackIcon,
     CloseIcon
 } from '@chakra-ui/icons'
 
@@ -24,7 +25,7 @@ const CloseButton: FunctionComponent<props> = ({ onClose }) => {
             onClick={()=>onClose()}
             zIndex='tooltip'
         >
-            <CloseIcon />
+            <ArrowBackIcon />
         </Button>
     )
 }

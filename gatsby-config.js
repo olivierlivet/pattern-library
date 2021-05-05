@@ -10,7 +10,7 @@ module.exports = {
     `gatsby-plugin-robots-txt`,
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/fr/compte/*`,`/fr/editor/*`] },
+      options: { prefixes: [`/fr/compte/*`,`/fr/editor/*`, `/admin/*`] },
     },
     {
       resolve: `gatsby-plugin-google-fonts`,

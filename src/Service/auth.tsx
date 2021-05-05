@@ -44,15 +44,6 @@ function loginEmailPassword( email, password ) {
                 password: password
             }
         )
-        // .then(handleResponse)
-        .then(response => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('tpcUser', JSON.stringify( response.data ));
-            navigate('/fr/compte');
-            // currentUserSubject.next(user);
-
-            // return user;
-        });
 }
 
 function loginPasswordLess( token ) {
@@ -83,5 +74,6 @@ function getUser() {
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('tpcUser');
+    localStorage.removeItem('Favorites');
     // currentUserSubject.next(null);
 }

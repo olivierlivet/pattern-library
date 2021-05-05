@@ -27,14 +27,16 @@ import Wrapper from '../Layouts/Wrapper'
 import ShoppingBagIcon from '../../Images/Icons/ShoppingBag'
 
 import ProductsCountIndicator from './ProductsCountIndicator'
+import CartButton from '../Cart/MainButton'
 
 import CategoryChoiceButton from './CategoryChoiceButton'
 import FilterButton from './FilterButton'
 import MainFiltersButton from './MainFiltersButton'
 import VariantFiltersButtons from './VariantFiltersButtons'
-import FavoriteButton from '../Favorite/GlobalButton'
+import FavoriteButton from '../Favorite/MainButton'
 
 import getVariants from '../../Data/getVariants'
+import UserNav from '../Nav/User'
 
 const contentful = require("contentful");
 const client = contentful.createClient({
@@ -369,24 +371,9 @@ class SearchEngine extends Component {
 
 
                                 <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
-                                    <FavoriteButton />
-                                    <Center w={8} h={8} position='relative'>
-                                        <ShoppingBagIcon w={{ base: 5, lg: 6 }} h={{ base: 5, lg: 6 }} />
-                                        <Center
-                                            backgroundColor='red.500'
-                                            color='white'
-                                            borderRadius='full'
-                                            p={1.5}
-                                            w='10px'
-                                            h='10px'
-                                            position='absolute'
-                                            fontSize='x-small'
-                                            top='0'
-                                            right='0'
-                                        >
-                                            4
-                                </Center>
-                                    </Center>
+                                    <UserNav />
+                                    {/* <FavoriteButton /> */}
+                                    {/* <CartButton /> */}
                                 </HStack>
                             </Flex>
                         </Box>
@@ -423,7 +410,7 @@ class SearchEngine extends Component {
 
                                             //Actions
                                             // onOpen={() => console.log('open')}
-                                            onOpen={() => this.setState({ singleProduct: product.fields })}
+                                            onOpen={() => this.setState({ singleProduct: product })}
                                         />
                                     </>
 

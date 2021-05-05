@@ -43,8 +43,6 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
 
 
         >
-            <ModalHeader>Heder</ModalHeader>
-            <ModalCloseButton />
             <ModalContent>
                 <ModalBody
                     my={'0'}
@@ -59,6 +57,10 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
                     {/* <Button
                         onClick={() => onClose()}
                     >Retour</Button> */}
+
+                    {/* <pre>
+                        { JSON.stringify( product, null, 1 )}
+                    </pre> */}
 
                     <ProductPage
                         data={ product }

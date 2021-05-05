@@ -35,6 +35,7 @@ const ProductPage: FunctionComponent<props> = (
         onClose,
         displayCloseButton
     }) => {
+
     return (
         <Wrapper>
             <Box

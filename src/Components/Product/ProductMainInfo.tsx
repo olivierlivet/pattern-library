@@ -19,6 +19,9 @@ import {
 } from '@chakra-ui/react'
 import RichContent from '../RichContent'
 import { StarIcon } from '@chakra-ui/icons'
+import BuyButton from './BuyButton'
+import FavoriteButton from '../Favorite/Button'
+
 
 
 const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
@@ -30,10 +33,10 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 {/* <pre>
                     { JSON.stringify( data, null, 1 )}
                 </pre> */}
-                <Heading as='h1'>
+                <Heading as='h1' fontWeight='normal'>
                     {data.title}
                 </Heading>
-                <Link
+                {/* <Link
                     color='gray.600'
                     borderBottom='solid 4px'
                     borderBottomColor='#f5d692'
@@ -42,46 +45,17 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 >
                     {data.editor ? data.editor.title : null}
                     {data.editor.fields ? data.editor.fields.title : null}
-                </Link>
+                </Link> */}
             </Box>
             <RichContent data={data.intro} />
 
             <HStack>
-                <Box
-                    bg='#88a7aa'
-                    color='white'
-                    border='solid 1px'
-                    borderColor='#88a7aa'
-                    borderRadius='sm'
-                    textTransform='uppercase'
-                    letterSpacing='widest'
-                    px={6}
-                    py={3}
-                    fontSize={{ base: 'x-small', md: 'small', lg: 'normal' }}
-                    _hover={{
-                        bg: '#75b5bb'
-                    }}
-                >
-                    Acheter
-                </Box>
-                <Box
-                    border='solid 1px'
-                    borderColor='#88a7aa'
-                    color='#88a7aa'
-
-                    borderRadius='sm'
-                    textTransform='uppercase'
-                    letterSpacing='widest'
-                    px={6}
-                    py={3}
-                    fontSize={{ base: 'x-small', md: 'small', lg: 'normal' }}
-                    _hover={{
-                        bg: '#75b5bb',
-                        color: 'white'
-                    }}
-                >
-                    Ajouter à ma liste
-                </Box>
+                <BuyButton
+                    product={data.sys ? data.sys.id : data.contentful_id}
+                />
+                <FavoriteButton
+                    product={data.sys ? data.sys.id : data.contentful_id}
+                />
             </HStack>
             <SimpleGrid
                 columns={3}

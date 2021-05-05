@@ -16,7 +16,20 @@ exports.createPages = ({ graphql, actions }) => {
     toPath: `/fr`,
   });
 
-// 3t0pwYmEBxvCykiqoJbMVG
+
+  /*
+    #####
+    Admin
+    #####
+  */
+    const adminTemplate = path.resolve('src/Templates/admin.js')
+    createPage({
+      path: `${'/admin'}`,
+      component: adminTemplate,
+      context: {
+        // slug: edge.node.slug,
+      }
+    });
 
   /*
     #####
