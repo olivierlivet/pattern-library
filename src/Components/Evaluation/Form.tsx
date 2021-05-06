@@ -1,25 +1,26 @@
 import { Box } from '@chakra-ui/layout'
 import React from 'react'
-import { Formik, Form } from 'formik';
+import { Formik, Form } from 'formik'
 import Questions from './Questions'
-import axios from 'axios';
-import { navigate } from '@reach/router';
-import { config } from '../../config';
-const EvaluationForm = ( { productId } ) => {
+import axios from 'axios'
+import { navigate } from '@reach/router'
+import { config } from '../../config'
+import {authenticationService} from '../../Service/auth'
+
+const EvaluationForm = ( { data } ) => {
 
     return (
         <Formik
             initialValues={
-                {
-                    product: productId
-                    // NoticeComprehensibilityDetail: '',
-                    // ProductCustomisation: '',
-                }
+                {}
             }
             onSubmit={(values, { setSubmitting }) => {
                 axios.post(
-                    `${config.apiUrl}/evaluation`,
-                    values
+                    `${config.apiUrl}/evaluation/${data._id}`,
+                    {
+                        ...values,
+                        user: authenticationService.getUser().userId
+                    }
                 ).then((response)=> navigate(`/fr/compte/contribution/evaluation/login/${response.data._id}`))
                 // setTimeout(() => {
                 //     alert(JSON.stringify(values, null, 2));
@@ -46,6 +47,7 @@ const EvaluationForm = ( { productId } ) => {
                 <Form>
                     {/* Product { productId } */}
                     <Questions
+                        data={ data }
                         values={values}
                         errors={errors}
                         touched={touched}
@@ -54,10 +56,9 @@ const EvaluationForm = ( { productId } ) => {
                         setFieldError={setFieldError}
                         handleSubmit={handleSubmit}
                     />
-
-                    <pre>
-                        { JSON.stringify( values , null, 1)}
-                    </pre>
+                    {/* <pre>
+                        { JSON.stringify( data, null, 1 )}
+                    </pre> */}
                 </Form>
             )}
         </Formik>

@@ -48,26 +48,43 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
     const [isError, setIsError] = useState(false)
 
     const handleLoginThirdParty = (email) => {
-
-        console.log(email)
-        // authenticationService.login( email )
-        // axios.post(
-        //     `${process.env.API_URL}/user/login/`,
-        //     {
-        //         "email": email
-        //     }
-        // ).then(response => console.log(response.data))
+        authenticationService.loginThirdParty(email)
+        .then((response) => {
+            localStorage.setItem('tpcUser', JSON.stringify( response.data ));
+            console.log( response )
+            onLogin( response.data );
+        })
+        .catch((error) => {
+            // Error 😨
+            setIsError(true)
+            if (error.response) {
+                /*
+                 * The request was made and the server responded with a
+                 * status code that falls out of the range of 2xx
+                 */
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                /*
+                 * The request was made but no response was received, `error.request`
+                 * is an instance of XMLHttpRequest in the browser and an instance
+                 * of http.ClientRequest in Node.js
+                 */
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request and triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        })
     }
 
     const handleLoginStandard = ({ email, password }) => {
-        console.log(
-            email, password
-        )
         authenticationService.loginEmailPassword(email, password)
             .then((response) => {
                 localStorage.setItem('tpcUser', JSON.stringify( response.data ));
                 onLogin( response.data );
-                console.log('logged !', response)
             })
             .catch((error) => {
                 // Error 😨

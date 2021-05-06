@@ -399,6 +399,7 @@ class SearchEngine extends Component {
                                         <ProductCardSmall
                                             key={product.sys.id}
                                             productId={product.sys.id}
+                                            backendDocumentId={product.fields.backendDocumentId}
                                             title={product.fields.title}
                                             price={product.fields.price}
                                             level={product.fields.level}

@@ -10,16 +10,16 @@ import {
 
 import { Field } from 'formik'
 
-const QuestionSizeAndFabricLength = ({ id, index, setStep, values }) => {
+const QuestionSizeAndFabricLength = ({ id, index, setStep, values, data }) => {
     return (
         <>
             <Text
                 lineHeight='40px'
                 fontSize='16px'
             >
-                J'ai cousu
-                {` la Jupe Rita `}
-                en taille{' '}
+                J'ai cousu{' '}
+                { data.title }
+                {' '}en taille{' '}
                 <Box
                     display='inline-block'
                 >

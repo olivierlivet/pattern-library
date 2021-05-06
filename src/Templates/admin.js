@@ -20,6 +20,11 @@ import EvaluationLogin from '../Components/Account/EvaluationLoginForm'
 import EvaluationForm from '../Components/Account/EvaluationForm'
 import InspirationForm from '../Components/Account/InspirationForm'
 import RenewPassword from '../Components/Account/RenewPassword'
+
+import Product from '../Components/Admin/Product'
+import User from '../Components/Admin/User'
+
+
 import { Center } from '@chakra-ui/layout'
 
 
@@ -59,16 +64,16 @@ const AdminTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                <div>
-                    ADMIN
-                </div>
-                {/* <Router
-                    basepath='/fr/compte'
+                <Router
+                    basepath='/admin'
                     default='/'
                     // basepath='/fr/compte'
                 >
-                    <AccountHome path="/" />
-                    <Login path="/login" />
+                    {/* <AdmintHome path="/" /> */}
+                    <Product path="/product" />
+                    <User path="/user" />
+
+                    {/* <Login path="/login" />
                     <RenewPassword path="/new-password" />
                     <QuickLogin path="/quick-login/:token" />
                     <AccountCart path="/cart" />
@@ -79,9 +84,8 @@ const AdminTemplate = (props) => {
                     <EvaluationForm path="/contribution/evaluation/:productId" />
                     <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
                     <InspirationForm path="/contribution/inspiration/:productId" />
-                    <AccountProfile path="/profil" />
-                </Router> */}
-                {/* <Nav data={univers} /> */}
+                    <AccountProfile path="/profil" /> */}
+                </Router>
 
 
             </Wrapper>

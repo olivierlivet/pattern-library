@@ -43,7 +43,7 @@ const transitionStyles = {
     exited: { opacity: 0, maxHeight: 0 },
 }
 
-const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel, onLogin }) => {
+const CreateAccountForm: FunctionComponent<props> = ({  onCancel, onLogin }) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [isError, setIsError] = useState(false)
@@ -59,17 +59,18 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel,
         })
     }
 
-    const handleCreateAccountPasswordLess: FunctionComponent = (firstName: String, email: String, pictureUrl: String) => {
+    const handleCreateAccountPasswordLess: FunctionComponent = (firstName: String, email: String, pictureUrl: String, source:String) => {
         axios.post(
             `${config.apiUrl}/user/password-less`,
             {
                 email: email,
                 firstName: firstName,
-                profilePictureUrl: pictureUrl
+                profilePictureUrl: pictureUrl,
+                source: source
             }
         ).then((response) => {
-            handleLoggedIn(response.data._id)
-            onLogin( reponse.data._id )
+            localStorage.setItem('tpcUser', JSON.stringify(response.data));
+            onLogin( response.data.userId )
         })
             .catch((error) => {
                 // Error 😨
@@ -107,9 +108,12 @@ const CreateAccountForm: FunctionComponent<props> = ({ handleLoggedIn, onCancel,
                 <HStack>
                     <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} w='full'>
                         <GoogleLoginButton
-                            handleLogin={(user) => handleCreateAccountPasswordLess(user.email, user.givenName, user.imageUrl)}
+                            handleLogin={(user) => handleCreateAccountPasswordLess( user.givenName, user.email, user.imageUrl, 'google')}
+                            // handleLogin={(user) => console.log( user )}
                         />
-                        <FacebookLoginButton />
+                        <FacebookLoginButton
+                             handleLogin={(user) => handleCreateAccountPasswordLess( user.name, user.email, user.picture.data.url, 'facebook') }
+                        />
                     </SimpleGrid>
                 </HStack>
 

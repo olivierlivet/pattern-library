@@ -24,7 +24,7 @@ type productCardPropsTypes = {
     title: string,
     level: number,
     rating: number,
-    productId: string,
+    backendDocumentId: string,
     intro: string,
     price: number,
     pictures: Array<string>
@@ -34,7 +34,7 @@ type productCardPropsTypes = {
 
 
 const ProductCard: FunctionComponent<productCardPropsTypes> = ({
-    productId,
+    backendDocumentId,
     title,
     level,
     rating,
@@ -145,7 +145,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 </Flex>
             </SimpleGrid>
             <Box>
-                <BuyButton product = {productId} />
+                <BuyButton product = {backendDocumentId} />
             </Box>
 
 
@@ -157,7 +157,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 right={5}
             >
                 <FavoriteButton
-                    product={ productId }
+                    product={ backendDocumentId }
                 />
                 {/* <Button
                     mt={0}

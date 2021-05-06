@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 
 import {
     Box,
@@ -15,6 +15,9 @@ import {
 
 import { useContentful } from 'react-contentful';
 import { navigate } from 'gatsby';
+import { config } from '../../config';
+import {authenticationService} from '../../Service/auth'
+import axios from 'axios';
 
 
 type props = {
@@ -25,35 +28,20 @@ type props = {
 
 const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButton }) => {
 
+    const [data, setData] = useState();
+    useEffect(async () => {
+        const result = await axios.get(
+            `${config.apiUrl}/cart/${authenticationService.getUser().userId}/created`
+        );
+        setData(result.data);
+    }, []);
+
     const productsInCart = () => {
-        const { data, error, fetched, loading } = useContentful({
-            contentType: 'product',
-            locale: 'fr',
-            query: {
-                'sys.id[in]': products.join(','),
-            }
-        });
-
-        if (loading || !fetched) {
-            return null;
-        }
-
-        if (error) {
-            console.error(error);
-            return null;
-        }
-
-        if (!data) {
-            return <p>Page does not exist.</p>;
-        }
-
-        // See the Contentful query response
-        console.debug(data);
-
+        if ( !data ){ return null }
         // Process and pass in the loaded `data` necessary for your page or child components.
         return (
 
-            data.items.map((product, index) =>
+            data.products.map((product, index) =>
                 <Box
                     onClick={() => navigate(product.fields.slug)}
                     cursor='pointer'
@@ -78,13 +66,13 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                             alignItems='center'
                         >
                             <Heading as='p' fontWeight='normal' fontSize='sm'>
-                                {product.fields.title}
+                                {product.title}
                             </Heading>
 
                         </Flex>
                         <HStack justify='flex-end'>
                             <Center>
-                                <Text color='green.400'>{product.fields.price}&nbsp;€</Text>
+                                <Text color='green.400'>{product.price}&nbsp;€</Text>
                             </Center>
                             <Button variant='outline' size='sm'>
                                 Supprimer
@@ -115,6 +103,9 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
     return (
         products ?
             <Stack spacing={2}>
+                {/* <pre>
+                    { JSON.stringify( products, null, 1 )}
+                </pre> */}
                 <Box>
                     {productsInCart()}
                     {/* {cartTotalAmount()} */}

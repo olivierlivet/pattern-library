@@ -125,7 +125,11 @@ const FastLoginForm: FunctionComponent<props> = (
               />
               :
               <LoginForm
-                onLogin={( user ) => onLogin( user ) }
+                onLogin={( user ) => {
+                  console.log( user )
+                  onLogin( user );
+                  onClose();
+                } }
                 onCancel={() => setCurrentModule('choice') }
               />
           }

@@ -17,6 +17,8 @@ import {
 
 import { Field, Form, Formik } from 'formik';
 import { useToast } from "@chakra-ui/react"
+import axios from 'axios';
+import { config } from '../../../config';
 
 const UserProfileForm = ({ data }) => {
 
@@ -39,6 +41,10 @@ const UserProfileForm = ({ data }) => {
         <Formik
             initialValues={data}
             onSubmit={(values, { setSubmitting }) => {
+                axios.put(
+                    `${config.apiUrl}/user/${data._id}`,
+                    values
+                )
                 setTimeout(() => {
                     // alert(JSON.stringify(values, null, 2));
                     // setSubmitting(false);
@@ -91,11 +97,11 @@ const UserProfileForm = ({ data }) => {
                             <Button type='submit'>Enregistrer</Button>
                         </Box>
                     </Stack>
-                    {/* <pre>
-                        {JSON.stringify(data, null, 1)}
-                    </pre> */}
+
                 </Form>
             )}
+
+            
 
         </Formik>
     )

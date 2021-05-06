@@ -1,36 +1,39 @@
-import React, { useState } from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import React, { useEffect, useState } from 'react'
 
 import {
     Box,
-    Button,
-    Center,
-    Heading,
-    Link,
-    Stack,
-    Text
+
 } from '@chakra-ui/react'
 
-import { Router, Link as NavLink, Match } from "@reach/router";
-import AccountWrapper from './Wrapper';
 import Form from '../Evaluation/Form'
+import { config } from '../../config';
+import axios from 'axios';
 const EvaluationForm = ({ productId }) => {
 
+    const [data, setData] = useState();
+    useEffect(async () => {
+        const result = await axios.get(
+            `${config.apiUrl}/product/${productId}`
+        );
+        setData(result.data);
+    }, []);
+
+
     return (
-
+        <Box
+            minH='100vh'
+            py={{ base: 6, lg: 24 }}
+            px={{ base: 8, lg: 0 }}
+        >
             <Box
-                minH='100vh'
-                py={{ base: 6, lg: 24 }}
-                px={{ base: 8, lg: 0 }}
+                mx='auto'
+                w={{ base: 'full', lg: '3xl' }}
             >
-                <Box
-                    mx='auto'
-                    w={{ base: 'full', lg: '3xl' }}
-                >
-                    <Form productId={ productId } />
-                </Box>
+                { data ?
+                    <Form data={ data } />
+                : null }
             </Box>
-
+        </Box>
     )
 }
 

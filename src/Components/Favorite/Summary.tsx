@@ -90,6 +90,7 @@ const FavoriteSummary: FunctionComponent<props> = ({ products, isOpen, hideButto
         products ?
                 <Stack spacing={2}>
                     <Box>
+                        {/* <pre>{ JSON.stringify( products, null, 1 ) }</pre> */}
                         {productsInCart()}
                     </Box>
                 </Stack>

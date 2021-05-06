@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
-const QuestionIntroduction = ({ id, index, setStep }) => {
+const QuestionIntroduction = ({ id, index, setStep, data }) => {
     return (
         <Stack spacing={{ base: 4, lg: 5 }}>
             <Text>

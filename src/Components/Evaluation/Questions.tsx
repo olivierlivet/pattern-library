@@ -96,48 +96,51 @@ const allQuestions = {
     Identification: QuestionIdentification
 }
 
-const questions = [
-    {
-        name: "Intro",
-        title: "Partager votre expérience sur le patron (patron fullname) de (brand pattern) avec la communauté des couturières ✂️",
-    },
-    {
-        name:"NoticeComprehensibility",
-        title:"Les explications accompagnant le patron sont elles claires ? 🔍" 
-    },
-    {
-        name:"ProductCustomisation",
-        title: "Avez-vous apporté des modifications à votre réalisation ? 🪡"
-    },
-    {
-        name: "SizeAndFabricLength",
-        title: "En quelle taille avez-vous cousu le patron et combien de métrage avez vous utilisé ? ✂️",
-    },
-    {
-        name: "FabricFamily",
-        title: "Quel tissu avez vous choisi pour votre Jupe Rita ? ✂️",
-    },
-    {
-        name:"CuttingSatisfacition",
-        title: "Etes-vous satisfaite de la coupe ? 👗"
-    },
-    {
-        name:"Wearability",
-        title: "Est-ce que votre réalisation est régulièrement portée ? 👗"
-    },
-    {
-        name:"GlobalRating",
-        title: "Quelle note globale donnez vous au patron [pattern full name] de [brand pattern] ? 🌟"
-    }
-]
+
 
 const Questions = ({
+    data,
     values,
     setFieldValue,
     setFieldError,
     setFieldTouched,
     handleSubmit
 }) => {
+
+    const questions = [
+        {
+            name: "Intro",
+            title: `Partager votre expérience sur le patron «${data.title}» de ${data.editor.name} avec la communauté des couturières ✂️`,
+        },
+        {
+            name:"NoticeComprehensibility",
+            title:"Les explications accompagnant le patron sont elles claires ? 🔍" 
+        },
+        {
+            name:"ProductCustomisation",
+            title: "Avez-vous apporté des modifications à votre réalisation ? 🪡"
+        },
+        {
+            name: "SizeAndFabricLength",
+            title: "En quelle taille avez-vous cousu le patron et combien de métrage avez vous utilisé ? ✂️",
+        },
+        {
+            name: "FabricFamily",
+            title: `Quel tissu avez vous choisi pour votre ${data.title} ? ✂️`,
+        },
+        {
+            name:"CuttingSatisfacition",
+            title: "Etes-vous satisfaite de la coupe ? 👗"
+        },
+        {
+            name:"Wearability",
+            title: "Est-ce que votre réalisation est régulièrement portée ? 👗"
+        },
+        {
+            name:"GlobalRating",
+            title: `Quelle note globale donnez vous au patron «${data.title}» de ${data.editor.name} ? 🌟`
+        }
+    ]
 
     const [step, setStep] = useState( 0 )
 
@@ -175,6 +178,7 @@ const Questions = ({
                             }}
                         >
                             <QuestionComponent
+                                data={ data }
                                 id={question.name}
                                 index={index}
                                 setStep={()=>setStep( index + 1 )}

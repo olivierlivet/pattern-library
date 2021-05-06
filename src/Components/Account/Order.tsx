@@ -26,12 +26,14 @@ const AccountOrder = ({ }) => {
     const [isDownloadModalDisplay, setIsDownloadModalDisplay] = useState(false)
     const [data, setData] = useState();
 
-    useEffect(async () => {
+    useEffect(() => { getData() }, []);
+
+    const getData = async () => {
         const result = await axios.get(
             `${config.apiUrl}/sale/user/${authenticationService.getUser().userId}`
         );
         setData(result.data);
-    }, []);
+    }
 
     return (
         <>
@@ -57,11 +59,13 @@ const AccountOrder = ({ }) => {
                                                 fontSize='sm'
                                             >
                                                 <Text>
-                                                    Jupe Rita
-                                        </Text>
+                                                    { item.product.title }
+                                                </Text>
                                                 <Text>—</Text>
-                                                <Text>Téléchargement : {item.download}/3</Text>
-                                                <Button onClick={() => setIsDownloadModalDisplay(item)} size='sm'>Télécharger maintenant</Button>
+                                                <Text>Téléchargement{item.download > 1 ? 's' : null} : {item.download}/3</Text>
+                                                { item.download < 3 ? 
+                                                    <Button isDisabled={ item.download === 3} onClick={() => setIsDownloadModalDisplay(item)} size='sm'>Télécharger maintenant</Button>
+                                                : null }
                                             </HStack>
                                         </Flex>
                                     </Box>)}
@@ -70,10 +74,18 @@ const AccountOrder = ({ }) => {
                         : <Center><Spinner size='sm' mx='auto' /></Center>}
                 </Box>
             </AccountWrapper>
+            { isDownloadModalDisplay ? 
             <DownloadModal
                 isVisible={isDownloadModalDisplay}
-                onClose={() => setIsDownloadModalDisplay(false)}
+                data={ isDownloadModalDisplay ? isDownloadModalDisplay : null }
+                onClose={() =>{
+                    setIsDownloadModalDisplay(false);
+                    setTimeout( () => getData(), 1500);
+                    
+
+                }}
             />
+            : null }
         </>
     )
 }

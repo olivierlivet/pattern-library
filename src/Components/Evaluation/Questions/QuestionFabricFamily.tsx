@@ -3,7 +3,7 @@ import { Stack } from '@chakra-ui/layout'
 import { Textarea } from '@chakra-ui/textarea'
 import React, { useState } from 'react'
 
-const QuestionFabricFamily = ({ id, index, setStep, setFieldValue }) => {
+const QuestionFabricFamily = ({ id, index, setStep, setFieldValue, data }) => {
     const [seeMore, setSeeMore] = useState(false)
     const primaryList = [
         "Coton",

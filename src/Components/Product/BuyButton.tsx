@@ -30,7 +30,6 @@ const BuyButton: FunctionComponent<props> = ({ product }) => {
     }
 
     const addToCart = ( userId ) => {
-        console.log('add to cart', userId )
         axios.put(
             `${config.apiUrl}/cart`,
             { 

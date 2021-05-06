@@ -10,17 +10,7 @@ type props = {
 const GoogleLoginButton:FunctionComponent< props > = ({ handleLogin }) => {
     const responseGoogle = (response) => {
         // console.log(response);
-        handleLogin(
-            response.profileObj
-
-// email: "oli.livet@gmail.com"
-// familyName: "Livet"
-// givenName: "Olivier"
-// googleId: "114413314934976709876"
-// imageUrl: "https://lh3.googleusercontent.com/a-/AOh14GjrEe7R9UiJgM6fUhyyhv4kUr9rmYbMvA4reYPrYw=s96-c"
-// name: "Olivier Livet"
-            
-        )
+        handleLogin( response.profileObj )
     }
     return (
         <GoogleLogin
