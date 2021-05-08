@@ -16,9 +16,6 @@ import AccountOrder from '../Components/Account/Order'
 import AccountFavorite from '../Components/Account/Favorite'
 import AccountContribution from '../Components/Account/Contribution'
 import AccountSubscription from '../Components/Account/Subscription'
-import EvaluationLogin from '../Components/Account/EvaluationLoginForm'
-import EvaluationForm from '../Components/Account/EvaluationForm'
-import InspirationForm from '../Components/Account/InspirationForm'
 import RenewPassword from '../Components/Account/RenewPassword'
 import { Center } from '@chakra-ui/layout'
 
@@ -32,7 +29,7 @@ const AccountTemplate = (props) => {
       const checkUserAuth = () => {
         const user = authenticationService.getUser()
         if( !user ){
-            // navigate('/fr/compte/login')
+            navigate('/fr/compte/login')
         }
       }
 
@@ -73,9 +70,9 @@ const AccountTemplate = (props) => {
                     <AccountOrder path="/order" />
                     <AccountContribution path="/contribution" />
                     <AccountSubscription path="/subscription" />                    
-                    <EvaluationForm path="/contribution/evaluation/:productId" />
+                    {/* <EvaluationForm path="/contribution/evaluation/:productId" />
                     <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
-                    <InspirationForm path="/contribution/inspiration/:productId" />
+                    <InspirationForm path="/contribution/inspiration/:productId" /> */}
                     <AccountProfile path="/profil" />
                 </Router>
                 {/* <Nav data={univers} /> */}

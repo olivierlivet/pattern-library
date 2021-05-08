@@ -7,6 +7,8 @@ import { Input } from '@chakra-ui/input'
 import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import ReactSlider from 'react-slider'
 import { ArrowForwardIcon, RepeatIcon, SmallCloseIcon } from '@chakra-ui/icons'
+import { config } from '../../../config'
+import axios from 'axios'
 
 
 
@@ -16,15 +18,60 @@ export default class UploadPictures extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pictures: [
-                'https://www.cousette.com/5665-stars_products_listing/patron-robe-harmonie.jpg',
-                'https://www.cousette.com/5665-stars_products_listing/patron-robe-harmonie.jpg',
-                'https://www.cousette.com/5665-stars_products_listing/patron-robe-harmonie.jpg',
-                'https://www.cousette.com/5665-stars_products_listing/patron-robe-harmonie.jpg',
-                'https://www.cousette.com/5665-stars_products_listing/patron-robe-harmonie.jpg'
-            ],
-            isSubmiting: false
+            pictures: [],
+            isSubmiting: false,
+            selectedFiles: null
         }
+    }
+
+    onFileChange = event => {
+        // Update the state
+        this.setState(
+            { selectedFiles: event.target.files },
+            ()=> this.onFileUpload()
+        );
+    }
+
+    // On file upload (click the upload button)
+    onFileUpload = () => {
+
+        // Create an object of formData
+
+        for (const key of Object.keys(this.state.selectedFiles)) {
+
+            const formData = new FormData();
+
+            formData.append('picture', this.state.selectedFiles[key])
+            formData.append('product', this.props.data._id)
+
+            // formData.append(
+            //     "picture",
+            //     this.state.selectedFiles[key],
+            //     this.state.selectedFiles[key].name
+            // );
+
+            axios.post(`${config.apiUrl}/inspiration/upload`, formData)
+                .then((response) => {
+                    let currentPictures = this.state.pictures
+                    currentPictures.push(response.data)
+                    this.setState({ pictures: currentPictures })
+                })
+
+        }
+
+        // Update the formData object
+        // formData.append(
+        //     "picture",
+        //     this.state.selectedFiles[0],
+        //     this.state.selectedFiles[0].name
+        // );
+
+        // Details of the uploaded file
+        console.log(this.state.selectedFiles);
+
+        // Request made to the backend api
+        // Send formData object
+        // axios.post(`${config.apiUrl}/inspiration/upload`, formData);
     }
 
     render() {
@@ -32,9 +79,9 @@ export default class UploadPictures extends Component {
         const { setFieldValue, setStep } = this.props
         const { showValidate, isSubmiting, pictures } = this.state
         return (
-            <Stack spacing={ 6 }>
+            <Stack spacing={6}>
                 <Text>
-                    Envoyez nous vos photos de votre réalisation du patron ##PatronName##. Autant de photos que vous voulez, les plus belles seront ajoutées la fiche du patron.
+                    Envoyez nous vos photos de votre réalisation du patron {this.props.data.title} Autant de photos que vous voulez, les plus belles seront ajoutées la fiche du patron.
                 </Text>
                 { pictures && pictures.length ?
                     <Box overflowX='scroll'>
@@ -45,10 +92,10 @@ export default class UploadPictures extends Component {
                                 >
                                     <Image
                                         borderRadius={2}
-                                        src={item}
+                                        src={`https://thepatternscorner.s3.eu-west-3.amazonaws.com${item}`}
                                         alt='tetete'
                                         size='xs'
-                                        boxSize={{ base:'100px', lg:'150px' }}
+                                        boxSize={{ base: '100px', lg: '150px' }}
                                         objectFit='cover'
                                     />
 
@@ -66,16 +113,25 @@ export default class UploadPictures extends Component {
                                 </Box>
                             )}
                         </HStack>
+
+
                     </Box>
-                : null
-                    
-                }
+                    : null}
+
                 <Flex
                     wrap='wrap'
                     alignItems='center'
                 >
-                    <Button 
-                        w={{ base:'100%', lg:'auto' }}
+                    <input
+                        id='browse'
+                        type='file'
+                        multiple
+                        style={{ display:'none' }}
+                        onChange={this.onFileChange}
+                    />
+                    <Button
+                        w={{ base: '100%', lg: 'auto' }}
+                        as='label' for='browse'
                     >
                         {pictures.length < 1 ? `Choisir les photos` : `Ajouter d'autres photos`}
 
@@ -83,14 +139,17 @@ export default class UploadPictures extends Component {
                     {pictures && pictures.length ?
                         <>
                             <Text
-                                w={{ base:'100%', lg:'auto' }}
+                                w={{ base: '100%', lg: 'auto' }}
                                 textAlign='center'
                                 px={2}
                             >ou</Text>
                             <Button
-                                w={{ base:'100%', lg:'auto' }}
+                                w={{ base: '100%', lg: 'auto' }}
                                 variant='outline'
-                                onClick={()=>setStep()}
+                                onClick={() => {
+                                    setFieldValue( 'pictures', this.state.pictures );
+                                    setStep();
+                                }}
                             >
                                 {pictures.length === 1
                                     ? `Valider cette image`

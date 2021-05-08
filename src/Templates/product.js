@@ -64,8 +64,8 @@ query adQuery( $contentfulID: String! ){
         description { raw }
         level
         price
-        picture { file { url } }
-        pictures{ content }
+        ##picture { file { url } }
+        ##pictures{ content }
         editor{ title }
         univers{ title slug }
         category{ title slug }

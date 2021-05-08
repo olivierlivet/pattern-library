@@ -10,11 +10,16 @@ import {
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
+import { convertToRaw, convertFromRaw  } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js'
+import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js';
+
+
 export default class Comment extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            editorState: null,
+            editorState: EditorState.createEmpty(),
         }
     }
 
@@ -50,6 +55,19 @@ export default class Comment extends Component {
         const { editorState } = this.state
         const { setStep } = this.props
 
+        const saveDescription = () => {
+
+            const content = editorState.getCurrentContent();
+            const dataToSaveBackend = convertToRaw(content );
+            var markdownString = draftToMarkdown(dataToSaveBackend);
+
+            this.props.setFieldValue( 'comment', markdownString );
+            this.props.setStep();
+
+            console.log( 'dataToSaveBackend',  markdownString )
+
+        }
+
         return (
             <Stack spacing={{ base: 4, lg: 6 }}>
                 <Text>
@@ -78,8 +96,16 @@ export default class Comment extends Component {
                     />
                 </Box>
                 <Box>
-                    <Button onClick={() => setStep()}>Enregistrer{' '}</Button>
+                    {/* <Button onClick={() => setStep()}>Enregistrer{' '}</Button> */}
+                    <Button
+                        onClick={() => {
+                            saveDescription()
+                        }}
+                    >Valider</Button>
                 </Box>
+                {/* <pre>
+                    { JSON.stringify( editorState, null, 1 )}
+                </pre> */}
             </Stack>
         )
     }

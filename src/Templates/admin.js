@@ -9,19 +9,10 @@ import QuickLogin from '../Components/Account/QuickLogin'
 import {authenticationService} from '../Service/auth'
 
 import { Router, Link as NavLink, Match, useLocation, Location, navigate } from "@reach/router";
-import AccountHome from '../Components/Account/Home'
-import AccountCart from '../Components/Account/Cart'
-import AccountProfile from '../Components/Account/Profile'
-import AccountOrder from '../Components/Account/Order'
-import AccountFavorite from '../Components/Account/Favorite'
-import AccountContribution from '../Components/Account/Contribution'
-import AccountSubscription from '../Components/Account/Subscription'
-import EvaluationLogin from '../Components/Account/EvaluationLoginForm'
-import EvaluationForm from '../Components/Account/EvaluationForm'
-import InspirationForm from '../Components/Account/InspirationForm'
-import RenewPassword from '../Components/Account/RenewPassword'
+
 
 import Product from '../Components/Admin/Product'
+import ProductCreateForm from '../Components/Admin/ProductForm'
 import User from '../Components/Admin/User'
 
 
@@ -71,6 +62,7 @@ const AdminTemplate = (props) => {
                 >
                     {/* <AdmintHome path="/" /> */}
                     <Product path="/product" />
+                    <ProductCreateForm path="/product/create" />
                     <User path="/user" />
 
                     {/* <Login path="/login" />

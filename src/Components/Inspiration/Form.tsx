@@ -1,19 +1,26 @@
 import { Box } from '@chakra-ui/layout'
 import React from 'react'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import Questions from './Questions'
-const ContributionForm = ({ }) => {
+import {authenticationService} from '../../Service/auth'
+import { navigate } from '@reach/router'
+import axios from 'axios'
+import { config } from '../../config'
 
 
+const InspirationForm = ({ productId, data }) => {
 
     return (
         <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ }}
             onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                axios.post(
+                    `${config.apiUrl}/inspiration/${productId}`,
+                    {
+                        ...values,
+                        user: authenticationService.getUser().userId
+                    }
+                ).then((response)=> console.log(response.data))
             }}
         >
             {({
@@ -29,18 +36,23 @@ const ContributionForm = ({ }) => {
                 setFieldValue
                 /* and other goodies */
             }) => (
-                <form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                     <Questions
                         values={values}
                         setFieldValue={setFieldValue}
                         setFieldError={setFieldError}
                         setFieldTouched={setFieldTouched}
                         handleSubmit={handleSubmit}
+                        data={data}
                     />
-                </form>
+                    <pre>
+                        {JSON.stringify(values, null, 1)}
+                    </pre>
+                </Form>
             )}
+
         </Formik>
     )
 }
 
-export default ContributionForm
+export default InspirationForm

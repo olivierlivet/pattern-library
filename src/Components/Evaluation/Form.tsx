@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/layout'
 import React from 'react'
 import { Formik, Form } from 'formik'
 import Questions from './Questions'
@@ -6,6 +5,7 @@ import axios from 'axios'
 import { navigate } from '@reach/router'
 import { config } from '../../config'
 import {authenticationService} from '../../Service/auth'
+import * as yup from 'yup';
 
 const EvaluationForm = ( { data } ) => {
 
@@ -21,7 +21,7 @@ const EvaluationForm = ( { data } ) => {
                         ...values,
                         user: authenticationService.getUser().userId
                     }
-                ).then((response)=> navigate(`/fr/compte/contribution/evaluation/login/${response.data._id}`))
+                ).then((response)=> navigate(`/fr/contribution/evaluation/login/${response.data._id}`))
                 // setTimeout(() => {
                 //     alert(JSON.stringify(values, null, 2));
                 //     setSubmitting(false);
@@ -29,6 +29,12 @@ const EvaluationForm = ( { data } ) => {
 
                 // }, 400);
             }}
+            validationSchema={
+                yup.object().shape({
+                    size: yup.number().min(30).max(54).nullable(),
+                    fabricLength: yup.number().min(20).max(400).nullable(),
+                })
+            }
         >
             {({
                 values,
@@ -56,9 +62,9 @@ const EvaluationForm = ( { data } ) => {
                         setFieldError={setFieldError}
                         handleSubmit={handleSubmit}
                     />
-                    {/* <pre>
-                        { JSON.stringify( data, null, 1 )}
-                    </pre> */}
+                    <pre>
+                        { JSON.stringify( values, null, 1 )}
+                    </pre>
                 </Form>
             )}
         </Formik>

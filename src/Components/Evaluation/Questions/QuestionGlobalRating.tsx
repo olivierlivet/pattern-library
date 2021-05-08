@@ -115,6 +115,7 @@ export default class QuestionGlobalRating extends Component {
                             <Button
                                 variant='ouline'
                                 isLoading={isSubmiting}
+                                type='submit'
                                 onClick={() => {
                                     this.props.handleSubmit()
                                     // this.setState({ 'isSubmiting': true })

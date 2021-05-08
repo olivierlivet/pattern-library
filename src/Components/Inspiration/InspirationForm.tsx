@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 
 import {
@@ -14,7 +14,17 @@ import {
 import { Router, Link as NavLink, Match } from "@reach/router";
 import AccountWrapper from './Wrapper';
 import Form from '../Inspiration/Form'
+import axios from 'axios';
+import { config } from '../../config';
 const InspirationForm = ({ productId }) => {
+
+    const [data, setData] = useState();
+    useEffect(async () => {
+        const result = await axios.get(
+            `${config.apiUrl}/product/${productId}`
+        );
+        setData(result.data);
+    }, []);
 
     return (
 
@@ -27,7 +37,9 @@ const InspirationForm = ({ productId }) => {
                     mx='auto'
                     w={{ base: 'full', lg: '3xl' }}
                 >
-                    <Form />
+                    {data ? 
+                        <Form productId={productId} data={data} />
+                    : null}
                 </Box>
             </Box>
 

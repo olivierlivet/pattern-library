@@ -125,7 +125,7 @@ const questions = [
     },
 ]
 
-const Questions = ({ }) => {
+const Questions = ({ setFieldValue, data }) => {
 
     const [step, setStep] = useState(0)
 
@@ -166,7 +166,9 @@ const Questions = ({ }) => {
                             <QuestionComponent
                                 id={question.name}
                                 index={index}
+                                data={data}
                                 setStep={()=>setStep( index + 1 )}
+                                setFieldValue={ setFieldValue }
                             />
                         </Box>
                         <Box

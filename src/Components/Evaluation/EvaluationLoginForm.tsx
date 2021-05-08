@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import { Link as GatsbyLink, navigate } from 'gatsby'
 
 import {
     Box,
@@ -13,7 +13,7 @@ import {
     Spinner
 } from '@chakra-ui/react'
 
-import {authenticationService} from '../../Service/auth'
+import { authenticationService } from '../../Service/auth'
 import FastLoginForm from '../FastLoginForm'
 import LoginForm from '../Account/Login'
 import CreateAccountForm from '../Account/CreateAccountForm'
@@ -23,20 +23,39 @@ import { Router, Link as NavLink, Match } from "@reach/router";
 import AccountWrapper from './Wrapper';
 import Form from '../Evaluation/Form'
 import { Formik } from 'formik';
-const EvaluationLoginForm = ({ productId }) => {
-    const [ user, setUser ] = useState()
+import axios from 'axios'
+import { config } from '../../config'
+const EvaluationLoginForm = ({ evaluationId }) => {
+    const [user, setUser] = useState()
     const [currentModule, setCurrentModule] = useState('choice');
 
     useEffect(() => {
         checkUserAuth()
-  }, []);
+    }, []);
 
     const checkUserAuth = () => {
-      const user = authenticationService.getUser()
-      if( !user ){
-          // navigate('/fr/compte/login')
-          setUser(user)
-      }
+        const user = authenticationService.getUser()
+        if (!user) {
+            // navigate('/fr/compte/login')
+            setUser(user)
+        }else{
+            console.log( user )
+            handleAddUserToRecord( user )
+            // navigate(`/fr/contribution/inspiration/${ productId }`)
+        }
+    }
+
+    const handleAddUserToRecord = ( user ) => {
+
+        axios.put(
+            `${config.apiUrl}/evaluation/${evaluationId}`,
+            {
+                user: user.userId
+            }
+        ).then(( response )=> navigate(`/fr/contribution/inspiration/${response.data.product}`))
+
+        // console.log( userId )
+
     }
 
     return (
@@ -52,21 +71,18 @@ const EvaluationLoginForm = ({ productId }) => {
             >
 
 
-<Heading
-                            fontSize={{ base: 'xl', lg: 'x-large' }}
-                            fontWeight='normal'
-                            textAlign='center'
-                            py={{ base: 6, lg: 10 }}
-                            px={{ base: 0, lg: 10 }}
-                            >
-                                Pour enregistrer vos retours sur ce patron il faut que vous vous identifiez :
-                            </Heading>
-
-
-
-
-
-                <Box>
+                <Heading
+                    fontSize={{ base: 'xl', lg: 'x-large' }}
+                    fontWeight='normal'
+                    textAlign='center'
+                    py={{ base: 6, lg: 10 }}
+                    px={{ base: 0, lg: 10 }}
+                >
+                    Pour enregistrer vos retours sur ce patron il faut que vous vous identifiez :
+                </Heading>
+                <Box
+                    bg='white'
+                >
                     {!user ?
                         <>
 
@@ -90,14 +106,14 @@ const EvaluationLoginForm = ({ productId }) => {
                                 : currentModule === 'createAccountForm' ?
 
                                     <CreateAccountForm
-                                        handleLoggedIn={(userId) => {
+                                        onLogin={(userId) => {
                                             onUserAuth(userId)
                                         }}
                                         onCancel={() => setCurrentModule('choice')}
                                     />
                                     :
                                     <LoginForm
-                                        onLogin={(userId) => { setFieldValue }}
+                                        onLogin={(user) => { handleAddUserToRecord( user.userId ) }}
                                         onCancel={() => setCurrentModule('choice')}
                                     />
                             }

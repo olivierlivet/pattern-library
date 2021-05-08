@@ -91,7 +91,7 @@ const FavoriteSummary: FunctionComponent<props> = ({ products, isOpen, hideButto
                 <Stack spacing={2}>
                     <Box>
                         {/* <pre>{ JSON.stringify( products, null, 1 ) }</pre> */}
-                        {productsInCart()}
+                        {/* {productsInCart()} */}
                     </Box>
                 </Stack>
             :

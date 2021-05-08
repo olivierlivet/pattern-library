@@ -261,13 +261,13 @@ class SearchEngine extends Component {
 
                     >
                         <Box
-                            bg={{ base:'white', lg:'none'}}
-                            
+                            bg={{ base: 'white', lg: 'none' }}
+
                             spacing={{ base: 4, lg: 8 }}
 
-                            display={{ base:showFilter ? 'block' : 'none', lg:'block' }}
-                            position={{ base:'fixed', lg:'sticky' }}
-                            top={{ base:'0px', lg:10 }}
+                            display={{ base: showFilter ? 'block' : 'none', lg: 'block' }}
+                            position={{ base: 'fixed', lg: 'sticky' }}
+                            top={{ base: '0px', lg: 10 }}
                             left={0}
                             bottom={0}
                             right={0}
@@ -276,45 +276,45 @@ class SearchEngine extends Component {
 
                             id='filters'
 
-                            p={{ base: 4, lg:0 }}
-                            pt={{ base:20, lg:0 }}
+                            p={{ base: 4, lg: 0 }}
+                            pt={{ base: 20, lg: 0 }}
 
-                            maxH={{ base:'100vh', base:'auto' }}
-                            overflowY={{ base:'scroll', lg:'auto' }}
+                            maxH={{ base: '100vh', base: 'auto' }}
+                            overflowY={{ base: 'scroll', lg: 'auto' }}
 
                         >
-                        <Stack>
+                            <Stack>
 
-                            <MainFiltersButton
-                                setCategory={(value) => this.updateMainFilters('category', value)}
-                                label={'Femme/Jupe'}
-                                display={{ base: 'none', lg: 'block' }}
-                                size='large'
-                            />
+                                <MainFiltersButton
+                                    setCategory={(value) => this.updateMainFilters('category', value)}
+                                    label={'Femme/Jupe'}
+                                    display={{ base: 'none', lg: 'block' }}
+                                    size='large'
+                                />
 
-                            <VariantFiltersButtons
-                                key={variants}
-                                variants={variants}
-                                selectedVariant={mainFilters.variants}
-                                setVariant={(value) => this.updateVariants(value)}
-                            />
+                                <VariantFiltersButtons
+                                    key={variants}
+                                    variants={variants}
+                                    selectedVariant={mainFilters.variants}
+                                    setVariant={(value) => this.updateVariants(value)}
+                                />
 
-                            <RefinerFilters
-                                mainFilters={mainFilters}
-                                category={
-                                    // mainFilters.category
-                                    '3v7MEyPWB0d1FOYFa9odJV'
-                                }
-                                key={{ category: mainFilters.category, refine: refineFilters }}
-                                refineFilters={refineFilters}
-                                handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
-                                isVisible={
-                                    // showFilter
-                                    true
-                                }
-                                hideFilter={() => this.setState({ 'showFilter': !showFilter })}
-                            />
-                        </Stack>
+                                <RefinerFilters
+                                    mainFilters={mainFilters}
+                                    category={
+                                        // mainFilters.category
+                                        '3v7MEyPWB0d1FOYFa9odJV'
+                                    }
+                                    key={{ category: mainFilters.category, refine: refineFilters }}
+                                    refineFilters={refineFilters}
+                                    handleChange={(key, value) => this.handleUpdateRefineFilters(key, value)}
+                                    isVisible={
+                                        // showFilter
+                                        true
+                                    }
+                                    hideFilter={() => this.setState({ 'showFilter': !showFilter })}
+                                />
+                            </Stack>
                         </Box>
                     </Box>
                     <Box>
@@ -339,22 +339,17 @@ class SearchEngine extends Component {
                         // display='none'
                         >
                             <Flex justify='space-between'>
-                                <Box>
-                                    <Box
-                                        display={{ base: 'none', lg: 'block' }}
-                                        visibility='hidden'
-                                        w='145px'
+
+                                <HStack
+                                    display={{ base: 'flex', lg: 'none' }}
+                                >
+                                    <MainFiltersButton
+                                        setCategory={(value) => this.updateMainFilters('category', value)}
+                                        label={'Femme/Jupe'}
+                                        display={{ base: 'block', lg: 'none' }}
+                                        size='small'
                                     />
-                                    <HStack
-                                        display={{ base: 'flex', lg: 'none' }}
-                                    >
-                                        <MainFiltersButton
-                                            setCategory={(value) => this.updateMainFilters('category', value)}
-                                            label={'Femme/Jupe'}
-                                            display={{ base: 'block', lg: 'none' }}
-                                            size='small'
-                                        />
-                                        {/* <CategoryChoiceButton
+                                    {/* <CategoryChoiceButton
                                             mainFilters={mainFilters}
                                             categories={Filters.getCategoryOptions()}
                                             variants={Filters.getVariantOptions(this.state.mainFilters.category)}
@@ -362,11 +357,10 @@ class SearchEngine extends Component {
                                             setUnivers={(value) => this.updateMainFilters('univers', value)}
                                             setCategory={(value) => this.updateMainFilters('category', value)}
                                         /> */}
-                                        <FilterButton
-                                            onClick={() => this.setState({ showFilter: !this.state.showFilter })}
-                                        />
-                                    </HStack>
-                                </Box>
+                                    <FilterButton
+                                        onClick={() => this.setState({ showFilter: !this.state.showFilter })}
+                                    />
+                                </HStack>
                                 <ProductsCountIndicator count={products && products.length ? products.length : null} />
 
 

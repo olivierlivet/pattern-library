@@ -7,14 +7,14 @@ import {
     Text
 } from '@chakra-ui/react'
 
-const Introduction = ({ id, index, setStep }) => {
+const Introduction = ({ id, index, setStep, data }) => {
     return (
         <Stack spacing={{ base:4, lg: 4 }}>
             <Text>
-                Votre avis 5 ⭐  sur Jupe Rita a bien été sauvegardé, merci beaucoup !
+                Votre avis à propos du patron de votre <strong>{data.title.toLowerCase()}</strong> a bien été sauvegardé, merci beaucoup !
             </Text>
             <Text>
-                Maintenant que nous connaissons votre sentiment sur ce patron en détail, on piaffe d'impatience de voir le résultat !
+                Maintenant, on piaffe d'impatience de voir le résultat !
             </Text>
             <Text>
                 Voulez-vous prendre encore 2 minutes pour partager quelques photos de votre réalisation et transmettre de l'inspiration aux autres couturières ? Merci d'avance !

@@ -79,6 +79,23 @@ exports.createPages = ({ graphql, actions }) => {
       }
     });
 
+
+  /*
+    #####
+    Contribution
+    #####
+  */
+    const contributionTemplate = path.resolve('src/Templates/contribution.js')
+    createPage({
+      path: `${'/fr/contribution'}`,
+      component: contributionTemplate,
+      context: {
+        // slug: edge.node.slug,
+        // contentfulID: '3t0pwYmEBxvCykiqoJbMVG',
+        locale: 'fr'
+      }
+    });
+
   /*
     #####
     Account Editor
