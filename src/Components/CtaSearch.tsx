@@ -56,7 +56,7 @@ const CtaSearch:FC< props > = ({ handleSubmit, label }) => {
                 position='relative'
             >
                 <Button
-                    bg='#66878a'
+                    bg='black'
                     borderRadius={3}
                     fontFamily='Noe Display'
                     fontWeight='normal'
