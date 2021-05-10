@@ -15,10 +15,11 @@ import Hierarchical from '../Components/Nav/Hierarchical'
 type props = {
     data: any,
     links: any,
-    hierarchy: any
+    hierarchy: any,
+    Cta: any
 }
 
-const PageHeader: FC<props> = ({ data, links, hierarchy }) => {
+const PageHeader: FC<props> = ({ data, links, hierarchy, Cta }) => {
 
     return (
         <Wrapper>
@@ -55,6 +56,9 @@ const PageHeader: FC<props> = ({ data, links, hierarchy }) => {
                             fontWeight='normal'
                         >{data.titleH1}</Heading>
                         <RichContent data={data.description} />
+
+                        {/* <Cta /> */}
+                        {Cta}
 
                         <Nav data={links} />
 

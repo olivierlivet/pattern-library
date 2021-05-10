@@ -55,7 +55,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                     { JSON.stringify( data, null, 1 )}
                 </pre> */}
                 <Text letterSpacing='wide' color='gray.400'>
-                    {data.editor.title}
+                    {data.editor ? data.editor.title : ''}
                 </Text>
                 <Heading as='h1' fontWeight='normal'>
                     {data.title}

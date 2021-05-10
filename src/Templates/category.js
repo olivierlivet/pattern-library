@@ -1,23 +1,12 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
-import SearchEngine from '../Components/SearchEngine'
-import Nav from '../Components/Nav/Base'
 
-import {
-    Heading,
-    Box,
-    SimpleGrid,
-    Stack,
-    Flex
-} from '@chakra-ui/react'
-import Wrapper from '../Components/Layouts/Wrapper'
-import RichContent from '../Components/RichContent'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import Helmet from 'react-helmet'
-import Hierarchical from '../Components/Nav/Hierarchical'
 
 import PageHeader from '../Components/PageHeader'
+import CtaSearch from '../Components/CtaSearch'
+import { navigate } from 'gatsby'
 
 
 const CategoryTemplate = (props) => {
@@ -37,8 +26,15 @@ const CategoryTemplate = (props) => {
                 data = { pageContent }
                 links = { variants }
                 hierarchy = {{ 'univers': pageContent.univers }}
+                Cta={
+                    <CtaSearch
+                        label={`Parcourir les patrons`}
+                        handleSubmit={(value) => navigate(`/fr/search?category=${value.id}&label=${value.label}`)}
+                    />
+                }
 
             />
+            
 
         </Layout>
     )

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import './modal.css'
 type productCardPropsTypes = {
-    product: object,
+    product: any,
     title: string,
 
     onOpen(): Function,
@@ -63,7 +63,7 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
                     </pre> */}
 
                     <ProductPage
-                        data={ product }
+                        data={ product.fields ? product.fields : product }
                         onClose={()=>onClose()}
                         displayCloseButton={ true }
                     />
