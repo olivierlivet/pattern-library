@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 
 import {
     Box,
@@ -14,7 +14,9 @@ import {
 import { useContentful } from 'react-contentful';
 import { navigate } from 'gatsby';
 import { AddIcon, SmallAddIcon } from '@chakra-ui/icons';
-
+import { config } from '../../config';
+import { authenticationService } from '../../Service/auth';
+import axios from 'axios';
 
 type props = {
     isOpen: Boolean
@@ -22,39 +24,27 @@ type props = {
     hideButton: Boolean
 }
 
-const FavoriteSummary: FunctionComponent<props> = ({ products, isOpen, hideButton }) => {
+const FavoriteSummary: FunctionComponent<props> = ({ isOpen, hideButton }) => {
 
-    const productsInCart = () => {
-        const { data, error, fetched, loading } = useContentful({
-            contentType: 'product',
-            locale: 'fr',
-            query: {
-                'sys.id[in]': products.join(','),
-            }
-        });
 
-        if (loading || !fetched) {
-            return null;
-        }
+    const [data, setData] = useState();
+    useEffect(async () => {
+        const result = await axios.get(
+            `${config.apiUrl}/favorite/user/${authenticationService.getUser().userId}`
+        );
+        console.log( data )
+        setData(result.data);
+    }, []);
 
-        if (error) {
-            console.error(error);
-            return null;
-        }
-
-        if (!data) {
-            return <p>Page does not exist.</p>;
-        }
-
-        // See the Contentful query response
-        console.debug(data);
+    const products = () => {
+        if (!data) { return null }
 
         // Process and pass in the loaded `data` necessary for your page or child components.
         return (
 
-            data.items.map((product, index) =>
+            data.map((item, index) =>
                 <Box
-                    onClick={() => navigate(product.fields.slug)}
+                    onClick={() => navigate(item.product.slug)}
                     cursor='pointer'
                     borderTop='solid 1px'
                     borderTopColor={ index !== 0 ? 'gray.50' : 'transparent'}
@@ -77,7 +67,7 @@ const FavoriteSummary: FunctionComponent<props> = ({ products, isOpen, hideButto
                             alignItems='center'
                         >
                             <Heading as='p' fontWeight='normal' fontSize='sm'>
-                                {product.fields.title} - { index }
+                                {item.product.title}
                             </Heading>
 
                         </Flex>
@@ -87,11 +77,11 @@ const FavoriteSummary: FunctionComponent<props> = ({ products, isOpen, hideButto
     }
 
     return (
-        products ?
+        data ?
                 <Stack spacing={2}>
                     <Box>
                         {/* <pre>{ JSON.stringify( products, null, 1 ) }</pre> */}
-                        {/* {productsInCart()} */}
+                        {products()}
                     </Box>
                 </Stack>
             :

@@ -50,7 +50,8 @@ const AccountOrder = ({ }) => {
                                     <Box bg='white' w='full' boxShadow='md' py={3} px={5} borderRadius='lg'>
                                         <Flex justify='space-between' align='center'>
                                             <Heading fontSize='md' fontFamily='Noe display' fontWeight='normal' color='#66878a' textTransform='none' letterSpacing='wider' p='0' m='0'>
-                                                Achat #{item._id.slice( item._id.length-7, item._id.length )}
+                                                {item.product.title}
+                                               
                                             </Heading>
                                             <HStack
                                                 spacing={2}
@@ -59,7 +60,7 @@ const AccountOrder = ({ }) => {
                                                 fontSize='sm'
                                             >
                                                 <Text>
-                                                    { item.product.title }
+                                                Achat #{item._id.slice( item._id.length-7, item._id.length )}
                                                 </Text>
                                                 <Text>—</Text>
                                                 <Text>Téléchargement{item.download > 1 ? 's' : null} : {item.download}/3</Text>

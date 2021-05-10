@@ -6,7 +6,7 @@ import Helmet from 'react-helmet'
 import LoginForm from '../Components/Account/Login'
 import QuickLogin from '../Components/Account/QuickLogin'
 
-import {authenticationService} from '../Service/auth'
+import { authenticationService } from '../Service/auth'
 
 import { Router, Link as NavLink, Match, useLocation, Location, navigate } from "@reach/router";
 
@@ -14,35 +14,40 @@ import { Router, Link as NavLink, Match, useLocation, Location, navigate } from 
 import Product from '../Components/Admin/Product'
 import ProductCreateForm from '../Components/Admin/ProductForm'
 import User from '../Components/Admin/User'
+import Inspiration from '../Components/Admin/Inspiration'
+import Evaluation from '../Components/Admin/Evaluation'
+import Sale from '../Components/Admin/Sale'
+import Editor from '../Components/Admin/Editor'
+import EditorForm from '../Components/Admin/EditorForm'
 
-
-import { Center } from '@chakra-ui/layout'
+import { Box, Center, ButtonGroup, Button } from '@chakra-ui/react'
+import ProductUpdateForm from '../Components/Admin/ProductForm/Update'
 
 
 const AdminTemplate = (props) => {
 
     useEffect(() => {
-          checkUserAuth()
+        checkUserAuth()
     }, []);
 
-      const checkUserAuth = () => {
+    const checkUserAuth = () => {
         const user = authenticationService.getUser()
-        if( !user ){
+        if (!user) {
             // navigate('/fr/compte/login')
         }
-      }
+    }
 
-      const Login = () => (
+    const Login = () => (
         <Center
-          minH='calc(100vh - 100px)'
+            minH='calc(100vh - 100px)'
         >
             <LoginForm
-                onLogin={()=> navigate('/fr/compte')}
-                onCancel={()=> navigate('/fr/')}
+                onLogin={() => navigate('/fr/compte')}
+                onCancel={() => navigate('/fr/')}
             />
         </Center>
     )
-    
+
 
     return (
         <Layout
@@ -55,17 +60,36 @@ const AdminTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                <Router
-                    basepath='/admin'
-                    default='/'
-                    // basepath='/fr/compte'
-                >
-                    {/* <AdmintHome path="/" /> */}
-                    <Product path="/product" />
-                    <ProductCreateForm path="/product/create" />
-                    <User path="/user" />
+                <Box py={'24'}>
+                    <ButtonGroup>
+                        <Button as={NavLink} to='/admin/user'>Users</Button>
+                        <Button as={NavLink} to='/admin/sale'>Sales</Button>
+                        <Button as={NavLink} to='/admin/editor'>Editors</Button>
+                        <Button as={NavLink} to='/admin/product'>Products</Button>
 
-                    {/* <Login path="/login" />
+                        <Button as={NavLink} to='/admin/evaluation'>Evaluations</Button>
+                        <Button as={NavLink} to='/admin/inspiration'>Inspirations</Button>
+                    </ButtonGroup>
+                    <Router
+                        basepath='/admin'
+                        default='/'
+                    // basepath='/fr/compte'
+                    >
+                        {/* <AdmintHome path="/" /> */}
+
+                        <User path="/user" />
+
+                        <Product path="/product" />
+                        <ProductCreateForm path="/product/create" />
+                        <ProductUpdateForm path="/product/:productId" />
+                        <Editor path="/editor" />
+                        <EditorForm path="/editor/create" />
+
+                        <Sale path="/sale" />
+                        <Evaluation path="/evaluation" />
+                        <Inspiration path="/inspiration" />
+
+                        {/* <Login path="/login" />
                     <RenewPassword path="/new-password" />
                     <QuickLogin path="/quick-login/:token" />
                     <AccountCart path="/cart" />
@@ -77,9 +101,9 @@ const AdminTemplate = (props) => {
                     <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
                     <InspirationForm path="/contribution/inspiration/:productId" />
                     <AccountProfile path="/profil" /> */}
-                </Router>
+                    </Router>
 
-
+                </Box>
             </Wrapper>
         </Layout>
     )

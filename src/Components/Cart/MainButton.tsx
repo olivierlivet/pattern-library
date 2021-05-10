@@ -40,7 +40,10 @@ const transitionStyles = {
 const MainButton = ({ }) => {
 
     useEffect(() => {
-        let interval = setInterval(() => getData(), (1000 * 5))
+        if( !data ){
+            getData();
+        }
+        let interval = setInterval(() => getData(), (1000 * 5));
         //destroy interval on unmount
         return () => clearInterval(interval)
     })

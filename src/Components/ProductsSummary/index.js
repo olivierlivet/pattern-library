@@ -19,7 +19,7 @@ const ProductsSummary = ({ data }) => {
                     <Box
                         key={`${product.node.slug}`}
                         as={ GatsbyLink }
-                        to={ `/fr${product.node.slug}` }
+                        to={ `${product.node.slug}` }
                         p={ 10 }
                         border='solid 1px'
                         borderColor='gray.100'

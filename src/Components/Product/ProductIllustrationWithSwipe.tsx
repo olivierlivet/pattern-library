@@ -2,6 +2,7 @@ import React, { createRef, FunctionComponent, useState, useMemo } from 'react'
 import { Box, Button, Center, Flex, Image, Text } from '@chakra-ui/react'
 import ReactSwipe from 'react-swipe';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { config } from '../../config';
 
 type propTypes = {
     imagesUrl: Array<string>,
@@ -48,24 +49,28 @@ const ProductIllustrationWithSwipe: FunctionComponent<propTypes> = (
     return (
         <>
             <Box>
+                {/* <pre>
+                    { JSON.stringify( imagesUrl , null, 1 )}
+                </pre> */}
                 <ReactSwipe
                     className="carousel"
                     swipeOptions={ swipeOptions }
                     ref={el => (reactSwipeEl = el)}
                 >
                     {imagesUrl && imagesUrl[0] ?
-                        imagesUrl.map(item =>
+                        imagesUrl.map(path =>
                             <Box
-                                key={item}
+                                key={path}
                                 h='100%'
                                 minH='100%'
                             >
                                 <Image
                                     // objectFit='cover'
+                                    loading='lazy'
                                     w='100%'
                                     h='100%'
                                     alt={alt}
-                                    src={item.content ? item.content : item} />
+                                    src={path ? `${ config.imageCdnBaseUrl }${path}?twic=v1/cover=300x300/format=webp/quality=60` : null} />
                             </Box>
                         )
                     : null}

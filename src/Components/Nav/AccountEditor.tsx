@@ -34,6 +34,7 @@ const AccountEditorNav = ({ }) => {
                         </Button>
                         <Button fontWeight='normal' variant='link' mx={2} as={NavLink} to='/fr/editor/products'>Patrons</Button>
                         <Button fontWeight='normal' variant='link' mx={2} as={NavLink} to='/fr/editor/sales'>Ventes</Button>
+                        <Button fontWeight='normal' variant='link' mx={2} as={NavLink} to='/fr/editor/payments'>Paiements</Button>
                         <Button fontWeight='normal' variant='link' mx={2} as={NavLink} to='/fr/editor/ratings'>Avis</Button>
                         <Button fontWeight='normal' variant='link' mx={2} as={NavLink} to='/fr/editor/settings'>Paramètres</Button>
                     </ButtonGroup>

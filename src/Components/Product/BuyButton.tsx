@@ -10,10 +10,11 @@ import { config } from '../../config'
 import PurchaseConfirm from './PurchaseConfirm'
 
 type props = {
-    product: String
+    product: String,
+    price: Number
 }
 
-const BuyButton: FunctionComponent<props> = ({ product }) => {
+const BuyButton: FunctionComponent<props> = ({ product, price }) => {
 
     const [showLoginForm, setShowLoginForm] = useState(false)
     const [showPurchseConfirm, setShowPurchseConfirm ] = useState(false)
@@ -58,7 +59,8 @@ const BuyButton: FunctionComponent<props> = ({ product }) => {
                     bg: '#75b5bb'
                 }}
             >
-                Acheter ce patron
+                Acheter ce patron →{' '}
+                <strong>{ price }€</strong>
             </Box>
             { showLoginForm ?
                 <FastLoginForm

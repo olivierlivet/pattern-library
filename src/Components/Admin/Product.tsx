@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { config } from '../../config'
 import { Link } from '@reach/router'
+import { Link as RouterLink } from '@reach/router'
 
 const Product = ({}) => {
 
@@ -27,7 +28,8 @@ const Product = ({}) => {
                     <Flex w='full' justify='space-between'>
                         { item.title }
                         <HStack>
-                            <Button size='sm' as='a' target='_blank' href={`https://app.contentful.com/spaces/e6euex8rtwnm/entries/${item.cmsDocumentId}`}>CMS</Button>
+                        <Button size='sm' as={RouterLink} target='_blank' to={`/admin/product/${item._id}`}>update</Button>
+                        <Button size='sm' as='a' target='_blank' href={`https://app.contentful.com/spaces/e6euex8rtwnm/entries/${item.cmsDocumentId}`}>CMS</Button>
                             <Text>{ item.price }€</Text>
                             <Text>{ item.rating }</Text>
                         </HStack>

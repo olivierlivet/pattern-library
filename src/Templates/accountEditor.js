@@ -32,7 +32,8 @@ import FacebookLoginButton from '../Components/Account/LoginButtons/Facebook'
 import { Router, Link as NavLink, Match, useLocation, Location } from "@reach/router";
 import AccountHome from '../Components/AccountEditor/Home'
 import AccountProducts from '../Components/AccountEditor/Products'
-import AccountSales from '../Components/AccountEditor/SalesBackup'
+import AccountSales from '../Components/AccountEditor/Sales'
+import AccountPayments from '../Components/AccountEditor/Payments'
 import AccountSettings from '../Components/AccountEditor/Settings'
 import AccountRatings from '../Components/AccountEditor/Ratings'
 import AccountLogin from '../Components/AccountEditor/Login'
@@ -97,6 +98,7 @@ const AccountEditorTemplate = (props) => {
                     <AccountLogin path='/login' />
                     <AccountProducts path='/products' />
                     <AccountSales path='/sales' />
+                    <AccountPayments path='/payments' />
                     <AccountRatings path='/ratings' />
                     <AccountSettings path='/settings' />
                     

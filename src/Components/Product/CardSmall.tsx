@@ -92,7 +92,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 >
                     <ProductIllustrationWithSwipe
                         alt={ title }
-                        imagesUrl={ pictures }
+                        imagesUrl={ pictures.url }
                         // imagesUrl={[
                         //     'https://img.ltwebstatic.com/images3_pi/2020/10/19/160308384184b44973720f8dfb2b5c9625c3e7faac_thumbnail_600x.webp',
                         //     'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',

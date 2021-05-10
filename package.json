@@ -58,6 +58,7 @@
     "react-touch-carousel": "^0.9.4",
     "react-transition-group": "^4.4.1",
     "slick-carousel": "^1.8.1",
+    "slugify": "^1.5.2",
     "swipe-js-iso": "^2.1.5",
     "swiper": "^6.5.9",
     "yup": "^0.32.9"

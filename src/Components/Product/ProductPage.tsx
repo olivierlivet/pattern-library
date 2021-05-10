@@ -39,22 +39,18 @@ const ProductPage: FunctionComponent<props> = (
     return (
         <Wrapper>
             <Box
-                maxW='1100px'
                 mx='auto'
             >
-            {/* <pre>
-                { JSON.stringify( data, null, 1 )}
-            </pre> */}
+
             { displayCloseButton ? <CloseButton onClose={()=>onClose()} /> : null }
             <Stack spacing={{ base:4, lg:8 }} pb={ 20 }>
-
                 <Grid
                     templateColumns={{
                         base:'100%',
                         xl: '600px 1fr'
                     }}
                     gap={{ base: 0, lg: 10 }}
-                    my={{ base: 0, lg: 10 }}
+                    my={{ base: 0, lg: 0 }}
                 >
                     <Box>
                         <Box
@@ -62,7 +58,7 @@ const ProductPage: FunctionComponent<props> = (
                         top={20}
                         >
                             <ProductIllustration data={data} />
-                            <SharingButtons url={data.slug} title={data.title} />
+                            {/* <SharingButtons url={data.slug} title={data.title} /> */}
                         </Box>
                     </Box>
                     <Center

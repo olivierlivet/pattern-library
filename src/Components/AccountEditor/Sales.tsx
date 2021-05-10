@@ -21,7 +21,7 @@ import { AddIcon, StarIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { config } from '../../config';
 
-const AccountSales = ({ }) => {
+const AccountPayments = ({ }) => {
 
     const [data, setData] = useState();
     useEffect(async () => {
@@ -123,4 +123,4 @@ var censorEmail = function (email){
     )
 }
 
-export default AccountSales
+export default AccountPayments

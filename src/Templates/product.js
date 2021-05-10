@@ -14,6 +14,8 @@ import {
     BreadcrumbLink,
     Heading
 } from '@chakra-ui/react'
+import Helmet from 'react-helmet'
+import { config } from '../config'
 
 const ProductTemplate = ( props ) => {
     const pageContent = props.data.product
@@ -21,9 +23,9 @@ const ProductTemplate = ( props ) => {
         <Layout
             enableBackButton = { false }
         >
-            {/* <pre>
-                { JSON.stringify( pageContent.pictures, null, 1 )}
-            </pre> */}
+            <Helmet>
+                <title>{ `${pageContent.title} - ${pageContent.editor.title} ${config.titleSuffix}` }</title>
+            </Helmet>
             <HierarchicalNav
                 data={ pageContent }
             />
@@ -31,23 +33,6 @@ const ProductTemplate = ( props ) => {
                 data={ props.data.product }
                 displayCloseButton= { false }
             />
-            {/* <StaticImage
-                src="https://placekitten.com/800/600"
-                alt="A kitten"
-                formats={['auto', 'avif', 'webp']}
-            /> */}
-
-            
-            <div>
-                {/* <StaticImage
-                    src={`https://images.ctfassets.net/e6euex8rtwnm/523FbtWgb4UHwARkyac2Jm/fabddc082975170488339aca75098da0/chemisier.jpeg?w=400&q=50`}
-                    alt={ 'pageContent.title' }
-                /> */}
-
-            </div>
-            {/* <pre>
-                { JSON.stringify( props, null, 1 )}
-            </pre> */}
         </Layout>
     )
 }
@@ -58,14 +43,15 @@ export const pageQuery = graphql`
 query adQuery( $contentfulID: String! ){
     product:contentfulProduct(contentful_id: {eq: $contentfulID}) {
         contentful_id
+        backendDocumentId
         slug
         title
         intro{ raw }
         description { raw }
         level
         price
-        ##picture { file { url } }
-        ##pictures{ content }
+        mainPicture
+        pictures{ url }
         editor{ title }
         univers{ title slug }
         category{ title slug }

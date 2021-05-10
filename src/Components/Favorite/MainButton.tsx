@@ -36,6 +36,9 @@ const FavoriteMainButton = ({ }) => {
     const [isOpen, setIsOpen] = useState()
 
     useEffect(() => {
+        if( !userFavorites ){
+            getUserFavorite();
+        }
         let interval = setInterval(() => getUserFavorite(), (1000 * 5))
         //destroy interval on unmount
         return () => clearInterval(interval)

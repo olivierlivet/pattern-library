@@ -8,7 +8,7 @@ const LinksList = ({ data }) => {
             <List as={ Grid } gridTemplateColumns={{ base: '50% 50%', lg:'25% 25% 25% 25%' } }>
                 {data.map(item =>
                     <ListItem>—{' '}
-                        <Link as={ GatsbyLink } to={`/fr${item.node.slug}`}>
+                        <Link as={ GatsbyLink } to={`${item.node.slug}`}>
                             {item.node.title}
                         </Link>
                     </ListItem>

@@ -28,7 +28,6 @@ type props = {
 
 const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton }) => {
 
-
     const [data, setData] = useState();
     useEffect(async () => {
         const result = await axios.get(
@@ -76,6 +75,7 @@ const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton })
                             </Text>
                         </Center>
                     </Grid>
+
                 </Box>)
         );
     }
@@ -85,6 +85,23 @@ const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton })
         <Stack spacing={2}>
             <Box>
                 {productsInCart()}
+            </Box>
+            <Box
+                p={2}
+            >
+                <Button
+                    onClick={()=>navigate('/fr/compte/cart')}
+                    w='full'
+                    bg='brand.green.500'
+                    color='white'
+                    fontFamily='Noe display'
+                    fontWeight='normal'
+                    _hover={{
+                        bg: 'brand.green.400'
+                    }}
+                >
+                    Passer commande
+                </Button>
             </Box>
         </Stack>
 

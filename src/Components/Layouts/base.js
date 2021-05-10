@@ -50,15 +50,15 @@ const baseLayout = (
             <CSSReset />
             <Header />
             <Box
-                // maxW='1300px'
-                // mx='auto'
-                // bg='#E3F4F0'
                 bg='#d9e6e63d'
                 px={{ base: 0, lg: 0 }}
                 as='main'
                 position='relative'
                 minH='100vh'
-                pt={'48px'}
+                pt={{
+                    base:'48px',
+                    lg:'115px'
+                }}
             >
                 {enableBackButton ? <BackButton /> : null}
                 {children}

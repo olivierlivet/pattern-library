@@ -117,7 +117,7 @@ export default class FavoriteButton extends Component {
                             e.stopPropagation();
                             this.handleFavoriteClick();
                         }}
-                        p={3}
+                        p={2.5}
                         // border='solid 1px'
                         cursor='pointer'
                         borderColor='gray.100'

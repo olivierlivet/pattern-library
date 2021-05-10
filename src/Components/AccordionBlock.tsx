@@ -31,8 +31,8 @@ const AccordionBlock: FunctionComponent<props> = (
         >
             <Heading
                 fontWeight='normal'
-                fontSize={{ base:'2xl', lg:'4xl'}}
-                mb={{ base: 8 }}
+                fontSize={{ base: '2xl', lg: '4xl' }}
+                mb={{ base: 8 }}
             >
                 {title}
             </Heading>

@@ -92,7 +92,7 @@ export default class UploadPictures extends Component {
                                 >
                                     <Image
                                         borderRadius={2}
-                                        src={`https://thepatternscorner.s3.eu-west-3.amazonaws.com${item}`}
+                                        src={`${config.imageBaseUrl}${item}`}
                                         alt='tetete'
                                         size='xs'
                                         boxSize={{ base: '100px', lg: '150px' }}
