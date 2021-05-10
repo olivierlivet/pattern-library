@@ -32,6 +32,7 @@ import LinksList from '../Components/LinksList'
 import CtaSearch from '../Components/CtaSearch'
 import AccordionBlock from '../Components/AccordionBlock'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { config } from '../config'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
@@ -41,6 +42,8 @@ const HomeTemplate = (props) => {
     const [showEngine, setShowEngine] = useState(false)
     const [category, setCategory] = useState(false)
     const [variant, setVariant] = useState(false)
+
+    console.log( 'config', config )
     return (
         <Layout
             enableBackButton={false}

@@ -41,6 +41,7 @@ import { StarIcon } from '@chakra-ui/icons'
 import BuyButton from './BuyButton'
 import FavoriteButton from '../Favorite/Button'
 import Rating from './Rating'
+import { navigate } from 'gatsby-link'
 
 
 
@@ -49,7 +50,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
         <Stack
             spacing={{ base: 4, lg: 6 }}
         >
-            <Box>
+            <Stack spacing={ 2 }>
                 {/* <pre>
                     { JSON.stringify( data, null, 1 )}
                 </pre> */}
@@ -59,18 +60,8 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 <Heading as='h1' fontWeight='normal'>
                     {data.title}
                 </Heading>
-                <Rating value={4} />
-                {/* <Link
-                    color='gray.600'
-                    borderBottom='solid 4px'
-                    borderBottomColor='#f5d692'
-                    display='inline-block'
-                    h='22px'
-                >
-                    {data.editor ? data.editor.title : null}
-                    {data.editor.fields ? data.editor.fields.title : null}
-                </Link> */}
-            </Box>
+                <Rating value={4} backendDocumentId={data.backendDocumentId} />
+            </Stack>
             <RichContent data={data.intro} />
 
             <HStack spacing={.5}>

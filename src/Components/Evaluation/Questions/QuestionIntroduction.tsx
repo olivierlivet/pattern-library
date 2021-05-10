@@ -14,7 +14,7 @@ const QuestionIntroduction = ({ id, index, setStep, data }) => {
             <Text>
             Votre contribution permettra à d'autres couturières de trouver plus facilement le patron qui correspond à leur projet et sera d'une aide précieuse pour la créatrice.
             </Text>
-            <Text>Et pour vous remercier, 1 avis = 10% de réduction sur votre prochaine commande sur The Patterns Corner.
+            <Text>Et pour vous remercier je vous offrirai des points de fidelité à convertir en réduction sur votre prochaine commande sur The Patterns Corner.
             </Text>
 
             <Box>
