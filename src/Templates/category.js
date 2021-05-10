@@ -1,42 +1,45 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
-
-import {
-    StaticImage,
-    // GatsbyImage
-} from "gatsby-plugin-image"
 import SearchEngine from '../Components/SearchEngine'
 import Nav from '../Components/Nav/Base'
-import ProductsSummary from '../Components/ProductsSummary/index.js'
 
 import {
     Heading,
-    Box
+    Box,
+    SimpleGrid,
+    Stack,
+    Flex
 } from '@chakra-ui/react'
+import Wrapper from '../Components/Layouts/Wrapper'
+import RichContent from '../Components/RichContent'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import Helmet from 'react-helmet'
+import Hierarchical from '../Components/Nav/Hierarchical'
 
-const CategoryTemplate = ( props ) => {
+import PageHeader from '../Components/PageHeader'
+
+
+const CategoryTemplate = (props) => {
     const pageContent = props.data.category
     const variants = props.data.variants.edges
     const products = props.data.products.edges
-    return(
+    return (
         <Layout
-            enableBackButton = { true }
+            enableBackButton={ false }
         >
-            <Heading as='h1'>Category: { pageContent.title }</Heading>
-            {/* <pre>
-                { JSON.stringify( categories, null, 1 )}
-            </pre> */}
+            <Helmet>
+                <title>{pageContent.titleSeo}</title>
+                <meta name='description' content={pageContent.descriptionSeo} />
+            </Helmet>
 
-            <Nav data={ variants } />
+            <PageHeader
+                data = { pageContent }
+                links = { variants }
+                hierarchy = {{ 'univers': pageContent.univers }}
 
-            <ProductsSummary data={ products } />
+            />
 
-            {/* <SearchEngine /> */}
-
-            {/* <pre>
-                { JSON.stringify( props, null, 1 )}
-            </pre> */}
         </Layout>
     )
 }
@@ -48,10 +51,12 @@ query categoryQuery( $contentfulID: String! ){
     category:contentfulCategory(contentful_id: {eq: $contentfulID}) {
         slug
         title
-        #description {
-        #    raw
-        #}
-        #picture { file { url } }
+        titleH1
+        titleSeo
+        descriptionSeo{ descriptionSeo }
+        description { raw }
+        illustration { gatsbyImageData(layout: FULL_WIDTH) }
+        univers { title slug }
     }
     variants:allContentfulVariant(
         filter:{ category:{ contentful_id: { eq : $contentfulID}} }

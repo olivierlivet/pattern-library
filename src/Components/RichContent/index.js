@@ -4,6 +4,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link as GatsbyLink } from 'gatsby'
 import {
     Link,
+    List,
+    ListItem,
     Stack,
     Text
 } from '@chakra-ui/react'
@@ -22,20 +24,22 @@ const RichContent = ({ data }) => {
             [MARKS.BOLD]: text => <strong>{text}</strong>,
         },
         renderNode: {
+            [BLOCKS.UL_LIST]: (node, children) => <List>{children}</List>,
+            [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
             [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
             [INLINES.ENTRY_HYPERLINK]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id)
                 // const { title, description, slug } = node.data.target.fields;
                 console.log('node', node.data.target)
                 console.log('children', children)
-                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={`${slug}`}>{children}</Link>
+                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={slug}>{children} {slug}</Link>
             },
             [INLINES.EMBEDDED_ENTRY]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id, data.references)
                 // const { title, description, slug } = node.data.target.fields;
                 console.log('node', node)
                 console.log('children', children)
-                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={`${slug}`}>{children} child</Link>
+                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={`${slug}`}>{children} coucou child</Link>
             },
             [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id)
@@ -45,7 +49,7 @@ const RichContent = ({ data }) => {
             },
             [INLINES.HYPERLINK]: (node, children) => {
                 console.log('node', node)
-                return <Text color='blue.700' borderBottom='solid 1px' borderColor='blue.300' as='a' href={node.data.uri}>{children}</Text>
+                return <Link as={GatsbyLink} color='blue.700' borderBottom='solid 1px' borderColor='blue.300' as='a' to={node.data.uri}>{node.data.uri}  test {children}</Link>
             },
         },
     }

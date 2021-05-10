@@ -31,8 +31,9 @@ module.exports = {
         localeFilter: locale => locale.code === 'fr' // Limite only to fr node for the moment
       },
     },
-    "gatsby-plugin-gatsby-cloud",
-    "gatsby-plugin-image",
+    `gatsby-plugin-gatsby-cloud`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
     // {
     //   resolve: "gatsby-plugin-google-analytics",
     //   options: {

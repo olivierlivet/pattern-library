@@ -1,40 +1,42 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../Components/Layouts/base'
-import ProductsSummary from '../Components/ProductsSummary/index.js'
-
-import {
-    StaticImage,
-    // GatsbyImage
-} from "gatsby-plugin-image"
 import SearchEngine from '../Components/SearchEngine'
 import Nav from '../Components/Nav/Base'
 
 import {
     Heading,
-    Box
+    Box,
+    SimpleGrid,
+    Stack,
+    Flex
 } from '@chakra-ui/react'
+import Wrapper from '../Components/Layouts/Wrapper'
+import RichContent from '../Components/RichContent'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import Helmet from 'react-helmet'
+import Hierarchical from '../Components/Nav/Hierarchical'
 
-const VariantTemplate = ( props ) => {
+import PageHeader from '../Components/PageHeader'
+
+const VariantTemplate = (props) => {
     const pageContent = props.data.variant
     const products = props.data.products.edges
-    return(
+    return (
         <Layout
-            enableBackButton = { true }
+            enableBackButton={ false }
         >
-            <Heading as='h1'>Variant: { pageContent.title }</Heading>
-            {/* <pre>
-                { JSON.stringify( categories, null, 1 )}
-            </pre> */}
+            <Helmet>
+                <title>{pageContent.titleSeo}</title>
+                <meta name='description' content={pageContent.descriptionSeo} />
+            </Helmet>
 
-            {/* <Nav data={ products } /> */}
-            <ProductsSummary data={ products } />
+            <PageHeader
+                data={pageContent}
+                // links={variants}
+                hierarchy={{ 'univers': pageContent.univers }}
 
-            {/* <SearchEngine /> */}
-
-            {/* <pre>
-                { JSON.stringify( props, null, 1 )}
-            </pre> */}
+            />
         </Layout>
     )
 }
@@ -46,10 +48,14 @@ query variantQuery( $contentfulID: String! ){
     variant:contentfulVariant(contentful_id: {eq: $contentfulID}) {
         slug
         title
-        #description {
-        #    raw
-        #}
-        #picture { file { url } }
+        titleH1
+        titleSeo
+        descriptionSeo{ descriptionSeo }
+        description { raw }
+        illustration { gatsbyImageData(layout: FULL_WIDTH) }
+
+        univers { title slug }
+        category { title slug }
     }
     products:allContentfulProduct(
         filter:{
