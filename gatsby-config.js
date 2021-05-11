@@ -7,6 +7,13 @@ module.exports = {
     siteUrl: "https://patternslibrary.gatsbyjs.io"
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-196735516-1",
+      }
+    },
+
     `gatsby-plugin-robots-txt`,
     {
       resolve: `gatsby-plugin-create-client-paths`,
