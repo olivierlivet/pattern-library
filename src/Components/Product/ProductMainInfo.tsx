@@ -23,6 +23,8 @@ import {
     PopoverCloseButton,
     PopoverArrow,
     PopoverHeader,
+    List,
+    ListItem,
 } from '@chakra-ui/react'
 
 import {
@@ -49,9 +51,9 @@ import ProductStats from './Stats'
 const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
     return (
         <Stack
-            spacing={{ base: 4, lg: 6 }}
+            spacing={{ base: 4, lg: 8 }}
         >
-            <Stack spacing={ 2 }>
+            <Stack spacing={2}>
                 {/* <pre>
                     { JSON.stringify( data, null, 1 )}
                 </pre> */}
@@ -199,6 +201,133 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
             </Box>
 
             <ProductStats />
+
+            <Box>
+                <Heading
+                    as='h4'
+                    color='gray.400'
+                    fontFamily='DM Sans'
+                    textTransform='uppercase'
+                    // fontWeight='normal'
+                    fontSize={{ base: 'xs', lg: 'sm' }}
+                    letterSpacing='wide'
+                >Fournitures</Heading>
+                <Box>
+                    Il faut ça ci et cela.
+                    <List>
+                        <ListItem>
+                            - 2 mettre de tissu X
+                        </ListItem>
+                        <ListItem>
+                            - 3 mettres de tissu Y
+                        </ListItem>
+                        <ListItem>
+                            - 30 cm de tissu de doublure
+                        </ListItem>
+                    </List>
+                </Box>
+            </Box>
+            <Box>
+                <Heading
+                    as='h4'
+                    color='gray.400'
+                    fontFamily='DM Sans'
+                    textTransform='uppercase'
+                    // fontWeight='normal'
+                    fontSize={{ base: 'xs', lg: 'sm' }}
+                    letterSpacing='wide'
+                >Choix des matières / tissus</Heading>
+                <Box>
+                    Pour réaliser ce patron, voici les types de tissus recommandés :
+                    <List>
+                        <ListItem>
+                            - Viscose
+                        </ListItem>
+                        <ListItem>
+                            - Lin
+                        </ListItem>
+                        <ListItem>
+                            - Tafeta
+                        </ListItem>
+                    </List>
+                </Box>
+            </Box>
+
+            <Box>
+                <Heading
+                    as='h4'
+                    color='gray.400'
+                    fontFamily='DM Sans'
+                    textTransform='uppercase'
+                    // fontWeight='normal'
+                    fontSize={{ base: 'xs', lg: 'sm' }}
+                    letterSpacing='wide'
+                >Mensurations détaillées :</Heading>
+
+
+                <Box
+                    maxW={{ base:'90vw', lg:'100%' }}
+                    overflowX='scroll'
+                >
+
+
+                    <Table variant="simple" size='sm'>
+                        <Tbody>
+                            <Tr>
+                                <Td><strong>Taille</strong></Td>
+                                <Td>34</Td>
+                                <Td>36</Td>
+                                <Td>38</Td>
+                                <Td>40</Td>
+                                <Td>42</Td>
+                                <Td>44</Td>
+                                <Td>46</Td>
+                            </Tr>
+                            <Tr>
+                                <Td><strong>Poitrine</strong></Td>
+
+                                <Td>80</Td>
+                                <Td>84</Td>
+                                <Td>88</Td>
+                                <Td>92</Td>
+                                <Td>96</Td>
+                                <Td>100</Td>
+                                <Td>104</Td>
+                            </Tr>
+                            <Tr>
+                                <Td><strong>Taille</strong></Td>
+                                <Td>62</Td>
+                                <Td>66</Td>
+                                <Td>70</Td>
+                                <Td>74</Td>
+                                <Td>78</Td>
+                                <Td>82</Td>
+                                <Td>86</Td>
+                            </Tr>
+                            <Tr>
+                                <Td><strong>Hanche</strong></Td>
+                                <Td>86</Td>
+                                <Td>90</Td>
+                                <Td>94</Td>
+                                <Td>98</Td>
+                                <Td>102</Td>
+                                <Td>106</Td>
+                                <Td>110</Td>
+                            </Tr>
+                            <Tr>
+                                <Td><strong>Tour de bras</strong></Td>
+                                <Td>25,6</Td>
+                                <Td>26,8</Td>
+                                <Td>28</Td>
+                                <Td>29,2</Td>
+                                <Td>30,4</Td>
+                                <Td>31,6</Td>
+                                <Td>32,8</Td>
+                            </Tr>
+                        </Tbody>
+                    </Table>
+                </Box>
+            </Box>
         </Stack>
     )
 }

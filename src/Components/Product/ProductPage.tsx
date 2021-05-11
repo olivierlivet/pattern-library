@@ -61,7 +61,6 @@ const ProductPage: FunctionComponent<props> = (
 
                 {displayCloseButton ? <CloseButton onClose={() => onClose()} /> : null}
 
-
                 {context === 'modal' ?
 
                     <HStack
@@ -96,8 +95,8 @@ const ProductPage: FunctionComponent<props> = (
                                     top={20}
                                 >
                                     <ProductIllustration data={data} />
-                                    {/* <SharingButtons url={data.slug} title={data.title} /> */}
                                 </Box>
+                                {/* <SharingButtons url={data.slug} title={data.title} /> */}
                             </Box>
                             <Center
                                 p={{ base: 5, lg: 0 }}
@@ -106,20 +105,21 @@ const ProductPage: FunctionComponent<props> = (
                             >
                                 <ProductMainInfo data={data} />
                             </Center>
-                            {/* <ProductStats /> */}
-
 
                         </Grid>
 
-                        {/* <Box
-                    px={{ base:5, lg:0 }}
-                    fontSize='15px'
-                    id='details'
-                >
-                    <RichContent data={data.description} />
-                </Box> */}
-
-                        <Tabs id="details">
+                        <Grid
+                            templateColumns={{
+                                base: `100%`,
+                                lg:`600px 1fr`
+                            }}
+                            gap={20}
+                            mt={ '32' }
+                        >
+                            <Box bg='gray.200'><Center h='500px'>Inspirations</Center></Box>
+                            <Box bg='gray.300'><Center h='500px'>Discussions</Center></Box>
+                        </Grid>
+                        {/* <Tabs id="details">
                             <TabList>
                                 <Tab>Détails</Tab>
                                 <Tab>Inspirations</Tab>
@@ -138,7 +138,7 @@ const ProductPage: FunctionComponent<props> = (
                                     <ProductRatingAdnAdvices data={data} />
                                 </TabPanel>
                             </TabPanels>
-                        </Tabs>
+                        </Tabs> */}
                     </Stack>
                 </Box>
             </Wrapper>

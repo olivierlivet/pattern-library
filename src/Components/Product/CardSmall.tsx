@@ -151,7 +151,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 </Flex>
             </SimpleGrid>
             <Box>
-                <BuyButton product = {backendDocumentId} />
+                <BuyButton price={ price } product = {backendDocumentId} />
             </Box>
 
 

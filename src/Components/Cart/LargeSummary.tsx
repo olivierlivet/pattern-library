@@ -20,6 +20,7 @@ import { authenticationService } from '../../Service/auth'
 import axios from 'axios';
 import GoToPaymentButton from './GoToPaymentButton';
 import SmallProductImage from '../Image/SmallProduct';
+import { CloseIcon, SmallCloseIcon } from '@chakra-ui/icons';
 
 
 type props = {
@@ -77,7 +78,7 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                 >
                     <Grid
                         templateColumns={{
-                            base: `40px 1fr 150px`
+                            base: `40px 1fr 120px`
                         }}
                         gap={{
                             base: 1,
@@ -105,8 +106,10 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                                 onClick={(e) => handleDelete(e, product._id)}
                                 variant='outline'
                                 size='sm'
-                            >
-                                Supprimer
+                            > 
+                                <SmallCloseIcon />
+                                <Text display={{ base: 'none', lg:'block'}}>Supprimer</Text>
+                                
                             </Button>
                         </HStack>
 
