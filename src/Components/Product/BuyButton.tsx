@@ -38,6 +38,10 @@ const BuyButton: FunctionComponent<props> = ({ product, price }) => {
                 product: product
             }
         ).then((response)=> setShowPurchseConfirm(true))
+        .catch((error)=>{
+            setShowPurchseConfirm(true);
+            console.log(error);
+        })
     }
 
     return (

@@ -4,23 +4,14 @@ import { Link as GatsbyLink } from 'gatsby'
 
 import {
     Button,
-    Box,
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
-    ModalCloseButton,
     Heading,
-    Text,
-    ButtonGroup,
-    Center,
-    Flex,
-    Stack,
     SimpleGrid
 } from "@chakra-ui/react"
-import { navigate } from '@reach/router'
 
 const PurchaseConfirm = ({ onClose }) => {
     return (
@@ -58,10 +49,14 @@ const PurchaseConfirm = ({ onClose }) => {
                 >
 
                     Votre patron a bien été ajouté à votre panier, souhaitez-vous :
-                    <ButtonGroup>
+                    <SimpleGrid
+                        columns={{ base:1, lg:2 }}
+                        gap={2 }
+
+                    >
                         <Button onClick={()=>onClose()}>Continuer vos achats</Button>
                         <Button as={GatsbyLink} to='/fr/compte/cart'>Finaliser la commande</Button>
-                    </ButtonGroup>
+                    </SimpleGrid>
                 </ModalBody>
             </ModalContent>
         </Modal>

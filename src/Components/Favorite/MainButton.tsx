@@ -49,7 +49,10 @@ const FavoriteMainButton = ({ }) => {
         if (userId) {
             axios.get(
                 `${config.apiUrl}/favorite/user/${authenticationService.getUser().userId}`
-            ).then((response) => setUserFavorites(response.data))
+            ).then((response) =>{
+                setUserFavorites(response.data)
+                
+            })
         }
     }
     const format = (userFavorites) => {

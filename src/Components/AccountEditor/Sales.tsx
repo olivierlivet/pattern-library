@@ -20,13 +20,14 @@ import AccountNav from '../Nav/Account';
 import { AddIcon, StarIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { config } from '../../config';
+import { authenticationService } from '../../Service/auth';
 
 const AccountPayments = ({ }) => {
 
     const [data, setData] = useState();
     useEffect(async () => {
         const result = await axios.get(
-            `${config.apiUrl}/sale/editor/${'6092f72cbc6b2262bb91d167'}`
+            `${config.apiUrl}/sale/editor/${authenticationService.getUser().userId}`
         );
         setData(result.data);
     }, []);
