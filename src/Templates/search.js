@@ -16,7 +16,7 @@ const SearchTemplate = (props) => {
     const SearchEngine = Loadable({
         loader: () => import('../Components/SearchEngine/index'),
         loading: loading,
-    });
+    })
     return (
         <EmptyLayout>
 

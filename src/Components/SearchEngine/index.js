@@ -12,8 +12,19 @@ import {
     Text,
     Badge,
     Spinner,
-    Stack
+    Stack,
 } from '@chakra-ui/react'
+
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from "@chakra-ui/react"
+
 import config from '../../Utils/config'
 import ProductCardSmall from '../Product/CardSmall'
 import ProductCardLarge from '../Product/CardLarge'
@@ -424,7 +435,7 @@ class SearchEngine extends Component {
 
 
 
-                {singleProduct ?               
+                {singleProduct ?
                     <ProductCardLarge
                         product={singleProduct}
                         onClose={() =>
