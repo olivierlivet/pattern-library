@@ -23,7 +23,7 @@ const UniversTemplate = (props) => {
     const pageContent = props.data.univers
     const categories = props.data.categories.edges
 
-    console.log(pageContent)
+    console.log('pageContent', pageContent)
     return (
         <Layout
             enableBackButton={ false }
@@ -31,7 +31,7 @@ const UniversTemplate = (props) => {
             <Hierarchical data={ pageContent } />
             <Helmet>
                 <title>{pageContent.titleSeo}</title>
-                <meta name='description' content={pageContent.descriptionSeo} />
+                <meta name='description' content={pageContent.descriptionSeo.descriptionSeo} />
             </Helmet>
             <PageHeader
                 data = { pageContent }

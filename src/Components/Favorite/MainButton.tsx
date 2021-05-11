@@ -53,7 +53,7 @@ const FavoriteMainButton = ({ }) => {
         }
     }
     const format = (userFavorites) => {
-        console.log('userFavorites', userFavorites)
+        // console.log('userFavorites', userFavorites)
         let formatedFavorites = []
         for (let index = 0; index < userFavorites.length; index++) {
             formatedFavorites.push(userFavorites[index].product)

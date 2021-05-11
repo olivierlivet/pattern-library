@@ -13,13 +13,17 @@ const CategoryTemplate = (props) => {
     const pageContent = props.data.category
     const variants = props.data.variants.edges
     const products = props.data.products.edges
+
+    console.log('pageContent', pageContent)
+
+
     return (
         <Layout
             enableBackButton={ false }
         >
             <Helmet>
                 <title>{pageContent.titleSeo}</title>
-                <meta name='description' content={pageContent.descriptionSeo} />
+                <meta name='description' content={pageContent.descriptionSeo.descriptionSeo} />
             </Helmet>
 
             <PageHeader
@@ -28,7 +32,7 @@ const CategoryTemplate = (props) => {
                 hierarchy = {{ 'univers': pageContent.univers }}
                 Cta={
                     <CtaSearch
-                        label={`Parcourir les patrons`}
+                        label={`Voir tous les modèle de ${pageContent.title}`}
                         handleSubmit={(value) => navigate(`/fr/search?category=${value.id}&label=${value.label}`)}
                     />
                 }
@@ -50,7 +54,9 @@ query categoryQuery( $contentfulID: String! ){
         titleH1
         titleSeo
         descriptionSeo{ descriptionSeo }
-        description { raw }
+        description {
+            raw
+        }
         illustration { gatsbyImageData(layout: FULL_WIDTH) }
         univers { title slug }
     }

@@ -244,7 +244,6 @@ class SearchEngine extends Component {
 
     render() {
         const { products, singleProduct, mainFilters, refineFilters, showFilter, variants } = this.state
-
         return (
             <>
                 <Grid
@@ -376,6 +375,7 @@ class SearchEngine extends Component {
 
                         <VStack
                             w='100%'
+                            minH='100vh'
                             py={{ base: 0, lg: 20 }}
                             // bg='gray.100'
                             spacing={{ base: 5, lg: 10 }}

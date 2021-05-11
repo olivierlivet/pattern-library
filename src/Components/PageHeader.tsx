@@ -46,7 +46,7 @@ const PageHeader: FC<props> = ({ data, links, hierarchy, Cta }) => {
                 >
                     <Stack
                         p={{ base: 4, lg: 0 }}
-                        spacing={{ base: 2, md: 3 }}
+                        spacing={{ base: 2, md: 4 }}
                     >
                         <Box>
                             <Hierarchical data={data} />

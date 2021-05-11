@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Formik, Form, Field } from 'formik';
 import {
@@ -7,25 +7,33 @@ import {
     FormControl,
     FormHelperText,
     FormLabel,
-    Stack
+    Stack,
+    Text
 } from '@chakra-ui/react';
+import axios from 'axios';
+import { config } from '../../config';
+import * as yup from 'yup';
 
 
 const NewsletterForm = ({ }) => {
+
+    const [isSubmited, setIsSubmited] = useState( false )
     return (
+        !isSubmited ?
         <Formik
             initialValues={
                 {
-                    // NoticeComprehensibility: '',
-                    // NoticeComprehensibilityDetail: '',
-                    // ProductCustomisation: '',
+                    source:'newsletter'
                 }
             }
+            validationSchema={ yup.object().shape({
+                email: yup.string().email('Le format semble erronée').required('')
+            })}
             onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                axios.post(
+                    `${config.apiUrl}/user/email`, values
+                )
+                setIsSubmited( true )
             }}
         >
             {({
@@ -44,8 +52,11 @@ const NewsletterForm = ({ }) => {
             }) => (
                 <Form>
                     <Field name="email">
-                    {({ props, field }) => (
-                            <FormControl maxW='100%'>
+                    {({ form, field }) => (
+                            <FormControl 
+                                isInvalid={ form.errors.email && form.touched.email }
+                                maxW='100%'
+                            >
                                 <FormLabel>
                                     Pour recevoir nos bons plans, les infos sur les derniers patrons et des inspirations, il suffit de laisser votre adresse mail.
                                 </FormLabel>
@@ -62,6 +73,7 @@ const NewsletterForm = ({ }) => {
                                         minW='120px'
                                         variant='outline'
                                         colorScheme='black'
+                                        isDisabled={isSubmitting}
                                     >
                                         Je m'abonne
                                     </Button>
@@ -77,6 +89,8 @@ const NewsletterForm = ({ }) => {
                 </Form>
             )}
         </Formik>
+        :
+        <Text>Votre abonnement à la lettre d'information a bien été enregistré ! bienvenue !</Text>
     )
 }
 
