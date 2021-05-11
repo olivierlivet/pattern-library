@@ -243,6 +243,7 @@ class SearchEngine extends Component {
     }
 
     render() {
+        // return(<div>SEARCH ENGINE</div>)
         const { products, singleProduct, mainFilters, refineFilters, showFilter, variants } = this.state
         return (
             <>
@@ -423,12 +424,15 @@ class SearchEngine extends Component {
 
 
 
-                {singleProduct ?
+                {singleProduct ?               
                     <ProductCardLarge
                         product={singleProduct}
-                        onClose={() => this.setState({ singleProduct: null })}
+                        onClose={() =>
+                            this.setState({ singleProduct: null })
+                            // console.log('onclose')
+                        }
                     />
-                    : null}
+                : null}
 
             </>
         )

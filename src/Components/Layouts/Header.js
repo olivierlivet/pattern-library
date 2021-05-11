@@ -23,7 +23,7 @@ const Header = () => {
             bg='linear-gradient(0deg, rgba(255,255,255,0) 0%,  rgba(255,255,255,1) 100%)'
             justifyContent='space-between'
 
-            position='fixed'
+            position={{ base:'fixed', lg:'initial' }}
             top={ 0 }
             left={ 0 }
             right={ 0 }

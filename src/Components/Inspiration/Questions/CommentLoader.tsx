@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import Loadable from "@loadable/component"
-const Comment = Loadable(() => import('./Comment'))
+import Loadable from "react-loadable"
+
+const Comment = Loadable({
+    loader: () => import('./Comment'),
+    loading: <Center minH='100vh' w='100vw'><Spinner /></Center>,
+});
 
 const CommentLoader = ({ setStep, setFieldValue }) => {
 

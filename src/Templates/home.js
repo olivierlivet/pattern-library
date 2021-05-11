@@ -6,7 +6,7 @@ import {
     StaticImage,
     // GatsbyImage
 } from "gatsby-plugin-image"
-import SearchEngineLoader from '../Components/SearchEngine/Loader.tsx'
+
 import Nav from '../Components/Nav/Base'
 import ProductsSummary from '../Components/ProductsSummary/index.js'
 import HeroSearch from '../Components/Hero/Hero'

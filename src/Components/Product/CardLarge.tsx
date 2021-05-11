@@ -40,8 +40,6 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
             onClose={() => onClose()}
             motionPreset="slideInBottom"
             id={`modal-product-detail`}
-
-
         >
             <ModalContent>
                 <ModalBody
