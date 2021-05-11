@@ -18,6 +18,7 @@ import { navigate } from 'gatsby';
 import { config } from '../../config';
 import { authenticationService } from '../../Service/auth'
 import axios from 'axios';
+import SmallProductImage from '../Image/SmallProduct';
 
 
 type props = {
@@ -41,9 +42,9 @@ const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton })
         // Process and pass in the loaded `data` necessary for your page or child components.
         return (
 
-            data.products.map((product, index) =>
+            data.products && data.products.length && data.products.map((product, index) =>
                 <Box
-                    onClick={() => navigate(product.fields.slug)}
+                    onClick={() => navigate(product.slug)}
                     cursor='pointer'
                     borderTop='solid 1px'
                     borderTopColor={index !== 0 ? 'gray.50' : 'transparent'}
@@ -57,9 +58,10 @@ const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton })
                             base: 4,
                         }}
                     >
-                        <Center bg='gray.50' w='50px' h='50px'>
-                            I
-                        </Center>
+                        <SmallProductImage
+                            label={product.title}
+                            path={product.mainPicture}
+                        />
                         <Flex
                             p={2}
                             alignItems='center'
@@ -90,7 +92,7 @@ const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton })
                 p={2}
             >
                 <Button
-                    onClick={()=>navigate('/fr/compte/cart')}
+                    onClick={() => navigate('/fr/compte/cart')}
                     w='full'
                     bg='brand.green.500'
                     color='white'

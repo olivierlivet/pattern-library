@@ -25,6 +25,7 @@ import RichContent from '../RichContent'
 import SharingButtons from './SharingButtons'
 import Nav from '../Nav/Base'
 import UserNav from '../Nav/User'
+import ProductStats from './Stats'
 
 type props = {
     data: Object,
@@ -63,14 +64,14 @@ const ProductPage: FunctionComponent<props> = (
 
                 {context === 'modal' ?
 
-                        <HStack
-                            boxShadow='sm'
-                            bg='whiteAlpha.900'
-                            borderRadius='full'
-                            p={2}
-                        >
-                            <UserNav />
-                        </HStack>
+                    <HStack
+                        boxShadow='sm'
+                        bg='whiteAlpha.900'
+                        borderRadius='full'
+                        p={2}
+                    >
+                        <UserNav />
+                    </HStack>
                     : null}
             </Flex>
             <Wrapper>
@@ -105,6 +106,9 @@ const ProductPage: FunctionComponent<props> = (
                             >
                                 <ProductMainInfo data={data} />
                             </Center>
+                            {/* <ProductStats /> */}
+
+
                         </Grid>
 
                         {/* <Box
@@ -125,6 +129,7 @@ const ProductPage: FunctionComponent<props> = (
                             <TabPanels>
                                 <TabPanel>
                                     <ProductDetails data={data} />
+
                                 </TabPanel>
                                 <TabPanel>
                                     <ProductInspirations data={data} />

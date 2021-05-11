@@ -5,6 +5,7 @@ import {
     Button,
     Flex,
     Text,
+    Image,
     Stack,
     Grid,
     Heading,
@@ -17,6 +18,7 @@ import { AddIcon, SmallAddIcon } from '@chakra-ui/icons';
 import { config } from '../../config';
 import { authenticationService } from '../../Service/auth';
 import axios from 'axios';
+import SmallProductImage from '../Image/SmallProduct';
 
 type props = {
     isOpen: Boolean
@@ -52,15 +54,18 @@ const FavoriteSummary: FunctionComponent<props> = ({ isOpen, hideButton }) => {
                 >
                     <Grid
                         templateColumns={{
-                            base: `40px 1fr 50px`
+                            base: `30px 1fr 50px`
                         }}
                         gap={{
-                            base: 1,
-                            lg: 2
+                            base: 3,
+                            lg: 3
                         }}
                     >
-                        <Center bg='gray.50' w='50px' h='50px'>
-                            I
+                        <Center bg='gray.50' w='30px' h='30px'>
+                            <SmallProductImage
+                                label={ item.product.title }
+                                path={ item.product.mainPicture }
+                            />
                         </Center>
                         <Flex
                             p={2}
@@ -71,6 +76,9 @@ const FavoriteSummary: FunctionComponent<props> = ({ isOpen, hideButton }) => {
                             </Heading>
 
                         </Flex>
+                        <Center color='green.400'>
+                            { item.product.price }€
+                        </Center>
                     </Grid>
                 </Box>)
         );

@@ -32,6 +32,7 @@ const GoToPaymentButton = ({ cart }) => {
       console.log(result.error)
     }
   };
+  if( !cart ) { return null }
   return (
     <>
       <Button

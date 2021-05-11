@@ -42,6 +42,7 @@ import BuyButton from './BuyButton'
 import FavoriteButton from '../Favorite/Button'
 import Rating from './Rating'
 import { navigate } from 'gatsby-link'
+import ProductStats from './Stats'
 
 
 
@@ -196,6 +197,8 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
             >
                 <RichContent data={data.description} />
             </Box>
+
+            <ProductStats />
         </Stack>
     )
 }

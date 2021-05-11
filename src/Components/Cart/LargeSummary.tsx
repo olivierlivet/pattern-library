@@ -16,8 +16,10 @@ import {
 import { useContentful } from 'react-contentful';
 import { navigate } from 'gatsby';
 import { config } from '../../config';
-import {authenticationService} from '../../Service/auth'
+import { authenticationService } from '../../Service/auth'
 import axios from 'axios';
+import GoToPaymentButton from './GoToPaymentButton';
+import SmallProductImage from '../Image/SmallProduct';
 
 
 type props = {
@@ -30,14 +32,38 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
 
     const [data, setData] = useState();
     useEffect(async () => {
+        getData();
+    }, []);
+
+
+    const getData = async () => {
         const result = await axios.get(
             `${config.apiUrl}/cart/${authenticationService.getUser().userId}/created`
         );
         setData(result.data);
-    }, []);
+    }
+
+    const handleDelete = (e, productId) => {
+        e.stopPropagation();
+
+        let currentProducts = data.products;
+        let updatedProducts = []
+
+        for (let index = 0; index < currentProducts.length; index++) {
+            const element = currentProducts[index];
+            if (element._id !== productId) {
+                console.log('add product ');
+                updatedProducts.push(element._id);
+            }
+        }
+        axios.put(
+            `${config.apiUrl}/cart/${data._id}`,
+            { products: updatedProducts }
+        ).then(() => getData())
+    }
 
     const productsInCart = () => {
-        if ( !data ){ return null }
+        if (!data) { return null }
         // Process and pass in the loaded `data` necessary for your page or child components.
         return (
 
@@ -58,9 +84,10 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                             lg: 2
                         }}
                     >
-                        <Center bg='gray.50' w='50px' h='50px'>
-                            I
-                        </Center>
+                        <SmallProductImage
+                            label={product.title}
+                            path={product.mainPicture}
+                        />
                         <Flex
                             p={2}
                             alignItems='center'
@@ -74,7 +101,11 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                             <Center>
                                 <Text color='green.400'>{product.price}&nbsp;€</Text>
                             </Center>
-                            <Button variant='outline' size='sm'>
+                            <Button
+                                onClick={(e) => handleDelete(e, product._id)}
+                                variant='outline'
+                                size='sm'
+                            >
                                 Supprimer
                             </Button>
                         </HStack>
@@ -126,6 +157,10 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                         Passer commande
                     </Button>
                     : null}
+
+                <GoToPaymentButton
+                    cart={data}
+                />
             </Stack>
             :
             <div>Votre panier est vide</div>

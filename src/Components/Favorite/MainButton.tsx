@@ -32,8 +32,8 @@ const transitionStyles = {
 
 const FavoriteMainButton = ({ }) => {
 
-    const [userFavorites, setUserFavorites] = useState(false)
-    const [isOpen, setIsOpen] = useState()
+    const [userFavorites, setUserFavorites] = useState<any>(undefined)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     useEffect(() => {
         if( !userFavorites ){
@@ -51,7 +51,7 @@ const FavoriteMainButton = ({ }) => {
                 `${config.apiUrl}/favorite/user/${authenticationService.getUser().userId}`
             ).then((response) =>{
                 setUserFavorites(response.data)
-                
+
             })
         }
     }
@@ -68,7 +68,7 @@ const FavoriteMainButton = ({ }) => {
         <>
             { isOpen ? 
                 <Box
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setIsOpen( !isOpen )}
 
                     zIndex='base'
                     position='fixed'
@@ -76,7 +76,6 @@ const FavoriteMainButton = ({ }) => {
                     bottom='0'
                     left='0'
                     right='0'
-
                     bg='whiteAlpha.400'
                 />
             : null}
@@ -121,7 +120,7 @@ const FavoriteMainButton = ({ }) => {
                     )}
                 </Transition>
                 <Button
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setIsOpen(userFavorites && userFavorites.length ? !isOpen : false )}
 
                     p={{ base: 1, lg: 2 }}
                     h='auto'

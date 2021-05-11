@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { authenticationService } from '../../Service/auth'
-
+import { Link as GatsbyLink } from 'gatsby'
 import {
     Box,
     Button,
@@ -51,12 +51,18 @@ const AccountCart = ({ }) => {
                         products={data.products}
                         hideButton={true}
                     />
-                    : null}
-                {data ?
-                    <GoToPaymentButton
-                        cart={data}
-                    />
-                : null}
+                    :
+                    <>
+                        <Text
+                            color='gray.600'
+                        >
+                            Vous n'avez pas encore de produit dans votre panier.
+                        </Text>
+                        <Button size='sm' as={GatsbyLink} to='/fr'>
+                            Retour
+                        </Button>
+                    </>
+                }
             </Stack>
         </AccountWrapper>
     )

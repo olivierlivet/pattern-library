@@ -138,9 +138,15 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 </Flex>
 
                 <Flex wrap='wrap'>
-                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Prix</Text>
-                    <Text w='100%'>{price}
-                        <Text as="sup">€</Text>
+                    <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Niveau</Text>
+                    <Text w='100%'>
+                        {
+                            level === 1 ? 'Débutante'
+                                : level === 2 ? 'Intermédiaire' 
+                                    : level === 3 ? 'Avancée' 
+                                        : level === 4 ? 'Expert' 
+                                            : null
+                        }
                     </Text>
                 </Flex>
             </SimpleGrid>
@@ -158,6 +164,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
             >
                 <FavoriteButton
                     product={ backendDocumentId }
+                    price={ price }
                 />
                 {/* <Button
                     mt={0}

@@ -19,18 +19,22 @@ var slugify = require('slugify')
 
 const EditorCreateForm = ({ }) => {
 
-
-
     const [editors, setEditors] = useState();
 
     useEffect(async () => {
-        const result = await axios.get(
-            `${config.apiUrl}/editor`
-        );
-        setEditors(result.data);
-        // getUnivers();
-        // getVariants();
+
+        if (!editors) {
+            client.getEntries({
+                'content_type': 'editor'
+            })
+                .then(function (entries) {
+                    setEditors(entries)
+                })
+        }
+
+
     }, []);
+
 
 
     const allFields = [
@@ -134,7 +138,7 @@ const EditorCreateForm = ({ }) => {
                                     <Field name={fieldItem.name}>
                                         {({ field, form }) => (
                                             <Box>
-                                                <FormControl isInvalid={errors[fieldItem.name]}>
+                                                <FormControl isInvalid={errors[fieldItem.name] && touched[fieldItem.name]}>
                                                     <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
                                                     <Input {...field} variant='flushed' type="text" />
                                                     <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
@@ -146,6 +150,23 @@ const EditorCreateForm = ({ }) => {
                                 )}
 
 
+                                <Field name='cmsDocumentId'>
+                                    {({ form, field }) => (
+                                        <FormControl>
+                                            <FormLabel>CMS entity</FormLabel>
+                                            <Select
+                                                placeholder='choose'
+                                                {...field}
+                                            // onChange={(e) => handleBuildSlug(e.target.value, setFieldValue, values.title)}
+                                            >
+                                                {editors ? editors.items.map(item =>
+                                                    <option value={item.sys.id}>{item.fields.title}</option>
+                                                ) : null}
+                                            </Select>
+                                        </FormControl>
+                                    )}
+                                </Field>
+
                             </SimpleGrid>
 
                             <Box>
@@ -153,7 +174,7 @@ const EditorCreateForm = ({ }) => {
                             </Box>
                         </Stack>
                         <pre>
-                            { JSON.stringify( errors, null, 1 )}
+                            {JSON.stringify(errors, null, 1)}
                         </pre>
                     </Form>
                 )}

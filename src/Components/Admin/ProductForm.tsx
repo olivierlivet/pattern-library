@@ -96,7 +96,7 @@ const ProductCreateForm = ({ }) => {
                     {({ field, form }) => (
                         <>
                             <FormLabel>Category</FormLabel>
-                            <Select {...props} {...field}>
+                            <Select {...props} {...field} placeholder='Select'>
                                 {allCategories && allCategories.items.map(item =>
                                     <option value={item.sys.id}>{item.fields.title}</option>
                                 )}
@@ -137,6 +137,7 @@ const ProductCreateForm = ({ }) => {
                             <Select
                                 {...props}
                                 {...field}
+                                placeholder='Select'
                                 onChange={(e) => {
                                     handleBuildSlug(e.target.value, setFieldValue, title);
                                     setFieldValue('variant', e.target.value)
@@ -169,7 +170,6 @@ const ProductCreateForm = ({ }) => {
                         univers: yup.string().required('Required').nullable(),
                         category: yup.string().required('Required').nullable(),
                         variant: yup.string().required('Required').nullable(),
-
                     })
                 }
                 onSubmit={(values) => {

@@ -16,6 +16,7 @@ import ProductCreateForm from '../Components/Admin/ProductForm'
 import User from '../Components/Admin/User'
 import Inspiration from '../Components/Admin/Inspiration'
 import Evaluation from '../Components/Admin/Evaluation'
+import EvaluationForm from '../Components/Admin/EvaluationForm'
 import Sale from '../Components/Admin/Sale'
 import Editor from '../Components/Admin/Editor'
 import EditorForm from '../Components/Admin/EditorForm'
@@ -55,7 +56,7 @@ const AdminTemplate = (props) => {
             isFooterHidden={true}
         >
             <Helmet>
-                <title>{`ADMIN`}</title>
+                <title>{`ADMIN OF THEPATTERNSCORNER`}</title>
                 <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
             </Helmet>
 
@@ -87,6 +88,7 @@ const AdminTemplate = (props) => {
 
                         <Sale path="/sale" />
                         <Evaluation path="/evaluation" />
+                        <EvaluationForm path="/evaluation/:evaluationId" />
                         <Inspiration path="/inspiration" />
 
                         {/* <Login path="/login" />
