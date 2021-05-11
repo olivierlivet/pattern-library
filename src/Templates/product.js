@@ -32,6 +32,7 @@ const ProductTemplate = ( props ) => {
             <ProductPage
                 data={ props.data.product }
                 displayCloseButton= { false }
+                context='page'
             />
         </Layout>
     )

@@ -64,6 +64,7 @@ const ProductCardLarge: FunctionComponent<productCardPropsTypes> = ({
                         data={ product.fields ? product.fields : product }
                         onClose={()=>onClose()}
                         displayCloseButton={ true }
+                        context='modal'
                     />
 
                 </ModalBody>

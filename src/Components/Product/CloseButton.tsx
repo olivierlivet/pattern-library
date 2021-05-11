@@ -5,7 +5,8 @@ type props = {
 }
 
 import {
-    Button
+    Button,
+    Text
 } from '@chakra-ui/react'
 
 import {
@@ -17,15 +18,28 @@ const CloseButton: FunctionComponent<props> = ({ onClose }) => {
     return(
         <Button
             borderRadius='full'
-            w='50px'
-            h='50px'
-            position={{ base:'fixed'}}
-            top={5}
-            left={5}
+            boxShadow='sm'
+            border='solid 1px'
+            borderColor='transparent'
+
+            bg='whiteAlpha.900'
+            w={{ base:'40px', lg:'auto' }}
+            h='40px'
             onClick={()=>onClose()}
-            zIndex='tooltip'
+
+            _hover={{
+                bg:'white',
+                border:'solid 1px',
+                borderColor:'gray.100'
+            }}
         >
             <ArrowBackIcon />
+            <Text
+                as='span'
+                ml={2}
+                fontWeight='small'
+                display={{ base:'none', lg:'inline'}}
+            >Retour</Text>
         </Button>
     )
 }
