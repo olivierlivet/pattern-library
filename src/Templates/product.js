@@ -23,7 +23,11 @@ const ProductTemplate = (props) => {
             enableBackButton={false}
         >
             <Helmet>
-                <title>{`${pageContent.title} - ${pageContent.editor.title} ${config.titleSuffix}`}</title>
+                <title>
+                    {`${pageContent.title} -
+                    ${pageContent.editor ? pageContent.editor.title : ''}
+                    ${config.titleSuffix}`}
+                </title>
             </Helmet>
             <Box
                 p={{ base: 0, lg: 10 }}

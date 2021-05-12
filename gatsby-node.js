@@ -269,6 +269,46 @@ exports.createPages = ({ graphql, actions }) => {
         });
       });
     });
+
+
+    /*
+    #####
+    REALISATIONS
+    #####
+  */
+    const reatlisationTemplate = path.resolve('src/Templates/realisation.js')
+    const realisations = graphql(`
+    {
+      allRealisations:allContentfulRealisation{
+        edges {
+          node {
+            node_locale
+            contentful_id
+            product{ contentful_id }
+            slug
+          }
+        }
+      }
+    }
+    `).then(result => {
+      if (result.errors) {
+        Promise.reject(result.errors);
+      }
+      // Create univers pages
+      const allRealisations = result.data.allRealisations.edges;
+      allRealisations.forEach((edge) => {
+        createPage({
+          path: `${edge.node.slug}`,
+          component: reatlisationTemplate,
+          context: {
+            slug: edge.node.slug,
+            contentfulID: edge.node.contentful_id,
+            productId: edge.node.product.contentful_id,
+            locale: edge.node.node_locale
+          }
+        });
+      });
+    });
   
   
   

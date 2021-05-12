@@ -62,9 +62,11 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 {/* <pre>
                     { JSON.stringify( data, null, 1 )}
                 </pre> */}
-                <Link as={GatsbyLink} to={data.editor.slug} letterSpacing='wide' color='gray.400'>
-                    {data.editor ? data.editor.title : ''}
-                </Link>
+                {data.editor ?
+                    <Link as={GatsbyLink} to={data.editor.slug} letterSpacing='wide' color='gray.400'>
+                        {data.editor ? data.editor.title : ''}
+                    </Link>
+                    : null}
                 <Heading as='h1' fontWeight='normal'>
                     {data.title}
                 </Heading>
@@ -130,7 +132,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                 <RichContent data={data.description} />
             </Box>
 
-            {/* <ProductStats backendDocumentId={data.backendDocumentId} /> */}
+            <ProductStats backendDocumentId={data.backendDocumentId} />
 
             <Accordion
                 allowMultiple={true}
@@ -156,7 +158,6 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                         <RichContent data={data.furnitures} />
                     </AccordionPanel>
                 </AccordionItem>
-
                 <AccordionItem>
                     <h2>
                         <AccordionButton>
@@ -178,31 +179,32 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                         <RichContent data={data.fabrics} />
                     </AccordionPanel>
                 </AccordionItem>
-
-                <AccordionItem>
-                    <h2>
-                        <AccordionButton>
-                            <Heading
-                                textAlign='left'
-                                flex='1'
-                                as='h4'
-                                color='gray.400'
-                                fontFamily='DM Sans'
-                                textTransform='uppercase'
-                                // fontWeight='normal'
-                                fontSize={{ base: 'xs', lg: 'sm' }}
-                                letterSpacing='wide'
-                            >Mesures détaillées</Heading>
-                            <AccordionIcon />
-                        </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                        <MeasuresTable data={data.measures.data} />
-                    </AccordionPanel>
-                </AccordionItem>
+                {data.measures ?
+                    <AccordionItem>
+                        <h2>
+                            <AccordionButton>
+                                <Heading
+                                    textAlign='left'
+                                    flex='1'
+                                    as='h4'
+                                    color='gray.400'
+                                    fontFamily='DM Sans'
+                                    textTransform='uppercase'
+                                    // fontWeight='normal'
+                                    fontSize={{ base: 'xs', lg: 'sm' }}
+                                    letterSpacing='wide'
+                                >Mesures détaillées</Heading>
+                                <AccordionIcon />
+                            </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>
+                            <MeasuresTable data={data.measures.data} />
+                        </AccordionPanel>
+                    </AccordionItem>
+                    : null}
 
             </Accordion>
-            
+
         </Stack>
     )
 }

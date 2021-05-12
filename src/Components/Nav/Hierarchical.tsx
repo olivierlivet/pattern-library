@@ -44,6 +44,12 @@ const Hierarchical: FC<props> = ({ data }):ReactElement => {
                     structuredItem( data.variant.title, data.variant.slug, 3 )
                 )
             }
+
+            if( data.product){
+                breadcrumbsItems.push(
+                    structuredItem( data.product.title, data.product.slug, 4 )
+                )
+            }
         
             let breadcrumbsList = {
               "@context": "https://schema.org",
@@ -81,6 +87,11 @@ const Hierarchical: FC<props> = ({ data }):ReactElement => {
                         {data.variant ?
                             <BreadcrumbItem>
                                 <BreadcrumbLink as={GatsbyLink} to={`${data.variant.slug}`}>{data.variant.title}</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            : null}
+                        {data.product ?
+                            <BreadcrumbItem>
+                                <BreadcrumbLink as={GatsbyLink} to={`${data.product.slug}`}>{data.product.title}</BreadcrumbLink>
                             </BreadcrumbItem>
                             : null}
                     </Breadcrumb>
