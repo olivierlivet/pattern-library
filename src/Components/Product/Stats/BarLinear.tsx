@@ -30,7 +30,7 @@ const BarLinear: FC<props> = ({ value }) => (
             position='relative'
         >
             <Box
-                bgGradient="linear(to-r, green.100, brand.green.500)"
+                bgGradient="linear(to-r, brand.green.500, #75b5bb)"
                 h='5px'
                 borderRadius='5px'
             />

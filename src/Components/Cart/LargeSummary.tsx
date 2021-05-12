@@ -78,7 +78,8 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                 >
                     <Grid
                         templateColumns={{
-                            base: `40px 1fr 120px`
+                            base: `40px 1fr 120px`,
+                            lg: `40px 1fr 150px`
                         }}
                         gap={{
                             base: 1,

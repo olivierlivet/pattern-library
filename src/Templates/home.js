@@ -278,10 +278,11 @@ query homeQuery( $contentfulID: String! ){
         description {
             raw
             references {
-                contentful_id
-                node_locale
-                slug
+                #contentful_id
+                #node_locale
+                #slug
                 ... on ContentfulUnivers { contentful_id slug }
+                ... on ContentfulProduct { contentful_id slug }
             }
         }
     }

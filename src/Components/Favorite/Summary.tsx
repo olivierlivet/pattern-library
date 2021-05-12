@@ -2,19 +2,14 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 
 import {
     Box,
-    Button,
     Flex,
-    Text,
-    Image,
     Stack,
     Grid,
     Heading,
     Center
 } from '@chakra-ui/react'
 
-import { useContentful } from 'react-contentful';
 import { navigate } from 'gatsby';
-import { AddIcon, SmallAddIcon } from '@chakra-ui/icons';
 import { config } from '../../config';
 import { authenticationService } from '../../Service/auth';
 import axios from 'axios';
@@ -34,7 +29,6 @@ const FavoriteSummary: FunctionComponent<props> = ({ isOpen, hideButton }) => {
         const result = await axios.get(
             `${config.apiUrl}/favorite/user/${authenticationService.getUser().userId}`
         );
-        console.log( data )
         setData(result.data);
     }, []);
 
@@ -51,6 +45,7 @@ const FavoriteSummary: FunctionComponent<props> = ({ isOpen, hideButton }) => {
                     borderTop='solid 1px'
                     borderTopColor={ index !== 0 ? 'gray.50' : 'transparent'}
                     p={2}
+                    key={`${item._id}-${item.product._id}`}
                 >
                     <Grid
                         templateColumns={{

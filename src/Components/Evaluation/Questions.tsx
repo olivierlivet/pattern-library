@@ -100,11 +100,13 @@ const allQuestions = {
 
 const Questions = ({
     data,
+    errors,
     values,
     setFieldValue,
     setFieldError,
     setFieldTouched,
-    handleSubmit
+    handleSubmit,
+    isSubmitting
 }) => {
 
     const questions = [
@@ -184,11 +186,13 @@ const Questions = ({
                                 setStep={()=>setStep( index + 1 )}
 
                                 values={values}
+                                errors={errors}
                                 setFieldValue={setFieldValue}
                                 setFieldError={setFieldError}
                                 setFieldTouched={setFieldTouched}
 
                                 handleSubmit={handleSubmit}
+                                isSubmitting={isSubmitting}
                             />
                         </Box>
                         <Box

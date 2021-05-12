@@ -15,7 +15,7 @@ const Thankyou = ({ id, index, setStep }) => {
     return (
         <Stack spacing={{ base:4, lg: 6 }}>
            <Text textAlign='center'>Un très grand merci, la communeauté des coutières sera plus riche de votre avis et de l'inspiration que pourra transmettre votre réalisation.</Text>
-           <Text textAlign='center'>Les plus belles réalisation seront partagées sur le compte @the.patterns.corner, pensez à vous abonner !</Text>
+           <Text textAlign='center'>Les plus belles réalisations seront partagées sur le compte @the.patterns.corner, pensez à vous abonner !</Text>
            <Flex justify='center'>
                 <Button
                     mx='auto'

@@ -6,7 +6,6 @@ import {
     Button,
     Center,
     Heading,
-    Link,
     Stack,
     Text,
     SimpleGrid,
@@ -18,11 +17,6 @@ import FastLoginForm from '../FastLoginForm'
 import LoginForm from '../Account/Login'
 import CreateAccountForm from '../Account/CreateAccountForm'
 
-
-import { Router, Link as NavLink, Match } from "@reach/router";
-import AccountWrapper from './Wrapper';
-import Form from '../Evaluation/Form'
-import { Formik } from 'formik';
 import axios from 'axios'
 import { config } from '../../config'
 const EvaluationLoginForm = ({ evaluationId }) => {
@@ -45,17 +39,18 @@ const EvaluationLoginForm = ({ evaluationId }) => {
         }
     }
 
-    const handleAddUserToRecord = ( user ) => {
-
-        axios.put(
-            `${config.apiUrl}/evaluation/${evaluationId}`,
-            {
-                user: user.userId
-            }
-        ).then(( response )=> navigate(`/fr/contribution/inspiration/${response.data.product}`))
-
-        // console.log( userId )
-
+    const handleAddUserToRecord = ( userId ) => {
+        if( userId ){
+            axios.put(
+                `${config.apiUrl}/evaluation/${evaluationId}`,
+                {
+                    user: userId
+                }
+            ).then(( response )=>
+                // console.log( response.data )
+                navigate(`/fr/contribution/inspiration/${response.data.product}`)
+            )
+        }
     }
 
     return (
@@ -70,7 +65,7 @@ const EvaluationLoginForm = ({ evaluationId }) => {
                 w={{ base: 'full', lg: '3xl' }}
             >
 
-
+                <Stack>
                 <Heading
                     fontSize={{ base: 'xl', lg: 'x-large' }}
                     fontWeight='normal'
@@ -78,8 +73,9 @@ const EvaluationLoginForm = ({ evaluationId }) => {
                     py={{ base: 6, lg: 10 }}
                     px={{ base: 0, lg: 10 }}
                 >
-                    Pour enregistrer vos retours sur ce patron il faut que vous vous identifiez :
+                    Pour enregistrer vos retours sur ce patron il faut que vous vous identifiez 🔒
                 </Heading>
+                <Text textAlign='center' fontSize='sm' color='gray.500'>En plus ça permettra de vous offrir des points de fidelité 😉</Text>
                 <Box
                     bg='white'
                 >
@@ -113,6 +109,7 @@ const EvaluationLoginForm = ({ evaluationId }) => {
                                     />
                                     :
                                     <LoginForm
+                                        // onLogin={(user) => { handleAddUserToRecord( user.userId ) }}
                                         onLogin={(user) => { handleAddUserToRecord( user.userId ) }}
                                         onCancel={() => setCurrentModule('choice')}
                                     />
@@ -122,7 +119,7 @@ const EvaluationLoginForm = ({ evaluationId }) => {
                         : <Center><Spinner size="sm" /></Center>}
                 </Box>
 
-
+                </Stack>
 
 
 

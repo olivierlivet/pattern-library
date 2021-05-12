@@ -22,7 +22,7 @@ const ProductIllustration:FunctionComponent<props> = ({ data }) => {
             position='relative'
             bg='gray.100'
             w='100%'
-            h={{ base:'auto', lg:'600px' }}
+            // h={{ base:'auto', lg:'600px' }}
         >
             <ProductIllustrationWithSwipe
                 alt={ data.title }

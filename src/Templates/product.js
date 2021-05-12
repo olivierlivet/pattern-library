@@ -9,29 +9,33 @@ import HierarchicalNav from '../Components/Nav/Hierarchical'
 // } from "gatsby-plugin-image"
 
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Heading
+    Box,
 } from '@chakra-ui/react'
 import Helmet from 'react-helmet'
 import { config } from '../config'
 
-const ProductTemplate = ( props ) => {
+const ProductTemplate = (props) => {
     const pageContent = props.data.product
-    return(
+
+    console.log( 'product data', pageContent )
+    return (
         <Layout
-            enableBackButton = { false }
+            enableBackButton={false}
         >
             <Helmet>
-                <title>{ `${pageContent.title} - ${pageContent.editor.title} ${config.titleSuffix}` }</title>
+                <title>{`${pageContent.title} - ${pageContent.editor.title} ${config.titleSuffix}`}</title>
             </Helmet>
-            <HierarchicalNav
-                data={ pageContent }
-            />
+            <Box
+                p={{ base: 0, lg: 10 }}
+            >
+                <HierarchicalNav
+                    data={pageContent}
+                />
+            </Box>
+
             <ProductPage
-                data={ props.data.product }
-                displayCloseButton= { false }
+                data={props.data.product}
+                displayCloseButton={false}
                 context='page'
             />
         </Layout>
@@ -53,10 +57,14 @@ query adQuery( $contentfulID: String! ){
         price
         mainPicture
         pictures{ url }
-        editor{ title }
+        editor{ title slug }
         univers{ title slug }
         category{ title slug }
         variant{ title slug }
+
+        furnitures{ raw }
+        fabrics{ raw }
+        measures{ data{ label values } }
       }
 }
 `

@@ -10,22 +10,16 @@ import ProductMainInfo from './ProductMainInfo'
 import CloseButton from './CloseButton'
 import {
     Box,
-    Button,
     Center,
     Flex,
-    Grid,
-    Heading,
     HStack,
     SimpleGrid,
     Stack
 } from '@chakra-ui/react'
 
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import RichContent from '../RichContent'
-import SharingButtons from './SharingButtons'
-import Nav from '../Nav/Base'
+// import RichContent from '../RichContent'
+// import SharingButtons from './SharingButtons'
 import UserNav from '../Nav/User'
-import ProductStats from './Stats'
 
 type props = {
     data: Object,
@@ -46,7 +40,7 @@ const ProductPage: FunctionComponent<props> = (
         <>
             <Flex
                 justify='space-between'
-                p={{ base: 4, lg: 10 }}
+                p={{ base: 5, lg: 10 }}
                 position={{
                     base: 'fixed',
                     lg: 'initial'
@@ -74,19 +68,18 @@ const ProductPage: FunctionComponent<props> = (
                     : null}
             </Flex>
             <Wrapper>
-
-
                 <Box
                     mx='auto'
+                    px={{ base:0, lg:10 }}
                 >
-
                     <Stack spacing={{ base: 4, lg: 8 }} pb={20}>
-                        <Grid
-                            templateColumns={{
-                                base: '100%',
-                                xl: '600px 1fr'
-                            }}
-                            gap={{ base: 0, lg: 10 }}
+                        <SimpleGrid
+                            // templateColumns={{
+                            //     base: '100%',
+                            //     xl: '50% 50%'
+                            // }}
+                            columns={{ base:1, lg:2 }}
+                            gap={{ base: 0, lg: 20 }}
                             my={{ base: 0, lg: 0 }}
                         >
                             <Box>
@@ -100,25 +93,27 @@ const ProductPage: FunctionComponent<props> = (
                             </Box>
                             <Center
                                 p={{ base: 5, lg: 0 }}
+                                pr={{ base:5, lg:10 }}
                                 pt={{ base: 5, lg: 10 }}
                                 wrap='wrap'
                             >
                                 <ProductMainInfo data={data} />
                             </Center>
 
-                        </Grid>
+                        </SimpleGrid>
 
-                        <Grid
-                            templateColumns={{
-                                base: `100%`,
-                                lg:`600px 1fr`
-                            }}
-                            gap={20}
-                            mt={ '32' }
+                        <SimpleGrid
+                            // templateColumns={{
+                            //     base: '100%',
+                            //     xl: '50% 50%'
+                            // }}
+                            columns={{ base:1, lg:2 }}
+                            gap={{ base: 0, lg: 20 }}
+                            my={{ base: 0, lg: 0 }}
                         >
-                            <Box bg='gray.200'><Center h='500px'>Inspirations</Center></Box>
-                            <Box bg='gray.300'><Center h='500px'>Discussions</Center></Box>
-                        </Grid>
+                            <Box bg='gray.200' id='inspirations'><Center h='500px'>Inspirations</Center></Box>
+                            <Box bg='gray.300' id='discussions'><Center h='500px'>Discussions</Center></Box>
+                        </SimpleGrid>
                         {/* <Tabs id="details">
                             <TabList>
                                 <Tab>Détails</Tab>

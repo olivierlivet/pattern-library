@@ -1,14 +1,16 @@
 import React from 'react'
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Link as GatsbyLink } from 'gatsby'
+import { Link as GatsbyLink, navigate } from 'gatsby'
 import {
+    Heading,
     Link,
     List,
     ListItem,
     Stack,
     Text
 } from '@chakra-ui/react'
+import ProductCard from '../Product/CardSmall';
 
 
 
@@ -17,13 +19,16 @@ import {
 
 // documentToReactComponents(document, options);
 
-const RichContent = ({ data }) => {
+const RichContent = ({ data, fontSize, spacing }) => {
 
     const options = {
         renderMark: {
             [MARKS.BOLD]: text => <strong>{text}</strong>,
         },
         renderNode: {
+            [BLOCKS.HEADING_2]: (node, children) => <Heading fontSize='2xl' mb='-40px' style={{marginBottom:'-20px'}} fontWeight='normal'>{children}</Heading>,
+            [BLOCKS.HEADING_3]: (node, children) => <Heading fontSize='xl' mb='-4' fontWeight='normal'>{children}</Heading>,
+            [BLOCKS.HEADING_4]: (node, children) => <Heading fontSize='xl' fontFamily='DM Sans' mb='-4' fontWeight='normal'>{children}</Heading>,
             [BLOCKS.UL_LIST]: (node, children) => <List>{children}</List>,
             [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
             [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
@@ -42,10 +47,27 @@ const RichContent = ({ data }) => {
                 return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={`${slug}`}>{children} coucou child</Link>
             },
             [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-                const slug = convertIdToSlug(node.data.target.sys.id)
+                const entry = getReferenceObject(node.data.target.sys.id)
                 // const { title, description, slug } = node.data.target.fields;
-                console.log('node', node)
-                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={`${slug}`}>{children}</Link>
+                return (
+                    <ProductCard
+                                            key={entry.contentful_id}
+                                            productId={entry.contentful_id}
+                                            backendDocumentId={entry.backendDocumentId}
+                                            title={entry.title}
+                                            price={entry.price}
+                                            level={entry.level}
+                                            rating={entry.rating}
+                                            editor={entry.editor}
+                                            pictures={entry.pictures}
+                                            // intro={<RichContent data={product.fields.intro} />}
+
+
+                                            //Actions
+                                            // onOpen={() => console.log('open')}
+                                             onOpen={() => navigate(entry.slug) }
+                                        />
+                )
             },
             [INLINES.HYPERLINK]: (node, children) => {
                 console.log('node', node)
@@ -63,16 +85,32 @@ const RichContent = ({ data }) => {
             for (let index = 0; index < references.length; index++) {
                 const element = references[index];
                 if (element.contentful_id === id) {
-                    return `/${element.node_locale}${element.slug}`
+                    return `${element.slug}`
                 }
             }
         }
     }
+
+    const getReferenceObject = (id) => {
+        const { references } = data
+        if (!references) {
+            return '/'
+        } else {
+            for (let index = 0; index < references.length; index++) {
+                const element = references[index];
+                if (element.contentful_id === id) {
+                    return element
+                }
+            }
+        }
+
+    }
     return(
         data && data.raw ?
-            <Stack spacing={{ base: 3, lg: 5 }}>{documentToReactComponents( JSON.parse(data.raw), options )}</Stack>
+            <Stack spacing={ spacing ? spacing : { base: 2, lg: 4 }} fontSize={ fontSize ? fontSize : 'md' }>{documentToReactComponents( JSON.parse(data.raw), options )}</Stack>
         :
-            <Stack spacing={{ base: 3, lg: 5 }}>{documentToReactComponents( data, options)}</Stack>
+            <Stack spacing={ spacing ? spacing : { base: 2, lg: 4 }} fontSize={ fontSize ? fontSize : 'md' }>{documentToReactComponents( data, options )}</Stack>
+
         )
 }
 

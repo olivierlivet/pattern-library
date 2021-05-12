@@ -11,13 +11,13 @@ const Introduction = ({ id, index, setStep, data }) => {
     return (
         <Stack spacing={{ base:4, lg: 4 }}>
             <Text>
-                Votre avis à propos du patron de votre <strong>{data.title.toLowerCase()}</strong> a bien été sauvegardé, merci beaucoup !
+                Votre avis à propos du patron de votre <strong>{data.title.toLowerCase()}</strong> a bien été sauvegardé, merci beaucoup&nbsp;!
             </Text>
             <Text>
-                Maintenant, on piaffe d'impatience de voir le résultat !
+                Maintenant, on piaffe d'impatience de voir le résultat&nbsp;!
             </Text>
             <Text>
-                Voulez-vous prendre encore 2 minutes pour partager quelques photos de votre réalisation et transmettre de l'inspiration aux autres couturières ? Merci d'avance !
+                Voulez-vous prendre encore 2 minutes pour partager quelques photos de votre réalisation et transmettre de l'inspiration aux autres couturières&nbsp;? Merci d'avance&nbsp;!
             </Text>
             <Box>
                 <Button onClick={() => setStep()}>On se lance ?</Button>

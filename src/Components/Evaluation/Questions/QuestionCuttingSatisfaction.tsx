@@ -22,7 +22,7 @@ const QuestionCuttingSatisfaction = ({ id, index, setStep, setFieldValue }) => {
                         Pas tout à fait.
                 </Text>
                     <Text fontSize='small' textAlign='right' w='30%'>
-                        Oui, totalement !
+                        Oui, totalement&nbsp;!
                 </Text>
 
                 </Flex>

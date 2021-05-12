@@ -74,6 +74,23 @@ export default class UploadPictures extends Component {
         // axios.post(`${config.apiUrl}/inspiration/upload`, formData);
     }
 
+    
+    handleDelete(index) {
+
+        let currentPictures = this.state.pictures
+        let pathToDelete = currentPictures[index]
+        console.log('path to delete', pathToDelete)
+
+        axios.delete(
+            `${config.apiUrl}/media/`,
+            { data: { path: pathToDelete } }
+        )
+
+        currentPictures.splice(index, 1)
+        this.setState({ pictures: currentPictures })
+
+    }
+
     render() {
         // const [showValidate, setShowValidate] = useState(false)
         const { setFieldValue, setStep } = this.props
@@ -81,12 +98,12 @@ export default class UploadPictures extends Component {
         return (
             <Stack spacing={6}>
                 <Text>
-                    Envoyez nous vos photos de votre réalisation du patron {this.props.data.title} Autant de photos que vous voulez, les plus belles seront ajoutées la fiche du patron.
+                    Partagez avec la communeauté les photos de votre réalisation du patron <em>{this.props.data.title}</em>. Autant de photos que vous voulez, les plus belles seront ajoutées la fiche du patron et sur Instagram.
                 </Text>
                 { pictures && pictures.length ?
                     <Box overflowX='scroll'>
                         <HStack w='max-content'>
-                            {pictures.map(item =>
+                            {pictures.map((item, index) =>
                                 <Box
                                     position='relative'
                                 >
@@ -106,8 +123,8 @@ export default class UploadPictures extends Component {
                                         left={0}
                                         p={2}
                                     >
-                                        <Button><SmallCloseIcon /></Button>
-                                        <Button><RepeatIcon /></Button>
+                                        <Button onClick={()=>this.handleDelete(index)}><SmallCloseIcon /></Button>
+                                        {/* <Button><RepeatIcon /></Button> */}
                                     </ButtonGroup>
 
                                 </Box>

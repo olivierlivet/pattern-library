@@ -6,12 +6,13 @@ import {
     Input,
     InputGroup,
     InputRightAddon,
-    FormControl
+    FormControl,
+    FormErrorMessage
 } from '@chakra-ui/react'
 
 import { Field } from 'formik'
 
-const QuestionSizeAndFabricLength = ({ id, index, setStep, values, data }) => {
+const QuestionSizeAndFabricLength = ({ id, index, setStep, values, data, errors }) => {
     return (
         <>
             <Text
@@ -53,16 +54,21 @@ const QuestionSizeAndFabricLength = ({ id, index, setStep, values, data }) => {
                 </Box>
                 {' '}de tissu.
             </Text>
+            <FormControl isInvalid={ errors.size || errors.fabricLength }>
+                <FormErrorMessage>{errors.fabricLength}</FormErrorMessage>
+                <FormErrorMessage>{errors.size}</FormErrorMessage>
+            </FormControl>
             {
                 !values.size && !values.fabricLength ?
                     <Box mt={4}>
                         <Text>Ou alors,  <Button size='sm' variant='link' onClick={() => setStep(3)}>je ne sais pas</Button></Text>
                     </Box>
-                    :
+                : !errors.size && !errors.fabricLength ?
                     <Box mt={4}>
                         <Button
                         onClick={() => setStep(3)}>Valider</Button>
                     </Box>
+                : null
             }
 
         </>

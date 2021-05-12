@@ -15,6 +15,8 @@ const EvaluationForm = ( { data } ) => {
                 {}
             }
             onSubmit={(values, { setSubmitting }) => {
+                setSubmitting( true )
+                console.log( 'submit evaluation', values)
                 axios.post(
                     `${config.apiUrl}/evaluation/${data._id}`,
                     {
@@ -22,17 +24,12 @@ const EvaluationForm = ( { data } ) => {
                         user: authenticationService.getUser().userId
                     }
                 ).then((response)=> navigate(`/fr/contribution/evaluation/login/${response.data._id}`))
-                // setTimeout(() => {
-                //     alert(JSON.stringify(values, null, 2));
-                //     setSubmitting(false);
-                //     navigate('/fr/compte/contribution/evaluation/login/_contributionID_')
 
-                // }, 400);
             }}
             validationSchema={
                 yup.object().shape({
-                    size: yup.number().min(30).max(54).nullable(),
-                    fabricLength: yup.number().min(20).max(400).nullable(),
+                    size: yup.number().min(30,'La taille doit être comprise entre 30 et 60').max(54,'La taille doit être comprise entre 30 et 60').nullable(),
+                    fabricLength: yup.number().min(20, 'La longueur de tissu est comprise entre 20cm et 400 cm').max(400, 'La longueur de tissu est comprise entre 20cm et 400 cm').nullable(),
                 })
             }
         >
@@ -61,6 +58,7 @@ const EvaluationForm = ( { data } ) => {
                         setFieldTouched={setFieldTouched}
                         setFieldError={setFieldError}
                         handleSubmit={handleSubmit}
+                        isSubmitting={isSubmitting}
                     />
                     <pre>
                         { JSON.stringify( values, null, 1 )}

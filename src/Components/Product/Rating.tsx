@@ -2,7 +2,8 @@ import {
     Box,
     Button,
     Link,
-    Text
+    Text,
+    Tooltip
 } from '@chakra-ui/react'
 import { navigate } from 'gatsby-link'
 import React, { FC } from 'react'
@@ -20,11 +21,17 @@ const Rating: FC<props> = ({
         <Box>
             Évaluation ThePatternsCorner : ⭐ 4.8/5.
             {' '}
-            (<Link
+            <Link
+                fontSize='sm'
                 textDecor='underline'
                 color='gray.500'
                 onClick={() => navigate(`/fr/contribution/evaluation/${backendDocumentId}`)}
-            >Vous aussi, donnez votre avis.</Link>)
+            >
+                (vous aussi,{' '}
+                <Tooltip label="Et gagnez des réductions sur vos patrons..." aria-label="Détail programme fidelité">
+                    donnez votre avis)
+                </Tooltip>
+            </Link>
         </Box>
     )
 }

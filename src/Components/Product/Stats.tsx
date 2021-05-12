@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/layout'
+import { Box, Link } from '@chakra-ui/layout'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { config } from '../../config';
 
 import {
@@ -8,17 +8,23 @@ import {
     Heading,
     Flex,
     Stack,
+    Text
 } from '@chakra-ui/react'
 
 import StatsSlider from './Stats/Slider';
 import BarLinear from './Stats/BarLinear';
+import { navigate } from 'gatsby-link';
 
-const ProductStats = () => {
+type props = {
+    backendDocumentId: string
+}
+
+const ProductStats: FC<props> = ({ backendDocumentId }) => {
 
     const [data, setData] = useState();
     useEffect(async () => {
         const result = await axios.get(
-            `${config.apiUrl}/evaluation/product/609a85066506111c3f601221`
+            `${config.apiUrl}/evaluation/product/${backendDocumentId}`
         );
         setData(result.data);
     }, []);
@@ -30,7 +36,7 @@ const ProductStats = () => {
             fontFamily='DM Sans'
             textTransform='uppercase'
             // fontWeight='normal'
-            fontSize={{ base:'xs', lg:'sm' }}
+            fontSize={{ base: 'xs', lg: 'sm' }}
             letterSpacing='wide'
         >{children}</Heading>
     )
@@ -41,16 +47,16 @@ const ProductStats = () => {
             fontWeight='normal'
             p={0}
             variant='link'
-            fontSize={{ base:'xs', lg:'sm' }}
+            fontSize={{ base: 'xs', lg: 'sm' }}
 
         >
-            { children }</Button>
+            { children}</Button>
     )
 
     return (
         <Stack spacing={10} >
             {data ?
-            <>
+                <>
                     <Box>
                         <Flex mb={3} justify='space-between'>
                             <Title>Clareté des indications : {data.stats[0].NoticeComprehensibility}%</Title>
@@ -59,14 +65,31 @@ const ProductStats = () => {
                         <BarLinear value={data.stats[0].NoticeComprehensibility} />
                     </Box>
                     <Box>
-                    <Flex mb={3} justify='space-between'>
-                        <Title>Satisfaction de la coupe : {data.stats[0].CuttingSatisfaction}%</Title>
-                        <DetailButton>Détails</DetailButton>
-                    </Flex>
-                    <BarLinear value={data.stats[0].CuttingSatisfaction} />
-                </Box>
+                        <Flex mb={3} justify='space-between'>
+                            <Title>Satisfaction de la coupe : {data.stats[0].CuttingSatisfaction}%</Title>
+                            <DetailButton>Détails</DetailButton>
+                        </Flex>
+                        <BarLinear value={data.stats[0].CuttingSatisfaction} />
+                    </Box>
                 </>
                 : null}
+
+            <Text
+                fontSize='sm'
+            >
+                Vous avez cousu ce patron ?{' '}
+                <Text
+                    cursor='pointer'
+                    as='span'
+                    textDecor='underline'
+                    color='gray.500'
+                    onClick={() => navigate(`/fr/contribution/evaluation/${backendDocumentId}`)}
+                >
+                    Partagez votre avis avec la communeauté →
+                </Text>
+            </Text>
+
+
         </Stack>
     )
 }

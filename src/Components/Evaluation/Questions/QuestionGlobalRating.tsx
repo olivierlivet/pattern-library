@@ -17,13 +17,12 @@ export default class QuestionGlobalRating extends Component {
         super(props)
         this.state = {
             showValidate: false,
-            isSubmiting: false
         }
     }
 
     render() {
         // const [showValidate, setShowValidate] = useState(false)
-        const { setFieldValue, setStep } = this.props
+        const { setFieldValue, setStep, isSubmitting } = this.props
         const { showValidate, isSubmiting } = this.state
         return (
             <Stack>
@@ -114,13 +113,13 @@ export default class QuestionGlobalRating extends Component {
                         >
                             <Button
                                 variant='ouline'
-                                isLoading={isSubmiting}
+                                isLoading={isSubmitting}
                                 type='submit'
-                                onClick={() => {
-                                    this.props.handleSubmit()
-                                    // this.setState({ 'isSubmiting': true })
-                                    this.reward.rewardMe()
-                                }}
+                                // onClick={() => {
+                                //     this.props.handleSubmit()
+                                //     // this.setState({ 'isSubmiting': true })
+                                //     this.reward.rewardMe()
+                                // }}
                             >Valider <ArrowForwardIcon /></Button>
                         </Reward>
                     </Center>
