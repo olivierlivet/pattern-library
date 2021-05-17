@@ -28,6 +28,8 @@ const AccordionBlock: FunctionComponent<props> = (
                 lg: '500px 1fr'
             }}
             p={{ base: 6, lg: 24 }}
+            gap={{ base: 2, lg: 12 }}
+
         >
             <Heading
                 fontWeight='normal'
@@ -43,7 +45,7 @@ const AccordionBlock: FunctionComponent<props> = (
                             <AccordionButton>
                                 <Box flex="1" textAlign="left">
                                     La plus large librairie de patrons en ligne
-        </Box>
+                                </Box>
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
@@ -52,7 +54,7 @@ const AccordionBlock: FunctionComponent<props> = (
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo consequat.
-    </AccordionPanel>
+                        </AccordionPanel>
                     </AccordionItem>
 
                     <AccordionItem>
@@ -60,7 +62,7 @@ const AccordionBlock: FunctionComponent<props> = (
                             <AccordionButton>
                                 <Box flex="1" textAlign="left">
                                     Des frais de livraisons offerts
-        </Box>
+                                </Box>
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
@@ -69,7 +71,7 @@ const AccordionBlock: FunctionComponent<props> = (
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo consequat.
-    </AccordionPanel>
+                        </AccordionPanel>
                     </AccordionItem>
 
 
@@ -78,8 +80,7 @@ const AccordionBlock: FunctionComponent<props> = (
                             <AccordionButton>
                                 <Box flex="1" textAlign="left">
                                     Les conseils avisés de toute la communauté
-
-        </Box>
+                                </Box>
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
@@ -88,11 +89,8 @@ const AccordionBlock: FunctionComponent<props> = (
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo consequat.
-    </AccordionPanel>
+                        </AccordionPanel>
                     </AccordionItem>
-
-
-
                 </Accordion>
             </Box>
         </Grid>

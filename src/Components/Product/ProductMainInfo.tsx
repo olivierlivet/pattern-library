@@ -67,7 +67,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                         {data.editor ? data.editor.title : ''}
                     </Link>
                     : null}
-                <Heading as='h1' fontWeight='normal'>
+                <Heading as='h1' fontWeight='normal' fontSize={{ base:'5xl', lg:'5xl'}}>
                     {data.title}
                 </Heading>
                 <Rating value={4} backendDocumentId={data.backendDocumentId} />
@@ -76,7 +76,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
 
             <HStack spacing={.5}>
                 <BuyButton
-                    product={data.sys ? data.sys.id : data.contentful_id}
+                    product={ data.backendDocumentId ? data.backendDocumentId : data.fields.backendDocumentId }
                     price={data.price}
                 />
                 <FavoriteButton

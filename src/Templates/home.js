@@ -124,7 +124,10 @@ const HomeTemplate = (props) => {
                     base: '100%',
                     lg: '450px 1fr'
                 }}
-                p={{ base: 6, lg: 24 }}
+                p={{ base: 0, lg: 24 }}
+                gap={{ base:2, lg:12 }}
+                py={{ base: 10, lg: 24 }}
+
             >
                 <Stack
                     px={{ base: 4, lg: 26 }}
@@ -140,13 +143,17 @@ const HomeTemplate = (props) => {
                         En savoir plus sur le système d'<Link as={GatsbyLink} to='/fr/a-propos'>évaluation des patrons <ArrowForwardIcon /></Link>
                     </Text>
                 </Stack>
-                <Stack
-                    spacing={{ base:4, lg:6 }}
-                    maxW='800px'
+                <Box
+                    maxW='100%'
+                    overflow='hidden'
+                    my={{
+                        base:10, lg:0
+                    }}
                 >
                     <EntrySummary />
-                    <Box
-                        px={{ base: 4, lg: 26 }}
+                    </Box>
+                    {/* <Box
+                        // px={{ base: 4, lg: 26 }}
                     >
                         <Button
                             bg='#EFCBBF'
@@ -157,8 +164,7 @@ const HomeTemplate = (props) => {
                             fontWeight='normal'
                             borderRadius={2}
                         >Voir plus</Button>
-                    </Box>
-                </Stack>
+                    </Box> */}
 
             </Grid>
 

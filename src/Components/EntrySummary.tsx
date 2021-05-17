@@ -20,8 +20,17 @@ const EntrySummary = () => {
 
     const Card = ({ index }) => (
         <Box
-            w='240px' h='400px' bg='gray.300'
-        // ml={ index === 0 ? 4 : 0 }
+            w={{
+                base:'240px',
+                md:'200px',
+                lg:'280px'
+            }}
+            h='400px'
+            bg='gray.300'
+            mx={{
+                base:index === 0 ? 2 : 2,
+                lg: 10
+            }}
         >
             <Image
                 src='https://republiqueduchiffon.com/wp-content/uploads/2021/02/Sewing-pattern-BILLY-6-600x600.jpg'
@@ -59,29 +68,32 @@ const EntrySummary = () => {
         <Box
             // maxW='100vw'
             position='relative'
-            mx={{ base:4, lg:26 }}
+            // mx={{ base:4, lg:26 }}
         >
             <Swiper
-                spaceBetween={10}
+                // spaceBetween={10}
                 // slidesPerView={1.4}
                 freeMode={true}
-
                 breakpoints={{
                     320: {
                         slidesPerView: 1.4,
-                        spaceBetween: 10,
+                        spaceBetween: 0,
                     },
                     640: {
                         slidesPerView: 3,
-                        spaceBetween: 10,
+                        spaceBetween: 0,
                     },
                     768: {
                         slidesPerView: 3,
-                        spaceBetween: 10,
+                        spaceBetween: 0,
                     },
                     1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
+                        slidesPerView: 3.2,
+                        spaceBetween: 0,
+                    },
+                    1280: {
+                        slidesPerView: 3.2,
+                        spaceBetween: 0,
                     },
                 }}
 

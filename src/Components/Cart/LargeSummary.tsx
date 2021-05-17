@@ -29,13 +29,17 @@ type props = {
     hideButton: Boolean
 }
 
+interface IData {
+    _id: string,
+    products: [any]
+}
+
 const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButton }) => {
 
-    const [data, setData] = useState();
+    const [data, setData] = useState< IData | undefined >();
     useEffect(async () => {
         getData();
     }, []);
-
 
     const getData = async () => {
         const result = await axios.get(
@@ -161,10 +165,11 @@ const CartLargeSummary: FunctionComponent<props> = ({ products, isOpen, hideButt
                         Passer commande
                     </Button>
                     : null}
-
-                <GoToPaymentButton
-                    cart={data}
-                />
+                { data && data.products.length > 0 ? 
+                    <GoToPaymentButton
+                        cart={data}
+                    />
+                : null }
             </Stack>
             :
             <div>Votre panier est vide</div>

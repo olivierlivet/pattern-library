@@ -13,11 +13,12 @@ import {
 } from '@chakra-ui/react'
 import Helmet from 'react-helmet'
 import { config } from '../config'
+import Wrapper from '../Components/Layouts/Wrapper'
 
 const ProductTemplate = (props) => {
     const pageContent = props.data.product
 
-    console.log( 'product data', pageContent )
+    console.log('product data', pageContent)
     return (
         <Layout
             enableBackButton={false}
@@ -29,20 +30,20 @@ const ProductTemplate = (props) => {
                     ${config.titleSuffix}`}
                 </title>
             </Helmet>
-            <Box
-                p={{ base: 0, lg: 10 }}
-            >
-                <HierarchicalNav
-                    data={pageContent}
-                />
-            </Box>
+            <Wrapper>
+                <Box px={10}>
+                    <HierarchicalNav
+                        data={pageContent}
+                    />
+                </Box>
+            </Wrapper>
 
             <ProductPage
                 data={props.data.product}
                 displayCloseButton={false}
                 context='page'
             />
-        </Layout>
+        </Layout >
     )
 }
 

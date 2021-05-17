@@ -1,10 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import Wrapper from '../Layouts/Wrapper'
 
-
-import ProductDetails from './ProductDetails'
-import ProductInspirations from './ProductInspirations'
-import ProductRatingAdnAdvices from './ProductRatingAndAdvices'
 import ProductIllustration from './ProductIllustration'
 import ProductMainInfo from './ProductMainInfo'
 import CloseButton from './CloseButton'
@@ -17,15 +13,14 @@ import {
     Stack
 } from '@chakra-ui/react'
 
-// import RichContent from '../RichContent'
-// import SharingButtons from './SharingButtons'
 import UserNav from '../Nav/User'
+import InspirationsList from './Inspiration/List'
 
 type props = {
     data: Object,
     onClose: Function,
     displayCloseButton: boolean,
-    context: String
+    context: string,
 }
 
 const ProductPage: FunctionComponent<props> = (
@@ -38,24 +33,25 @@ const ProductPage: FunctionComponent<props> = (
 
     return (
         <>
-            <Flex
-                justify='space-between'
-                p={{ base: 5, lg: 10 }}
-                position={{
-                    base: 'fixed',
-                    lg: 'initial'
-                }}
-                top={0}
-                left={0}
-                right={0}
+            {context === 'modal' ?
 
-                zIndex='banner'
+                <Flex
+                    justify='space-between'
+                    p={{ base: 5, lg: 10 }}
+                    position={{
+                        base: 'fixed',
+                        lg: 'initial'
+                    }}
+                    top={0}
+                    left={0}
+                    right={0}
 
-            >
+                    zIndex='banner'
 
-                {displayCloseButton ? <CloseButton onClose={() => onClose()} /> : null}
+                >
 
-                {context === 'modal' ?
+                    {displayCloseButton ? <CloseButton onClose={() => onClose()} /> : null}
+
 
                     <HStack
                         boxShadow='sm'
@@ -65,20 +61,24 @@ const ProductPage: FunctionComponent<props> = (
                     >
                         <UserNav />
                     </HStack>
-                    : null}
-            </Flex>
+                </Flex>
+                : null}
+
             <Wrapper>
                 <Box
                     mx='auto'
-                    px={{ base:0, lg:10 }}
+                    px={{ base: 0, lg: 10 }}
                 >
-                    <Stack spacing={{ base: 4, lg: 8 }} pb={20}>
+                    <Stack
+                        spacing={{ base: 12, lg: 24 }}
+                        pb={20}
+                    >
                         <SimpleGrid
                             // templateColumns={{
                             //     base: '100%',
                             //     xl: '50% 50%'
                             // }}
-                            columns={{ base:1, lg:2 }}
+                            columns={{ base: 1, lg: 2 }}
                             gap={{ base: 0, lg: 20 }}
                             my={{ base: 0, lg: 0 }}
                         >
@@ -93,7 +93,7 @@ const ProductPage: FunctionComponent<props> = (
                             </Box>
                             <Center
                                 p={{ base: 5, lg: 0 }}
-                                pr={{ base:5, lg:10 }}
+                                pr={{ base: 5, lg: 10 }}
                                 pt={{ base: 5, lg: 10 }}
                                 wrap='wrap'
                             >
@@ -103,37 +103,19 @@ const ProductPage: FunctionComponent<props> = (
                         </SimpleGrid>
 
                         <SimpleGrid
-                            // templateColumns={{
-                            //     base: '100%',
-                            //     xl: '50% 50%'
-                            // }}
-                            columns={{ base:1, lg:2 }}
+                            columns={{ base: 1, lg: 2 }}
                             gap={{ base: 0, lg: 20 }}
                             my={{ base: 0, lg: 0 }}
+                            px={{ base: 5, lg: 0 }}
                         >
-                            <Box bg='gray.200' id='inspirations'><Center h='500px'>Inspirations</Center></Box>
-                            <Box bg='gray.300' id='discussions'><Center h='500px'>Discussions</Center></Box>
+                            <Box id='inspirations'>
+                                <InspirationsList
+                                    productId={data.backendDocumentId}
+                                    product={data}
+                                />
+                            </Box>
+                            <Box bg='gray.300' id='discussions'><Center h='1500px'>Discussions</Center></Box>
                         </SimpleGrid>
-                        {/* <Tabs id="details">
-                            <TabList>
-                                <Tab>Détails</Tab>
-                                <Tab>Inspirations</Tab>
-                                <Tab>Questions / Réponses</Tab>
-                            </TabList>
-
-                            <TabPanels>
-                                <TabPanel>
-                                    <ProductDetails data={data} />
-
-                                </TabPanel>
-                                <TabPanel>
-                                    <ProductInspirations data={data} />
-                                </TabPanel>
-                                <TabPanel>
-                                    <ProductRatingAdnAdvices data={data} />
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs> */}
                     </Stack>
                 </Box>
             </Wrapper>

@@ -36,7 +36,6 @@ const transitionStyles = {
     exited: { opacity: 0 },
 }
 
-
 const MainButton = ({ }) => {
 
     useEffect(() => {
@@ -44,11 +43,10 @@ const MainButton = ({ }) => {
             getData();
         }
         let interval = setInterval(() => getData(), (1000 * 5));
-        //destroy interval on unmount
         return () => clearInterval(interval)
     })
 
-    const [isOpen, setIsOpen] = useState()
+    const [isOpen, setIsOpen] = useState<boolean | undefined>(undefined)
     const [data, setData] = useState();
 
     const getData = async () => {
@@ -56,58 +54,39 @@ const MainButton = ({ }) => {
             const result = await axios.get(
                 `${config.apiUrl}/cart/${authenticationService.getUser().userId}/created`
             );
-
             setData(result.data);
         }
-
-
-
     }
-
 
     return (
         <>
             { isOpen ?
                 <Box
-                    onClick={() => setIsOpen(!isOpen)}
-
+                    onClick={() => setIsOpen( data && !isOpen ? !isOpen : false )}
                     zIndex='base'
                     position='fixed'
                     top='0'
                     bottom='0'
                     left='0'
                     right='0'
-
                     bg='whiteAlpha.400'
                 />
-                : null}
+            : null}
             <Box
                 position='relative'
                 zIndex='docked'
             >
-                {/* { data ?
-                <CartSummary
-                    isOpen={isOpen}
-                    key={isOpen}
-                    products={data.products}
-                /> 
-            : null } */}
-
                 <Transition in={isOpen} timeout={duration}>
                     {state => (
 
                         <Box
-                            // border='solid 2px'
-                            // borderColor='#88A7AA'
                             bg='white'
-
 
                             position='absolute'
                             top='50px'
                             right='0px'
                             borderRadius='xl'
                             boxShadow='xl'
-                            // pt={20}
                             overflow='hidden'
                             zIndex='banner'
                             w='xs'
@@ -125,14 +104,13 @@ const MainButton = ({ }) => {
                                 />
                                 : <Text>Votre panier est vide pour le moment, remplissez-le vite ! 🧵</Text>
                             }
-
                         </Box>
                     )}
                 </Transition>
 
                 <Button
-                    onClick={() => setIsOpen(!isOpen)}
-
+                    onClick={() => setIsOpen( !isOpen )}
+                    pointerEvents={ data && data.products.length ? 'auto' : 'none' }
                     p={{ base: 1, lg: 2 }}
                     h='auto'
                     w='auto'
@@ -143,7 +121,10 @@ const MainButton = ({ }) => {
                         color: 'white'
                     }}
                 >
-                    {data && data.products ?
+                    <pre>
+
+                    </pre>
+                    {data && data.products && data.products.length ?
                         <Center
                             backgroundColor='red.500'
                             color='white'
