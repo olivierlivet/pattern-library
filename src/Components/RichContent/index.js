@@ -37,7 +37,7 @@ const RichContent = ({ data, fontSize, spacing }) => {
                 // const { title, description, slug } = node.data.target.fields;
                 console.log('node', node.data.target)
                 console.log('children', children)
-                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={slug}>{children} {slug}</Link>
+                return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={slug}>{children}</Link>
             },
             [INLINES.EMBEDDED_ENTRY]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id, data.references)
@@ -51,27 +51,27 @@ const RichContent = ({ data, fontSize, spacing }) => {
                 // const { title, description, slug } = node.data.target.fields;
                 return (
                     <ProductCard
-                                            key={entry.contentful_id}
-                                            productId={entry.contentful_id}
-                                            backendDocumentId={entry.backendDocumentId}
-                                            title={entry.title}
-                                            price={entry.price}
-                                            level={entry.level}
-                                            rating={entry.rating}
-                                            editor={entry.editor}
-                                            pictures={entry.pictures}
-                                            // intro={<RichContent data={product.fields.intro} />}
+                        key={entry.contentful_id}
+                        productId={entry.contentful_id}
+                        backendDocumentId={entry.backendDocumentId}
+                        title={entry.title}
+                        price={entry.price}
+                        level={entry.level}
+                        rating={entry.rating}
+                        editor={entry.editor}
+                        pictures={entry.pictures}
+                        // intro={<RichContent data={product.fields.intro} />}
 
 
-                                            //Actions
-                                            // onOpen={() => console.log('open')}
-                                             onOpen={() => navigate(entry.slug) }
-                                        />
+                        //Actions
+                        // onOpen={() => console.log('open')}
+                            onOpen={() => navigate(entry.slug) }
+                    />
                 )
             },
             [INLINES.HYPERLINK]: (node, children) => {
                 console.log('node', node)
-                return <Link as={GatsbyLink} color='blue.700' borderBottom='solid 1px' borderColor='blue.300' as='a' to={node.data.uri}>{node.data.uri}  test {children}</Link>
+                return <Link as={GatsbyLink} color='blue.700' borderBottom='solid 1px' borderColor='blue.300' as='a' to={node.data.uri}>{children}</Link>
             },
         },
     }

@@ -38,10 +38,10 @@ const Footer = () => {
                     <Heading as='p' mb={2} fontSize='normal' fontWeight='normal' color='#EFCBBF' fontFamily='Noe Display'>Éditeurs de patrons</Heading>
                     <List>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink} to='/fr/a-propos'>Pourquoi Patterns Corner</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos#why'>Pourquoi Patterns Corner</Link>
                         </ListItem>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink} to='/fr/a-propos'>Mentions légales</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos#legal'>Mentions légales</Link>
                         </ListItem>
                     </List>
                 </Box>
@@ -49,7 +49,7 @@ const Footer = () => {
                     <Heading as='p' mb={2} fontSize='normal' fontWeight='normal' color='#EFCBBF' fontFamily='Noe Display'>Éditeurs de patrons</Heading>
                     <List>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink} to='/fr/a-propos'>Vendre sur TPC</Link>
+                            <Link as={GatsbyLink} to='/fr/a-propos#sell'>Vendre sur TPC</Link>
                         </ListItem>
                         <ListItem>—{' '}
                             <Link as={GatsbyLink} to='/fr/editor/login'>Accès plateforme éditeurs</Link>

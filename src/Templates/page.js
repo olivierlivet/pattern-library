@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import RichContent from '../Components/RichContent'
+import AboutPageModule from '../Components/AboutPage'
 
 const PageTemplate = (props) => {
     const pageContent = props.data.page
@@ -38,13 +39,13 @@ const PageTemplate = (props) => {
                 // px={{ base: 24, lg: 32, xl:'72' }}
                 mx='auto'
                 maxW='700px'
-                py={{ 
-                    base:10,
-                    lg:0
+                py={{
+                    base: 10,
+                    lg: 0
                 }}
-                px={{ 
-                    base:4,
-                    lg:0
+                px={{
+                    base: 4,
+                    lg: 0
                 }}
             >
 
@@ -61,7 +62,7 @@ const PageTemplate = (props) => {
                     textAlign='center'
                     fontWeight='normal'
                     as='h1'
-                    // mb={{ base:'24', lg:'28'}}
+                // mb={{ base:'24', lg:'28'}}
                 >
                     {pageContent.title}
                 </Heading>
@@ -69,31 +70,28 @@ const PageTemplate = (props) => {
                 <Wrapper>
                     <RichContent
                         data={pageContent.description}
-                        fontSize={{ base:'md', lg:'lg'}}
-                        spacing={ {base: 4, lg: 8} }
+                        fontSize={{ base: 'md', lg: 'lg' }}
+                        spacing={{ base: 4, lg: 8 }}
                     />
+
+                    {/* <div>
+                        <pre>
+                            { JSON.stringify( props , null, 1 )}
+                        </pre>
+                    </div> */}
+
+
                 </Wrapper>
             </Box>
+            <Wrapper>
+                <Box mx='auto'>
+                    {props.pageContext.slug === '/fr/a-propos/' ?
+                        <AboutPageModule />
+                        : null
+                    }
+                </Box>
 
-
-
-            {/* <StaticImage
-                src="https://placekitten.com/800/600"
-                alt="A kitten"
-                formats={['auto', 'avif', 'webp']}
-            /> */}
-
-
-            <div>
-                {/* <StaticImage
-                    src={`https://images.ctfassets.net/e6euex8rtwnm/523FbtWgb4UHwARkyac2Jm/fabddc082975170488339aca75098da0/chemisier.jpeg?w=400&q=50`}
-                    alt={ 'pageContent.title' }
-                /> */}
-
-            </div>
-            {/* <pre>
-                { JSON.stringify( props, null, 1 )}
-            </pre> */}
+            </Wrapper>
         </Layout>
     )
 }

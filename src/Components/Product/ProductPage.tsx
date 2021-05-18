@@ -15,6 +15,7 @@ import {
 
 import UserNav from '../Nav/User'
 import InspirationsList from './Inspiration/List'
+import ProductDiscussionList from './Discussion/List'
 
 type props = {
     data: Object,
@@ -114,7 +115,14 @@ const ProductPage: FunctionComponent<props> = (
                                     product={data}
                                 />
                             </Box>
-                            <Box bg='gray.300' id='discussions'><Center h='1500px'>Discussions</Center></Box>
+                            <Box
+                                mt={{ base:0, lg:'-6' }}
+                                id='discussions'>
+                                <ProductDiscussionList
+                                    productId={data.backendDocumentId}
+                                    product={data}
+                                />
+                            </Box>
                         </SimpleGrid>
                     </Stack>
                 </Box>

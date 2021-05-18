@@ -49,8 +49,8 @@ const HomeTemplate = (props) => {
             enableBackButton={false}
         >
             <Helmet>
-                <title>{pageContent.title}</title>
-                <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
+                <title>{pageContent.titleSeo}</title>
+                {/* <meta name='description' content={pageContent.descriptionSeo.descriptionSeo} /> */}
             </Helmet>
 
             <Center
@@ -235,6 +235,7 @@ const HomeTemplate = (props) => {
                     lg: '500px 1fr'
                 }}
                 p={{ base: 6, lg: 24 }}
+                gap={{ base:2, lg:12 }}
             >
                 <Heading
                     fontWeight='normal'
@@ -279,6 +280,9 @@ export const pageQuery = graphql`
 query homeQuery( $contentfulID: String! ){
     page:contentfulPage(contentful_id: {eq: $contentfulID})
     {
+        title
+        titleSeo
+        #descriptionSeo{ descriptionSeo }
         slug
         title
         description {
