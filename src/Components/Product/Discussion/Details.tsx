@@ -43,10 +43,6 @@ const DiscussionDetails: React.FC<props> = ({ data }) => {
                 {' '}{data.content}
             </Text> */}
 
-            {/* <pre>
-                {JSON.stringify(data, null, 1)}
-            </pre> */}
-
             {data.messages && data.messages.length ?
                 <Stack my={ 6 } spacing={5}>
                     {data.messages.map(message =>
@@ -58,13 +54,10 @@ const DiscussionDetails: React.FC<props> = ({ data }) => {
                 </Stack>
             : null}
 
-
             <ReplyForm
                 discussionId={data._id}
                 onMessagePosted={() => console.log('message posted')}
             />
-
-            {/* { JSON.stringify( data, null, 1 )} */}
 
         </Box>
     )
