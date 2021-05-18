@@ -31,7 +31,7 @@ const ProductStats: FC<props> = ({ backendDocumentId }) => {
 
     const Title = ({ children }) => (
         <Heading
-            as='h4'
+            as='h2'
             color='gray.400'
             fontFamily='DM Sans'
             textTransform='uppercase'

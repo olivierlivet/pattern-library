@@ -38,6 +38,7 @@ const UniversTemplate = (props) => {
                 links = { categories }
                 // hierarchy = { ...univers }
             />
+            {/* <RichContent data={ pageContent.description } /> */}
 
         </Layout>
     )

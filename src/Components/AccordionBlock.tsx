@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
-
-import { Box, Grid, Stack, Text } from '@chakra-ui/layout'
+import { Link as GatsbyLink } from 'gatsby'
+import { Box, Grid, Link, Stack, Text } from '@chakra-ui/layout'
 
 import {
     Accordion,
@@ -118,6 +118,8 @@ const AccordionBlock: FunctionComponent<props> = (
                         </AccordionPanel>
                     </AccordionItem>
                 </Accordion>
+                <Link></Link>
+                <Link as={GatsbyLink} to='/fr/a-propos'>Tout savoir sur ThePatternsCorner</Link>
             </Box>
         </Grid>
     )
