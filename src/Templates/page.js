@@ -126,11 +126,11 @@ query pageQuery( $contentfulID: String! ){
                     pictures{ url }
                     intro{ raw }
                 }
-                ... on ContentfulAsset {
-                    contentful_id
-                    title
-                    gatsbyImageData(layout: FULL_WIDTH)
-                }
+                #... on ContentfulAsset {
+                #    contentful_id
+                #    title
+                #    gatsbyImageData(layout: FULL_WIDTH)
+                #}
             }
         }
 
