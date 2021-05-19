@@ -15,7 +15,14 @@ import {
 
 import UserNav from '../Nav/User'
 import InspirationsList from './Inspiration/List'
-import ProductDiscussionList from './Discussion/List'
+// import ProductDiscussionList from './Discussion/List'
+import Loadable from "react-loadable"
+
+const ProductDiscussionList = Loadable({
+    loader: () => import('./Discussion/List'),
+    loading: 'Loading',
+});
+
 
 type props = {
     data: Object,
@@ -116,12 +123,15 @@ const ProductPage: FunctionComponent<props> = (
                                 />
                             </Box>
                             <Box
-                                mt={{ base:0, lg:'-6' }}
-                                id='discussions'>
-                                <ProductDiscussionList
-                                    productId={data.backendDocumentId}
-                                    product={data}
-                                />
+                                mt={{ base: 0, lg: '-6' }}
+                                id='discussions'
+                            >
+                                {/* {ProductDiscussionList ?
+                                    <ProductDiscussionList
+                                        productId={data.backendDocumentId}
+                                        product={data}
+                                    />
+                                    : null} */}
                             </Box>
                         </SimpleGrid>
                     </Stack>

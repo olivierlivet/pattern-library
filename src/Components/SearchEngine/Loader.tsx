@@ -1,16 +1,11 @@
 import React, {FunctionComponent} from 'react'
-import Loadable from "@loadable/component"
 import {
     Modal,
     ModalOverlay,
     ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
-    ModalCloseButton,
 } from "@chakra-ui/react"
 const SearchEngine = Loadable(() => import('./index.js'))
-
 
 // type propsType = {
 //     filter: string,
@@ -40,9 +35,6 @@ const SearchEngineLoader: FunctionComponent<propTypes> = ({ filter, onClose, isO
                     bg='gray.50'
                 >
                     <ModalBody p={0}>
-                        {/* <pre>
-                            { JSON.stringify( universList, null, 1 )}
-                        </pre> */}
                         <SearchEngine
                             mainFilters={ filter }
                             onClose={()=>onClose()}
