@@ -59,24 +59,26 @@ const ProductStats: FC<props> = ({ backendDocumentId }) => {
 
     return (
         <Stack spacing={10} >
-            {data ?
+            {data && data.stats && data.stats.length ?
                 <>
-                    
+                    { data.stats[0].noticeComprehensibility ? 
                     <Stat
-                        title={ `Satisfaction de la coupe : ${data.stats[0].noticeComprehensibility}%`}
+                        title={ `Clareté de la notice : ${data.stats[0].noticeComprehensibility}%`}
                         evaluatedValue={data.stats[0].noticeComprehensibility}
-                        detailsData = { data.cuttingComments }
-                        contentKey='CuttingSatisfactionDetail'
+                        detailsData = { data.noticeComprehensibilityDetails }
+                        contentKey='noticeComprehensibilityDetail'
 
                     />
-
+                    : null }
+                    { data.stats[0].cuttingSatisfaction ? 
                     <Stat
-                        title={ `Clareté des indications : ${data.stats[0].noticeComprehensibility}%`}
-                        evaluatedValue={data.stats[0].noticeComprehensibility}
-                        detailsData = { data.cuttingComments }
-                        contentKey='ProductCustomisationDetails'
+                        title={ `Satisfaction de la coupe : ${data.stats[0].cuttingSatisfaction}%`}
+                        evaluatedValue={data.stats[0].cuttingSatisfaction}
+                        detailsData = { data.cuttingSatisfactionDetails }
+                        contentKey='cuttingSatisfactionDetail'
 
                     />
+                    : null }
 
                 </>
                 : null}

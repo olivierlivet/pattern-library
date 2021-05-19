@@ -1,5 +1,7 @@
 import { Box, Stack } from '@chakra-ui/layout'
 import React, { FC, useState } from 'react'
+import Moment from 'react-moment'
+import TimeAgo from 'timeago-react'
 
 import {
     Button,
@@ -70,10 +72,20 @@ const Stat: FC<props> = ({
                 </pre> */}
                     {detailsData.map(item =>
                         <Box>
-                            <Box bg='white' color='gray.400' borderRadius='lg' p={4}>
-                                {item[contentKey]}
+                            <Box bg='white' color='gray.400' borderRadius='lg' p={3}>
+                                «<em>{item[contentKey]}</em>»
                             </Box>
-                            <Box pr={1} pt={1} fontSize='xs' color='gray.500'>{item.user.firstName}</Box>
+                            <Box pl={3} pt={1} fontSize='xs' color='gray.500'>
+                                {item.user.firstName}
+                                {' '}le{' '}
+                                <Moment format="DD/MM/YYYY">
+                                    {item.createdAt}
+                                </Moment>
+                                {/* <TimeAgo
+                                    datetime={item.createdAt}
+                                    locale='fr'
+                                /> */}
+                            </Box>
                         </Box>
                     )}
                 </Stack>

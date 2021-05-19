@@ -35,7 +35,7 @@ export default class QuestionGlobalRating extends Component {
                         transition='opacity 500ms ease-in-out'
                         opacity={ this.props.values.globalEvaluation ? 1 : 0.2 }
                     >
-                        {this.props.values.globalEvaluation / 10}/10
+                        {this.props.values.globalEvaluation ? Math.round( this.props.values.globalEvaluation / 10 ) : 5}/10
                     </Text>
                 </Center>
                     <Flex
