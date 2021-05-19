@@ -1,21 +1,18 @@
 import axios from 'axios'
 import * as React from 'react'
-import { config } from '../../../config'
-
-import { Link as GatsbyLink } from 'gatsby'
 import { Button, Box, Center, Flex, Heading, Text, Stack } from '@chakra-ui/react'
-import { ArrowForwardIcon, ChatIcon } from '@chakra-ui/icons'
 
-import CreateDiscussionForm from './CreateForm'
-import DiscussionDetail from './CreateForm'
+
 import ReplyForm from './ReplyForm'
 import DiscussionMessage from './Message'
+import { authenticationService } from '../../../Service/auth'
 
 type props = {
-    data: any
+    data: any,
+    reloadData: Function
 }
 
-const DiscussionDetails: React.FC<props> = ({ data }) => {
+const DiscussionDetails: React.FC<props> = ({ data, reloadData }) => {
 
     const [discussionLoaded, setDiscussionLoaded] = React.useState<string | undefined>(undefined)
     const [showCreateTopicForm, setShowCreateTopicForm] = React.useState<boolean>(false)
@@ -32,7 +29,7 @@ const DiscussionDetails: React.FC<props> = ({ data }) => {
     return (
         <Box
             borderRadius='sm'
-            px={6}
+            px={0}
             pb={6}
             bg='white'
         >
@@ -42,22 +39,32 @@ const DiscussionDetails: React.FC<props> = ({ data }) => {
                 </Text>
                 {' '}{data.content}
             </Text> */}
+            <DiscussionMessage
+                isFirstMessage={ true }
+                data={{
+                    user: data.user,
+                    content: data.content
+                }}
+            />
 
             {data.messages && data.messages.length ?
-                <Stack my={ 6 } spacing={5}>
+                <Stack spacing={4}>
                     {data.messages.map(message =>
-                        <DiscussionMessage data={ message } />
-                        // <pre>
-                        //     {JSON.stringify(message, null, 1)}
-                        // </pre>
+                        <DiscussionMessage
+                            key={ `discussionMessage-${message._id}` }
+                            data={ message }
+                            isFirstMessage={ false }
+                        />
                     )}
                 </Stack>
             : null}
 
-            <ReplyForm
-                discussionId={data._id}
-                onMessagePosted={() => console.log('message posted')}
-            />
+            { authenticationService.getUser() ?
+                <ReplyForm
+                    discussionId={data._id}
+                    onMessagePosted={() => reloadData()}
+                />
+            : null}
 
         </Box>
     )

@@ -23,6 +23,7 @@ import AboutPageModule from '../Components/AboutPage'
 
 const PageTemplate = (props) => {
     const pageContent = props.data.page
+    console.log( "pageContent", pageContent )
     return (
         <Layout
             enableBackButton={false}
@@ -124,6 +125,11 @@ query pageQuery( $contentfulID: String! ){
                     slug
                     pictures{ url }
                     intro{ raw }
+                }
+                ... on ContentfulAsset {
+                    contentful_id
+                    title
+                    gatsbyImageData(layout: FULL_WIDTH)
                 }
             }
         }

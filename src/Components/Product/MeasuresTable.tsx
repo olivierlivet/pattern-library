@@ -11,12 +11,14 @@ const MeasuresTable: FC<props> = ({ data }) => {
         <Box maxW='80vw' overflowX='scroll'>
             <Table variant="simple" size='sm'>
                 <Tbody>
-                    {data.map((line, index) =>
-                        <Tr>
+                    {data.map((line, x) =>
+                        <Tr key={`MeasuresTableTR-${x}`}>
                             <Td><strong>{line.label}</strong></Td>
-                            {line.values.map(value =>
-                                <Td>
-                                    { index === 0 ?
+                            {line.values.map((value, y) =>
+                                <Td
+                                    key={`MeasuresTableTD-${y}${x}`}
+                                >
+                                    { y === 0 ?
                                         <Box
                                             flex='1'
                                         >

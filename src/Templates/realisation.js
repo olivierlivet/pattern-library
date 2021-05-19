@@ -80,11 +80,11 @@ const ReatlisationTemplate = (props) => {
                                 color='gray.500'
                             >
                                 La réalisation de Fanny vous plait, suivez son activité sur
-                                {' '}<Link as='' href={pageContent.data.instagramAccount}>
+                                {' '}<Link as='' color='gray.600' textDecor='underline' href={pageContent.data.instagramAccount}>
                                     Instagram
                                 </Link>{' '}
                                  ou sur son
-                                 {' '}<Link as='' href={pageContent.data.blogUrl}>
+                                 {' '}<Link as='' color='gray.600' textDecor='underline' href={pageContent.data.blogUrl}>
                                     blog
                                 </Link>
                                 .

@@ -50,6 +50,7 @@ const InspirationsList: React.FC<props> = ({ productId, product }) => {
                     <Text>Nous aimons vous proposer des exemples de réalisation pour booster votre envie et votre créativité. Merci aux couturières qui ont généreusement partagé le résultat de leur projet&nbsp;:</Text>
                     { data.map(item =>
                         <InspirationCard
+                            key={item._id}
                             data={item}
                             product={product}
                         />
@@ -62,6 +63,7 @@ const InspirationsList: React.FC<props> = ({ productId, product }) => {
                 pt={ 4 }
                 borderTop='solid 1px'
                 borderTopColor='gray.300'
+                fontSize='sm'
             >
                 Vous avez cousu {product.title} ?
                 {' '}<Link color='gray.700' as={GatsbyLink} to={`/fr/contribution/evaluation/${product.backendDocumentId}`}>

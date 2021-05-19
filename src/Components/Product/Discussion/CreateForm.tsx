@@ -32,8 +32,8 @@ const CreateDiscussionForm = ({ data, onDiscussionPosted, productId }) => {
             }}
             validationSchema={
                 yup.object().shape({
-                    size: yup.number().min(30, 'La taille doit être comprise entre 30 et 60').max(54, 'La taille doit être comprise entre 30 et 60').nullable(),
-                    fabricLength: yup.number().min(20, 'La longueur de tissu est comprise entre 20cm et 400 cm').max(400, 'La longueur de tissu est comprise entre 20cm et 400 cm').nullable(),
+                    title: yup.string(),
+                    content: yup.string(),
                 })
             }
         >
@@ -46,13 +46,13 @@ const CreateDiscussionForm = ({ data, onDiscussionPosted, productId }) => {
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                isValid,
                 setFieldError,
                 setFieldValue,
                 setFieldTouched,
                 /* and other goodies */
             }) => (
                 <Form>
-                    { productId }
                     <Stack spacing={4}>
                         <Field name='title'>
                             {({ field, form }) => (
@@ -77,7 +77,16 @@ const CreateDiscussionForm = ({ data, onDiscussionPosted, productId }) => {
                             )}
                         </Field>
                         <Box>
-                            <Button type='submit'>Envoyer</Button>
+                            <Button
+                                type='submit'
+                                isLoading={ isSubmitting }
+                                isActive={ !isValid }
+                            >
+                                Envoyer
+                            </Button>
+                            <pre>
+                                { JSON.stringify (isValid , null, 1 )}
+                            </pre>
                         </Box>
                     </Stack>
                 </Form>

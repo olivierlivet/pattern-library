@@ -17,61 +17,66 @@ const ReplyForm = ({ discussionId, onMessagePosted }) => {
         <Formik
             initialValues={{
                 user: authenticationService.getUser().userId,
-                discussion: discussionId
+                discussion: discussionId,
+                content: ''
             }}
-            onSubmit={(values, { setSubmitting }) => {
-                setSubmitting(true)
-                console.log('submit evaluation', values)
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+                console.log( 'onSubmit' )
+                setSubmitting(true);
                 axios.post(
                     `${config.apiUrl}/discussion/${discussionId}/message`,
                     {
                         ...values
                     }
-                ).then((response) => onMessagePosted())
-
+                ).then((response) =>{
+                    onMessagePosted();
+                    resetForm( {values: {
+                        content:'',
+                        user: authenticationService.getUser().userId,
+                        discussion: discussionId
+                    }} )
+                })
             }}
             validationSchema={
                 yup.object().shape({
-                    size: yup.number().min(30, 'La taille doit être comprise entre 30 et 60').max(54, 'La taille doit être comprise entre 30 et 60').nullable(),
-                    fabricLength: yup.number().min(20, 'La longueur de tissu est comprise entre 20cm et 400 cm').max(400, 'La longueur de tissu est comprise entre 20cm et 400 cm').nullable(),
+                    content: yup.string(),
                 })
             }
         >
             {({
-                values,
-                initialValues,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
                 isSubmitting,
-                setFieldError,
-                setFieldValue,
-                setFieldTouched,
-                /* and other goodies */
+                errors
             }) => (
                 <Form>
-                    <Stack spacing={4}>
-                       
+                    <Stack
+                        spacing={2}
+                        mt={5}
+                        ml='50'
+                        px={5}
+                    >   
                         <Field name='content'>
                             {({ field, form }) => (
                                 <Box>
                                     <FormControl isInvalid={form.errors.content}>
-                                        <FormLabel color='gray.500'>Votre réponse :</FormLabel>
-                                        <Textarea {...field} variant='flushed' />
+                                        <Textarea {...field} placeholder='Participez à la discussion' />
                                         <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
                                     </FormControl>
                                 </Box>
                             )}
                         </Field>
                         <Box>
-                            <Button type='submit'>Envoyer</Button>
+                            <Button
+                                type='submit'
+                                size='sm'
+                                isActive={ !errors }
+                                isLoading={ isSubmitting}
+                            >
+                                Publier votre message
+                            </Button>
                         </Box>
                     </Stack>
                 </Form>
             )}
-
         </Formik>
     )
 }

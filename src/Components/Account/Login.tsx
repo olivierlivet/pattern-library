@@ -133,10 +133,14 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} w='full'>
                 <GoogleLoginButton
                     handleLogin={(user) => handleLoginThirdParty(user.email)}
+                    // handleLogin={(user) => console.log('GOOGLE LOGIN HANDLE')}
+
                 />
                 <FacebookLoginButton
                     handleLogin={(user) => handleLoginThirdParty(user.email)}
-                    // handleLogin={(user) => handleLoginThirdParty(user.email)}
+                    // handleLogin={(user) => console.log('FACEBOOK LOGIN HANDLE')}
+
+
                 />
             </SimpleGrid>
 

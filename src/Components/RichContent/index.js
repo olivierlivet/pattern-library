@@ -11,6 +11,7 @@ import {
     Text
 } from '@chakra-ui/react'
 import ProductCard from '../Product/CardSmall';
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 
 
@@ -32,6 +33,23 @@ const RichContent = ({ data, fontSize, spacing }) => {
             [BLOCKS.UL_LIST]: (node, children) => <List>{children}</List>,
             [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
             [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
+            [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+
+                const assetObject = getReferenceObject( node.data.target.sys.id );
+
+                console.log( 'EMBEDDED_ASSET', node, getReferenceObject( node.data.target.sys.id ) )
+
+
+                return(
+                    <>
+                        <GatsbyImage
+                            image={assetObject.gatsbyImageData}
+                            alt={ assetObject.title }
+                        />
+                    </>
+                )
+
+            },
             [INLINES.ENTRY_HYPERLINK]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id)
                 // const { title, description, slug } = node.data.target.fields;
@@ -93,6 +111,7 @@ const RichContent = ({ data, fontSize, spacing }) => {
 
     const getReferenceObject = (id) => {
         const { references } = data
+        console.log('EMBEDDED_ASSET references', references )
         if (!references) {
             return '/'
         } else {

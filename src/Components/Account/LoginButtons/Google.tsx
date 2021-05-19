@@ -9,8 +9,10 @@ type props = {
 
 const GoogleLoginButton:FunctionComponent< props > = ({ handleLogin }) => {
     const responseGoogle = (response) => {
-        // console.log(response);
-        handleLogin( response.profileObj )
+        // console.log('responseGoogle', response);
+        if( response.profileObj ){
+            handleLogin( response.profileObj )
+        }
     }
     return (
         <GoogleLogin
