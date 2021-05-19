@@ -50,7 +50,7 @@ import RichContent from '../RichContent'
 import BuyButton from './BuyButton'
 import FavoriteButton from '../Favorite/Button'
 import Rating from './Rating'
-import ProductStats from './Stats'
+import ProductStats from './Stats/Stats'
 import MeasuresTable from './MeasuresTable'
 
 const ProductMainInfo: FunctionComponent<props> = ({ data }) => {

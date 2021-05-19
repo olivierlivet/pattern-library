@@ -71,7 +71,7 @@ const ReplyForm = ({ discussionId, onMessagePosted }) => {
                                 isActive={ !errors }
                                 isLoading={ isSubmitting}
                             >
-                                Publier votre message
+                                Publier votre réponse
                             </Button>
                         </Box>
                     </Stack>

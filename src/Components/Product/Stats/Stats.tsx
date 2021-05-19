@@ -1,7 +1,7 @@
 import { Box, Link } from '@chakra-ui/layout'
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react'
-import { config } from '../../config';
+import { config } from '../../../config';
 
 import {
     Button,
@@ -11,9 +11,11 @@ import {
     Text
 } from '@chakra-ui/react'
 
-import StatsSlider from './Stats/Slider';
-import BarLinear from './Stats/BarLinear';
+import StatsSlider from './Slider';
+import BarLinear from './BarLinear';
 import { navigate } from 'gatsby-link';
+import { string } from 'yup/lib/locale';
+import Stat from './Stat';
 
 type props = {
     backendDocumentId: string
@@ -27,9 +29,10 @@ const ProductStats: FC<props> = ({ backendDocumentId }) => {
             `${config.apiUrl}/evaluation/product/${backendDocumentId}`
         );
         setData(result.data);
+        console.log( result.data )
     }, []);
 
-    const Title = ({ children }) => (
+    const Title:FC<{ children: any}> = ({ children }) => (
         <Heading
             as='h2'
             color='gray.400'
@@ -41,8 +44,9 @@ const ProductStats: FC<props> = ({ backendDocumentId }) => {
         >{children}</Heading>
     )
 
-    const DetailButton = ({ children }) => (
+    const DetailButton:FC<{ children: string, onClick:Function}> = ({onClick, children }) => (
         <Button
+            onClick={()=> onClick() }
             h='auto'
             fontWeight='normal'
             p={0}
@@ -57,20 +61,20 @@ const ProductStats: FC<props> = ({ backendDocumentId }) => {
         <Stack spacing={10} >
             {data ?
                 <>
-                    <Box>
-                        <Flex mb={3} justify='space-between'>
-                            <Title>Clareté des indications : {data.stats[0].NoticeComprehensibility}%</Title>
-                            <DetailButton>Détails</DetailButton>
-                        </Flex>
-                        <BarLinear value={data.stats[0].NoticeComprehensibility} />
-                    </Box>
-                    <Box>
-                        <Flex mb={3} justify='space-between'>
-                            <Title>Satisfaction de la coupe : {data.stats[0].CuttingSatisfaction}%</Title>
-                            <DetailButton>Détails</DetailButton>
-                        </Flex>
-                        <BarLinear value={data.stats[0].CuttingSatisfaction} />
-                    </Box>
+                    
+                    <Stat
+                        title={ `Clareté des indications : ${data.stats[0].NoticeComprehensibility}%`}
+                        evaluatedValue={data.stats[0].NoticeComprehensibility}
+                        detailsData = { data.cuttingComments }
+                    />
+
+                    <Stat
+                        title={ `Clareté des indications : ${data.stats[0].NoticeComprehensibility}%`}
+                        evaluatedValue={data.stats[0].NoticeComprehensibility}
+                        detailsData = { data.cuttingComments }
+
+                    />
+
                 </>
                 : null}
 
