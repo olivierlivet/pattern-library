@@ -67,7 +67,7 @@ const QuestionAssociationWithOtherFabric = ({ id, index, setStep, setFieldValue 
                                 />
                             }
                             onAfterChange={(props,state)=>{
-                                setFieldValue( 'AssociationWithOtherFabricScore', props )
+                                setFieldValue( 'associationWithOtherFabricScore', props )
                                 setShowValidate( true );
                                 
                             } }

@@ -63,11 +63,14 @@ const ProductDiscussionList: React.FC<props> = ({ productId, product }) => {
                             bg={item._id === discussionLoaded ? 'white' : 'none'}
                             boxShadow={item._id === discussionLoaded ? 'sm' : 'none'}
                             borderRadius={item._id === discussionLoaded ? 'md' : 'none'}
+                            borderTop={ (index !== 0 && item._id !== discussionLoaded) ? 'solid 1px' : 'none'}
+                            borderTopColor='gray.200'
+
+                            _hover={{
+                                bg:'whiteAlpha.600'
+                            }}
                         >
                             <Flex
-                                borderTop={index !== 0 ? 'solid 1px' : 'none'}
-                                borderTopColor='gray.300'
-
                                 justify='space-between'
                                 transition='padding 200ms ease-in-out'
                                 p={item._id === discussionLoaded ? 6 : 2}

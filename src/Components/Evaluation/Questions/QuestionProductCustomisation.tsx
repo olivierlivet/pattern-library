@@ -16,7 +16,7 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
                         p={2}
                         onClick={
                             () =>{
-                                setFieldValue('ProductCustomisation', false);
+                                setFieldValue('productCustomisation', false);
                                 setStep();
                             }
                         }
@@ -27,7 +27,7 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
                         p={2}
                         onClick={
                             () =>{
-                                setFieldValue('ProductCustomisation', true);
+                                setFieldValue('productCustomisation', true);
                                 setShowDetails(true);
 
                             }
@@ -36,11 +36,11 @@ const QuestionProductCustomisation = ({ id, index, setStep, setFieldValue }) => 
                 </ >
             :
                 <>
-                    <Field name='ProductCustomisationDetails'>
+                    <Field name='productCustomisationDetail'>
                         {({ field, form }) => (
                             <FormControl>
                                 <FormLabel>Qu'avez-vous personnalisé ?</FormLabel>
-                                <Textarea {...field} id='ProductCustomisationDetails' />
+                                <Textarea {...field} id='productCustomisationDetails' />
                                 <FormHelperText>Cela pourrait donner des idées à d'autres couturières.</FormHelperText>
                             </FormControl>
                         )}

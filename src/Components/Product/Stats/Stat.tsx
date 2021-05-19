@@ -12,13 +12,15 @@ import BarLinear from './BarLinear';
 interface props {
     title: string;
     evaluatedValue: number;
+    contentKey: string;
     detailsData: [any]
 }
 
 const Stat: FC<props> = ({
     title,
     evaluatedValue,
-    detailsData
+    detailsData,
+    contentKey
 }) => {
 
     const [showDetails, setShowDetails] = useState<boolean>(false)
@@ -69,7 +71,7 @@ const Stat: FC<props> = ({
                     {detailsData.map(item =>
                         <Box>
                             <Box bg='white' color='gray.400' borderRadius='lg' p={4}>
-                                {item.CuttingSatisfactionDetail}
+                                {item[contentKey]}
                             </Box>
                             <Box pr={1} pt={1} fontSize='xs' color='gray.500'>{item.user.firstName}</Box>
                         </Box>

@@ -82,7 +82,7 @@ const QuestionNoticeComprehensibility = ({ id, index, setStep, setFieldValue, va
                                 />
                             }
                             onAfterChange={(props, state) => {
-                                setFieldValue('NoticeComprehensibility', props);
+                                setFieldValue('noticeComprehensibility', props);
                                 setShowDetails(props < 50);
                                 setShowValidate(true)
 
@@ -93,12 +93,12 @@ const QuestionNoticeComprehensibility = ({ id, index, setStep, setFieldValue, va
             </>
             {showDetails && showValidate ?
                 <>
-                    <Field name='NoticeComprehensibilityDetail'>
+                    <Field name='noticeComprehensibilityDetail'>
 
                         {({ field, form }) => (
                             <FormControl>
                                 <FormLabel>Pouvez-vous précisez ce qui n'était pas clair ?</FormLabel>
-                                <Textarea {...field} id='NoticeComprehensibilityDetail' placeholder='Un autre ...' />
+                                <Textarea {...field} id='noticeComprehensibilityDetail' placeholder='Un autre ...' />
                                 <FormHelperText>Cette information peut-être très utile à l'éditeur pour des amélioratoin futures.</FormHelperText>
                             </FormControl>
                         )}

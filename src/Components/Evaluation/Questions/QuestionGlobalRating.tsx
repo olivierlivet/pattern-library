@@ -27,6 +27,17 @@ export default class QuestionGlobalRating extends Component {
         return (
             <Stack>
                 <>
+                <Center>
+                    <Text
+                        color='brand.green.500'
+                        fontFamily='Noe Display'
+                        fontSize={{ base:'4xl', lg:'6xl'}}
+                        transition='opacity 500ms ease-in-out'
+                        opacity={ this.props.values.globalEvaluation ? 1 : 0.2 }
+                    >
+                        {this.props.values.globalEvaluation / 10}/10
+                    </Text>
+                </Center>
                     <Flex
                         justifyContent='space-between'
                     >
@@ -96,7 +107,7 @@ export default class QuestionGlobalRating extends Component {
                                     />
                                 }
                                 onAfterChange={(props, state) => {
-                                    setFieldValue('GlobalEvaluation', props);
+                                    setFieldValue('globalEvaluation', props);
                                     this.setState({ 'showValidate': true })
 
                                 }}

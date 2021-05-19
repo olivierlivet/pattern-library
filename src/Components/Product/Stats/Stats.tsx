@@ -63,15 +63,18 @@ const ProductStats: FC<props> = ({ backendDocumentId }) => {
                 <>
                     
                     <Stat
-                        title={ `Clareté des indications : ${data.stats[0].NoticeComprehensibility}%`}
-                        evaluatedValue={data.stats[0].NoticeComprehensibility}
+                        title={ `Satisfaction de la coupe : ${data.stats[0].noticeComprehensibility}%`}
+                        evaluatedValue={data.stats[0].noticeComprehensibility}
                         detailsData = { data.cuttingComments }
+                        contentKey='CuttingSatisfactionDetail'
+
                     />
 
                     <Stat
-                        title={ `Clareté des indications : ${data.stats[0].NoticeComprehensibility}%`}
-                        evaluatedValue={data.stats[0].NoticeComprehensibility}
+                        title={ `Clareté des indications : ${data.stats[0].noticeComprehensibility}%`}
+                        evaluatedValue={data.stats[0].noticeComprehensibility}
                         detailsData = { data.cuttingComments }
+                        contentKey='ProductCustomisationDetails'
 
                     />
 

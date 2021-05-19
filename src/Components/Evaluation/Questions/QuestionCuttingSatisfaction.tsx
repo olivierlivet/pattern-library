@@ -83,7 +83,7 @@ const QuestionCuttingSatisfaction = ({ id, index, setStep, setFieldValue }) => {
                                 />
                             }
                             onAfterChange={(props, state) => {
-                                setFieldValue('CuttingSatisfaction', props);
+                                setFieldValue('cuttingSatisfaction', props);
                                 setShowDetails(props < 50);
                                 setShowValidate(true)
 
@@ -96,12 +96,12 @@ const QuestionCuttingSatisfaction = ({ id, index, setStep, setFieldValue }) => {
             {showDetails && showValidate ?
 
                 <>
-                    <Field name='CuttingSatisfactionDetail'>
+                    <Field name='cuttingSatisfactionDetail'>
 
                         {({ field, form }) => (
                             <FormControl>
                                 <FormLabel>Quelles améliorations suggérez-vous ?</FormLabel>
-                                <Textarea {...field} id='NoticeComprehensibilityDetail' placeholder='Un autre ...' />
+                                <Textarea {...field} placeholder='Un autre ...' />
                                 <FormHelperText>Cette information peut-être très utile à l'éditeur pour des optimisations futures.</FormHelperText>
                             </FormControl>
                         )}

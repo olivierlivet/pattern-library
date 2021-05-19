@@ -38,7 +38,7 @@ const QuestionFabricFamily = ({ id, index, setStep, setFieldValue, data }) => {
         <Stack>
             { primaryList.map(item =>
                 <Button onClick={ ()=>{
-                    setFieldValue('FabricFamily', item );
+                    setFieldValue('fabricFamily', item );
                     setStep();
                 } }>{item}</Button>)}
             { !seeMore ?
