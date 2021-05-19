@@ -80,6 +80,7 @@ useEffect(() => {
 
                     {univers && univers.length ? univers.map(item =>
                         <Box
+                            key={item.sys.id}
                             borderBottom='solid 1px'
                             borderBottomColor='gray.50'
                         >

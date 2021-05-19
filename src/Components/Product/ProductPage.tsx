@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import Wrapper from '../Layouts/Wrapper'
 
 import ProductIllustration from './ProductIllustration'
@@ -20,9 +20,8 @@ import Loadable from "react-loadable"
 
 const ProductDiscussionList = Loadable({
     loader: () => import('./Discussion/List'),
-    loading: 'Loading',
+    loading: () => <span>Loading...</span>,
 });
-
 
 type props = {
     data: Object,
@@ -38,6 +37,12 @@ const ProductPage: FunctionComponent<props> = (
         displayCloseButton,
         context
     }) => {
+
+        const [ isLoaded , setIsLoaded ] = useState<boolean>(false)
+
+        useEffect(() => {
+            setIsLoaded( true );
+          }, []);
 
     return (
         <>
@@ -126,12 +131,12 @@ const ProductPage: FunctionComponent<props> = (
                                 mt={{ base: 0, lg: '-6' }}
                                 id='discussions'
                             >
-                                {/* {ProductDiscussionList ?
+                                { isLoaded ? 
                                     <ProductDiscussionList
                                         productId={data.backendDocumentId}
                                         product={data}
                                     />
-                                    : null} */}
+                                : null }
                             </Box>
                         </SimpleGrid>
                     </Stack>
