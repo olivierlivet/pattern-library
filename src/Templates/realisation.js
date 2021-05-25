@@ -26,6 +26,17 @@ import CtaSearch from '../Components/CtaSearch'
 import PageHeader from '../Components/PageHeader'
 import CtaOpenSearch from '../Components/CtaOpenSearch'
 import { config } from '../config'
+import { Twicpics } from "@twicpics/react";
+import TwicImg from "@twicpics/react";
+
+Twicpics({
+    domain: config.imageCdnBaseUrl,
+    defaultParams: {
+      anticipation: 0.5,
+      maxDpr: 2,
+      step: 100,
+    },
+  });
 
 const ReatlisationTemplate = (props) => {
     let pageContent = props.data.realisation
@@ -53,10 +64,15 @@ const ReatlisationTemplate = (props) => {
             >
                 <Stack spacing={3} mb={10}>
                     {pageContent.pictures.url.map(picture =>
-                        <Image
-                            src={`${config.imageCdnBaseUrl}${picture}`}
-                            alt='Title'
-                        />
+                        // <Image
+                        //     src={`${config.imageCdnBaseUrl}${picture}`}
+                        //     alt='Title'
+                        // />
+                        <TwicImg
+                            key={`realisationImage-${picture}`}
+                            w='500px'
+                            h='500px'
+                            src={`${picture}`} />
                     )}
                 </Stack>
                 <Box

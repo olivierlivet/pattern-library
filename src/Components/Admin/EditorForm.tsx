@@ -47,37 +47,37 @@ const EditorCreateForm = ({ }) => {
         {
             name: 'name',
             type: 'text',
-            label: 'Raison sociale /'
+            label: 'Company name'
         },
         {
             name: 'vatNumber',
             type: 'text',
-            label: 'Numéro de TVA'
+            label: 'Vat number'
         },
         {
             name: 'address',
             type: 'text',
-            label: 'Adresse'
+            label: 'Address'
         },
         {
             name: 'postalCode',
             type: 'text',
-            label: 'Code postal'
+            label: 'Postal code'
         },
         {
             name: 'city',
             type: 'text',
-            label: 'Ville'
+            label: 'City'
         },
         {
             name: 'email',
             type: 'email',
-            label: 'Adresse email'
+            label: 'Email address'
         },
         {
             name: 'phone',
             type: 'phone',
-            label: 'Numéro de téléphone'
+            label: 'Phone number'
         },
     ]
 
@@ -98,7 +98,7 @@ const EditorCreateForm = ({ }) => {
                         address: yup.string().required('Required').nullable(),
                         postalCode: yup.string().required('Required').nullable(),
                         phone: yup.string().required('Required').nullable(),
-                        email: yup.string().required('Required').nullable(),
+                        email: yup.string().email().required('Required').nullable(),
                     })
                 }
                 onSubmit={(values) => {
@@ -134,7 +134,7 @@ const EditorCreateForm = ({ }) => {
                                     <Field name={fieldItem.name}>
                                         {({ field, form }) => (
                                             <Box>
-                                                <FormControl isInvalid={errors[fieldItem.name]}>
+                                                <FormControl isInvalid={errors[fieldItem.name] && touched[fieldItem.name]}>
                                                     <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
                                                     <Input {...field} variant='flushed' type="text" />
                                                     <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>

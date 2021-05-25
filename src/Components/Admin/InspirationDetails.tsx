@@ -16,12 +16,15 @@ import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import React, { useState, useEffect, FC } from 'react'
 import { config } from '../../config'
+import { useToast } from "@chakra-ui/react"
 
 type props = {
     data: any
 }
 
 const InspirationDetails: FC<props> = ({ data }) => {
+    const toast = useToast()
+
 
     const handlePublish = (values) => {
         axios.post(
@@ -54,11 +57,24 @@ const InspirationDetails: FC<props> = ({ data }) => {
                         product: data.product,
                         user: data.user
                     }}
-                    onSubmit={(values) => {
+                    onSubmit={(values,  actions) => {
+
+                        
                         axios.put(
                             `${config.apiUrl}/inspiration/${data._id}`,
                             values
-                        ).catch(error => console.log('error', error))
+                        )
+                            .then(()=>{
+                                actions.setSubmitting(false);
+                                toast({
+                                    title: "Realisation updated.",
+                                    description: "This realisation has been updated.",
+                                    status: "success",
+                                    duration: 9000,
+                                    isClosable: true,
+                                  })
+                            })
+                            .catch(error => console.log('error', error))
                     }}
                 >
                     {({
@@ -72,7 +88,8 @@ const InspirationDetails: FC<props> = ({ data }) => {
                         isSubmitting,
                         setFieldError,
                         setFieldValue,
-                        setFieldTouched
+                        setFieldTouched,
+                        setSubmitting
                     }) => (
 
                         <Form>
@@ -97,7 +114,10 @@ const InspirationDetails: FC<props> = ({ data }) => {
                                     </Field>
                                 </SimpleGrid>
                                 <ButtonGroup>
-                                    <Button type='submit'>Update</Button>
+                                    <Button
+                                        type='submit'
+                                        isLoading={ isSubmitting }
+                                    >Update</Button>
                                     {data.status === 'draft' ?
                                         <Button
                                             colorScheme='green'
@@ -106,22 +126,12 @@ const InspirationDetails: FC<props> = ({ data }) => {
                                             Publish
                                         </Button>
                                     : null}
-                                    <Button
-                                            colorScheme='green'
-                                            onClick={() => handlePublish(values)}
-                                        >
-                                            Publish
-                                    </Button>
                                 </ButtonGroup>
                             </Stack>
                         </Form>
                     )}
-
                 </Formik>
             </Box>
-            <pre>
-                {JSON.stringify(data, null, 1)}
-            </pre>
         </Stack>
     )
 }
