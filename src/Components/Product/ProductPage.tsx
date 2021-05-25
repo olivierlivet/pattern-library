@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect, useState, useRef } from 'react'
 import Wrapper from '../Layouts/Wrapper'
 
 import ProductIllustration from './ProductIllustration'
@@ -43,18 +43,25 @@ const ProductPage: FunctionComponent<props> = (
         context
     }) => {
 
+        const pageRef = useRef()
+
         const [ isLoaded , setIsLoaded ] = useState<boolean>(false)
         const [fixedCtaVisible, setFixedCtaVisible] = useState<boolean>(false)
 
-        useScrollPosition(({ prevPos, currPos }) => {
-            // console.log(currPos.x)
-            // console.log(currPos.y)
-            if( !fixedCtaVisible && currPos.y < -300 ) {
-                setFixedCtaVisible( true )
-            }else if( fixedCtaVisible && currPos.y > -300 ){
-                setFixedCtaVisible( false )
-            }
-        })
+        useScrollPosition(
+            ({ prevPos, currPos }) => {
+                // console.log(currPos.x)
+                // console.log(currPos.y)
+                if( !fixedCtaVisible && currPos.y < -300 ) {
+                    setFixedCtaVisible( true )
+                }else if( fixedCtaVisible && currPos.y > -300 ){
+                    setFixedCtaVisible( false )
+                }
+            },
+            [],
+            document.getElementById('productPage')
+
+        )
 
         useEffect(() => {
             setIsLoaded( true );
@@ -97,6 +104,7 @@ const ProductPage: FunctionComponent<props> = (
                 <Box
                     mx='auto'
                     px={{ base: 0, lg: 10 }}
+                    ref={ pageRef }
                 >
                     <Stack
                         spacing={{ base: 12, lg: 24 }}
