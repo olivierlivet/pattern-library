@@ -32,7 +32,7 @@ import TwicImg from "@twicpics/react";
 Twicpics({
     domain: config.imageCdnBaseUrl,
     defaultParams: {
-      anticipation: 0.5,
+      anticipation: 0,
       maxDpr: 2,
       step: 100,
     },
@@ -64,15 +64,23 @@ const ReatlisationTemplate = (props) => {
             >
                 <Stack spacing={3} mb={10}>
                     {pageContent.pictures.url.map(picture =>
-                        // <Image
-                        //     src={`${config.imageCdnBaseUrl}${picture}`}
-                        //     alt='Title'
-                        // />
-                        <TwicImg
-                            key={`realisationImage-${picture}`}
-                            w='500px'
-                            h='500px'
-                            src={`${picture}`} />
+                        <Image
+                            src={`${config.imageCdnBaseUrl}${picture}`}
+                            alt='Title'
+                            loading='lazy'
+                        />
+        //                 <TwicImg
+        //                     key={`realisationImage-${picture}`}
+        //                     w='500px'
+        //                     h='500px'
+        //                     src={`${picture}`}
+
+        //                     ratio="1/1"
+        // step="100"
+        // focus="auto"
+        // placeholder="preview"
+
+        //                     />
                     )}
                 </Stack>
                 <Box

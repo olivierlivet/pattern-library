@@ -37,7 +37,7 @@ const RichContent = ({ data, fontSize, spacing }) => {
 
                 const assetObject = getReferenceObject( node.data.target.sys.id );
 
-                console.log( 'EMBEDDED_ASSET', node, getReferenceObject( node.data.target.sys.id ) )
+                // console.log( 'EMBEDDED_ASSET', node, getReferenceObject( node.data.target.sys.id ) )
 
 
                 return(
@@ -53,15 +53,15 @@ const RichContent = ({ data, fontSize, spacing }) => {
             [INLINES.ENTRY_HYPERLINK]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id)
                 // const { title, description, slug } = node.data.target.fields;
-                console.log('node', node.data.target)
-                console.log('children', children)
+                // console.log('node', node.data.target)
+                // console.log('children', children)
                 return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={slug}>{children}</Link>
             },
             [INLINES.EMBEDDED_ENTRY]: (node, children) => {
                 const slug = convertIdToSlug(node.data.target.sys.id, data.references)
                 // const { title, description, slug } = node.data.target.fields;
-                console.log('node', node)
-                console.log('children', children)
+                // console.log('node', node)
+                // console.log('children', children)
                 return <Link as={GatsbyLink} color='blue.900' textDecoration='underline' to={`${slug}`}>{children} coucou child</Link>
             },
             [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
@@ -111,7 +111,6 @@ const RichContent = ({ data, fontSize, spacing }) => {
 
     const getReferenceObject = (id) => {
         const { references } = data
-        console.log('EMBEDDED_ASSET references', references )
         if (!references) {
             return '/'
         } else {
