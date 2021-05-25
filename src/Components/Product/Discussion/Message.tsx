@@ -14,7 +14,7 @@ const DiscussionMessage = ({ data, isFirstMessage  }) => {
         >
             <Grid
                 templateColumns={{
-                    base: ``,
+                    base: `100%`,
                     lg: `40px 1fr`,
                 }}
                 gap={{
@@ -22,7 +22,12 @@ const DiscussionMessage = ({ data, isFirstMessage  }) => {
                     lg: 4,
                 }}
             >
-                <Box>
+                <Box
+                    display={{
+                        base:'none',
+                        lg:'block'
+                    }}
+                >
                     {data.user && data.user.profilePictureUrl ?
                         <Image
                             w='40px'

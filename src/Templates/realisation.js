@@ -3,13 +3,14 @@ import { graphql, navigate } from 'gatsby'
 import Layout from '../Components/Layouts/base'
 import SearchEngine from '../Components/SearchEngine'
 import Nav from '../Components/Nav/Base'
+import { Link as GatsbyLink } from 'gatsby'
 
 import {
     Heading,
-    Link,
     Box,
     SimpleGrid,
     Image,
+    Link,
     Stack,
     Text,
     Flex,
@@ -50,7 +51,7 @@ const ReatlisationTemplate = (props) => {
                 maxW='1200px'
                 mx='auto'
             >
-                <Stack spacing={3}>
+                <Stack spacing={3} mb={10}>
                     {pageContent.pictures.url.map(picture =>
                         <Image
                             src={`${config.imageCdnBaseUrl}${picture}`}
@@ -58,20 +59,46 @@ const ReatlisationTemplate = (props) => {
                         />
                     )}
                 </Stack>
-                <Box>
+                <Box
+                    position={{
+                        base: `fixed`,
+                        lg: `initial`
+                    }}
+                    bottom={0}
+                    px={6}
+                >
                     <Box
                         position='sticky'
                         top={20}
+                        bg='white'
+                        borderTopRadius='2xl'
+                        boxShadow='sm'
                     >
                         <Stack
-                            spacing={8}
-                            py={'32'}
+                            spacing={{
+                                base:2,
+                                lg:8
+                            }}
+                            p={{
+                                base:8,
+                                lg:'32 0'
+                            }}
                         >
                             <Box>
                                 <Hierarchical
                                     data={product}
                                 />
                             </Box>
+                            <Link
+                                as={GatsbyLink}
+                                to='../'
+                                display={{
+                                    base: 'inline',
+                                    lg: 'none'
+                                }}
+                            >
+                            ← Retour
+                            </Link>
 
                             <Heading as='h1' fontWeight='normal'>{pageContent.title}</Heading>
                             <RichContent data={pageContent.description} />
@@ -79,8 +106,8 @@ const ReatlisationTemplate = (props) => {
                             <Text
                                 color='gray.500'
                             >
-                                La réalisation de Fanny vous plait, suivez son activité sur
-                                {' '}<Link as='' color='gray.600' textDecor='underline' href={pageContent.data.instagramAccount}>
+                                La réalisation de { pageContent.data.firstName } vous plait, suivez son activité sur
+                                {' '}<Link as='' color='gray.600' textDecor='underline' href={`https://instagram.com/${pageContent.data.instagramAccount}`}>
                                     Instagram
                                 </Link>{' '}
                                  ou sur son
@@ -114,7 +141,11 @@ query realisationQuery( $contentfulID: String!, $productId: String! ){
         #univers { contentful_id title slug }
         #category { contentful_id title slug }
         pictures{ url }
-        data{ instagramAccount blogUrl }
+        data{
+            instagramAccount
+            blogUrl
+            firstName
+        }
     }
     product:contentfulProduct(contentful_id: {eq: $productId}) {
         slug

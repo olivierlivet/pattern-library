@@ -128,7 +128,7 @@ const ProductPage: FunctionComponent<props> = (
                                 />
                             </Box>
                             <Box
-                                mt={{ base: 0, lg: '-6' }}
+                                mt={{ base: 4, lg: '-6' }}
                                 id='discussions'
                             >
                                 { isLoaded ? 

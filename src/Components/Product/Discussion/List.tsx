@@ -77,7 +77,12 @@ const ProductDiscussionList: React.FC<props> = ({ productId, product }) => {
                                 onClick={() => setDiscussionLoaded(item._id === discussionLoaded ? undefined : item._id)}
                                 cursor='pointer'
                             >
-                                <Text>{item.title}</Text>
+                                <Text
+                                    fontSize={{
+                                        base:'sm',
+                                        lg:'normal'
+                                    }}
+                                >{item.title}</Text>
                                 <Center
                                     transition='transform 200ms ease-in-out'
                                     transform={item._id === discussionLoaded ? 'rotate(90deg)' : 'none'}

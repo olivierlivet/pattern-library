@@ -51,7 +51,7 @@ const ReplyForm = ({ discussionId, onMessagePosted }) => {
                     <Stack
                         spacing={2}
                         mt={5}
-                        ml='50'
+                        ml={{ base:0, lg:'50' }}
                         px={5}
                     >   
                         <Field name='content'>

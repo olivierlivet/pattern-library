@@ -1,6 +1,8 @@
-import axios from 'axios'
 import * as React from 'react'
-import { Button, Box, Center, Flex, Heading, Text, Stack } from '@chakra-ui/react'
+import { 
+    Box,
+    Stack
+} from '@chakra-ui/react'
 
 
 import ReplyForm from './ReplyForm'
@@ -16,15 +18,6 @@ const DiscussionDetails: React.FC<props> = ({ data, reloadData }) => {
 
     const [discussionLoaded, setDiscussionLoaded] = React.useState<string | undefined>(undefined)
     const [showCreateTopicForm, setShowCreateTopicForm] = React.useState<boolean>(false)
-    // React.useEffect(() => {
-    //     getData()
-    // }, []);
-
-    // const getData = () => {
-    //     axios.get(
-    //         `${config.apiUrl}/discussion/product/${productId}`
-    //     ).then((response) => setData(response.data))
-    // }
 
     return (
         <Box
@@ -33,12 +26,6 @@ const DiscussionDetails: React.FC<props> = ({ data, reloadData }) => {
             pb={6}
             bg='white'
         >
-            {/* <Text>
-                <Text as='span' color='gray.600'>
-                    {data.user.firstName}, le {data.createdAt}&nbsp;:
-                </Text>
-                {' '}{data.content}
-            </Text> */}
             <DiscussionMessage
                 isFirstMessage={ true }
                 data={{
