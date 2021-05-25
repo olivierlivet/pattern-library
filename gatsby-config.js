@@ -2,6 +2,7 @@ let activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "develo
 require("dotenv").config({ path: `.env.${activeEnv}` });
 
 module.exports = {
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   siteMetadata: {
     title: "Pattern Library",
     siteUrl: "https://patternslibrary.gatsbyjs.io"

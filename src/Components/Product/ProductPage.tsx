@@ -18,6 +18,11 @@ import InspirationsList from './Inspiration/List'
 // import ProductDiscussionList from './Discussion/List'
 import Loadable from "react-loadable"
 
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import FixedCta from './Cta/Fixed'
+
+
+
 const ProductDiscussionList = Loadable({
     loader: () => import('./Discussion/List'),
     loading: () => <span>Loading...</span>,
@@ -39,6 +44,17 @@ const ProductPage: FunctionComponent<props> = (
     }) => {
 
         const [ isLoaded , setIsLoaded ] = useState<boolean>(false)
+        const [fixedCtaVisible, setFixedCtaVisible] = useState<boolean>(false)
+
+        useScrollPosition(({ prevPos, currPos }) => {
+            // console.log(currPos.x)
+            // console.log(currPos.y)
+            if( !fixedCtaVisible && currPos.y < -300 ) {
+                setFixedCtaVisible( true )
+            }else if( fixedCtaVisible && currPos.y > -300 ){
+                setFixedCtaVisible( false )
+            }
+        })
 
         useEffect(() => {
             setIsLoaded( true );
@@ -141,6 +157,11 @@ const ProductPage: FunctionComponent<props> = (
                         </SimpleGrid>
                     </Stack>
                 </Box>
+                <FixedCta
+                    isVisible={ fixedCtaVisible }
+                    productId={ data.backendDocumentId }
+                    price={ data.price }
+                />
             </Wrapper>
         </>
     )

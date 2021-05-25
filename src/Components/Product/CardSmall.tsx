@@ -83,7 +83,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                 transition='transform 300ms ease-in-out, box-shadow 200ms ease-in-out'
                 _hover={{
                     // "borderColor": 'green.100'
-                    transform: 'translateX(30px)',
+                    transform: { base:'none', lg:'translateX(30px)' },
                     boxShadow: 'lg'
                 }}
                 w={{ base: 'auto', lg: '700px' }}

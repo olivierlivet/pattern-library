@@ -12,15 +12,18 @@ import {
 import UserNav from '../Nav/User'
 import { navigate } from 'gatsby-link'
 
+
+
 const Header = () => {
     const [menuVisible, setMenuVisible] = useState(false)
+
     return (
         <>
             <Flex
                 as={'header'}
                 p={{ base: 4, lg: 10 }}
                 pb={2}
-                bg='linear-gradient(0deg, rgba(255,255,255,0) 0%,  rgba(255,255,255,1) 100%)'
+                bg='linear-gradient(0deg, rgba(255,255,255,1) 0%,  rgba(255,255,255,1) 100%)'
                 justifyContent='space-between'
 
                 position={{ base: 'fixed', lg: 'initial' }}
