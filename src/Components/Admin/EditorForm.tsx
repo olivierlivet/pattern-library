@@ -117,6 +117,7 @@ const EditorCreateForm = ({ }) => {
                     handleChange,
                     handleBlur,
                     handleSubmit,
+                    isValid,
                     isSubmitting,
                     setFieldError,
                     setFieldValue,
@@ -149,7 +150,7 @@ const EditorCreateForm = ({ }) => {
                             </SimpleGrid>
 
                             <Box>
-                                <Button type='submit'>Create</Button>
+                                <Button isDisabled={!isValid} type='submit'>Create</Button>
                             </Box>
                         </Stack>
                         <pre>

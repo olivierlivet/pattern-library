@@ -2,7 +2,7 @@ import { Box, Button, Flex, FormControl, FormLabel, Image, Heading, HStack, Inpu
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { config } from '../../../config'
-import { Link } from '@reach/router'
+import { Link, navigate } from '@reach/router'
 import { Field, Form, Formik } from 'formik';
 import { MediaUpload } from './Uploader';
 
@@ -39,7 +39,7 @@ const ProductUpdateForm = ({ productId }) => {
                         axios.put(
                             `${config.apiUrl}/product/${productId}`,
                             values
-                        )
+                        ).then(()=> navigate('/admin/product'))
                         console.log(values)
                     }}
                 >
@@ -147,7 +147,7 @@ const ProductUpdateForm = ({ productId }) => {
                                     )}
                                 </Field>
                                 <Box>
-                                    <Button type='submit'>Mettre à jour</Button>
+                                    <Button type='submit'>Update</Button>
 
                                 </Box>
                             </Stack>

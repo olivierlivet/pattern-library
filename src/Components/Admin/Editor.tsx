@@ -7,7 +7,13 @@ import {
     HStack,
     Text,
     ButtonGroup,
-    Stack
+    Stack,
+    Table,
+    Thead,
+    Th,
+    Tbody,
+    Tr,
+    Td
 } from '@chakra-ui/react'
 import { Link } from '@reach/router';
 import axios from 'axios';
@@ -26,31 +32,46 @@ const Editor = ({ }) => {
 
     return (
         <Box w='full' my='20' bg='white' p={10}>
-            <Button as={Link} to='/admin/editor/create'>Ad editor</Button>
-            <Stack spacing={2}>
-                {data ?
-                    data.map(item =>
-                        <Grid
-                            templateColumns={{
-                                base: `1fr 200px`
-                            }}
-                            gap={6}
-                        >
-                            <Flex align='center'>
-                                {item.name}
-                            </Flex>
-                            <Box>
-                                <ButtonGroup justifyContent='flex-end'>
-                                    <Button>Details</Button>
-                                    <Button>Update</Button>
-                                </ButtonGroup>
-                            </Box>
-                        </Grid>
+            <Flex justify='flex-end'>
+                <Button colorScheme='blue' size='sm' as={Link} to='/admin/editor/create'>New editor</Button>
+            </Flex>
+            <Table>
+                <Thead>
+                    <Th fontFamily='DM Sans'>Name</Th>
+                    <Th fontFamily='DM Sans'>Email</Th>
+                    <Th fontFamily='DM Sans'>Phone</Th>
+                    <Th fontFamily='DM Sans'>Action</Th>
+                </Thead>
+                <Tbody>
+                    {data ?
+                        data.map(item =>
+                            <Tr>
+                                <Td>
+                                    {item.name}
 
-
-                    )
-                    : null}
-            </Stack>
+                                </Td>
+                                <Td>
+                                    {item.email}
+                                </Td>
+                                <Td>
+                                    {item.phone}
+                                </Td>
+                                <Td>
+                                    <ButtonGroup size='sm' justifyContent='flex-end'>
+                                        <Button
+                                            as='a'
+                                            target='_blank'
+                                            href={`https://app.contentful.com/spaces/e6euex8rtwnm/entries/${item.cmsDocumentId}`}
+                                        >CMS</Button>
+                                        {/* <Button>Details</Button>
+                                        <Button>Update</Button> */}
+                                    </ButtonGroup>
+                                </Td>
+                            </Tr>
+                        )
+                        : null}
+                </Tbody>
+            </Table>
         </Box>
     )
 }

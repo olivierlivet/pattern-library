@@ -225,7 +225,7 @@ const ProductCreateForm = ({ }) => {
                                     {({ form, field }) => (
                                         <FormControl>
                                             <FormLabel>Editor</FormLabel>
-                                            <Select {...field}>
+                                            <Select {...field} placeholder='Choose one'>
                                                 {editors ? editors.map(item =>
                                                     <option value={item._id}>{item.name}</option>
                                                 ) : null}
@@ -250,7 +250,7 @@ const ProductCreateForm = ({ }) => {
                                         <FormControl>
                                             <FormLabel>Univers</FormLabel>
                                             <Select
-                                                placeholder='choose'
+                                                placeholder='Choose one'
                                                 {...field}
                                             // onChange={(e) => handleBuildSlug(e.target.value, setFieldValue, values.title)}
                                             >

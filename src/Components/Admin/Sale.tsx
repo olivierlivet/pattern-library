@@ -6,7 +6,12 @@ import {
     Grid,
     HStack,
     Text,
-    ButtonGroup
+    ButtonGroup,
+    Table,
+    Thead,
+    Th,
+    Tr,
+    Td
 } from '@chakra-ui/react'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
@@ -24,27 +29,34 @@ const Sales = ({ }) => {
 
     return (
         <Box w='full' my='20' bg='white' p={10}>
-            { data ?
-                data.map(item =>
-                    <Grid
-                        templateColumns={{
-                            base: `1fr 200px`
-                        }}
-                        gap={6}
-                    >
-                            <Flex align='center'>
-                                {item.product.title} de { item.user.firstName }
-                            </Flex>
-                            <Box>
-                                <ButtonGroup justifyContent='flex-end'>
+            <Table>
+                <Thead fontFamily='DM Sans'>
+                    <Th fontFamily='DM Sans'>What</Th>
+                    <Th fontFamily='DM Sans'>Who</Th>
+                    <Th fontFamily='DM Sans'>Downloads</Th>
+                    <Th fontFamily='DM Sans'>Actions</Th>
+                </Thead>
+                {data ?
+                    data.map(item =>
+                        <Tr>
+                            <Td>
+                                {item.product.title}
+                            </Td>
+                            <Td>
+                                {item.user.firstName}
+                            </Td>
+                            <Td>
+                                {item.downloads}
+                            </Td>
+                            <Td>
+                                <ButtonGroup  size='sm' justifyContent='flex-end'>
                                     <Button>Détails</Button>
                                 </ButtonGroup>
-                            </Box>
-                    </Grid>
-
-
-                )
-                : null}
+                            </Td>
+                        </Tr>
+                    )
+                    : null}
+            </Table>
         </Box>
     )
 }

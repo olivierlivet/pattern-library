@@ -22,7 +22,21 @@ import Editor from '../Components/Admin/Editor'
 import EditorForm from '../Components/Admin/EditorForm'
 
 import { Box, Center, ButtonGroup, Button } from '@chakra-ui/react'
+import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuIcon,
+    MenuCommand,
+    MenuDivider,
+  } from "@chakra-ui/react"
 import ProductUpdateForm from '../Components/Admin/ProductForm/Update'
+// import Menu from '../Components/Layouts/Menu'
+import { ChevronRightIcon, ChevronDownIcon } from '@chakra-ui/icons'
 
 
 const AdminTemplate = (props) => {
@@ -61,7 +75,24 @@ const AdminTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                <Box py={'24'}>
+                <Box py={'4'}>
+                    <Box>
+                        <Menu>
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                                Menu
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem as={NavLink} to='/admin/user'>Users</MenuItem>
+                                <MenuItem as={NavLink} to='/admin/sale'>Sales</MenuItem>
+                                <MenuItem as={NavLink} to='/admin/editor'>Editors</MenuItem>
+                                <MenuItem as={NavLink} to='/admin/product'>Products</MenuItem>
+                                <MenuItem as={NavLink} to='/admin/evaluation'>Evaluations</MenuItem>
+                                <MenuItem as={NavLink} to='/admin/inspiration'>Inspirations</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </Box>
+
+                    {/*
                     <ButtonGroup>
                         <Button as={NavLink} to='/admin/user'>Users</Button>
                         <Button as={NavLink} to='/admin/sale'>Sales</Button>
@@ -71,12 +102,13 @@ const AdminTemplate = (props) => {
                         <Button as={NavLink} to='/admin/evaluation'>Evaluations</Button>
                         <Button as={NavLink} to='/admin/inspiration'>Inspirations</Button>
                     </ButtonGroup>
+                    */}
+
                     <Router
                         basepath='/admin'
                         default='/'
-                    // basepath='/fr/compte'
+                        // basepath='/fr/compte'
                     >
-                        {/* <AdmintHome path="/" /> */}
 
                         <User path="/user" />
 
@@ -91,18 +123,20 @@ const AdminTemplate = (props) => {
                         <EvaluationForm path="/evaluation/:evaluationId" />
                         <Inspiration path="/inspiration" />
 
-                        {/* <Login path="/login" />
-                    <RenewPassword path="/new-password" />
-                    <QuickLogin path="/quick-login/:token" />
-                    <AccountCart path="/cart" />
-                    <AccountFavorite path="/favorite" />
-                    <AccountOrder path="/order" />
-                    <AccountContribution path="/contribution" />
-                    <AccountSubscription path="/subscription" />                    
-                    <EvaluationForm path="/contribution/evaluation/:productId" />
-                    <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
-                    <InspirationForm path="/contribution/inspiration/:productId" />
-                    <AccountProfile path="/profil" /> */}
+                        {/*
+                        <Login path="/login" />
+                        <RenewPassword path="/new-password" />
+                        <QuickLogin path="/quick-login/:token" />
+                        <AccountCart path="/cart" />
+                        <AccountFavorite path="/favorite" />
+                        <AccountOrder path="/order" />
+                        <AccountContribution path="/contribution" />
+                        <AccountSubscription path="/subscription" />                    
+                        <EvaluationForm path="/contribution/evaluation/:productId" />
+                        <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
+                        <InspirationForm path="/contribution/inspiration/:productId" />
+                        <AccountProfile path="/profil" />
+                        */}
                     </Router>
 
                 </Box>

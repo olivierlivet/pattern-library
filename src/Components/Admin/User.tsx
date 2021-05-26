@@ -1,9 +1,10 @@
-import { Box, Flex, HStack, Text} from '@chakra-ui/react'
+import { CheckIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { Box, Button, Flex, HStack, Table, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import axios from 'axios';
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { config } from '../../config'
 
-const User = ({}) => {
+const User = ({ }) => {
 
     const [data, setData] = useState();
     useEffect(async () => {
@@ -13,19 +14,36 @@ const User = ({}) => {
         setData(result.data);
     }, []);
 
-    return(
+    return (
         <Box w='full' my='20' bg='white' p={10}>
-            { data ?
-                data.map( item =>
-                    <Flex w='full' justify='space-between'>
-                        { item.firstName }
-                        <HStack>
-                            <Text>{ item.email }</Text>
-                            <Text>{ item.source }</Text>
-                        </HStack>
-                    </Flex>
+            <Table>
+                <Thead>
+                    <Th fontFamily='DM Sans'>Name</Th>
+                    <Th fontFamily='DM Sans'>Email</Th>
+                    <Th fontFamily='DM Sans'>Auth source</Th>
+                    <Th fontFamily='DM Sans'>Newsletter</Th>
+                    <Th fontFamily='DM Sans'>Action</Th>
+                </Thead>
+
+                {data ?
+                    data.map(user =>
+                        <Tr>
+                            <Td>{user.firstName}</Td>
+                            <Td>{user.email}</Td>
+                            <Td>{user.source}</Td>
+                            <Td>
+                                { user.newsletter ? <CheckIcon /> : <SmallCloseIcon /> }
+                            </Td>
+                            <Td>
+                                <Button size='sm'>Update</Button>
+                            </Td>
+
+                        </Tr>
+
                     )
-            : null }
+                    : null}
+            </Table>
+
         </Box>
     )
 }
