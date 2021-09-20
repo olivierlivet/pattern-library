@@ -68,7 +68,7 @@ class SearchEngine extends Component {
                 category: null,
                 variants: []
             },
-            refineFilters: { 'test': 'test' },
+            refineFilters: {},
             showFilter: false
         }
     }
@@ -109,16 +109,30 @@ class SearchEngine extends Component {
     refineFilters() {
         const {
             type,
-            pocket
+            pocket,
+            length,
+            waist
         } = this.state.refineFilters
-        console.log('format', type)
+
+        let refineFilters = {}
+
         if (type) {
             return ({ "fields.format[in]": type.join(',') })
         }
 
         if (pocket && pocket.length === 1) {
-            return ({ "fields.pocket": pocket[0] === 'with' ? true : 'false' })
+            refineFilters["fields.pocket"] = pocket[0] === 'with' ? true : false ;
         }
+
+        if (length && length.length >= 1) {
+            refineFilters["fields.length[in]"] = length.join(',');
+        }
+
+        if (waist && waist.length >= 1) {
+            refineFilters["fields.waist[in]"] = waist.join(',');
+        }
+        console.log('refineFilters', refineFilters )
+        return refineFilters;
 
     }
     handleUpdateRefineFilters(key, value) {
@@ -144,12 +158,13 @@ class SearchEngine extends Component {
     }
 
     loadProducts() {
-        console.log('LoadProducts', this.state.mainFilters)
+        // console.log('LoadProducts', this.state.mainFilters)
+        console.log( this.state.refineFilters )
         let baseQuery = {
             content_type: "product",
             ...this.categoryFilter(this.state.mainFilters.category),
             ...this.variantFilter(this.state.mainFilters.variant),
-            ...this.refineFilters(this.state.refineFilters)
+            ...this.refineFilters(this.state.refineFilters),
             // ...this.variantFilter( this.state.mainFilters.variant )
             // "fields.level[gt]": 1
             // "fields.specs.level":3
@@ -211,9 +226,7 @@ class SearchEngine extends Component {
                 }
 
             }
-            console.log('remove variant')
         } else {
-            console.log('ad variant')
             if (currentVariants && currentVariants.length) {
                 currentVariants.push(value)
             } else {
@@ -221,8 +234,6 @@ class SearchEngine extends Component {
             }
 
             mainFilters['variants'] = currentVariants
-
-            console.log('updatedVariants', currentVariants)
 
 
         }
@@ -254,8 +265,14 @@ class SearchEngine extends Component {
     }
 
     render() {
-        // return(<div>SEARCH ENGINE</div>)
-        const { products, singleProduct, mainFilters, refineFilters, showFilter, variants } = this.state
+        const {
+            products,
+            singleProduct,
+            mainFilters,
+            refineFilters,
+            showFilter,
+            variants
+        } = this.state
         return (
             <>
                 <Grid
@@ -327,7 +344,7 @@ class SearchEngine extends Component {
                                 />
                             </Stack>
                         </Box>
-                    </Box>
+                    </Box>                                                                                                                                                   
                     <Box>
                         <Box
                             zIndex='banner'
@@ -374,8 +391,6 @@ class SearchEngine extends Component {
 
                                 <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
                                     <UserNav />
-                                    {/* <FavoriteButton /> */}
-                                    {/* <CartButton /> */}
                                 </HStack>
                             </Flex>
                         </Box>
@@ -419,7 +434,7 @@ class SearchEngine extends Component {
                                     </>
 
                                 ) :
-                                <CissorsLoader />
+                               <Box> <CissorsLoader /> On cherche vos patrons...</Box>
                             }
 
                         </VStack>

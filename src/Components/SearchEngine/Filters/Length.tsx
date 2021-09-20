@@ -13,7 +13,9 @@ import {
 import Label from './FilterLabel'
 import ClearButton from './ClearButton'
 
-const Filter: FunctionComponent = () => {
+const Filter: FunctionComponent<props> = ({ handleChange }) => {
+    const [values, setValues] = useState()
+
     return (
         <>
             <AccordionButton>
@@ -21,10 +23,18 @@ const Filter: FunctionComponent = () => {
                 <AccordionIcon />
             </AccordionButton>
             <AccordionPanel>
-                <Stack spacing={2} direction="column">
-                    <Checkbox value='length' name="pocket" >Genou</Checkbox>
-                    <Checkbox value='length' name="pocket" >Basse</Checkbox>
-                </Stack>
+                <CheckboxGroup
+                    onChange={value => {
+                        handleChange('length', value)
+                    }}
+                    value={values}
+                >
+                    <Stack spacing={2} direction="column">
+                        <Checkbox name='length' value="knee" >Genou</Checkbox>
+                        <Checkbox name='length' value="aboveKnee" >Sous le genou</Checkbox>
+                        <Checkbox name='length' value="long">Longue</Checkbox>
+                    </Stack>
+                </CheckboxGroup>
             </AccordionPanel>
         </>
     )

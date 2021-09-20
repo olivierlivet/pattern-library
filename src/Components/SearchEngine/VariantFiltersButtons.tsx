@@ -45,6 +45,7 @@ const VariantFiltersButtons = (
                 mb={2}
 
                 onClick={(e)=> setVariant( id ) }
+                // onClick={(e)=> console.log('click')}
             >
                 { children }
             </Box>
@@ -64,32 +65,9 @@ const VariantFiltersButtons = (
                         key={variant.sys.id}
                         id={variant.sys.id}
                         onClick={()=> console.log('click')}
-                        // onClick={(e)=> setVariant( variant.sys.id ) }
                     >
                          {variant.fields.title}
                     </TagButton>
-                    // <Tag
-                    //     size={'md'}
-                    //     mr={1}
-                    //     mb={2}
-                    //     borderRadius="full"
-                    //     variant="solid"
-                    //     colorScheme={selectedVariant.includes(variant.sys.id) ? 'blue' : 'gray'}
-                    //     cursor='pointer'
-                    //     _hover={{
-                    //         bg:'pink.500'
-                    //     }}
-
-                    //     onClick={(e)=> setVariant( variant.sys.id ) }
-                    // >
-                    //     <TagLabel>
-                    //         {variant.fields.title}
-                    //     </TagLabel>
-                    //     {selectedVariant.includes(variant.sys.id) ?
-                    //         <TagCloseButton />
-                    //     : null }
-                    // </Tag>
-
                 )}
             </Flex>
         </Box>
