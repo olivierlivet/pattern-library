@@ -27,10 +27,19 @@ const AccountProducts = ({ }) => {
 
     useEffect(async () => {
         const result = await axios.get(
-            `${config.apiUrl}/product/editor/6092f72cbc6b2262bb91d167`
+            `${config.apiUrl}/product/editor/${ JSON.parse(localStorage.getItem('tpcEditor')).editorId }`
         );
         setData(result.data);
     }, []);
+
+    const totalViews = ( data ) => {
+        let total:number = 0;
+        for (let index = 0; index < data.length; index++) {
+            total = data[index].views + total;
+        }
+        return total;
+
+    }
 
 
     return (
@@ -63,11 +72,11 @@ const AccountProducts = ({ }) => {
                                 spacing={0}
                             >
                                 <ViewIcon color="white" w={30} h={30} />
-                                <Text fontSize='7xl' fontFamily='Noe Display' color='white'>1000</Text>
+                                <Text fontSize='7xl' fontFamily='Noe Display' color='white'>{ totalViews( data ) }</Text>
                                 <Text fontSize='md' color='white'>visites cumulées</Text>
                             </VStack>
                         </Box>
-                        <Box borderRadius='10px' bg='gray.300' w='300px' p={10}>
+                        {/* <Box borderRadius='10px' bg='gray.300' w='300px' p={10}>
                             <VStack
                                 align='flex-start'
                                 spacing={0}
@@ -76,7 +85,7 @@ const AccountProducts = ({ }) => {
                                 <Text fontSize='7xl' fontFamily='Noe Display' color='white'>4,8</Text>
                                 <Text fontSize='md' color='white'>Évaluation globale cumulée</Text>
                             </VStack>
-                        </Box>
+                        </Box> */}
                     </VStack>
                 </Box>
                 : null }
@@ -105,7 +114,11 @@ const AccountProducts = ({ }) => {
                                         <Text>
                                             Évaluation : {item.rating} <StarIcon color='yellow.400' />
                                         </Text>
-                                        <Button size='sm'>
+                                        <Button
+                                            as={ 'a' }
+                                            target='_blank'
+                                            href={ item.slug }
+                                            size='sm'>
                                             <AddIcon />
                                         </Button>
 

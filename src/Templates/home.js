@@ -21,7 +21,9 @@ import {
     HStack,
     VStack,
     Stack,
-    Center
+    Center,
+    List,
+    ListItem
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import Helmet from 'react-helmet'
@@ -33,17 +35,19 @@ import CtaSearch from '../Components/CtaSearch'
 import AccordionBlock from '../Components/AccordionBlock'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { config } from '../config'
+import SubTitle from '../Components/SubTitle'
 
 const HomeTemplate = (props) => {
     const pageContent = props.data.page
     const univers = props.data.univers.edges
     const products = props.data.products.edges
+    const news = props.data.news.edges
 
     const [showEngine, setShowEngine] = useState(false)
     const [category, setCategory] = useState(false)
     const [variant, setVariant] = useState(false)
 
-    console.log( 'config', config )
+    console.log('config', config)
     return (
         <Layout
             enableBackButton={false}
@@ -80,7 +84,7 @@ const HomeTemplate = (props) => {
                             fontWeight='normal'
                         >
                             Le plus grand choix de
-                    {' '}<Heading
+                            {' '}<Heading
                                 as='h1'
                                 display='inline'
                                 fontWeight='normal'
@@ -101,7 +105,7 @@ const HomeTemplate = (props) => {
                         Votre futur projet n’attend pas,
                         trouvez maintenant le patron de  vos rêves
                         parmi les
-                    {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text>
+                        {' '}<Text as="span" display='inline-block' lineHeight='8px' borderBottom="solid 3px" borderBottomColor="#E7B8A9">2 135</Text>
                         {' '}patrons.
                     </Text>
                     <CtaSearch
@@ -125,34 +129,55 @@ const HomeTemplate = (props) => {
                     lg: '450px 1fr'
                 }}
                 p={{ base: 0, lg: 24 }}
-                gap={{ base:2, lg:12 }}
+                gap={{ base: 2, lg: 12 }}
                 py={{ base: 10, lg: 24 }}
 
             >
-                <Stack
-                    px={{ base: 4, lg: 26 }}
-                    spacing={4}
-                >
-                    <Title>Vos patrons préférés</Title>
-                    <Text
-                        color='gray.600'
+                <Box>
+                    <Box
+                        position='sticky'
+                        top={10}
                     >
-                        Voici les patrons préférés de la communeauté, ceux qui ont reçu les meilleures évaluations.
-                    </Text>
-                    <Text>
-                        En savoir plus sur le système d'<Link as={GatsbyLink} to='/fr/a-propos'>évaluation des patrons <ArrowForwardIcon /></Link>
-                    </Text>
-                </Stack>
+                        <Stack
+                            px={{ base: 4, lg: 26 }}
+                            spacing={4}
+                        >
+                            <Title>Vos patrons préférés</Title>
+                            <Text
+                                color='gray.600'
+                            >
+                                Voici les patrons préférés de la communeauté, ceux qui ont reçu les meilleures évaluations.
+                            </Text>
+                            <Text>
+                                En savoir plus sur le système d'<Link as={GatsbyLink} to='/fr/a-propos'>évaluation des patrons <ArrowForwardIcon /></Link>
+                            </Text>
+
+                            <SubTitle>
+                                Les familles de patrons
+                            </SubTitle>
+                            <List>
+                                <ListItem>
+                                    <Link as={GatsbyLink} to="/fr/femme">
+                                        Patron de vêtement pour femme
+                                    </Link>
+                                </ListItem>
+                                <ListItem>Patron de vêtement pour enfant</ListItem>
+                                <ListItem>Patron de vêtement pour homme</ListItem>
+                                <ListItem>Patron d'accessoires</ListItem>
+                            </List>
+                        </Stack>
+                    </Box>
+                </Box>
                 <Box
                     maxW='100%'
                     overflow='hidden'
                     my={{
-                        base:10, lg:0
+                        base: 10, lg: 0
                     }}
                 >
                     <EntrySummary />
-                    </Box>
-                    {/* <Box
+                </Box>
+                {/* <Box
                         // px={{ base: 4, lg: 26 }}
                     >
                         <Button
@@ -226,8 +251,22 @@ const HomeTemplate = (props) => {
                 </Box>
             </VStack>
 
+            <Wrapper>
+                <Box>
+                    <Title>Dernières actualités</Title>
+                    {news.map(({node}) =>
+                        <Box>
+                            <Link
+                                as={ GatsbyLink }
+                                to={ node.slug }
+                            >
 
-
+                            {node.title}
+                            </Link>
+                        </Box>
+                    )}
+                </Box>
+            </Wrapper>
 
             <Grid
                 templateColumns={{
@@ -235,7 +274,7 @@ const HomeTemplate = (props) => {
                     lg: '500px 1fr'
                 }}
                 p={{ base: 6, lg: 24 }}
-                gap={{ base:2, lg:12 }}
+                gap={{ base: 2, lg: 12 }}
             >
                 <Heading
                     fontWeight='normal'
@@ -314,5 +353,14 @@ query homeQuery( $contentfulID: String! ){
             }
         }
     }
+    news:allContentfulPage(filter: {metadata: {tags: {elemMatch: {name: {eq: "news"}}}}}) {
+        edges {
+            node {
+                title
+                slug
+            }
+        }
+    }
+
 }
 `

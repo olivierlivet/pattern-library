@@ -9,7 +9,11 @@ import {
     Box,
     SimpleGrid,
     Stack,
-    Flex
+    Flex,
+    Grid,
+    Link,
+    List,
+    ListItem
 } from '@chakra-ui/react'
 import Wrapper from '../Components/Layouts/Wrapper'
 import RichContent from '../Components/RichContent'
@@ -20,15 +24,37 @@ import CtaSearch from '../Components/CtaSearch'
 
 import PageHeader from '../Components/PageHeader'
 import CtaOpenSearch from '../Components/CtaOpenSearch'
+import StaticProductsList from '../Components/ProductsSummary/StaticList'
+import BrandsSummary from '../Components/BrandsSummary'
 
 const VariantTemplate = (props) => {
     const pageContent = props.data.variant
     const products = props.data.products.edges
 
-    console.log( 'pageContent', pageContent )
+    console.log('pageContent', pageContent)
+
+    const SideTitle = ({ children }) => {
+        return(
+            <Heading
+                as='h3'
+                fontFamily='DM Sans'
+                color='gray.500'
+                letterSpacing='wide'
+                textTransform='uppercase'
+                mb={2}
+                fontSize={{
+                    base:'sm',
+                    lg:'md'
+                }}
+            >
+                { children }
+            </Heading>
+        )
+    }
+
     return (
         <Layout
-            enableBackButton={ false }
+            enableBackButton={false}
         >
             <Helmet>
                 <title>{pageContent.titleSeo}</title>
@@ -49,6 +75,84 @@ const VariantTemplate = (props) => {
                     />
                 }
             />
+            <BrandsSummary />
+            <Wrapper>
+                <Grid
+                    templateColumns={{
+                        base: `100%`,
+                        lg: `1fr 700px`
+                    }}
+                    gap={{
+                        base: 4,
+                        lg: 8
+                    }}
+                    px={{
+                        base: 4,
+                        lg: 10
+                    }}
+                >
+                    <Box
+                        order={{
+                            base: 1,
+                            lg:2
+                        }}
+
+                    >
+                        <StaticProductsList
+                            data={products}
+                        />
+                    </Box>
+                    <Box
+                        order={{
+                            base: 2,
+                            lg:1
+                        }}
+                    >
+                        <Box position='sticky' top={10}>
+                            <Stack
+                                spacing={{ base: 4, lg:6 }}
+                            >
+                                <Heading
+                                    fontWeight='normal'
+                                    fontSize='2xl'
+                                    color='brand.green.600'
+                                >Nos dossier à propos des Mini-Jupes :</Heading>
+                                <Box>
+                                    <SideTitle>Guides&nbsp;</SideTitle>
+                                    <List color='gray.900'>
+                                        <ListItem fontSize='sm'>Choisir une mini-jupe</ListItem>
+                                        <ListItem fontSize='sm'>Prendre ses mesures pour coudre une mini-jupe</ListItem>
+                                        <ListItem fontSize='sm'>Dessiner une mini-jupe</ListItem>
+                                        <ListItem fontSize='sm'>Avec quel haut associer une mini-jupe</ListItem>
+                                        <ListItem fontSize='sm'>Mini jupe en hiver, quels collants choisir</ListItem>
+                                    </List>
+                                </Box>
+
+                                <Box>
+                                    <SideTitle>Actualites&nbsp;</SideTitle>
+                                    <List color='gray.900'>
+                                        <ListItem fontSize='sm'>Nouvelles mini-jupes au catalogue</ListItem>
+                                        <ListItem fontSize='sm'>Concours autour de la jupe Else</ListItem>
+                                        <ListItem fontSize='sm'>Les mini-jupes en haute couture</ListItem>
+                                    </List>
+                                </Box>
+
+                                <Box>
+                                    <SideTitle>Tutoriels&nbsp;</SideTitle>
+                                    <List>
+                                        <ListItem fontSize='sm'>→<Link to='/' color='brand.green.600'>Coudre la mini-jupe Alma</Link></ListItem>
+                                        <ListItem fontSize='sm'>Ajouter une ceinture à la jupe Julia</ListItem>
+                                        <ListItem fontSize='sm'>Customiser la jupe machine avec des poches</ListItem>
+                                    </List>
+                                </Box>
+
+                            </Stack>
+                        </Box>
+                    </Box>
+                </Grid>
+            </Wrapper>
+
+
         </Layout>
     )
 }
@@ -77,8 +181,15 @@ query variantQuery( $contentfulID: String! ){
         {
         edges {
             node {
-                slug
+                contentful_id
+                backendDocumentId
                 title
+                mainPicture
+                price
+                level
+                slug
+                pictures{ url }
+                intro{ raw }
             }
         }
     }

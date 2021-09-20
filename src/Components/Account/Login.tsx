@@ -128,8 +128,6 @@ const LoginForm: FunctionComponent<props> = ({ onCancel, onLogin }) => {
             spacing={{ base: 2, lg: 4 }}
         >
 
-
-
             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} w='full'>
                 <GoogleLoginButton
                     handleLogin={(user) => handleLoginThirdParty(user.email)}

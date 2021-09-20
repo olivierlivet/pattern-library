@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useRef } from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 import {
     Box,
     Heading,
@@ -27,7 +28,8 @@ type productCardPropsTypes = {
     backendDocumentId: string,
     intro: string,
     price: number,
-    pictures: Array<string>
+    pictures: Array<string>,
+    slug?: string,
 
     onOpen: Function
 }
@@ -42,6 +44,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
     // editor,
     price,
     pictures,
+    slug,
     onOpen
 }) => {
     const favoriteButton = useRef()
@@ -102,15 +105,12 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                         overflowY='hidden'
                         position='relative'
                     >
+                        { pictures && pictures.url ? 
                         <ProductIllustrationWithSwipe
                             alt={title}
                             imagesUrl={pictures.url}
-                        // imagesUrl={[
-                        //     'https://img.ltwebstatic.com/images3_pi/2020/10/19/160308384184b44973720f8dfb2b5c9625c3e7faac_thumbnail_600x.webp',
-                        //     'https://static-mapetitemercerie.o10c.net/88723-large_default/patron-l-enfant-roi-chemise-xavier-de-2-ans-a-12-ans.jpg',
-                        //     'https://www.ladroguerie.com/wp-content/uploads/2020/02/patron-couture-deauville-chemise-homme-mesures.jpg'
-                        // ]}
                         />
+                        : null }
                     </Box>
 
                     <VStack
@@ -122,7 +122,8 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                     >
 
                         <Heading
-                            as='h3'
+                            as={ slug ? GatsbyLink : 'h3' }
+                            to={ slug }
                             fontSize='28px'
                             letterSpacing='wide'
                             fontWeight='normal'

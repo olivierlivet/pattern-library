@@ -45,6 +45,7 @@ const FastLoginForm: FunctionComponent<props> = (
       isOpen={true}
       onClose={() => onClose()}
       size={'xl'}
+      blockScrollOnMount={ true }
     >
       <ModalOverlay />
       <ModalContent
@@ -90,14 +91,13 @@ const FastLoginForm: FunctionComponent<props> = (
 
           {currentModule === 'choice' ?
             <Stack
-              p={{ base: 0, lg: 6 }}
+              p={{ base: 10, lg: 6 }}
               spacing={{ base: 3, lg: 4 }}
             >
 
               <SimpleGrid
                 gap={2}
                 columns={{ base:1, lg:2}}
-
               >
                 <Button onClick={() => setCurrentModule('loginForm')} w='full'>J'ai déjà un compte</Button>
                 <Button onClick={() => setCurrentModule('createAccountForm')} w='full'>Je créé un compte</Button>

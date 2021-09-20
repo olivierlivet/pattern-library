@@ -51,7 +51,8 @@ const RichContent = ({ data, fontSize, spacing }) => {
 
             },
             [INLINES.ENTRY_HYPERLINK]: (node, children) => {
-                const slug = convertIdToSlug(node.data.target.sys.id)
+                const slug = convertIdToSlug(node.data.target.sys.id, data.references)
+                console.log('slug', slug)
                 // const { title, description, slug } = node.data.target.fields;
                 // console.log('node', node.data.target)
                 // console.log('children', children)

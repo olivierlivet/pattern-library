@@ -17,6 +17,7 @@ import AccountFavorite from '../Components/Account/Favorite'
 import AccountContribution from '../Components/Account/Contribution'
 import AccountSubscription from '../Components/Account/Subscription'
 import RenewPassword from '../Components/Account/RenewPassword'
+import RenewPasswordCreate from '../Components/Account/RenewPasswordCreate'
 import { Center } from '@chakra-ui/layout'
 
 
@@ -28,14 +29,16 @@ const AccountTemplate = (props) => {
 
       const checkUserAuth = () => {
         const user = authenticationService.getUser()
-        if( !user ){
+
+        // Allow only new password route
+        if( !user && !props.location.pathname.match(/^\/fr\/compte\/new-password\/(.*)$/) ){
             navigate('/fr/compte/login')
         }
       }
 
       const Login = () => (
         <Center
-          minH='calc(100vh - 100px)'
+          minH='calc(100vh - 200px)'
         >
             <LoginForm
                 onLogin={()=> navigate('/fr/compte')}
@@ -64,6 +67,9 @@ const AccountTemplate = (props) => {
                     <AccountHome path="/" />
                     <Login path="/login" />
                     <RenewPassword path="/new-password" />
+                    <RenewPasswordCreate path="/new-password/:token" />
+
+
                     <QuickLogin path="/quick-login/:token" />
                     <AccountCart path="/cart" />
                     <AccountFavorite path="/favorite" />
@@ -74,6 +80,7 @@ const AccountTemplate = (props) => {
                     <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
                     <InspirationForm path="/contribution/inspiration/:productId" /> */}
                     <AccountProfile path="/profil" />
+                    
                 </Router>
                 {/* <Nav data={univers} /> */}
 

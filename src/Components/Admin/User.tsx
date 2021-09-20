@@ -1,8 +1,9 @@
 import { CheckIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, HStack, Table, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Image, Table, Tag, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { config } from '../../config'
+import { Link as RouterLink } from '@reach/router'
 
 const User = ({ }) => {
 
@@ -28,14 +29,36 @@ const User = ({ }) => {
                 {data ?
                     data.map(user =>
                         <Tr>
-                            <Td>{user.firstName}</Td>
-                            <Td>{user.email}</Td>
-                            <Td>{user.source}</Td>
                             <Td>
-                                { user.newsletter ? <CheckIcon /> : <SmallCloseIcon /> }
+                                <Image
+                                    src={user.profilePictureUrl}
+                                    w='30px'
+                                    h='30px'
+                                    mr={2}
+                                    display='inline'
+                                />
+                                {user.firstName}
                             </Td>
                             <Td>
-                                <Button size='sm'>Update</Button>
+                                <a target='_blank' href={`mailto:${user.email}`}>
+                                    {user.email}
+                                </a>
+                            </Td>
+                            <Td>{user.source}</Td>
+                            <Td>
+                                {user.newsletterSubscription ?
+                                    <Tag size='sm' colorScheme='green'>
+                                        <CheckIcon />
+                                    </Tag> :
+                                    <Tag size='sm' colorScheme='yellow'>
+                                        <SmallCloseIcon />
+                                    </Tag>}
+                            </Td>
+                            <Td>
+                                <Button
+                                    as={RouterLink}
+                                    to={`/admin/user/${user._id}`}
+                                    size='sm'>Update</Button>
                             </Td>
 
                         </Tr>

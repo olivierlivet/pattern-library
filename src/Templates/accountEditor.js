@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import React, { useEffect, useState } from 'react'
+import { graphql, navigate } from 'gatsby'
 import Layout from '../Components/Layouts/base'
 
 import {
@@ -37,9 +37,23 @@ import AccountPayments from '../Components/AccountEditor/Payments'
 import AccountSettings from '../Components/AccountEditor/Settings'
 import AccountRatings from '../Components/AccountEditor/Ratings'
 import AccountLogin from '../Components/AccountEditor/Login'
-
+import AccountNewPassword from '../Components/AccountEditor/NewPassword'
+import { authenticationService } from '../Service/auth'
 
 const AccountEditorTemplate = (props) => {
+    useEffect(() => {
+        checkEditorAuth()
+  }, []);
+
+    const checkEditorAuth = () => {
+      const editor = authenticationService.getEditor()
+
+      // Allow only new password route
+      if( !editor && !props.location.pathname.match(/^\/fr\/compte\/new-password\/(.*)$/) ){
+          navigate('/fr/editor/login')
+      }
+    }
+
 
     const location = useLocation()
     const Login = () => {
@@ -60,7 +74,7 @@ const AccountEditorTemplate = (props) => {
                                 lg: 'larger'
                             }}
                         >
-                            Accès à votre compte
+                            Accès à votre compte --
                         </Box>
                         <HStack>
                             <ButtonGroup>
@@ -85,7 +99,7 @@ const AccountEditorTemplate = (props) => {
         >
             <Helmet>
                 <title>{`Plateforme éditeur | The Patterns Corner`}</title>
-                <meta name='description' content='Qu’est-ce-qu’un patron de couture ?  Le patron de couture est le plan qui vous permet de réaliser un ouvrage : il s’agit du tracé sur papier de tous les éléments composant un vêtement.' />
+                <meta name='description' content='Accéder à la gestion de votre compte ThePatterneCorner.' />
             </Helmet>
 
             <Wrapper>
@@ -94,6 +108,10 @@ const AccountEditorTemplate = (props) => {
                     default='/'
                     // basepath='/fr/compte'
                 >
+
+                    <AccountNewPassword path='/new-password/:token' />
+                    <AccountNewPassword path='/init/new-password/:token' init={true} />
+
                     <AccountHome path='/' />
                     <AccountLogin path='/login' />
                     <AccountProducts path='/products' />

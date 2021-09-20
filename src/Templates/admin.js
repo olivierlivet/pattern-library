@@ -14,12 +14,16 @@ import { Router, Link as NavLink, Match, useLocation, Location, navigate } from 
 import Product from '../Components/Admin/Product'
 import ProductCreateForm from '../Components/Admin/ProductForm'
 import User from '../Components/Admin/User'
+import UserForm from '../Components/Admin/UserForm'
 import Inspiration from '../Components/Admin/Inspiration'
 import Evaluation from '../Components/Admin/Evaluation'
 import EvaluationForm from '../Components/Admin/EvaluationForm'
 import Sale from '../Components/Admin/Sale'
 import Editor from '../Components/Admin/Editor'
 import EditorForm from '../Components/Admin/EditorForm'
+
+import Payment from '../Components/Admin/Payment'
+import PaymentForm from '../Components/Admin/PaymentForm'
 
 import { Box, Center, ButtonGroup, Button } from '@chakra-ui/react'
 import {
@@ -84,6 +88,7 @@ const AdminTemplate = (props) => {
                             <MenuList>
                                 <MenuItem as={NavLink} to='/admin/user'>Users</MenuItem>
                                 <MenuItem as={NavLink} to='/admin/sale'>Sales</MenuItem>
+                                <MenuItem as={NavLink} to='/admin/payment'>Payments</MenuItem>
                                 <MenuItem as={NavLink} to='/admin/editor'>Editors</MenuItem>
                                 <MenuItem as={NavLink} to='/admin/product'>Products</MenuItem>
                                 <MenuItem as={NavLink} to='/admin/evaluation'>Evaluations</MenuItem>
@@ -111,12 +116,17 @@ const AdminTemplate = (props) => {
                     >
 
                         <User path="/user" />
+                        <UserForm path="/user/:userId" />
+
 
                         <Product path="/product" />
                         <ProductCreateForm path="/product/create" />
                         <ProductUpdateForm path="/product/:productId" />
                         <Editor path="/editor" />
                         <EditorForm path="/editor/create" />
+
+                        <Payment path="/payment" />
+                        <PaymentForm path="/payment/create" />
 
                         <Sale path="/sale" />
                         <Evaluation path="/evaluation" />

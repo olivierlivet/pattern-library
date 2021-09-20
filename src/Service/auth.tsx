@@ -12,6 +12,7 @@ export const authenticationService = {
     loginPasswordLess,
     logout,
     getUser,
+    getEditor
     // currentUser: currentUserSubject.asObservable(),
     // get currentUserValue () { return currentUserSubject.value }
 };
@@ -55,6 +56,14 @@ function isAuth() {
 function getUser() {
     if( localStorage.getItem( 'tpcUser' ) ){
         return (JSON.parse( localStorage.getItem( 'tpcUser' )))
+    }else{
+        return false;
+    }
+}
+
+function getEditor() {
+    if( localStorage.getItem( 'tpcEditor' ) ){
+        return (JSON.parse( localStorage.getItem( 'tpcEditor' )))
     }else{
         return false;
     }

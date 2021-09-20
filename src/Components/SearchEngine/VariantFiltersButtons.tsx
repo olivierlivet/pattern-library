@@ -54,7 +54,7 @@ const VariantFiltersButtons = (
     return (
         variants && variants.length ?
         <Box>
-            <Text p={2}>Type de jupe : </Text>
+            <Text p={2}>Type : </Text>
             <Flex
                 key={selectedVariant}
                 wrap='wrap'
@@ -63,7 +63,8 @@ const VariantFiltersButtons = (
                     <TagButton
                         key={variant.sys.id}
                         id={variant.sys.id}
-
+                        onClick={()=> console.log('click')}
+                        // onClick={(e)=> setVariant( variant.sys.id ) }
                     >
                          {variant.fields.title}
                     </TagButton>

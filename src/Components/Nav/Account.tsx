@@ -28,7 +28,7 @@ const AccountNav = ({ }) => {
             <Box maxW='100vw' overflowX='scroll'>
                 <Center spacing={3} w={{ base: 'max-content', lg: '100%' }}>
                     <ButtonGroup fontFamily='DM Sans' fontWeight="normal">
-                        <Button mx={2} as={NavLink} to='/fr/'>
+                        <Button mx={2} as={NavLink} to='/fr'>
                             <ArrowBackIcon mr={1} />
                             Retour au site
                         </Button>

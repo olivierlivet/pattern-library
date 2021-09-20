@@ -25,7 +25,6 @@ const CategoryTemplate = (props) => {
                 <title>{pageContent.titleSeo}</title>
                 <meta name='description' content={pageContent.descriptionSeo.descriptionSeo} />
             </Helmet>
-
             <PageHeader
                 data = { pageContent }
                 links = { variants }

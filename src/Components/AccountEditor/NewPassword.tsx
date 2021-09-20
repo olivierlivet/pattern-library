@@ -14,6 +14,7 @@ import {
     Heading,
     FormControl,
     FormLabel,
+    FormErrorMessage,
     Input,
     Stack
 } from '@chakra-ui/react'
@@ -29,22 +30,22 @@ import { config } from '../../config'
 import Title from '../Title'
 import * as yup from 'yup';
 
-const AccountLogin = ({ }) => {
+const NewPassword = ({ init, token }) => {
     // const [racingDetail, setRatingDeatail] = useState(false)
     const [error, setError] = useState(false)
 
     const questions = [
         {
-            name: 'email',
-            label: 'Email',
-            type: 'email',
-            autocomplete: 'email'
-        },
-        {
             name: 'password',
             label: 'Mot de passe',
             type: 'password',
-            autocomplete: 'current-password'
+            autocomplete: 'new-password'
+        },
+        {
+            name: 'passwordConfirmation',
+            label: 'Confirmation de mot de passe',
+            type: 'password',
+            autocomplete: 'new-password'
         },
 
     ]
@@ -57,7 +58,14 @@ const AccountLogin = ({ }) => {
                 <Box
                     w='340px'
                 >
-                    <Title>Accès à la plateforme éditeur</Title>
+                    <Title>Créer votre nouveau mot de passe</Title>
+
+                    { init ? 
+                    <Box>
+                        Init message
+                    </Box>
+                    : null }
+
                     <Formik
                         initialValues={{
                             firstName: undefined,
@@ -65,27 +73,32 @@ const AccountLogin = ({ }) => {
                         }}
                         onSubmit={(values, { setSubmitting }) => {
                             axios.post(
-                                `${config.apiUrl}/editor/login`, values
+                                `${config.apiUrl}/editor/new-password`,
+                                {
+                                    token: token,
+                                    password: values.password
+                                }
                             )
                                 .then((r) =>{
                                     console.log('Logged in attempt')
-                                    localStorage.setItem(
-                                        'tpcEditor',
-                                        JSON.stringify( r.data )
-                                    )
-                                    navigate('/fr/editor')
+                                    // localStorage.setItem(
+                                    //     'tpcEditor',
+                                    //     JSON.stringify( r.data )
+                                    // )
+                                    navigate('/fr/editor/login')
                                 })
                                 .catch((error) => setError(true))
                         }}
                         validationSchema={
                             yup.object().shape({
-                                email: yup.string().email('La syntaxe semble erronée').required('Champ obligatoire').nullable(),
                                 password: yup.string().required('Champ obligatoire').nullable(),
+                                passwordConfirmation: yup.string().required('Champ obligatoire').nullable(),
                             })
                         }
                     >
                         {({
-                            values
+                            values,
+                            errors
                         }) => (
                             <Form>
                                 <Stack
@@ -95,6 +108,9 @@ const AccountLogin = ({ }) => {
                                     borderRadius='lg'
                                     bg='white'
                                 >
+                                    <pre>
+                                        { JSON.stringify( errors, null, 1 )}
+                                    </pre>
                                     {questions.map(item =>
                                         <Field name={item.name}>
                                             {({ field, form }) => (
@@ -107,11 +123,12 @@ const AccountLogin = ({ }) => {
                                                         placeholder=''
                                                         autoComplete={item.autocomplete}
                                                     />
+                                                    {/* <FormErrorMessage>{errors[item].name}</FormErrorMessage> */}
                                                 </FormControl>
                                             )}
                                         </Field>
                                     )}
-                                    <Button type='submit'>S'identifier</Button>
+                                    <Button type='submit'>Enregistrer</Button>
                                     {error ?
                                         <Box>
                                             <Text color='red' fontSize='sm'>
@@ -131,4 +148,4 @@ const AccountLogin = ({ }) => {
     )
 }
 
-export default AccountLogin
+export default NewPassword

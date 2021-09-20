@@ -2,6 +2,7 @@ import {
     Box,
     HStack,
     Image,
+    SimpleGrid,
     Stack,
     Text
 } from '@chakra-ui/react'
@@ -70,7 +71,7 @@ const EntrySummary = () => {
             position='relative'
             // mx={{ base:4, lg:26 }}
         >
-            <Swiper
+            {/* <Swiper
                 // spaceBetween={10}
                 // slidesPerView={1.4}
                 freeMode={true}
@@ -99,11 +100,21 @@ const EntrySummary = () => {
 
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
+            > */}
+            <SimpleGrid
+                columns={{
+                    base:1,
+                    lg:3
+                }}
+                gap={{
+                    base:2,
+                    lg:6
+                }}
             >
-                <Box mx={4}>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, i) => <SwiperSlide><Card index={i} /></SwiperSlide>)}
-                </Box>
-            </Swiper>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, i) => <SwiperSlide><Card index={i} /></SwiperSlide>)}
+            </SimpleGrid>
+
+            {/* </Swiper> */}
         </Box>
     )
 }

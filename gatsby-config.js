@@ -33,10 +33,13 @@ module.exports = {
     {
       resolve: "gatsby-source-contentful",
       options: {
+        enableTags: true,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         host: process.env.CONTENTFUL_HOST,
-        localeFilter: locale => locale.code === 'fr' // Limite only to fr node for the moment
+        localeFilter: locale => locale.code === 'fr', // Limite only to fr node for the moment
+        enableTags: true
+
       },
     },
     `gatsby-plugin-gatsby-cloud`,

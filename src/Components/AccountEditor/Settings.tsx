@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 
 import {
@@ -20,13 +20,35 @@ import {
     FormErrorMessage
 } from '@chakra-ui/react'
 
-import { Router, Link as NavLink, Match } from "@reach/router";
+import { Router, Link as NavLink, Match, navigate } from "@reach/router";
 import AccountWrapper from './Wrapper';
 import AccountNav from '../Nav/Account';
 import { AddIcon, ChatIcon, CopyIcon, InfoOutlineIcon, StarIcon, SunIcon, ViewIcon } from '@chakra-ui/icons';
 import { Formik, Form, Field } from 'formik'
+import { config } from '../../config';
+import axios from 'axios';
 
-const AccountProduct = ({ }) => {
+const EditorUpdateForm = ({ }) => {
+
+    const [ data, setData ] = useState<undefined|any>( undefined )
+
+    const handleLogout = () => {
+        console.log( 'Logout' )
+        localStorage.removeItem('tpcEditor');
+        navigate('/fr/editor/login');
+    }
+
+    const getEditorId = () => {
+        let editor = JSON.parse( localStorage.getItem('tpcEditor') )
+        return editor.editorId;
+    }
+
+    useEffect(async () => {
+        const result = await axios.get(
+            `${config.apiUrl}/editor/${getEditorId()}`
+        );
+        setData(result.data);
+    }, []);
 
     const allFields = [
         {
@@ -40,7 +62,7 @@ const AccountProduct = ({ }) => {
             label: 'Nom'
         },
         {
-            name: 'companyName',
+            name: 'name',
             type: 'text',
             label: 'Raison sociale'
         },
@@ -79,23 +101,28 @@ const AccountProduct = ({ }) => {
     return (
         <AccountWrapper>
             <Box>
-                <Heading my={7} color='#66878a' fontWeight='normal' fontSize='3xl'>Paramètres & profil</Heading>
+                <Heading
+                    display='flex'
+                    justifyContent='space-between'
+                    my={7}
+                    color='#66878a'
+                    fontWeight='normal'
+                    fontSize='3xl'
+                >
+                    Paramètres & profil{' '}
+                    <Button onClick={()=> handleLogout()} fontWeight='normal' fontFamily='DM Sans' variant='link'>(Déconnexion)</Button>
+                </Heading>
             </Box>
+            { data ? 
             <Formik
                 initialValues={
-                    {
-                        firstName:'Olivier',
-                        lastName:'Livet',
-                        // NoticeComprehensibility: '',
-                        // NoticeComprehensibilityDetail: '',
-                        // ProductCustomisation: '',
-                    }
+                    data
                 }
                 onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
+                    axios.put(
+                        `${config.apiUrl}/editor/${getEditorId()}`,
+                        values
+                    );
                 }}
             >
                 {({
@@ -143,15 +170,16 @@ const AccountProduct = ({ }) => {
                                 <Button type='submit'>Enregistrer</Button>
                             </Box>
                         </Box>
-                        <pre>
+                        {/* <pre>
                             {JSON.stringify(values, null, 1)}
-                        </pre>
+                        </pre> */}
                     </Form>
                 )}
             </Formik>
+            : null }
 
         </AccountWrapper>
     )
 }
 
-export default AccountProduct
+export default EditorUpdateForm

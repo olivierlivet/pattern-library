@@ -83,7 +83,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                     product={data.sys ? data.sys.id : data.contentful_id}
                 />
             </HStack>
-            <SimpleGrid
+            {/* <SimpleGrid
                 columns={3}
                 gap={4}
             >
@@ -91,8 +91,6 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                     <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Niveau</Text>
                     <Flex align='center'>
                         <Text w='100%' mr={2}>Intermédiaire</Text>
-                        {/* <Box>✂️✂️✂️</Box> */}
-
                     </Flex>
                 </Flex>
 
@@ -124,7 +122,7 @@ const ProductMainInfo: FunctionComponent<props> = ({ data }) => {
                         </Popover>
                     </Flex>
                 </Flex>
-            </SimpleGrid>
+            </SimpleGrid> */}
             <Box
                 px={{ base: 0, lg: 0 }}
                 fontSize='15px'

@@ -33,6 +33,10 @@ const UniversTemplate = (props) => {
                 <title>{pageContent.titleSeo}</title>
                 <meta name='description' content={pageContent.descriptionSeo.descriptionSeo} />
             </Helmet>
+            <div>Test</div>
+            <pre>
+                { JSON.stringify( categories, null, 1 )}
+            </pre>
             <PageHeader
                 data = { pageContent }
                 links = { categories }
@@ -54,7 +58,13 @@ query universQuery( $contentfulID: String! ){
         titleH1
         titleSeo
         descriptionSeo{ descriptionSeo }
-        description { raw }
+        description {
+            raw
+            references{
+                contentful_id      
+                slug
+            }
+        }
         illustration { gatsbyImageData(layout: FULL_WIDTH) }
     }
     categories:allContentfulCategory(

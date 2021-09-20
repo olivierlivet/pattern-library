@@ -20,7 +20,7 @@ const Footer = () => {
     return (
         <Box
             as='footer'
-            bg='#235C62'
+            bg='brand.green.600'
         >
             <SimpleGrid
                 columns={{ base: 1, lg: 3 }}
@@ -52,7 +52,7 @@ const Footer = () => {
                             <Link as={GatsbyLink} to='/fr/a-propos#sell'>Vendre sur TPC</Link>
                         </ListItem>
                         <ListItem>—{' '}
-                            <Link as={GatsbyLink} to='/fr/editor/login'>Accès plateforme éditeurs</Link>
+                            <Link as={GatsbyLink} to='/fr/editor'>Accès plateforme éditeurs</Link>
                         </ListItem>
                     </List>
                 </Box>

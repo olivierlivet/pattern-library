@@ -65,7 +65,7 @@ const InspirationCard: FC<props> = ({ data, product }) => {
                             as='span'
                             borderBottom='solid 3px'
                             borderBottomColor='brand.green.500'
-                        >{data.user.firstName}</Text>
+                        >{data.user ? data.user.firstName : ''}</Text>
                     </Heading>
                     <Text
                         fontSize='sm'

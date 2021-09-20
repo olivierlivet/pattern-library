@@ -330,7 +330,6 @@ class SearchEngine extends Component {
                     </Box>
                     <Box>
                         <Box
-                            // bg='white'
                             zIndex='banner'
                             position='fixed'
                             top='0'
@@ -346,8 +345,6 @@ class SearchEngine extends Component {
 
                             bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7693452380952381) 70%, rgba(255,255,255,1) 100%)'
 
-                        // boxShadow='sm'
-                        // display='none'
                         >
                             <Flex justify='space-between'>
 

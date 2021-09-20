@@ -57,7 +57,7 @@ const baseLayout = (
                 px={{ base: 0, lg: 0 }}
                 as='main'
                 position='relative'
-                minH='100vh'
+                minH={{ base:'100vh', lg:'calc(100vh - 115px)'  }}
                 pt={'48px'}
             >
                 {enableBackButton ? <BackButton /> : null}

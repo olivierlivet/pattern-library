@@ -52,9 +52,6 @@ const Product = ({ }) => {
                         <Th fontFamily='DM Sans'>Price</Th>
                         <Th fontFamily='DM Sans'>Rating</Th>
                         <Th fontFamily='DM Sans'>Actions</Th>
-
-
-
                     </Thead>
                     {data ?
                         data.map(item =>

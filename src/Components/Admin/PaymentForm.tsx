@@ -6,6 +6,7 @@ import { Link, navigate } from '@reach/router'
 import { Field, Form, Formik, useFormikContext, useField } from 'formik';
 import { MediaUpload } from './ProductForm/Uploader';
 import getVariants from '../../Data/getVariants';
+import { Link as RouterLink } from '@reach/router';
 import * as yup from 'yup';
 
 var contentful = require('contentful');
@@ -17,7 +18,7 @@ var client = contentful.createClient({
 var slugify = require('slugify')
 
 
-const EditorCreateForm = ({ }) => {
+const PaymentCreateForm = ({ }) => {
 
 
 
@@ -85,28 +86,21 @@ const EditorCreateForm = ({ }) => {
         <Box w='full' my='20' bg='white' p={10}>
             <Formik
                 initialValues={{
-                    title: '',
-                    univers: null,
-                    category: null
+                    amount: undefined,
+                    editor: undefined
                 }}
                 validationSchema={
                     yup.object().shape({
-                        name: yup.string().required('Required').nullable(),
-                        firstName: yup.string().required('Required').nullable(),
-                        lastName: yup.string().required('Required').nullable(),
-                        vatNumber: yup.string().nullable(),
-                        address: yup.string().required('Required').nullable(),
-                        postalCode: yup.string().required('Required').nullable(),
-                        phone: yup.string().required('Required').nullable(),
-                        email: yup.string().email().required('Required').nullable(),
+                        amount: yup.string().required('Required'),
+                        editor: yup.string().required('Required')
                     })
                 }
                 onSubmit={(values) => {
                     axios.post(
-                        `${config.apiUrl}/editor`,
+                        `${config.apiUrl}/payment`,
                         values,
-                    ).then(response => navigate(`/admin/editor`))
-                    console.log(values)
+                    ).then(response => navigate(`/admin/payment`))
+                    // console.log(values)
                 }}
             >
                 {({
@@ -125,35 +119,56 @@ const EditorCreateForm = ({ }) => {
                 }) => (
                     <Form>
                         <Stack spacing={6}>
+                            <Box>
+                                    <Button as={RouterLink} to='..' size='sm'>Cancel</Button>
+                            </Box>
                             <SimpleGrid
                                 columns={{ base: 1, lg: 2 }}
                                 gap={{ base: 2, lg: 8 }}
                             >
-                                {allFields.map(fieldItem =>
 
-                                    <Field name={fieldItem.name}>
+
+                                <Field name={'amount'}>
+                                    {({ field, form }) => (
+                                        <Box>
+                                            <FormControl isInvalid={errors['amount'] && touched['amount']}>
+                                                <FormLabel color='gray.500'>Amount :</FormLabel>
+                                                <Input {...field} variant='flushed' type="text" />
+                                                <FormErrorMessage>Warning, there is a problem with this field</FormErrorMessage>
+                                            </FormControl>
+                                        </Box>
+                                    )}
+                                </Field>
+                                {editors ?
+                                    <Field name={'editor'}>
                                         {({ field, form }) => (
                                             <Box>
-                                                <FormControl isInvalid={errors[fieldItem.name] && touched[fieldItem.name]}>
-                                                    <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
-                                                    <Input {...field} variant='flushed' type="text" />
-                                                    <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
+                                                <FormControl isInvalid={errors['editor'] && touched['editor']}>
+                                                    <FormLabel color='gray.500'>Editor :</FormLabel>
+                                                    <Select {...field} placeholder='Select'>
+                                                        {editors.map(item =>
+                                                            <option value={ item._id }>{item.name}</option>
+                                                        )}
+                                                    </Select>
+                                                    <FormErrorMessage>Warning, there is a problem with this field</FormErrorMessage>
                                                 </FormControl>
                                             </Box>
                                         )}
 
                                     </Field>
-                                )}
+                                    : null}
+
+                            
 
 
                             </SimpleGrid>
 
                             <Box>
-                                <Button isDisabled={!isValid} type='submit'>Create</Button>
+                                <Button colorScheme='blue' isDisabled={!isValid} type='submit'>Create</Button>
                             </Box>
                         </Stack>
                         <pre>
-                            { JSON.stringify( errors, null, 1 )}
+                            {JSON.stringify(values, null, 1)}
                         </pre>
                     </Form>
                 )}
@@ -162,4 +177,4 @@ const EditorCreateForm = ({ }) => {
     )
 }
 
-export default EditorCreateForm
+export default PaymentCreateForm

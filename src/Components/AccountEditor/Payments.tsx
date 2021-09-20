@@ -21,13 +21,14 @@ import AccountNav from '../Nav/Account';
 import { AddIcon, StarIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { config } from '../../config';
+import { authenticationService } from '../../Service/auth';
 
 const AccountPayments = ({ }) => {
 
     const [data, setData] = useState();
     useEffect(async () => {
         const result = await axios.get(
-            `${config.apiUrl}/sale/editor/${'6092f72cbc6b2262bb91d167'}`
+            `${config.apiUrl}/payment/editor/${ authenticationService.getEditor().editorId }`
         );
         setData(result.data);
     }, []);
@@ -61,7 +62,7 @@ const AccountPayments = ({ }) => {
                                     spacing={0}
                                 >
                                     <Text fontSize='7xl' fontFamily='Noe Display' color='white'>{data.length}</Text>
-                                    <Text fontSize='md' color='white'>{data.length <= 1 ? 'vente' : 'ventes'}</Text>
+                                    <Text fontSize='md' color='white'>{data.length <= 1 ? 'paiement' : 'paiements'}</Text>
                                 </VStack>
                             </Box>
                             <Box borderRadius='10px' bg='green.200' w='300px' p={10}>
@@ -70,16 +71,7 @@ const AccountPayments = ({ }) => {
                                     spacing={0}
                                 >
                                     <Text fontSize='7xl' fontFamily='Noe Display' color='white'>234€</Text>
-                                    <Text fontSize='md' color='white'>chiffre d'affaire</Text>
-                                </VStack>
-                            </Box>
-                            <Box borderRadius='10px' bg='gray.300' w='300px' p={10}>
-                                <VStack
-                                    align='flex-start'
-                                    spacing={0}
-                                >
-                                    <Text fontSize='7xl' fontFamily='Noe Display' color='white'>2,3%</Text>
-                                    <Text fontSize='md' color='white'>taux de conversion global</Text>
+                                    <Text fontSize='md' color='white'>Solde</Text>
                                 </VStack>
                             </Box>
                         </VStack>
@@ -88,8 +80,8 @@ const AccountPayments = ({ }) => {
                 <Box>
 
                     {data ?
-                        <VStack spacing={8}>
-                            <SimpleGrid columns={2} justify='space-between' bg='white' w='full' boxShadow='md' py={3} px={5} borderRadius='lg'>
+                        <VStack spacing={4}>
+                            {/* <SimpleGrid columns={2} justify='space-between' bg='white' w='full' boxShadow='md' py={3} px={5} borderRadius='lg'>
                                 <Box>
                                     Solde :{' '}<Text as='span' color='green.300'>+ 125€</Text>
                                 </Box>
@@ -98,13 +90,13 @@ const AccountPayments = ({ }) => {
                                         Prochain paiement : 01/06/2021
                                     </Text>
                                 </Box>
-                            </SimpleGrid>
+                            </SimpleGrid> */}
 
                             {data.map(item =>
                                 <Box bg='white' w='full' boxShadow='md' py={3} px={5} borderRadius='lg'>
                                     <Flex justify='space-between' align='center'>
                                         <Heading fontSize='md' fontFamily='Noe display' fontWeight='normal' color='#66878a' textTransform='none' letterSpacing='wider' p='0' m='0'>
-                                            Achat #{item._id.slice(item._id.length - 5, item._id.length)}
+                                            Paiement #{item._id.slice(item._id.length - 5, item._id.length)}
                                         </Heading>
                                         <HStack
                                             spacing={2}
@@ -113,23 +105,22 @@ const AccountPayments = ({ }) => {
                                             fontSize='sm'
                                         >
                                             <Text>
-                                                {item.product.title}
+                                                { item.createdAt }
                                             </Text>
                                             <Text>—</Text>
-
-                                            <Text>
-                                                25/04/2021 @ 15h55
-                                            </Text>
-                                            <Text>—</Text>
-
-                                            <Text>{censorEmail(item.user.email)}</Text>
-
-
+                                            <Text color='green.500'>{ item.amount }€</Text>
                                         </HStack>
                                     </Flex>
                                 </Box>)}
+
+                                <Text fontSize='sm' color='gray.500'>
+                                    Vous recevez un paiment à chaque début de mois si votre solde est supérieur à 100€. Le virement effectué correspond à l'intégralité de votre solde au moment du déclenchement du paiement.
+                                </Text>
                         </VStack>
-                        : null}
+                        : 
+                        <Center color='gray.500'>Vous n'avez pas encore reçu de paiment</Center>
+                        }
+
                 </Box>
             </Grid>
         </AccountWrapper>
