@@ -59,7 +59,7 @@ const ProductPage: FunctionComponent<props> = (
                 }
             },
             [],
-            document.getElementById('productPage')
+            // document.getElementById('productPage')
 
         )
 
