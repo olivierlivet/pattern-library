@@ -23,12 +23,15 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-  } from "@chakra-ui/react"
+} from "@chakra-ui/react"
 
 import config from '../../Utils/config'
 import ProductCardSmall from '../Product/CardSmall'
 import ProductCardLarge from '../Product/CardLarge'
 import RichContent from '../../Components/RichContent'
+
+import InfiniteScroll from 'react-infinite-scroller';
+
 
 import CissorsLoader from '../Loaders/Cissors'
 
@@ -60,6 +63,9 @@ class SearchEngine extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: false,
+            hasMore: false,
+            currentPage: 1,
             variants: null,
             products: null,
             singleProduct: null,
@@ -73,6 +79,12 @@ class SearchEngine extends Component {
         }
     }
 
+    componentDidMount() {
+        this.updateMainFilters('category', this.props.mainFilters.category)
+        // this.getVariants()
+        this.loadFromCMS()
+    }
+
     categoryFilter() {
         let categoryFilter = Filters.getCategoryFilter(this.state.mainFilters)
         if (categoryFilter) {
@@ -80,11 +92,9 @@ class SearchEngine extends Component {
         } else {
             return null
         }
-
     }
 
     variantFilter() {
-
         if (this.state.mainFilters.variants && this.state.mainFilters.variants.length) {
             return (
                 { "fields.variant.sys.id[in]": this.state.mainFilters.variants.join(',') }
@@ -110,8 +120,10 @@ class SearchEngine extends Component {
         const {
             type,
             pocket,
+            asymetrical,
             length,
-            waist
+            waist,
+            level
         } = this.state.refineFilters
 
         let refineFilters = {}
@@ -121,7 +133,11 @@ class SearchEngine extends Component {
         }
 
         if (pocket && pocket.length === 1) {
-            refineFilters["fields.pocket"] = pocket[0] === 'with' ? true : false ;
+            refineFilters["fields.pocket"] = pocket[0] === 'with' ? true : false;
+        }
+
+        if (asymetrical && asymetrical.length === 1) {
+            refineFilters["fields.asymetrical"] = asymetrical.join(',');
         }
 
         if (length && length.length >= 1) {
@@ -131,25 +147,24 @@ class SearchEngine extends Component {
         if (waist && waist.length >= 1) {
             refineFilters["fields.waist[in]"] = waist.join(',');
         }
-        console.log('refineFilters', refineFilters )
+
+        if (level && level.length >= 1) {
+            refineFilters["fields.level[in]"] = level.join(',');
+        }
+        console.log('refineFilters', refineFilters)
         return refineFilters;
 
     }
+
     handleUpdateRefineFilters(key, value) {
         let { refineFilters } = this.state
         refineFilters[key] = value
-        this.setState({ "refineFilters": refineFilters },
+        this.setState({ "refineFilters": refineFilters, currentPage: 1 },
             () => {
-                this.loadProducts();
+                this.loadFromCMS( true);
                 //  this.updateVariants();
             }
         )
-    }
-
-    componentDidMount() {
-        this.updateMainFilters('category', this.props.mainFilters.category)
-        this.getVariants()
-        this.loadProducts()
     }
 
     getVariants() {
@@ -157,28 +172,34 @@ class SearchEngine extends Component {
         const variants = getVariants(this.state.mainFilters.category).then((response) => this.setState({ variants: response.items }));
     }
 
-    loadProducts() {
+    loadFromCMS( reset ) {
+        // alert("Load from CMS");
+        const { currentPage, products } = this.state
         // console.log('LoadProducts', this.state.mainFilters)
-        console.log( this.state.refineFilters )
+        this.setState({ isLoading: true, hasMore: false });
         let baseQuery = {
             content_type: "product",
             ...this.categoryFilter(this.state.mainFilters.category),
             ...this.variantFilter(this.state.mainFilters.variant),
             ...this.refineFilters(this.state.refineFilters),
-            // ...this.variantFilter( this.state.mainFilters.variant )
-            // "fields.level[gt]": 1
-            // "fields.specs.level":3
-            // locale: process.env.GATSBY_LANG,
-            // order: this.getOrder(),
-            // limit: this.props.pageLimite ? this.props.pageLimite : 20,
-            // skip: reset ? 0 : (currentPage) * (this.props.pageLimite ? this.props.pageLimite : 20),
+
+            limit: 10,
+            skip: 10 * (currentPage - 1),
+
         }
 
         client
             .getEntries(baseQuery)
             .then(response =>
                 // console.log( response )
-                this.setState({ products: response.items })
+                this.setState({
+
+                    products: reset ? response.items : products.concat(response.items),
+                    isLoading: false,
+                    hasMore: response.total > (currentPage * 10) ? true : false,
+                    totalProducts: response.total,
+
+                })
 
                 // this.setState({
                 //     ads: reset ? response.items : ads.concat(response.items),
@@ -190,15 +211,15 @@ class SearchEngine extends Component {
             )
             .catch(console.error)
     }
-    refineFiltersCount() {
-        const { refineFilters } = this.state
-        var size = 0,
-            key;
-        for (key in refineFilters) {
-            if (refineFilters.hasOwnProperty(key)) size++;
-        }
-        return size;
-    }
+    // refineFiltersCount() {
+    //     const { refineFilters } = this.state
+    //     var size = 0,
+    //         key;
+    //     for (key in refineFilters) {
+    //         if (refineFilters.hasOwnProperty(key)) size++;
+    //     }
+    //     return size;
+    // }
 
     handleChange(e) {
         this.setState({ products: [] })
@@ -208,7 +229,7 @@ class SearchEngine extends Component {
         console.log(e.target.name, e.target.value)
         mainFilters[e.target.name] = e.target.value
         if (e.target.name === 'category') { delete mainFilters.variant }
-        this.setState({ mainFilters: mainFilters }, this.loadProducts())
+        this.setState({ mainFilters: mainFilters }, this.loadFromCMS())
         // }, 1000)
 
 
@@ -240,7 +261,7 @@ class SearchEngine extends Component {
 
         this.setState({
             mainFilters: mainFilters
-        }, this.loadProducts())
+        }, this.loadFromCMS())
         // this.setState({ products: [] })
 
     }
@@ -248,7 +269,7 @@ class SearchEngine extends Component {
     updateMainFilters(key, value) {
         this.setState({ products: [] })
 
-        // setTimeout(()=>{
+
         let mainFilters = this.state.mainFilters
         console.log(key, value)
         mainFilters[key] = value
@@ -256,12 +277,30 @@ class SearchEngine extends Component {
         this.setState({ mainFilters: mainFilters },
             () => {
                 this.getVariants()
-                this.loadProducts();
+                this.loadFromCMS();
             }
         )
-        // }, 1000)
 
+    }
 
+    nextPage() {
+        // alert('load next page')
+        const { currentPage, products } = this.state
+        this.setState({
+            currentPage: currentPage + 1,
+            hasMore: false
+        },
+            () => {
+                this.loadFromCMS();
+            }
+        );
+        // if( products.length > 0 ){
+        //     this.setState({ currentPage : currentPage+1, hasMore: false },
+        //         ()=>{
+        //             this.loadFromCMS()
+        //         }
+        //     )
+        // }
     }
 
     render() {
@@ -271,7 +310,11 @@ class SearchEngine extends Component {
             mainFilters,
             refineFilters,
             showFilter,
-            variants
+            variants,
+            isLoading,
+            hasMore,
+            totalProducts,
+            currentPage
         } = this.state
         return (
             <>
@@ -285,9 +328,10 @@ class SearchEngine extends Component {
                 >
                     <Box
                         bg='white'
-                        p={{ base: 0, lg: 8 }}
+                        p={{ base: 0, lg: 0 }}
 
                     >
+                        <Box>currentPage : {currentPage} </Box>
                         <Box
                             bg={{ base: 'white', lg: 'none' }}
 
@@ -304,7 +348,7 @@ class SearchEngine extends Component {
 
                             id='filters'
 
-                            p={{ base: 4, lg: 0 }}
+                            p={{ base: 0, lg: 0 }}
                             pt={{ base: 20, lg: 0 }}
 
                             maxH={{ base: '100vh', base: 'auto' }}
@@ -312,20 +356,24 @@ class SearchEngine extends Component {
 
                         >
                             <Stack>
+                                <Box px={4}>
 
-                                <MainFiltersButton
-                                    setCategory={(value) => this.updateMainFilters('category', value)}
-                                    label={'Femme/Jupe'}
-                                    display={{ base: 'none', lg: 'block' }}
-                                    size='large'
-                                />
+                                    <MainFiltersButton
+                                        setCategory={(value) => this.updateMainFilters('category', value)}
+                                        label={'Femme/Jupe'}
+                                        display={{ base: 'none', lg: 'block' }}
+                                        size='large'
+                                    />
+                                </Box>
+                                <Box px={4}>
 
-                                <VariantFiltersButtons
-                                    key={variants}
-                                    variants={variants}
-                                    selectedVariant={mainFilters.variants}
-                                    setVariant={(value) => this.updateVariants(value)}
-                                />
+                                    <VariantFiltersButtons
+                                        key={variants}
+                                        variants={variants}
+                                        selectedVariant={mainFilters.variants}
+                                        setVariant={(value) => this.updateVariants(value)}
+                                    />
+                                </Box>
 
                                 <RefinerFilters
                                     mainFilters={mainFilters}
@@ -344,7 +392,7 @@ class SearchEngine extends Component {
                                 />
                             </Stack>
                         </Box>
-                    </Box>                                                                                                                                                   
+                    </Box>
                     <Box>
                         <Box
                             zIndex='banner'
@@ -352,7 +400,7 @@ class SearchEngine extends Component {
                             top='0'
                             left={{
                                 base: 0,
-                                lg: '300px',
+                                lg: '320px',
                                 xl: '400px'
                             }}
                             right='0'
@@ -386,7 +434,9 @@ class SearchEngine extends Component {
                                         onClick={() => this.setState({ showFilter: !this.state.showFilter })}
                                     />
                                 </HStack>
-                                <ProductsCountIndicator count={products && products.length ? products.length : null} />
+
+
+                                <ProductsCountIndicator count={totalProducts ? totalProducts : false} />
 
 
                                 <HStack spacing={2} justify='flex-end' w={{ base: 'auto', lg: '145px' }}>
@@ -396,23 +446,33 @@ class SearchEngine extends Component {
                         </Box>
 
 
-
-                        <VStack
-                            w='100%'
-                            minH='100vh'
-                            py={{ base: 0, lg: 20 }}
-                            // bg='gray.100'
-                            spacing={{ base: 5, lg: 10 }}
-                            shouldWrapChildren={true}
-                            bg='gray.50'
-                            // p={{ base: 4, lg: 4 }}
-                            px={{ base: 4, lg: 0 }}
-                            py={{ base: 24, lg: 24 }}
+                        <InfiniteScroll
+                            // key={filters}
+                            useWindow={true}
+                            pageStart={0}
+                            loadMore={this.nextPage.bind(this)}
+                            hasMore={hasMore}
+                            threshold={1000}
+                            loader={<div key={0}>loading</div>}
                         >
+                            <VStack
+                                w='100%'
+                                minH='100vh'
+                                py={{ base: 0, lg: 20 }}
+                                // bg='gray.100'
+                                spacing={{ base: 5, lg: 10 }}
+                                shouldWrapChildren={true}
+                                bg='gray.50'
+                                // p={{ base: 4, lg: 4 }}
+                                px={{ base: 4, lg: 0 }}
+                                py={{ base: 24, lg: 24 }}
 
-                            {products && products.length ?
-                                products.map(product =>
-                                    <>
+                                key={"infinitescroll-0"}
+                            >
+
+
+                                {products && products.length ?
+                                    products.map(product =>
 
                                         <ProductCardSmall
                                             key={product.sys.id}
@@ -426,26 +486,28 @@ class SearchEngine extends Component {
                                             pictures={product.fields.pictures}
                                             intro={<RichContent data={product.fields.intro} />}
 
-
                                             //Actions
                                             // onOpen={() => console.log('open')}
                                             onOpen={() => this.setState({ singleProduct: product })}
                                         />
-                                    </>
 
-                                ) :
-                               <Box> <CissorsLoader /> On cherche vos patrons...</Box>
-                            }
+                                    ) :
+                                    isLoading ?
 
-                        </VStack>
+                                        <Box> <CissorsLoader /> On cherche vos patrons...</Box>
+                                        :
+                                        <Box ><Center minH='80vh'><Text color='gray.500'>Oupsy, on a pas encore de patron qui correpondent à ces critères :/</Text></Center></Box>
+                                }
+
+                            </VStack>
+                        </InfiniteScroll>
+
 
 
                     </Box>
 
 
                 </Grid>
-
-
 
                 {singleProduct ?
                     <ProductCardLarge
@@ -455,7 +517,7 @@ class SearchEngine extends Component {
                             // console.log('onclose')
                         }
                     />
-                : null}
+                    : null}
 
             </>
         )

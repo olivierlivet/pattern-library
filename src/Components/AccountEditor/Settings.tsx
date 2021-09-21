@@ -27,6 +27,7 @@ import { AddIcon, ChatIcon, CopyIcon, InfoOutlineIcon, StarIcon, SunIcon, ViewIc
 import { Formik, Form, Field } from 'formik'
 import { config } from '../../config';
 import axios from 'axios';
+import * as yup from 'yup';
 
 const EditorUpdateForm = ({ }) => {
 
@@ -70,6 +71,11 @@ const EditorUpdateForm = ({ }) => {
             name: 'vatNumber',
             type: 'text',
             label: 'Numéro de TVA'
+        },
+        {
+            name: 'iban',
+            type: 'iban',
+            label: 'IBAN de votre compte banquaire'
         },
         {
             name: 'address',
@@ -124,6 +130,16 @@ const EditorUpdateForm = ({ }) => {
                         values
                     );
                 }}
+                validationSchema={
+                    yup.object().shape({
+                        iban: yup
+                            .string()
+                            .required('Iban requis')
+                            .matches(/^(FR|GB|DE)[0-9]{2}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{3}$/s)
+                            .nullable(),
+                        password: yup.string().required('Champ obligatoire').nullable(),
+                    })
+                }
             >
                 {({
                     values,
@@ -149,7 +165,7 @@ const EditorUpdateForm = ({ }) => {
                                 gap={{ base: 2, lg: 8 }}
                             >
                                 {allFields.map(fieldItem =>
-
+                                    fieldItem.type !== 'iban' ?
                                     <Field name={fieldItem.name}>
                                         {({ field, form }) => (
                                             <Box>
@@ -160,7 +176,18 @@ const EditorUpdateForm = ({ }) => {
                                                 </FormControl>
                                             </Box>
                                         )}
-
+                                    </Field>
+                                    :
+                                    <Field name={fieldItem.name}>
+                                        {({ field, form }) => (
+                                            <Box>
+                                                <FormControl isInvalid={ errors[fieldItem.name]}>
+                                                    <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
+                                                    <Input {...field} variant='flushed' type="text" />
+                                                    <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
+                                                </FormControl>
+                                            </Box>
+                                        )}
                                     </Field>
                                 )}
 

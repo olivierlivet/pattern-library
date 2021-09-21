@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import { Link as GatsbyLink } from 'gatsby'
 
 import {
     Button,
@@ -10,7 +10,9 @@ import {
     ModalHeader,
     ModalBody,
     Heading,
-    SimpleGrid
+    Stack,
+    SimpleGrid,
+    Text
 } from "@chakra-ui/react"
 
 const PurchaseConfirm = ({ onClose }) => {
@@ -35,10 +37,10 @@ const PurchaseConfirm = ({ onClose }) => {
                     borderBottom='solid 1px'
                     borderBottomColor='gray.100'
                 >
-                <Heading
+                    <Heading
                         as='p'
                         fontWeight='normal'
-                        fontSize={{ base:'lg', lg:'xl'}}
+                        fontSize={{ base: 'lg', lg: 'xl' }}
                     >
                         Félicitations !
                     </Heading>
@@ -47,16 +49,24 @@ const PurchaseConfirm = ({ onClose }) => {
                 <ModalBody
                     p={4}
                 >
-
-                    Votre patron a bien été ajouté à votre panier, souhaitez-vous :
-                    <SimpleGrid
-                        columns={{ base:1, lg:2 }}
-                        gap={2 }
-
+                    <Stack
+                        spacing={2}
                     >
-                        <Button onClick={()=>onClose()}>Continuer vos achats</Button>
-                        <Button as={GatsbyLink} to='/fr/compte/cart'>Finaliser la commande</Button>
-                    </SimpleGrid>
+                        <Text>
+                            Votre patron a bien été ajouté à votre panier 👏
+                        </Text>
+                        <Text>
+                            Maintenant, voulez-vous :
+                        </Text>
+                        <SimpleGrid
+                            columns={{ base: 1, lg: 2 }}
+                            gap={2}
+
+                        >
+                            <Button onClick={() => onClose()}>Continuer vos achats</Button>
+                            <Button as={GatsbyLink} to='/fr/compte/cart'>Finaliser la commande</Button>
+                        </SimpleGrid>
+                    </Stack>
                 </ModalBody>
             </ModalContent>
         </Modal>

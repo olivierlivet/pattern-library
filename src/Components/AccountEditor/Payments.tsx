@@ -28,7 +28,7 @@ const AccountPayments = ({ }) => {
     const [data, setData] = useState();
     useEffect(async () => {
         const result = await axios.get(
-            `${config.apiUrl}/payment/editor/${ authenticationService.getEditor().editorId }`
+            `${config.apiUrl}/payment/editor/${authenticationService.getEditor().editorId}`
         );
         setData(result.data);
     }, []);
@@ -105,21 +105,24 @@ const AccountPayments = ({ }) => {
                                             fontSize='sm'
                                         >
                                             <Text>
-                                                { item.createdAt }
+                                                {item.createdAt}
                                             </Text>
                                             <Text>—</Text>
-                                            <Text color='green.500'>{ item.amount }€</Text>
+                                            <Text color='green.500'>{item.amount}€</Text>
                                         </HStack>
                                     </Flex>
                                 </Box>)}
 
-                                <Text fontSize='sm' color='gray.500'>
-                                    Vous recevez un paiment à chaque début de mois si votre solde est supérieur à 100€. Le virement effectué correspond à l'intégralité de votre solde au moment du déclenchement du paiement.
-                                </Text>
+                                {!data || data.length === 0 ? <Text color='gray.700'>Aucun paiment n'a encore été émis, le premier surviendra quand votre solde dépassera 100€ 😉</Text> : null}
+
+
+                            <Text fontSize='sm' color='gray.500'>
+                                Vous recevez un paiment à chaque début de mois si votre solde est supérieur à 100€. Le virement effectué correspond à l'intégralité de votre solde au moment du déclenchement du paiement.
+                            </Text>
                         </VStack>
-                        : 
+                        :
                         <Center color='gray.500'>Vous n'avez pas encore reçu de paiment</Center>
-                        }
+                    }
 
                 </Box>
             </Grid>

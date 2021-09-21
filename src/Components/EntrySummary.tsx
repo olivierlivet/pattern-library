@@ -24,7 +24,7 @@ const EntrySummary = () => {
             w={{
                 base:'240px',
                 md:'200px',
-                lg:'280px'
+                lg:'100%'
             }}
             h='400px'
             bg='gray.300'
@@ -104,7 +104,8 @@ const EntrySummary = () => {
             <SimpleGrid
                 columns={{
                     base:1,
-                    lg:3
+                    md:2,
+                    xl:3
                 }}
                 gap={{
                     base:2,

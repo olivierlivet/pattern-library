@@ -32,8 +32,8 @@ const Filter: FunctionComponent<props> = ({ handleChange }) => {
                     value={values}
                 >
                     <Stack spacing={2} direction="column">
-                        <Checkbox value={true} name="asymetrical" >Oui</Checkbox>
-                        <Checkbox value={false} name="asymetrical" >Non</Checkbox>
+                        <Checkbox value={'yes'} name="asymetrical">Oui</Checkbox>
+                        <Checkbox value={'no'} name="asymetrical">Non</Checkbox>
                     </Stack>
                 </CheckboxGroup>
             </AccordionPanel>

@@ -79,7 +79,7 @@ const AdminTemplate = (props) => {
             </Helmet>
 
             <Wrapper>
-                <Box py={'4'}>
+                <Box p={'4'}>
                     <Box>
                         <Menu>
                             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -133,22 +133,7 @@ const AdminTemplate = (props) => {
                         <EvaluationForm path="/evaluation/:evaluationId" />
                         <Inspiration path="/inspiration" />
 
-                        {/*
-                        <Login path="/login" />
-                        <RenewPassword path="/new-password" />
-                        <QuickLogin path="/quick-login/:token" />
-                        <AccountCart path="/cart" />
-                        <AccountFavorite path="/favorite" />
-                        <AccountOrder path="/order" />
-                        <AccountContribution path="/contribution" />
-                        <AccountSubscription path="/subscription" />                    
-                        <EvaluationForm path="/contribution/evaluation/:productId" />
-                        <EvaluationLogin path="/contribution/evaluation/login/:evaluationId" />
-                        <InspirationForm path="/contribution/inspiration/:productId" />
-                        <AccountProfile path="/profil" />
-                        */}
                     </Router>
-
                 </Box>
             </Wrapper>
         </Layout>

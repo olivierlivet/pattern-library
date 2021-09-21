@@ -126,6 +126,8 @@ const AccountProducts = ({ }) => {
                                     </HStack>
                                 </Flex>
                             </Box>)}
+
+                            { !data || data.length === 0 ? <Text color='gray.700'>Vous n'avez pas encore de patron au catalogue.</Text> :null }
                     </VStack>
                     : null }
                 </Box>

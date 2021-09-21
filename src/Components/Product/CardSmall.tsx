@@ -137,7 +137,7 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
                             <Flex wrap='wrap'>
                                 <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Évaluation</Text>
                                 <Flex align='center'>
-                                    <Text w='100%' mr={2}>4/5</Text>
+                                    <Text w='100%' mr={2} fontSize={{ base:'sm', lg:'sm'}}>4/5</Text>
                                     <StarIcon color='yellow.300' w={3} h={3} />
                                     <StarIcon color='yellow.300' w={3} h={3} />
                                     <StarIcon color='yellow.300' w={3} h={3} />
@@ -147,12 +147,12 @@ const ProductCard: FunctionComponent<productCardPropsTypes> = ({
 
                             <Flex wrap='wrap'>
                                 <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Taille</Text>
-                                <Text w='100%'>36→44</Text>
+                                <Text w='100%' fontSize={{ base:'sm', lg:'sm'}}>36→44</Text>
                             </Flex>
 
                             <Flex wrap='wrap'>
                                 <Text w='100%' color='gray.600' textTransform='uppercase' fontSize='12px' letterSpacing='wider'>Niveau</Text>
-                                <Text w='100%'>
+                                <Text w='100%' fontSize={{ base:'sm', lg:'sm'}}>
                                     {
                                         level === 1 ? 'Débutante'
                                             : level === 2 ? 'Intermédiaire'

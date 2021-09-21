@@ -105,7 +105,10 @@ const EditorCreateForm = ({ }) => {
                     axios.post(
                         `${config.apiUrl}/editor`,
                         values,
-                    ).then(response => navigate(`/admin/editor`))
+                    ).then(response => ()=>{
+                        // navigate(`/admin/editor`)
+                    }
+                    )
                     console.log(values)
                 }}
             >

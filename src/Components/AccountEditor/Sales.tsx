@@ -131,6 +131,9 @@ const totalSalesAmount = ( data ) => {
                                         </HStack>
                                     </Flex>
                                 </Box>)}
+
+                                { !data || data.sales.length === 0 ? <Text color='gray.700'>Pas encore de transaction avec vos patrons, patience 😉</Text> :null }
+
                         </VStack>
                     : null }
                 </Box>

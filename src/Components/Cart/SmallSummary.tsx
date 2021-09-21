@@ -49,6 +49,7 @@ const CartSummary: FunctionComponent<props> = ({ products, isOpen, hideButton })
                     borderTop='solid 1px'
                     borderTopColor={index !== 0 ? 'gray.50' : 'transparent'}
                     p={2}
+                    key={ product._id }
                 >
                     <Grid
                         templateColumns={{

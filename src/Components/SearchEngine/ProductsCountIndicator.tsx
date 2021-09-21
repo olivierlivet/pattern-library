@@ -1,9 +1,11 @@
-import { Center, Text } from '@chakra-ui/react'
+import { Box, Center, Text } from '@chakra-ui/react'
 import React from 'react'
 
 const ProductsCountIndicator = ({ count }) => {
+    if (!count || count === 0){
+        return <Box></Box>;
+    }
     return (
-
         <Center p={0}>
             <Text fontSize='15px' letterSpacing='wide' display={{ base: 'block', lg: 'none' }}>
                 <Text as='span' fontWeight='bold' borderBottom="solid 3px" borderBottomColor='green.300'>

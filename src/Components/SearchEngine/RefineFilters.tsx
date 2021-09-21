@@ -76,7 +76,7 @@ const conf = {
 
         size: true,
         level: true,
-        document: true,
+        document: false,
     },
     "2aMnwR8nnDdeb0PNj2SBe9": { // Haut
         size: true,
@@ -126,8 +126,8 @@ const RefineFilters: FunctionComponent<props> = (
         let FilterComponent = allFilters[key]
         if (value && FilterComponent) {
             Filters.push(
-                <AccordionItem>
-                    <FilterComponent key={key} handleChange={(name, value) => handleChange(name, value)} />
+                <AccordionItem key={key} >
+                    <FilterComponent handleChange={(name, value) => handleChange(name, value)} />
                 </AccordionItem>
             )
         }
@@ -161,6 +161,7 @@ const RefineFilters: FunctionComponent<props> = (
                             {Filters}
                         </Accordion>
                         <Button
+                            display={{ base:'flex', lg:'none'}}
                             mt={2}
                             w={{ base:'full', lg:'auto'}}
                             onClick={() => hideFilter()}
