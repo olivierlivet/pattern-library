@@ -17,17 +17,15 @@ var client = contentful.createClient({
 var slugify = require('slugify')
 
 
-const EditorCreateForm = ({ }) => {
+const EditorCreateForm = ({ action, editorId }) => {
 
-
-
-    const [editors, setEditors] = useState();
+    const [editor, setEditor] = useState();
 
     useEffect(async () => {
         const result = await axios.get(
-            `${config.apiUrl}/editor`
+            `${config.apiUrl}/editor/${editorId}`
         );
-        setEditors(result.data);
+        setEditor(result.data);
         // getUnivers();
         // getVariants();
     }, []);
@@ -53,6 +51,11 @@ const EditorCreateForm = ({ }) => {
             name: 'vatNumber',
             type: 'text',
             label: 'Vat number'
+        },
+        {
+            name: 'iban',
+            type: 'iban',
+            label: 'IBAN'
         },
         {
             name: 'address',
@@ -82,85 +85,123 @@ const EditorCreateForm = ({ }) => {
     ]
 
     return (
+
         <Box w='full' my='20' bg='white' p={10}>
-            <Formik
-                initialValues={{
-                    title: '',
-                    univers: null,
-                    category: null
-                }}
-                validationSchema={
-                    yup.object().shape({
-                        name: yup.string().required('Required').nullable(),
-                        firstName: yup.string().required('Required').nullable(),
-                        lastName: yup.string().required('Required').nullable(),
-                        vatNumber: yup.string().nullable(),
-                        address: yup.string().required('Required').nullable(),
-                        postalCode: yup.string().required('Required').nullable(),
-                        phone: yup.string().required('Required').nullable(),
-                        email: yup.string().email().required('Required').nullable(),
-                    })
-                }
-                onSubmit={(values) => {
-                    axios.post(
-                        `${config.apiUrl}/editor`,
-                        values,
-                    ).then(response => ()=>{
-                        // navigate(`/admin/editor`)
+            {editor || action === 'create' ?
+                <Formik
+                    initialValues={editor}
+                    validationSchema={
+                        yup.object().shape({
+                            name: yup.string().required('Required').nullable(),
+                            firstName: yup.string().required('Required').nullable(),
+                            lastName: yup.string().required('Required').nullable(),
+                            address: yup.string().required('Required').nullable(),
+                            postalCode: yup.string().required('Required').nullable(),
+                            phone: yup.string().required('Required').nullable(),
+                            email: yup.string().email().required('Required').nullable(),
+                            vatNumber: yup
+                                .string()
+                                .matches(/^FR[0-9]{12}$/s)
+                                .nullable(),
+                                // FR33893568857
+                            iban: yup
+                                .string()
+                                .required('Iban requis')
+                                .matches(/^(FR|GB|DE)[0-9]{2}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{3}$/s)
+                                .nullable(),
+                        })
                     }
-                    )
-                    console.log(values)
-                }}
-            >
-                {({
-                    values,
-                    initialValues,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isValid,
-                    isSubmitting,
-                    setFieldError,
-                    setFieldValue,
-                    setFieldTouched
-                }) => (
-                    <Form>
-                        <Stack spacing={6}>
-                            <SimpleGrid
-                                columns={{ base: 1, lg: 2 }}
-                                gap={{ base: 2, lg: 8 }}
-                            >
-                                {allFields.map(fieldItem =>
+                    onSubmit={(values) => {
+                        if (action === 'creat ') {
+                            axios.post(
+                                `${config.apiUrl}/editor`,
+                                values,
+                            ).then(response => () => {
+                                navigate(`/admin/editor`)
+                            }
+                            )
+                        }
+                        else {
+                            axios.patch(
+                                `${config.apiUrl}/editor/${editor._id}`,
+                                values,
+                            ).then(response => () => {
+                                // navigate(`/admin/editor`)
+                            }
+                            )
 
-                                    <Field name={fieldItem.name}>
-                                        {({ field, form }) => (
-                                            <Box>
-                                                <FormControl isInvalid={errors[fieldItem.name] && touched[fieldItem.name]}>
-                                                    <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
-                                                    <Input {...field} variant='flushed' type="text" />
-                                                    <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
-                                                </FormControl>
-                                            </Box>
-                                        )}
+                        }
 
-                                    </Field>
-                                )}
+                        console.log(values)
+                    }}
+                >
+                    {({
+                        values,
+                        initialValues,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isValid,
+                        isSubmitting,
+                        setFieldError,
+                        setFieldValue,
+                        setFieldTouched
+                    }) => (
+                        <Form>
+                            {/* <pre>
+                                {JSON.stringify(editor, null, 1)}
+                            </pre> */}
+                            <Stack spacing={6}>
+                                <SimpleGrid
+                                    columns={{ base: 1, lg: 2 }}
+                                    gap={{ base: 2, lg: 8 }}
+                                >
+                                    {allFields.map(fieldItem =>
+
+                                        fieldItem.type !== 'iban' ?
+                                            <Field name={fieldItem.name}>
+                                                {({ field, form }) => (
+                                                    <Box>
+                                                        <FormControl isInvalid={errors[fieldItem.name]}>
+                                                            <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
+                                                            <Input {...field} variant='flushed' type="text" />
+                                                            <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
+                                                        </FormControl>
+                                                    </Box>
+                                                )}
+                                            </Field>
+                                            :
+                                            <Field name={fieldItem.name}>
+                                                {({ field, form }) => (
+                                                    <Box>
+                                                        <FormControl isInvalid={errors[fieldItem.name]}>
+                                                            <FormLabel color='gray.500'>{fieldItem.label} :</FormLabel>
+                                                            <Input {...field} variant='flushed' type="text" />
+                                                            <FormErrorMessage>Attention, ce champs n'est pas correct</FormErrorMessage>
+                                                        </FormControl>
+                                                    </Box>
+                                                )}
+                                            </Field>
+                                    )}
 
 
-                            </SimpleGrid>
+                                </SimpleGrid>
 
-                            <Box>
-                                <Button isDisabled={!isValid} type='submit'>Create</Button>
-                            </Box>
-                        </Stack>
-                        <pre>
-                            { JSON.stringify( errors, null, 1 )}
-                        </pre>
-                    </Form>
-                )}
-            </Formik>
+                                <Box>
+                                    <Button isDisabled={!isValid} type='submit'>
+                                        {action === "create" ? 'Create' : 'Update'}
+                                    </Button>
+                                </Box>
+                            </Stack>
+                            {/* <pre>
+                                {JSON.stringify(errors, null, 1)}
+                            </pre> */}
+                        </Form>
+                    )}
+                </Formik>
+                : null}
         </Box>
     )
 }

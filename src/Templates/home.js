@@ -121,16 +121,18 @@ const HomeTemplate = (props) => {
             /> */}
 
 
+            <Wrapper>
+
+
 
             <Grid
                 bg='#D9E6E6'
                 templateColumns={{
                     base: '100%',
-                    lg: '450px 1fr'
+                    lg: '400px 1fr'
                 }}
-                p={{ base: 0, lg: 24 }}
                 gap={{ base: 2, lg: 12 }}
-                py={{ base: 10, lg: 24 }}
+
 
             >
                 <Box>
@@ -192,6 +194,7 @@ const HomeTemplate = (props) => {
                     </Box> */}
 
             </Grid>
+            </Wrapper>
 
 
             <AccordionBlock

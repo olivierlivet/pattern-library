@@ -35,6 +35,13 @@ const Product = ({ }) => {
         setPage( page - 1 )
     }
 
+    const handleDelete = async ( itemId ) => {
+        console.log('delete 2', itemId )
+        const remove = await axios.delete(
+            `${config.apiUrl}/product/${itemId}`
+        );
+    }
+
     React.useEffect(() => {
         getData();
     }, [page]);
@@ -64,6 +71,9 @@ const Product = ({ }) => {
                                     <ButtonGroup>
                                         <Button size='sm' as='a' target='_blank' href={`https://app.contentful.com/spaces/e6euex8rtwnm/entries/${item.cmsDocumentId}`}>CMS</Button>
                                         <Button size='sm' as={RouterLink} target='_blank' to={`/admin/product/${item._id}`}>update</Button>
+                                        <Button size='sm'
+                                            onClick={ ()=> handleDelete( item._id )}
+                                        >remove</Button>
                                     </ButtonGroup>
                                 </Td>
                             </Tr>

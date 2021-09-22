@@ -21,6 +21,7 @@ import EvaluationForm from '../Components/Admin/EvaluationForm'
 import Sale from '../Components/Admin/Sale'
 import Editor from '../Components/Admin/Editor'
 import EditorForm from '../Components/Admin/EditorForm'
+import EditorUpdateForm from '../Components/Admin/EditorForm'
 
 import Payment from '../Components/Admin/Payment'
 import PaymentForm from '../Components/Admin/PaymentForm'
@@ -118,12 +119,15 @@ const AdminTemplate = (props) => {
                         <User path="/user" />
                         <UserForm path="/user/:userId" />
 
-
+                        {/* Products */}
                         <Product path="/product" />
                         <ProductCreateForm path="/product/create" />
                         <ProductUpdateForm path="/product/:productId" />
+
+                        {/* Editors */}
                         <Editor path="/editor" />
-                        <EditorForm path="/editor/create" />
+                        <EditorForm path="/editor/create" action='create' />
+                        <EditorUpdateForm path="/editor/edit/:editorId" action='edit' />
 
                         <Payment path="/payment" />
                         <PaymentForm path="/payment/create" />

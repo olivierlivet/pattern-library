@@ -132,6 +132,10 @@ const EditorUpdateForm = ({ }) => {
                 }}
                 validationSchema={
                     yup.object().shape({
+                        vatNumber: yup
+                            .string()
+                            .matches(/^FR[0-9]{12}$/s)
+                            .nullable(),
                         iban: yup
                             .string()
                             .required('Iban requis')

@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { Link } from '@reach/router';
 import axios from 'axios';
+import GatsbyLink from 'gatsby-link';
 import React, { useState, useEffect } from 'react'
 import { config } from '../../config'
 
@@ -63,6 +64,12 @@ const Editor = ({ }) => {
                                             target='_blank'
                                             href={`https://app.contentful.com/spaces/e6euex8rtwnm/entries/${item.cmsDocumentId}`}
                                         >CMS</Button>
+                                        <Button
+                                            as={ GatsbyLink }
+                                            to={`/admin/editor/edit/${item._id}`}
+                                        >
+                                            Edit
+                                        </Button>
                                         {/* <Button>Details</Button>
                                         <Button>Update</Button> */}
                                     </ButtonGroup>
